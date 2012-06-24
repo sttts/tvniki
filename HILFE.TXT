@@ -1,0 +1,1543 @@
+.topic Muster
+ Ü Muster
+ ßßßßßßßßß
+
+Siehe auch:
+ {Inhalt:NoContext}
+
+
+
+
+.topic NoContext=0
+ Ü tvNiki-Hilfe
+ ßßßßßßßßßßßßßßß
+
+ ³ Inhalt:
+ ³
+ ³ {Bedienung}
+ ³ {Tastatur}
+ ³
+ ³ {PASCAL}
+ ³ {Compiler-Fehlermeldungen:Fehler}
+ ³ {Teach-In:Teach}
+ ³ {Einzelschrittmodus:Debug}
+ ³
+ ³ {Systemanforderungen:Hardware}
+ ³ {Installation}
+ ³
+ ³ {Bugs in tvNiki:Bugs}
+ ³ {Geschichte von tvNiki:Geschichte}
+ ³ {Copyright}
+
+
+
+.topic Installation
+ Ü Installation
+ ßßßßßßßßßßßßßßß
+
+Um tvNiki auf ihrem Rechner zu installieren , kopieren sie es in ein
+Verzeichnis ihre Wahl. Die Minimalversion von tvNiki besteht aus der Datei
+NIKI.EXE. Um die Hilfe benutzen zu k”nnen, ist auch die Datei HILFE.HLP
+n”tig.
+
+Um Niki zu starten, geben sie einfach NIKI ein, sofern sie sich im
+Nikiverzeichnis befinden. Um Niki auch aus anderen Verzeichnissen starten zu
+k”nnen, kann man entweder seinen Suchpfad in der AUTOEXEC.BAT erweiteren, so
+daá Dos das Nikiverzeichnis automatisch durchsucht. Alternativ kann man
+natrlich auch eine kurze Batch-Datei schreiben, die tvNiki aufruft.
+
+tvNiki braucht im aktuellen Verzeichnis Schreibberechtigung. D.h. daá der
+Betrieb im Netzwerk NUR von einem Laufwerk erfolgen kann was nicht
+schreibgeschtzt ist. Wichtig ist, daá wirklich nur das aktuelle Verzeichnis
+diese Eigenschaft haben muá. Es ist egal, ob das Verzeichnis, in dem sich
+die NIKI.EXE befinden, beschreibbar ist oder nicht.
+
+Es reicht aus, nur eine Version von NIKI.EXE im Netzwerk fr alle Benutzer
+zur Verfgung zu stellen.
+
+Der Betrieb von tvNiki im Netzwerk f„llt NICHT unter den privaten Gebrauch, so
+daá dazu eine Lizenz beim {Autor:Copyright} gekauft werden muá.
+
+
+Siehe auch:
+ {Copyright}
+ {Bugs in tvNiki:Bugs}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Hardware
+ Ü Systemanforderungen
+ ßßßßßßßßßßßßßßßßßßßßßß
+
+Um Niki benutzen zu k”nnen, sollte ihr Rechner mindestens 400KByte freien
+DOS-Speichern. Alle Prozessoren ab dem i8088 werden untersttzt. Auf der
+Festplatte bzw. der Diskette sind mindestens 100KByte n”tig. Weiterhin
+sollte mindestens MS-DOS 3.3 verwendet werden.
+
+tvNiki ist zu Windows 95 voll kompatibel. Jedoch k”nnen keine langen
+Dateinamen verwendet werden.
+
+Die Verwendung unter Windows NT wurde zur Zeit noch nicht getesten. Fehler
+k”nnen also nicht ausgeschlossen werden.
+
+In einem {Netzwerk:Installation} kann Niki allen Usern vergbar gemacht
+werden. Bisher wird aber noch kein echtes Sperren von Dateien untersttzt.
+Trotzdem gibt es keine Probleme, tvNiki z.B. auf einem Netware-Server zu
+installieren.
+
+
+Siehe auch:
+ {Installation}
+ {Copyright}
+ {Bugs in tvNiki:Bugs}
+ {Inhalt:NoContext}
+
+
+
+
+
+
+
+
+.topic Teach
+ Ü Teach-In
+ ßßßßßßßßßßß
+
+tvNiki verfgt ber einen sogenannten Teach-In-Modus. Normalerweise muá man
+ein Programm ber den {Editor} Zeile fr Zeile eingeben. Fr kurze und
+einfache Aufgaben bietet sich jedoch auch dieser Modus an, in dem man Niki
+mit verschiedenen Tasten steuern kann. Die {Befehlsfolge:Befehle} wird in der
+Zwischenablage gespeichert und kann am Ende der Aufnahme als komplettes
+lauff„higes Programm abgespeichert werden.
+
+Um in den Teach-In-Modus zu gelangen, w„hlt man den Menpunkt Compiler|Teach-In an.
+Jetzt kann man Niki mit den Cursor-Tasten Links und Vor drehen und nach vorne
+gehen lassen. Mit der Taste Entf nimmt Niki Paletten auf. Mit Einf legt er
+welche ab.
+
+Tritt ein Fehler auf oder bricht man die Aufnahme mit ESC ab, erscheint eine
+Abfrage, ob man das Programm abspeichert m”chte. Unabh„ngig davon, ob sie es
+speichern, befindet es sich nun in der Zwischenablage und kann zum
+Weiterarbeiten {eingefgt:Blockbefehle} werden.
+
+Siehe auch:
+ {Bedienung des Editor:Editor}
+ {Inhalt:NoContext}
+
+
+
+.topic Debug
+ Ü Einzelschrittmodus
+ ßßßßßßßßßßßßßßßßßßßßß
+
+tvNiki verfgt ber einen Einzelschrittmodus, in dem ein Programm Schritt
+fr Schritt ausgefhrt werden kann. Er kann eingesetzt werden, um Fehler in
+Programmen zu suchen bzw. Programme zu berprfen.
+
+Um in diesen Modus zu gelangen, drckt man entweder w„hrend der
+Programmausfhrung auf F8 oder startet das Programm gleich im
+Einzelschrittmodus ber Alt-F8 statt.
+
+Durch Drcken von F9 kann ein Programm wieder mit voller Geschwindigkeit
+ausgefhrt werden.
+
+Siehe auch:
+ {Bedienung des Editor:Editor}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Bedienung
+ Ü tvNiki-Bedienung
+ ßßßßßßßßßßßßßßßßßßß
+
+In tvNiki gibt es drei verschiedene Fenster. Das Fenster, das beim Start des
+Programms sichtbar ist, ist der {Texteditor:Editor}, in dem man Programme
+eingeben und bearbeiten kann.
+
+Das Zweite Fenster ist der {Feldeditor}. In ihm werden Robotorfelder, in denen
+sich Niki, der Robotor, bewegt, bearbeitet.
+
+Das letzte Fenster ist das Info Fenster. Im Info-Fenster werden st„ndig
+aktuelle Informationen ber das {Feldfenster:Feldeditor} angezeigt. Dort kann
+man z.B. den aktuellen Vorrat und die Position von Niki ablesen. Weiterhin
+gibt die unterste Zeile den aktuellen Modus an, in dem sich der Feldeditor im
+Moment befindet.
+
+ {1. Die Bedienung des Texteditors:Editor}
+ {2. Das Erstellen und Bearbeiten von Feldern:Feldeditor}
+
+
+Siehe auch:
+ {Tastatur}
+ {Inhalt:NoContext}
+
+
+
+.topic Feldeditor
+ Ü Feldeditor
+ ßßßßßßßßßßßßß
+
+Der Feldeditor besteht aus einem schwarzen Fenster, das eine Aufteilung
+von 15 mal 10 Feldern enth„lt. In ihm kann man Roboterfelder erstellen, in
+denen Niki herumlaufen kann.
+
+Um Hindernisse zu setzen, durch die Niki nicht durchlaufen kann, benutzt man
+entweder die Maus, indem man mit der linken Taste zwischen zwei Punkte klickt.
+Oder man bewegt mit den Cursortasten den Cursor und setzt mit der Leertaste
+Hindernisse.
+
+Durch erneutetes anklicken bzw. Space-Drcken werden W„nde wieder gel”scht.
+
+Um Niki zu verschieben, klickt man mit der rechten Maustaste in die Mitte
+zwischen 4 Punkten. Erneutet anklicken dreht Niki um die eigene Achse.
+Mit der Tastatur geschieht das mit der Taste P.
+
+Mit den Tasten + und - kann man an der aktuellen Cursorposition Paletten
+ablegen bzw- wegnehmen. Um den Cursor zu verschieben, klickt man mit der linken
+Maustaste an die gewnschte Position oder bewegt ihn mit den Cursortasten.
+
+Um Niki vor dem Start eines Programms mit einem Palettenvorrat zu versehen,
+w„hlt man den Menpunkt Feld|Vorrat an.
+
+Die Ablaufgeschwindigkeit eines Programm wird ber den Menpunkt
+Feld|Geschwindigkeit eingestellt.
+
+Siehe auch:
+ {Bedienung von tvNiki:Bedienung}
+ {Bedienung des Texteditors:Editor}
+ {Teach-In-Modus:Teach}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Editor
+ Ü Bedienung des Texteditors
+ ßßßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+Der Editor in tvNiki ist ein ganz normaler Wordstar-kompatibler Texteditor.
+Mit ihm k”nnen Textdateien biszu 64kByte Gr”áe bearbeitet werden.
+šber die Mens Datei, Bearbeiten und Suchen k”nnen die Funktionen des Editors
+aufgerufen werden.
+
+Zus„tzlich kann der Text im Editor, wenn es sich um ein {PASCAL-Programm:PASCAL}
+handelt, kompiliert und im {Feldeditor} ausgefhrt werden. šber das Men
+Compiler k”nnen diese Funktionen aktiviert werden. Wurden nderungen am
+Programm vorgenommen erscheint ein Dialog, in dem ber den aktuellen
+Kompilierstand informiert wird. Tritt ein Fehler auf wird im Editor eine Zeile
+eingeblendet, in der der {Fehler} beschrieben wird. Mit der Taste F1 kann man
+weitere Informationen zum aufgetretenen Fehler anzeigen lassen. Zus„tzlich
+springt der Editor in die Zeile, in der der {Fehler} gefunden wurde. Trat kein
+Fehler auf erscheint im Statusfenster ein OK-Button, das durch drcken von
+Return den Dialog schlieát.
+
+Siehe auch:
+ {Bedienung des Feldeditors:Feldeditor}
+ {Tastaturbedienung des Editors:Editortastatur}
+ {Inhalt:NoContext}
+
+
+
+
+
+.topic Tastatur
+ Ü tvNiki-Tastaturbelegung
+ ßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+{Allgemeine Hotkeys:Hotkeys}
+
+{Bedienung des Feldeditors mit der Tastatur:Feldeditor}
+{Bedienung des Editors mit der Tastatur:Editortastatur}
+
+{Bedienung im Teach-In-Modus:Teach}
+
+
+Siehe auch:
+ {Bedienung}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Editortastatur
+ Ü Bedienung des Texteditors mit der Tastatur
+ ßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+ {Cursorsteuerung:Cursor}
+ {Blockfunktionen:Blockbefehle}
+ {Einfgen und L”schen:InsDel}
+
+Siehe auch:
+ {Tastaturbedienung:Tastatur}
+ {Inhalt:NoContext}
+
+
+
+
+.topic InsDel
+ Ü Befehle fr das Einfgen und L”schen
+ ßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+ ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
+  Einfgemodus an/aus          ³ Strg-V oder Einfg
+  Zeile einfgen               ³ Strg-N
+  Zeile l”schen                ³ Strg-Y
+  L”schen bis Zeilenende       ³ Strg-Q Y
+  Zeichen links l”schen        ³ Strg-H oder Rcktaste
+  Zeichen unter Cursor l”schen ³ Strg-G oder Entf
+  rechtes Wort l”schen         ³ Strg-T
+
+Siehe auch:
+ {Tastaturbedienung des Texteditors:Editortastatur}
+ {Blockbefehle}
+ {Cursorsteuerung:Cursor}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Cursor
+ Ü Cursor-Bewegungen
+ ßßßßßßßßßßßßßßßßßßßß
+
+ ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
+  Zeichen links     ³ Strg-S oder Cursor links
+  Zeichen rechts    ³ Strg-D oder Cursor rechts
+  Wort links        ³ Strg-A oder Strg+Cursor links
+  Wort rechts       ³ Strg-F oder Strg+Cursor rechts
+  Zeile nach oben   ³ Strg-E oder Cursor hoch
+  Zeile nach unten  ³ Strg-X oder Cursor runter
+  Nach oben rollen  ³ Strg-W
+  Nach unten rollen ³ Strg-Z
+  Seite nach oben   ³ Strg-R oder Bild Auf
+  Seite nach unten  ³ Strg-C oder Bild Ab
+
+Siehe auch:
+ {Tastaturbedienung des Texteditors:Editortastatur}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Blockbefehle
+ Ü Blockbefehle
+ ßßßßßßßßßßßßßßß
+
+ ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍ
+  Blockanfang markieren          ³ Strg-K B
+  Blockende markieren            ³ Strg-K K
+  Wort markieren                 ³ Strg-K T
+  Block kopieren                 ³ Strg-K C
+  Block verschieben              ³ Strg-K V
+  Block l”schen                  ³ Strg-K Y
+  Block von Disk lesen           ³ Strg-K R
+  Block auf Disk schreiben       ³ Strg-K W
+  Blockanzeige an/aus            ³ Strg-K H
+  Block drucken                  ³ Strg-K P
+  Block ein Zeichen links rcken ³ Strg-K U
+  Block ein Zeichen rechts rcken³ Strg-K I
+  Zum Blockanfang bewegen        ³ Strg+Q B
+  zum Blockende bewegen          ³ Strg+Q K
+  Menleiste aktivieren          ³ Strg+K D
+  Zeile markieren                ³ Strg+K L
+  Kopieren in Zwischenablage     ³ Strg+Einf
+  Ausschneiden und in die        ³
+  Zwischenablage kopieren        ³ Umschalt+Entf
+  Block l”schen                  ³ Strg+Entf
+  Einfgen aus der Zwischenablage³ Umschalt+Einfg
+
+
+Siehe auch:
+ {Tastaturbedienung:Tastatur}
+ {Bedienung}
+ {Inhalt:NoContext}
+
+
+
+.topic Hotkeys
+ Ü Tastaturbelegung
+ ßßßßßßßßßßßßßßßßßßß
+
+ ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍ
+  ™ffnen einer Datei             ³ F3
+  Speichern der aktuellen Datei  ³ F2
+  Beenden von tvNiki             ³ Alt-X
+  Undo                           ³ Alt-Rck
+  Ausfhren eines Programms      ³ Strg-F9
+  Kompilieren eins Programms     ³ Alt-F9
+  Weitersuchen                   ³ Alt-W
+  Gr”áe/Position eines Fenster   ³ Strg-F5
+  Vergr”áern eines Fensters      ³ F5
+  N„chstes Fenster anw„hlen      ³ F6
+  Vorheriges Fenster anw„hlen    ³ Shift-F6
+  Fenster schlieáen              ³ Alt-F3
+  Hilfe anzeigen                 ³ F1
+  Hilfe zur PASCAL-Sprache       ³ Strg+F1
+
+
+Siehe auch:
+ {Tastaturbedienung:Tastatur}
+ {Blockbefehle}
+ {Bedienung}
+ {Inhalt:NoContext}
+
+
+
+.topic PASCAL
+ Ü PASCAL-Sprache
+ ßßßßßßßßßßßßßßßßß
+
+tvNiki beinhaltet eine Untermenge der Programmiersprache PASCAL.
+D.h. nicht alle Konstruktionen, die in PASCAL Gltigkeit haben, werden von
+tvNiki untersttzt. Jedoch sind ALLE Strukturen, die in tvNiki
+funktionieren, zu PASCAL kompatibel.
+
+ {Aufbau von Programmen:Aufbau}
+ {Strukturen}
+ {Unterprogramme}
+ {Logische Vernpfung:Logik}
+ {Kommentare}
+
+
+tvNiki stellt verschiedene Befehle und Sensoren zur Verfgung, die nicht zum
+PASCAL-Sprachstandard geh”ren. Sie sind also nur in der
+Niki-Programmierumgebung verfgbar.
+
+ {Befehle}
+ {Sensoren}
+
+
+Siehe auch:
+ {Inhalt:NoContext}
+
+
+
+.topic   Kommentare
+ Ü Kommentare
+ ßßßßßßßßßßßßß
+
+Kommentare sind Beschreibungen und Erg„nzungen zu Programmtexten, die NICHT
+vom Compiler behandelt werden, d.h. sie haben fr die Funktion des Programms
+absolut keine Bedeutung, machen ein Programm jedoch, wenn sie richtig
+verwendet werden, lesbarer und verst„ndlicher.
+
+In PASCAL gibt es zwei verschiedene Kommentare. Das eine wird von geschweiften
+Klammern umgeben, das andere durch runde Klammern gefolgt von einem Stern:
+
+  {{Dies ist ein Kommentar}
+  (* Dies ist ebenfalls ein Kommentar*)
+
+Kommentare k”nnen berall im Programm stehen, sogar innerhalb von
+{IF-THEN:If}-Anweisung etc. .
+
+  IF Vorne_Frei {{Hier das Kommentar} THEN Vor;
+
+
+Siehe auch:
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+.topic Befehle
+ Ü Befehle
+ ßßßßßßßßßß
+
+tvNiki stellt diverse Befehle zur Verfgung, um Niki im Roboterfeld navigieren
+zu k”nnen. Diese Befehle geh”ren nicht zum normalen PASCAL-Sprachumfang. Die
+Verwendung ist jedoch analog zu echten PASCAL-Befehlen.
+
+ {Vor}
+ {Drehe_Links}
+ {Nimm_Auf}
+ {Gib_Ab}
+
+
+Siehe auch:
+ {Die PASCAL-Sprache:PASCAL}
+ {Sensoren}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Vor
+ Ü Vor
+ ßßßßßßßßßßß
+
+"Vor" l„át Niki eine Schritt vorgehen. Wenn sich vor ihm eine {Wand:Feldeditor}
+befindet, wird das Programm mit einem Fehler abgebrochen.
+
+
+Siehe auch:
+ {Befehle}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Drehe_Links
+ Ü Drehe_Links
+ ßßßßßßßßßßß
+
+"Drehe_Links" l„át Niki um 90ø gegen den Uhrzeigersinn drehen.
+
+
+Siehe auch:
+ {Befehle}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Nimm_Auf
+ Ü Nimm_Auf
+ ßßßßßßßßßßß
+
+"Nimm_Auf" l„át Niki eine Palette aufnehmen. Liegt am aktuellen Platz keine
+Palette, bricht das Programm mit einem Fehler ab.
+
+
+Siehe auch:
+ {Befehle}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Gib_Ab
+ Ü Gib_Ab
+ ßßßßßßßßßßß
+
+"Gib_ab" l„át Niki eine Palette an der aktuellen Position ablegen. Hat er keine
+Palette mehr geladen, wird das Programm abgebrochen.
+
+
+Siehe auch:
+ {Befehle}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Sensoren
+ Ü Sensoren
+ ßßßßßßßßßßß
+
+tvNiki stellt verschiedene Sensoren zur Verfgung, die nicht zum PASCAL-
+Sprachstandard geh”ren. Die Verwendung ist jedoch genau gleich der von PASCAL-
+Funktionen.
+
+Alle tvNiki-Sensoren haben als Rckgabewert einen Boolean-Wert, d.h. sie
+haben entweder den Wert TRUE, also wahr, oder den Wert FALSE, falsch. Keine
+der Funktionen liefert einen numerischen Wert zurck. Niki kann z.B. nur
+feststellen, ob er noch Paletten geladen hat, aber nicht die Anzahl der
+geladenen Palatten.
+
+Sensoren k”nnen nur in {Strukturen} verwendet werden, die Benutzung als
+{Befehle} ist nicht m”glich.
+
+ {Platz_Belegt}
+
+ {Vorne_Frei}
+ {Links_Frei}
+ {Rechts_Frei}
+
+ {Hat_Vorrat}
+
+ Beispiele:
+
+   IF {Vorne_Frei} THEN {Vor};
+
+   WHILE {Hat_Vorrat} DO {Gib_Ab};
+
+
+Siehe auch:
+ {Die PASCAL-Sprache:PASCAL}
+ {Strukturen}
+ {Befehle}
+ {Logische Verknpfung:Logik}
+ {Inhalt:NoContext}
+
+
+
+.topic Platz_Belegt
+ Ü Platz_Belegt
+ ßßßßßßßßßßßßßßß
+
+Der Sensor "Platz_Belegt" hat den Wert TRUE, wenn sich unter Niki eine oder
+mehrere Paletten befinden. Wenn keine Palette vorhanden ist, hat
+"Platz_Belegt" den Wert FALSE.
+
+
+Siehe auch:
+ {Sensoren}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Vorne_Frei
+ Ü Vorne_Frei
+ ßßßßßßßßßßßßßßß
+
+Der Sensor "Vorne_Frei" hat den Wert TRUE, wenn sich vor Niki keine Wand
+befindet.
+
+
+Siehe auch:
+ {Sensoren}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Links_Frei
+ Ü Links_Frei
+ ßßßßßßßßßßßßßßß
+
+Der Sensor "Links_Frei" hat den Wert TRUE, wenn sich links von Niki keine Wand
+befindet.
+
+
+Siehe auch:
+ {Sensoren}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Rechts_Frei
+ Ü Rechts_Frei
+ ßßßßßßßßßßßßßßß
+
+Der Sensor "Rechts_Frei" hat den Wert TRUE, wenn sich rechts von Niki keine
+Wand befindet.
+
+
+Siehe auch:
+ {Sensoren}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Hat_Vorrat
+ Ü Hat_Vorrat
+ ßßßßßßßßßßßßß
+
+Der Sensor "Hat_Vorrat" liefert den Wert TRUE zurck, wenn Niki eine oder
+mehrere Paletten geladen hat.
+
+
+Siehe auch:
+ {Sensoren}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Strukturen
+ Ü PASCAL-Strukturen
+ ßßßßßßßßßßßßßßßßßßßß
+
+tvNiki untersttzt drei verschiedene Strukturtypen. Es handelt sich dabei um
+die zwei Schleifentypen {REPEAT UNTIL:Repeat} und {WHILE DO:While} sowie
+die einfache Entscheidung {IF THEN:If} bzw. {IF THEN ELSE:If}.
+
+
+
+Siehe auch:
+ {Die PASCAL-Sprache:PASCAL}
+ {Logische Vernpfung:Logik}
+ {Aufbau von PASCAL-Programmen:Aufbau}
+ {Unterprogramme}
+ {Inhalt:NoContext}
+
+
+
+
+.topic If
+ Ü IF THEN ELSE
+ ßßßßßßßßßßßßßßß
+
+ IF {Sensor:Sensoren} THEN {Befehl:Befehle};
+
+ IF {Sensor:Sensoren} THEN {Befehl:Befehle} ELSE {Befehl:Befehle};
+
+ IF {Sensor:Sensoren} THEN
+ BEGIN
+   {Befehl:Befehle};
+   {Befehl:Befehle};
+ END;
+
+Wenn der Sensor zwischen IF und THEN den Wert TRUE hat, wird der Befehl bzw.
+der Block hinter THEN ausgefhrt. Existiert auch ein ELSE-Zweig wird dieser
+ausgefhrt, wenn der Wert FALSE ist.
+
+ Beispiel:
+
+   IF {Hat_Vorrat} THEN {Gib_Ab} ELSE {Vor};
+
+
+Statt des Sensors kann man auch eine {logische Verknpfung:Logik} mehrerer
+Sensoren verwenden.
+
+ Beispiel:
+
+   IF Hat_Vorrat AND Vorne_Frei THEN
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+
+Siehe auch:
+ {Sensoren}
+ {Logische Verknpfung:Logik}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic While
+ Ü WHILE DO
+ ßßßßßßßßßßß
+
+ WHILE {Sensor:Sensoren} DO {Befehl:Befehle};
+
+ WHILE {Sensor:Sensoren} DO
+ BEGIN
+   {Befehl:Befehle};
+   {Befehl:Befehle};
+ END;
+
+Solange der Sensor zwischen WHILE und DO den Wert TRUE hat, wird der Befehl
+bzw. der Block hinter DO ausgefhrt.
+
+ Beispiel:
+
+   WHILE {Platz_Belegt} DO {Nimm_Auf};
+
+Dabei wird erst geprft, ob der Sensor TRUE ist, erst dann wird der Befehl
+ausgefhrt. Dagegen fhrt {REPEAT UNTIL:Repeat} erst den Befehl aus und
+prft dann.
+
+Wenn mehrere von WHILE DO abh„ngige Befehle ausgefhrt werden sollen, muá ein
+BEGIN-END-Block verwendet werden;
+
+ Beispiel:
+
+   WHILE Hat_Vorrat DO
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+
+Statt des Sensors kann man auch eine {logische Verknpfung:Logik} mehrerer
+Sensoren verwenden.
+
+ Beispiel:
+
+   WHILE Hat_Vorrat AND Vorne_Frei DO
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+
+Siehe auch:
+ {Sensoren}
+ {Logische Verknpfung:Logik}
+ {REPEAT UNTIL:Repeat}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Repeat
+ Ü REPEAT UNTIL
+ ßßßßßßßßßßßßßßß
+
+ REPEAT {Befehl:Befehle}; UNTIL {Sensor:Sensoren};
+
+ REPEAT
+   {Befehl:Befehle};
+   {Befehl:Befehle};
+ UNTIL {Sensor:Sensoren};
+
+Der Befehl bzw. der Block zwischen REPEAT und UNTIL wird solange ausgefhrt,
+bis der Sensor hinter UNTIL den Wert TRUE zurckliefert.
+
+ Beispiel:
+
+   REPEAT {Vor}; UNTIL NOT {Vorne_Frei};
+
+
+Dabei fhrt {REPEAT UNTIL:Repeat} erst den Befehl aus und
+prft dann, ob der Sensor TRUE ist. Dagegen wird bei {WHILE DO:While} erst
+geprft, ob der Sensor TRUE ist, erst dann wird der Befehl ausgefhrt.
+
+Statt des Sensors kann man auch eine {logische Verknpfung:Logik} mehrerer
+Sensoren verwenden.
+
+ Beispiel:
+
+   REPEAT
+     Gib_Ab;
+     Vor;
+   UNTIL NOT (Hat_Vorrat AND Vorne_Frei);
+
+Siehe auch:
+ {Sensoren}
+ {Logische Verknpfung:Logik}
+ {WHILE DO:While}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Logik
+ Ü Logische Verknpfung
+ ßßßßßßßßßßßßßßßßßßßßßßß
+
+{Sensoren} k”nnen in PASCAL mit logischen Operatoren verknpft werden.
+Man kann so Abfrage realisieren, die von mehr als einem Sensor abh„ngen.
+
+ Beispiel:
+
+   WHILE (Hat_Vorrat AND Vorne_Frei) DO
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+Dazu stehen die beiden Operatoren OR und AND zur Verfgung.
+
+
+Der Operator OR verknpft zwei {Sensoren} so, daá der Rckgabewert dann TRUE
+ist, wenn mindestens einer der beiden TRUE zurckliefert.
+
+ Beispiel:
+
+   IF Links_Frei OR Rechts_Frei THEN Vor;
+
+ Wahrheitstabelle:
+
+   Links_Frei OR Rechts_Frei =
+   ÍÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍÍËÍÍÍÍÍÍÍ
+   FALSE      ³  FALSE       º FALSE
+   TRUE       ³  FALSE       º TRUE
+   FALSE      ³  TRUE        º TRUE
+   TRUE       ³  TRUE        º TRUE
+   ÍÍÍÍÍÍÍÍÍÍÍÏÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍ
+
+
+Der Operator AND verknpft zwei {Sensoren} so, daá der Rckgabewert dann TRUE
+ist, wenn beide {Sensoren} TRUE zurckliefert.
+
+ Beispiel:
+
+   IF Links_Frei OR Rechts_Frei THEN Vor;
+
+ Wahrheitstabelle:
+
+   Links_Frei OR Rechts_Frei =
+   ÍÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍÍËÍÍÍÍÍÍÍ
+   FALSE      ³  FALSE       º FALSE
+   TRUE       ³  FALSE       º FALSE
+   FALSE      ³  TRUE        º FALSE
+   TRUE       ³  TRUE        º TRUE
+   ÍÍÍÍÍÍÍÍÍÍÍÏÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍ
+
+
+Durch Benutzung von mehr als einem Operator kann man auch mehrere Sensoren
+verknpfen.
+
+ Beispiel:
+
+   IF Links_Frei OR Rechts_Frei OR Vorne_Frei THEN Nimm_Auf;
+
+Wenn verschiedene Operatoren bei solch einer Verknpfung auftreten, stellt
+sich die Frage der Auswertungreihenfolge. Grunds„tzlich gilt: NOT vor AND,
+AND vor OR. D.h., daá erst die NOT-, dann die AND- und dann erst die
+OR-Verknpfung ausgewertet werden.
+
+ Beispiel:
+
+   IF Vorne_Frei OR Links_Frei AND Rechts_Frei THEN ...
+
+   entspricht
+
+   IF Vorne_Frei OR (Links_Frei AND Rechts_Frei) THEN ...
+
+
+ Priorit„t       entspricht in der Mathematik
+ ÍÍÍÍÑÍÍÍÍÍÍÍÍÍËÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
+ 1   ³  NOT    º - (negieren)
+ 2   ³  AND    º */ (multiplizieren/dividieren)
+ 3   ³  OR     º +- (addieren/subtrahieren)
+ ÍÍÍÍÏÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
+
+
+Siehe auch:
+ {Sensoren}
+ {Strukturen}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Unterprogramme
+ Ü Unterprogramme
+ ßßßßßßßßßßßßßßßßß
+
+In PASCAL kann man gleiche Teile in einem Programm durch Unterprogramme
+ersetzen. Diese Unterprogramme k”nnen dann genauso verwendet werden wie
+richtige {Befehle}.
+
+Diese Unterprogramme werden in PASCAL "Prozeduren" genannt. Sie werden
+vor dem Hauptprogramm definiert und sind fr sich aufgebaut wie kleine
+PASCAL-Programme.
+
+ Beispiel:
+
+   PROGRAM Beispiel;
+
+     PROCEDURE Drehe_Rechts;
+     BEGIN
+       Drehe_Links;
+       Drehe_Links;
+       Drehe_Links;
+     END;
+
+   BEGIN
+     Vor;
+     Drehe_Rechts;
+   END.
+
+Zwischen BEGIN und END k”nnen beliebige {Befehle} und {Strukturen} verwendet
+werden. Wenn eine Prozedur aufgerufen wird, werden die Befehle in der
+Prozedur nacheinander ausgefhrt. Danach wird wieder zum Aufrufpunkt
+zurckgekehrt.
+
+Das obige Programme k”nnte also auch folgendermaáen geschrieben werden:
+
+  PROGRAM Beispiel;
+  BEGIN
+    Vor;
+    Drehe_Links;
+    Drehe_Links;
+    Drehe_Links;
+  END;
+
+
+Sobald jedoch mehrfach in einem Programm rechts-gedreht wird, sollte man dafr
+eine Prozedur verwenden, da das Programm dadurch krzer und vor allem
+bersichtlicher wird.
+Prozeduren geh”ren also zu einem guten Programmierstil.
+
+
+Prozeduren k”nnen sich selber oder andere Prozeduren aufrufen, vorausgesetzt
+sie sind zum Zeitpunkt des Aufrufs schon definiert. Sie mssen also oberhalb
+des Aufrufs im Programmtext definiert sein.
+Wenn sich Prozeduren selber aufrufen, nennt man das "Rekursive Programmierung".
+Bei rekursivem Programmieren muá darauf geachtet werden, daá sich keine
+Endlosschleife bildet, da sonst irgendwann ein "Stackberlauf" auftritt und
+das Programm abgebrochen wird. Bei echten PASCAL-Programmen kann es sogar
+dazu fhren, daá der Rechner abstrtzt.
+
+ Beispiel:
+
+   PROGRAM Falsch;
+
+     PROCEDURE Gehe;
+     BEGIN
+       Vor;
+       Gehe;
+     END;
+
+   BEGIN
+     Gehe;
+   END.
+
+Da die meisten Probleme auch ohne diese manchmal verwirrende Technik gel”st
+werden k”nnen, sollte man die lineare Programmierung vorziehen.
+Rekursive Programmierung sollte wirklich nur da eingesetzt werden, wo es
+unbedingt n”tig ist.
+
+
+Siehe auch:
+ {Aufbau von PASCAL-Programmen:Aufbau}
+ {Befehle}
+ {Strukturen}
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Aufbau
+ Ü Aufbau von PASCAL-Programmen
+ ßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßß
+
+Eine PASCAL-Programm bzw. Niki-Programm hat immer den gleichen Aufbau:
+
+In der ersten Zeile wird ein Name fr das Programm angegeben.
+
+  PROGRAM Name;
+
+Der Name darf nicht wie ein vorgegebenes Schlsselwort von PASCAL oder ein
+Befehl von Niki lauten.
+Ein Programm mit dem Namen "Vor" ist also nicht m”glich.
+
+Danach kommen alle Definitionen. Bei tvNiki sind dies alle definierten
+{Prozeduren:Unterprogramme}.
+
+Als letztes muá jedes PASCAL-Programm ein Hauptprgramm enthalten. Dieses
+Hauptprogramm beginnt mit BEGIN und endet mit END gefolgt von einem Punkt.
+Dazwischen k”nnen {Befehle} stehen. Jeder Befehl wird mit einem Semikolon
+abgeschlossen.
+
+  BEGIN
+    {Drehe_Links};
+    {Vor};
+  END.
+
+Beim Start des Programms beginnt die Ausfhrung beim ersten Befehl des
+Hauptprogramms.
+
+Gltige PASCAL-Programme k”nnen also folgendermaáen aussehen:
+
+  PROGRAM Beispiel1;
+
+  BEGIN
+    {Vor};
+    {Vor};
+    {Drehe_Links};
+  END.
+
+
+  PROGRAM Beispiel2;
+
+    {PROCEDURE:Unterprogramme} Einlagern;
+    BEGIN
+      {Drehe_Links};
+      {Vor};
+      {Gib_Ab};
+      {Drehe_Links};
+      {Drehe_Links};
+      {Vor};
+      {Drehe_Links};
+    END;
+
+  BEGIN
+    {Nimm_Auf};
+    {Nimm_Auf};
+    {Nimm_Auf};
+    Einlagern;
+    Einlagern;
+    Einlagern;
+  END.
+
+
+Siehe auch:
+ {Die PASCAL-Sprache:PASCAL}
+ {Unterprogramme}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Fehler
+ Ü Compiler-Fehler
+ ßßßßßßßßßßßßßßßßßß
+
+   Fehlernummer Beschreibung
+ ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+   1            {Quelldatei nicht gefunden oder kann nicht ge”ffnet werden:Fehler1}
+   2            {Zieldatei kann nicht erzeugt werden:Fehler2}
+   3            {BEGIN erwartet:Fehler3}
+   4            {END oder Befehl erwartet:Fehler4}
+   5            {Punkt erwartet:Fehler5}
+   6            {Bezeichner erwartet:Fehler6}
+   7            {Semikolon (;) erwartet:Fehler7}
+   8            {Nicht geschlossenes Kommentar:Fehler8}
+   9            {Unbekannter Befehl:Fehler9}
+   10           {Doppelter Bezeichner:Fehler10}
+   11           {Schlsselwort als Bezeichner nicht erlaubt:Fehler11}
+   12           {THEN erwartet:Fehler12}
+   13           {Unbekannte Funktion:Fehler13}
+   14           {Funktion erwartet:Fehler14}
+   15           {DO erwartet:Fehler15}
+   16           {UNTIL erwartet:Fehler16}
+   17           {Rechte Klammer erwartet:Fehler17}
+
+
+Siehe auch:
+ {Die PASCAL-Sprache:PASCAL}
+ {Inhalt:NoContext}
+
+
+.topic Fehler1
+ Ü Fehler 1
+ ßßßßßßßßßßß
+Quelldatei nicht gefunden oder kann nicht ge”ffnet werden
+
+Aus irgendwelchen Grnden wurde der Quellcode vor dem Kompilieren nicht
+gespeichert. Speichern Sie vor dem Kompilieren von Hand, um das Problem zu
+beheben.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler2
+ Ü Fehler 2
+ ßßßßßßßßßßß
+Zieldatei kann nicht erzeugt werden
+
+Die kompilierte Datei kann nicht erzeugt werden, da der Schreibzugriff auf das
+aktuelle Verzeichnis nicht erlaubt ist oder der Datentr„ger voll ist.
+Wechseln sie in ein "beschreibbares" Verzeichnis, das gengend freien
+Speicherplatz enth„lt.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler3
+ Ü Fehler 3
+ ßßßßßßßßßßß
+BEGIN erwartet
+
+Der Compiler erwartet an der angezeigten Stelle ein BEGIN.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler4
+ Ü Fehler 4
+ ßßßßßßßßßßß
+END oder Befehl erwartet
+
+Der Compiler erwartet an der angezeigten Stelle ein END, z.B. weil ein BEGIN
+END Block nicht abgeschlossen wurde.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler5
+ Ü Fehler 5
+ ßßßßßßßßßßß
+Punkt erwartet
+
+Der Compiler erwartet an der angezeigten Stelle einen Punkt. Wahrscheinlich
+kommt nach Ende des {Hauptprogramms:Aufbau} noch irgendetwas.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler6
+ Ü Fehler 6
+ ßßßßßßßßßßß
+Bezeichner erwartet
+
+Der Compiler erwartet an der angezeigten Stelle einen Bezeichner fr eine
+{PROCEDURE:Unterprogramme} oder hinter der {PROGRAM-Anweisung:Aufbau}.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler7
+ Ü Fehler 7
+ ßßßßßßßßßßß
+Semikolon (;) erwartet
+
+Hinter einem {Befehl:Befehle} oder hinter einer Anweisung wie {PROGRAM:Aufbau},
+{PROCEDURE:Unterprogramme} etc. wird ein Semikolon erwartet. Dieser Fehler
+kann auch auftreten, wenn ein Umlaut oder andere Sonderzeichen in einem
+Bezeichner verwendet werden.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler8
+ Ü Fehler 8
+ ßßßßßßßßßßß
+Nicht geschlossenes Kommentar
+
+Ein Kommentar wurde nicht abgeschlossen. Es wurde entweder ein } oder ein *)
+vergessen.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler9
+ Ü Fehler 9
+ ßßßßßßßßßßß
+Unbekannter Befehl
+
+Der angegebene Bezeichner fr einen {Befehl:Befehle} ist nicht bekannt. Z.B.
+wurde eine {PROCEDURE:Unterprogramme} verwendet, bevor sie definiert wurde,
+oder es handelt sich um einen Schreibfehler.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler10
+ Ü Fehler 10
+ ßßßßßßßßßßßß
+Doppelter Bezeichner
+
+Der angegebene Bezeichner fr eine {PROCEDURE:Unterprogramme} wird doppelt
+verwendet. Zwei {PROZEDUREN:Unterprogramme} haben den gleichen Namen oder
+es wird versucht, eine {PROZEDUR:Unterprogramme} wie einen vordefinierten
+Befehl zu benennen.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler11
+ Ü Fehler 11
+ ßßßßßßßßßßßß
+Schlsselwort als Bezeichner nicht erlaubt
+
+Der angegebene Bezeichner fr eine {PROZEDUR:Unterprogramme} oder hinter
+der Anweisung {PROGRAM:Aufbau} ist fr ein PASCAL-Schlsselwort reserviert.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler12
+ Ü Fehler 12
+ ßßßßßßßßßßßß
+THEN erwartet
+
+Hinter einer {IF-Anweisung:If} fehlt das BEGIN.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler13
+ Ü Fehler 13
+ ßßßßßßßßßßßß
+Unbekannte Funktion
+
+Die benutzte Funktion bzw. der benutzte {Sensor:Sensoren} ist nicht bekannt,
+weil er z.B. falsch geschrieben wurde.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler14
+ Ü Fehler 14
+ ßßßßßßßßßßßß
+Funktion erwartet
+
+In einer {Schleife:Strukturen} oder hinter {IF} wird eine Funktion bzw. ein
+{Sensor:Sensoren} oder eine {logische Vernpfung:Logik} erwartet.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler15
+ Ü Fehler 15
+ ßßßßßßßßßßßß
+DO erwartet
+
+Hinter einer {WHILE:While}-Anweisung wird das DO erwartet.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler16
+ Ü Fehler 16
+ ßßßßßßßßßßßß
+UNTIL erwartet
+
+Hinter einer {REPEAT:Repeat}-Anweisung wird das UNTIL erwartet.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Fehler17
+ Ü Fehler 17
+ ßßßßßßßßßßßß
+Rechte Klammer erwartet
+
+Zu einer linken Klammer fehlt die rechte Klammer.
+
+Siehe auch:
+ {Kompilierfehler:Fehler}
+ {Inhalt:NoContext}
+
+
+
+.topic Geschichte
+ Ü Geschichte
+ ßßßßßßßßßßßßß
+
+ alpha 1 - Anfang September 96
+
+ - Implentierung von Prozeduren und Befehlen
+ - Kompilieren und Ausfhren von Programmen
+
+
+
+ beta 1 - 10.9.96
+
+ - Implementierung von Strukturen (IF, WHILE, REPEAT)
+ - Benutzung von Sensoren
+ - Benutzung von BEGIN/END-Bl”cken
+
+
+ beta 2 - 15.9.96
+
+ - Behebung von Speicherproblemen
+ - Fertigstellung vom Teach-In-Modus
+ - verbesserte Netzwerkf„higkeit
+ - Verarbeitung von Dateien mit Tabs
+ - EGA-Videomodus
+ - Dosshell
+ - Verzeichniswechsel im Programm
+ - neuer Info-Dialog
+
+
+ beta 3 - 21.9.96
+
+ - Einbau einer Hilfefunktion
+ - Kombinieren von Sensoren mittels logischer Verknpfung (AND/OR)
+
+
+ beta 4 - 13.10.96
+
+ - Erweiterung der Hilfe
+ - korrigierte Fehler in der Hilfe
+ - korrektes Auswerten von logischen Verknpfungen (linksassoziativ)
+ - Gr”áe der EXE-Datei auf 50% reduziert
+
+
+ 1.0a - 19.10.96
+
+ - Lauff„higkeit unter Win95 getestet
+ - Installationsanweisungen in der Hilfe
+ - šbernehmen von Quellcodes vom Original-Niki des Klett-Verlags getestet
+ - Drucken von Quellcodes und Feldern
+ - richtige Positionierung des Cursors bei Kompilierfehlern
+
+
+ 1.0b - 20.10.96
+
+ - Fehlermeldung wenn Hilfedatei fehlt (statt Absturz)
+ - Kein Absturz mehr, wenn Hilfe im Dialog ge”ffnet wird, obwohl nicht
+   modale Hilfe im Hintergrund existiert
+ - Richtiges freigeben des Speichers eines modalen Hilfefensters
+ - Konfigurationsdatei NIKI.CFG, in der Einstellungen vorgenommen werden
+   k”nnen (siehe NIKI.CFG fr Beschreibung)
+ - Behebung eines Bugs, wenn Rechner schon vor tvNiki im 80x50-Modus war
+ - Richtige Darstellung des Balken in der rechten unteren Ecke auch im
+   80x50-Modus
+ - Ausgeben des Vorrats sowie des Namens beim Ausdrucken eines Feldes oder
+   Quellcodes
+
+
+ 1.0c - 28.10.96
+
+ - richtige Interpretation von AND und OR: AND hat eine h”here Priorit„t als
+   OR, wird also zuerst ausgewertet
+
+
+ 1.0d - 29.10.96
+
+ - Ausgabe einer Fehlermeldung auch beim fehlerfreien Beenden von tvNiki
+   beseitigt
+ - Richtiges Verg”áern und Verkleinern vom Feldfenster beim Wechsel
+   des Videomodes
+ - Einstellen des Videomodes in NIKI.CFG
+
+
+ 1.0e - 1.11.96
+
+ - Option BIGHELP (NIKI.CFG): Hilfe nimmt den ganzen Bildschirm ein
+ - Option SPEED (NIKI.CFG): Anf„ngliche Interpreter-Geschwindigkeit
+ - Korrektur einiger Meneintr„ge
+
+
+ 1.0f - 9.11.96
+
+ - Ausgewertete L„nge von Bezeichnern auf 255 Zeichen erh”ht
+ - Bug entfernt: Sprnge werteten nur das Lo-Byte aus -> Programme, die mehr
+   als 256 Bytes L„nge (kompiliert) hatten, funktionierten nicht richtig
+   ( Word( ByteArray[IP] ) <> ByteArray[IP]+ByteArray[IP+1]*256 )
+
+
+ 1.1 beta 1 - 9.11.96
+
+ - Einbau eines Einzelschrittmodus, mit dem Programme Schritt fr Schritt
+   ausgefhrt werden k”nnen
+ - Anzeigen der aktuellen Zeile im Einzelschrittmodus im Editorfenster
+
+
+ 1.1 beta 2 - 13.11.96
+
+ - Fehlermeldung hinzugefgt, wenn an einem Platz schon 9 Paletten liegen
+ - Einige Fehler in der Hilfe beseitigt
+ - Endlich wird NOT vor AND und OR ausgewertet :-(
+
+
+ M”gliche zuknftige Features:
+
+ - Definition von eigenen Sensoren (Funktionen)
+ - grafische Ausgabe des Feldes
+ - Portierung zu Graphics Vision (grafisches Turbo Vision)
+ - echte Breakpoints
+ - echtes Sperren von ge”ffneten Dateien
+ - im Netzwerk lauff„hige {Protected-Mode-Version:Bugs}
+ - Angeben des Ausgabeports beim Drucken
+ - Netzwerkversion: Zwei Nikis k„mpfen gegeneinander, wobei jeder sein
+   eigenes Programm hat
+ - komplette Eindeutschung von Turbo Vision
+ - besserer Editor
+ - besseres Hilfefenster
+ - Farbeinstellungen
+ - Abspeichern der Oberfl„che
+ - Einstellen der Optionen im Programm
+ .
+ .
+ .
+
+
+Siehe auch:
+ {Fehler in tvNiki:Bugs}
+ {Inhalt:NoContext}
+
+
+
+.topic Bugs
+ Ü Fehler in tvNiki
+ ßßßßßßßßßßßßßßßßßßß
+
+Groáe Fehler in tvNiki sind zur Zeit nicht bekannt. Jedoch kann keine Gew„hr
+dafr bernommen werden, daá alles fehlerfrei funktioniert.
+
+Kleine Bugs:
+
+ - Die Protected-Mode-Version ist nicht netzwerkf„hig. Sie kann nur einmal
+   im Netzwerk gestartet werden (h„ngt irgendwie mit dem DOS-Extender
+   vom Borland Pascal 7.0 zusammen)
+ - Das Hilfefenster kann in Dialogen nicht ge”ffnet werden, wenn schon
+   ein "normales" Hilfefenster im Hintergrund ist (L”schen von nicht modalen
+   Fenstern in einem Dialog funktioniert nicht richtig)
+ - ...
+
+
+Siehe auch:
+ {Geschichte von tvNiki:Geschichte}
+ {Inhalt:NoContext}
+
+
+
+
+.topic Copyright
+ Ü Copyright
+ ßßßßßßßßßßßß
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³tvNiki v1.1 by 1Stein          ³
+ ³                               ³
+ ³Copyright by Stefan Schimanski,³
+ ³All rights reserved            ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+
+Diese Version von tvNiki ist fr private Zwecke frei verwendbar. Die
+Benutzung im Unterricht und fr andere ”ffentliche Zwecke ist ohne
+Registrierung beim Autor NICHT gestattet.
+
+"Ein Programm, das es wert ist, von Ihnen benutzt zu werden, ist es
+auch wert daá Sie es bezahlen..."
+
+Die aktuelle Version von tvNiki steht auf der Homepage der Computer-AG
+der Groáen Schule im Internet zum Download bereit:
+
+http://www.tigersoft.de/wf-net/info/computer-ag
+
+
+
+Fr weiter Informationen:
+
+ Stefan Schimanski
+ Ginsterweg 19
+ D-38300 Wolfenbttel
+ Tel.: 05331/63268
+
+
+
+Siehe auch:
+ {Geschichte}
+ {Inhalt:NoContext}
