@@ -14,6 +14,17 @@ bd close <id>         # Complete work
 bd sync               # Sync with git
 ```
 
+## Testing with tmux
+
+When running the application for testing, use tmux sessions named after your current task:
+
+```bash
+tmux new-session -d -s <task-id> -x 100 -y 30 './niki'
+tmux send-keys -t <task-id> ...
+tmux capture-pane -t <task-id> -p
+tmux kill-session -t <task-id>
+```
+
 ## Landing the Plane (Session Completion)
 
 **When ending a work session**, you MUST complete ALL steps below. Work is NOT complete until `git push` succeeds.
