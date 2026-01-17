@@ -43,7 +43,7 @@ TYPE  TNikiApplication = OBJECT(TApplication)
 
 
 IMPLEMENTATION
-USES Dos, NikiCnst, NikiEdit, NikiInfo, NikiGlob, NikiCopy,
+USES Dos, FVConsts, NikiCnst, NikiEdit, NikiInfo, NikiGlob, NikiCopy,
      NikiHelp, HelpFile, Hilfe, Config;
 
 CONST HeapSize = (128 * 1024) DIV 16;
@@ -226,6 +226,7 @@ BEGIN
 END;
 
 PROCEDURE TNikiApplication.HandleEvent(VAR Event:TEvent);
+VAR NewMode: TVideoMode;
 BEGIN
   CASE Event.What OF
     evCommand : CASE Event.Command OF
@@ -256,6 +257,14 @@ BEGIN
                   cmChangeDir: ChangeDir;
                   cmHelp: Hilfe(hcNoContext, FALSE);
                   cmPascalHelp: Hilfe(hcPascal, FALSE);
+                  cmResizeApp: BEGIN
+                    { Handle terminal resize - use new size from event }
+                    NewMode.Col := Event.Id;
+                    NewMode.Row := Event.InfoWord;
+                    NewMode.Color := True;
+                    SetScreenVideoMode(NewMode);
+                    ClearEvent(Event);
+                  END;
                 END;
   END;
   INHERITED HandleEvent(Event);

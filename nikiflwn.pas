@@ -35,11 +35,11 @@ CONST cmUpdateTitle = 523;
 CONST cFeld1 = 15 + 0*16;
       cFeld2 = 7 + 0*16;
 
-VAR   Walls: ARRAY[0..17] OF Char;
+VAR   Walls: ARRAY[0..17] OF String[4];  { UTF-8 box-drawing characters }
 
 
 TYPE TChar=RECORD
-             z:CHAR;
+             z:String[4];  { UTF-8 character (up to 4 bytes) }
              f:BYTE;
            END;
 
@@ -94,7 +94,7 @@ TYPE PFeld=^TFeld;
            END;
 
 IMPLEMENTATION
-USES Dos, NikiCnst, MsgBox, App, StdDlg, Timer, Hilfe;
+USES Dos, SysUtils, NikiCnst, MsgBox, App, StdDlg, Timer, Hilfe;
 
 CONSTRUCTOR TFeld.Init(R:TRect; ADatei:String;
     AHScrollBar, AVScrollBar:PScrollBar);
@@ -129,7 +129,7 @@ END;
 
 FUNCTION TFeld.LoadFile(ADatei:STRING):BOOLEAN;
 VAR S:TBufStream;
-    Id:PString;
+    Id:PShortString;
     x,y:Byte;
 BEGIN
   LoadFile := FALSE;
@@ -255,7 +255,7 @@ BEGIN
       VScrollBar^.SetParams(Delta.Y, 0, Limit.Y - Size.Y + 1, Size.Y - 1, 1);
 END;
 
-VAR Str:PString;
+VAR Str:PShortString;
 
 FUNCTION TFeld.CanClose:BOOLEAN;
 VAR Result:Integer;
@@ -368,40 +368,50 @@ END;
 
 PROCEDURE TFeld.DrawLine(y:Integer);
 VAR Width:Byte;
-    Color:Byte;
+    B:TDrawBuffer;
+    i,j:Integer;
+    s:String[4];
 BEGIN
   IF (y>=Delta.Y) AND (y<Delta.Y+Size.Y) THEN
   BEGIN
     Width := SizeX-Delta.X;
     IF Width > Size.X THEN Width := Size.X;
-    WriteLine(0, y-Delta.Y, Width, 1, Feld[y, Delta.X]);
+    { Convert TChar array to TDrawBuffer (Int64 format with UTF-8 support) }
+    FOR i := 0 TO Width-1 DO
+    BEGIN
+      s := Feld[y, Delta.X+i].z;
+      Int64Rec(B[i]).Lo := 0;  { Clear character bytes }
+      FOR j := 1 TO Length(s) DO
+        Int64Rec(B[i]).Bytes[j-1] := Ord(s[j]);
+      Int64Rec(B[i]).Hi := Feld[y, Delta.X+i].f;
+    END;
+    WriteLine(0, y-Delta.Y, Width, 1, B);
   END;
 END;
 
 BEGIN
-  { Initialize box-drawing characters for walls }
-  { CP437 codes - may render as box drawing on some terminals }
+  { Initialize box-drawing characters for walls using UTF-8 Unicode }
   { Index: 0=point, 1=L, 2=U, 3=LU, 4=R, 5=RL, 6=RU, 7=RLU }
   {        8=D, 9=LD, 10=DU, 11=LDU, 12=RD, 13=RLD, 14=RDU, 15=LRDU }
   {        16=mid, 17=no }
-  Walls[0]  := Chr(197); { cross ┼ }
-  Walls[1]  := Chr(196); { left ─ }
-  Walls[2]  := Chr(179); { up │ }
-  Walls[3]  := Chr(217); { LU corner ┘ }
-  Walls[4]  := Chr(196); { right ─ }
-  Walls[5]  := Chr(196); { horizontal ─ }
-  Walls[6]  := Chr(192); { RU corner └ }
-  Walls[7]  := Chr(193); { RLU T-junction ┴ }
-  Walls[8]  := Chr(179); { down │ }
-  Walls[9]  := Chr(191); { LD corner ┐ }
-  Walls[10] := Chr(179); { vertical │ }
-  Walls[11] := Chr(180); { LDU T-junction ┤ }
-  Walls[12] := Chr(218); { RD corner ┌ }
-  Walls[13] := Chr(194); { RLD T-junction ┬ }
-  Walls[14] := Chr(195); { RDU T-junction ├ }
-  Walls[15] := Chr(197); { LRDU cross ┼ }
-  Walls[16] := ' ';      { mid (field) }
-  Walls[17] := ' ';      { no wall }
+  Walls[0]  := '·';  { centered dot for field points }
+  Walls[1]  := '─';  { left }
+  Walls[2]  := '│';  { up }
+  Walls[3]  := '┘';  { LU corner }
+  Walls[4]  := '─';  { right }
+  Walls[5]  := '─';  { horizontal }
+  Walls[6]  := '└';  { RU corner }
+  Walls[7]  := '┴';  { RLU T-junction }
+  Walls[8]  := '│';  { down }
+  Walls[9]  := '┐';  { LD corner }
+  Walls[10] := '│';  { vertical }
+  Walls[11] := '┤';  { LDU T-junction }
+  Walls[12] := '┌';  { RD corner }
+  Walls[13] := '┬';  { RLD T-junction }
+  Walls[14] := '├';  { RDU T-junction }
+  Walls[15] := '┼';  { LRDU cross }
+  Walls[16] := ' ';  { mid (field) }
+  Walls[17] := ' ';  { no wall }
 
   GetMem(Str, 256);
 END.

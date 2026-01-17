@@ -9,14 +9,16 @@ FPCFLAGS = -Sh -Fufv_utf8
 # Main target
 TARGET = niki
 
-# Source files
+# Source files - main and all units
 MAIN = niki.pas
+SOURCES = $(wildcard *.pas)
 
 .PHONY: all clean
 
 all: $(TARGET)
 
-$(TARGET): $(MAIN)
+# Depend on all .pas files so changes trigger rebuild
+$(TARGET): $(SOURCES)
 	$(FPC) $(FPCFLAGS) -o$(TARGET) $(MAIN)
 
 clean:

@@ -256,7 +256,8 @@ BEGIN
 END;
 
 PROCEDURE TFeldPrint.Print;
-VAR c:Char;
+VAR c:String[4];
+    c1:Char;
 BEGIN
   CASE Status OF
    0 : BEGIN
@@ -277,12 +278,16 @@ BEGIN
          IF (XPos<SizeX) AND (YPos<SizeY) THEN
          BEGIN
            c := Editor^.Feld[YPos, XPos].z;
-
-           CASE c OF
-             #16 : c := '>';
-             #17 : c := '<';
-             #30 : c := '^';
-             #31 : c := 'v';
+           { Convert special characters for printing }
+           IF Length(c) = 1 THEN
+           BEGIN
+             c1 := c[1];
+             CASE c1 OF
+               #16 : c := '>';
+               #17 : c := '<';
+               #30 : c := '^';
+               #31 : c := 'v';
+             END;
            END;
 
            Write(Lst, c);

@@ -12,6 +12,10 @@ BEGIN
   ExitProc := OldExit;
   DoneMouse;
 
+  { Disable xterm mouse mode }
+  Write(#27'[?1006l');  { Disable SGR extended mouse mode }
+  Write(#27'[?1000l');  { Disable mouse button tracking }
+
   IF ExitCode<>0 THEN
   BEGIN
     Write(#27'[2J'#27'[H');  { ANSI: clear screen and home cursor }
@@ -29,6 +33,12 @@ BEGIN
   ExitProc := @MyExitProc;
 
   Install_Timer;
+
+  { Force xterm mouse mode for terminals not recognized by fv_utf8 }
+  { (alacritty, kitty, wezterm, iterm, etc.) }
+  Write(#27'[?1000h');  { Enable mouse button tracking }
+  Write(#27'[?1006h');  { Enable SGR extended mouse mode }
+
   InitMouse;
 
   Niki.Init; { Initialisierung }

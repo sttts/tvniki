@@ -19,7 +19,7 @@ TYPE PRobot=^TRobot;
               Feld:PFeldEditor;
 
               FarbeAlt:Byte;
-              ZeichenAlt:Char;
+              ZeichenAlt:String[4];
 
               Richtung:TRichtung;
 
@@ -346,10 +346,10 @@ END;
 
 FUNCTION TRobot.PlatzBelegt:BOOLEAN;
 BEGIN
-  CASE ZeichenAlt OF
-    '1'..'9': PlatzBelegt := TRUE;
-   ELSE PlatzBelegt := FALSE;
-  END;
+  IF (Length(ZeichenAlt) = 1) AND (ZeichenAlt[1] IN ['1'..'9']) THEN
+    PlatzBelegt := TRUE
+  ELSE
+    PlatzBelegt := FALSE;
 END;
 
 FUNCTION TRobot.hatVorrat:BOOLEAN;
@@ -384,17 +384,17 @@ FUNCTION TRobot.Take:BOOLEAN;
 BEGIN
   Take := TRUE;
 
-  CASE ZeichenAlt OF
-    '2'..'9':BEGIN
-               Dec(ZeichenAlt);
-               Inc(Vorrat);
-             END;
-    '1':BEGIN
-          ZeichenAlt := ' ';
-          Inc(Vorrat);
-        END;
-    ELSE Take := FALSE;
-  END;
+  IF (Length(ZeichenAlt) = 1) AND (ZeichenAlt[1] IN ['2'..'9']) THEN
+  BEGIN
+    ZeichenAlt := Chr(Ord(ZeichenAlt[1])-1);
+    Inc(Vorrat);
+  END
+  ELSE IF ZeichenAlt = '1' THEN
+  BEGIN
+    ZeichenAlt := ' ';
+    Inc(Vorrat);
+  END
+  ELSE Take := FALSE;
 END;
 
 FUNCTION TRobot.Put:BOOLEAN;
@@ -404,7 +404,7 @@ BEGIN
   IF (ZeichenAlt<>'9') AND (Vorrat>0) THEN
   BEGIN
     IF ZeichenAlt=' ' THEN ZeichenAlt:='1'
-      ELSE Inc(ZeichenAlt);
+      ELSE ZeichenAlt := Chr(Ord(ZeichenAlt[1])+1);
     Dec(Vorrat);
   END ELSE Put := FALSE;
 END;
@@ -1190,13 +1190,13 @@ BEGIN
       IF Feld[y,x].z <> '9' THEN
       BEGIN
         IF Feld[y,x].z=' ' THEN Feld[y,x].z:='1'
-        ELSE inc(Feld[y,x].z);
+        ELSE Feld[y,x].z := Chr(Ord(Feld[y,x].z[1])+1);
       END;
     END ELSE
-          CASE Feld[y,x].z OF
-            '2'..'9' : Dec(Feld[y,x].z);
-            '1'      : Feld[y,x].z:=' ';
-          END;
+          IF (Length(Feld[y,x].z) = 1) AND (Feld[y,x].z[1] IN ['2'..'9']) THEN
+            Feld[y,x].z := Chr(Ord(Feld[y,x].z[1])-1)
+          ELSE IF Feld[y,x].z = '1' THEN
+            Feld[y,x].z:=' ';
 
     Niki^.Show;
 
