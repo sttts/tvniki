@@ -10,7 +10,9 @@ CONST CFeldColor=#$0F#$07#$0A;
 TYPE PRobot=^TRobot;
      PFeldEditor=^TFeldEditor;
 
+{$PACKENUM 1}
      TRichtung=(rDummy, rLinks, rOben, rRechts, rUnten);
+{$PACKENUM DEFAULT}
 
      TRobot=OBJECT(TObject)
               x,y:SmallInt;     { SmallInt = 2 bytes to match file format }

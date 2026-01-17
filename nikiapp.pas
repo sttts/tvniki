@@ -421,15 +421,21 @@ FUNCTION TNikiApplication.OpenFeld(FileName: FNameStr): PFeldWindow;
 VAR
   P: PWindow;
   R: TRect;
+  OldOrigin: TPoint;
+  HadWindow: Boolean;
 CONST
   { Window size = field content (61x21) + frame (2x2) }
   FieldWindowW = 63;  { SizeX + 2 }
   FieldWindowH = 23;  { SizeY + 2 }
 BEGIN
+  HadWindow := FALSE;
   IF FeldWindow<>NIL THEN
   BEGIN
     IF FeldWindow^.CanClose THEN
     BEGIN
+      { Remember position before disposing }
+      OldOrigin := FeldWindow^.Origin;
+      HadWindow := TRUE;
       Dispose(FeldWindow, Done);
       FeldWindow:=NIL;
     END;
@@ -438,7 +444,10 @@ BEGIN
   IF FeldWindow=NIL THEN
   BEGIN
     { Create window with exact size needed for content + frame }
-    R.Assign(0, 0, FieldWindowW, FieldWindowH);
+    IF HadWindow THEN
+      R.Assign(OldOrigin.X, OldOrigin.Y, OldOrigin.X + FieldWindowW, OldOrigin.Y + FieldWindowH)
+    ELSE
+      R.Assign(0, 0, FieldWindowW, FieldWindowH);
     P := New(PFeldWindow, Init(R, FileName));
     FeldWindow := PFeldWindow(InsertWindow(P));
   END;
