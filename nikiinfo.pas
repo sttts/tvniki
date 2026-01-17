@@ -84,8 +84,8 @@ BEGIN
 END;
 
 TYPE TPosInfo = RECORD
-                  x:Longint;
-                  y:Longint;
+                  x:PtrInt;  { Must match FormatStr's TLongArray element size }
+                  y:PtrInt;
                 END;
 
 VAR Pos:TPosInfo;
@@ -109,7 +109,6 @@ PROCEDURE TInfoDialog.SetPosition(x,y:Integer);
 BEGIN
   Pos.X := x;
   Pos.Y := y;
-
   Position^.SetData(Pos);
 END;
 
