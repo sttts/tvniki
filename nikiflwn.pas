@@ -130,7 +130,6 @@ END;
 FUNCTION TFeld.LoadFile(ADatei:STRING):BOOLEAN;
 VAR S:TBufStream;
     Id:PShortString;
-    x,y:Byte;
 BEGIN
   LoadFile := FALSE;
 
@@ -138,14 +137,13 @@ BEGIN
   IF S.Status=stOk THEN
   BEGIN
      Id := S.ReadStr;
-     IF Id^='FELD' THEN
+     IF (Id <> NIL) AND (Id^='FELD') THEN
      BEGIN
        ReadFile(S);
-
        IF S.Status>=stOk THEN LoadFile := TRUE;
      END;
 
-     DisposeStr(Id);
+     IF Id <> NIL THEN DisposeStr(Id);
   END;
   S.Done;
 END;
@@ -170,20 +168,77 @@ BEGIN
   S.Done;
 END;
 
+{ Convert CP437 byte to UTF-8 string for box-drawing characters }
+FUNCTION CP437toUTF8(c: Byte): String;
+BEGIN
+  CASE c OF
+    $B3: CP437toUTF8 := '│';  { vertical line }
+    $C4: CP437toUTF8 := '─';  { horizontal line }
+    $DA: CP437toUTF8 := '┌';  { top-left corner }
+    $BF: CP437toUTF8 := '┐';  { top-right corner }
+    $C0: CP437toUTF8 := '└';  { bottom-left corner }
+    $D9: CP437toUTF8 := '┘';  { bottom-right corner }
+    $C3: CP437toUTF8 := '├';  { T left }
+    $B4: CP437toUTF8 := '┤';  { T right }
+    $C2: CP437toUTF8 := '┬';  { T down }
+    $C1: CP437toUTF8 := '┴';  { T up }
+    $C5: CP437toUTF8 := '┼';  { cross }
+    $FA: CP437toUTF8 := '·';  { middle dot (field point) }
+    $F9: CP437toUTF8 := '·';  { alternate dot }
+    $10: CP437toUTF8 := '►';  { right arrow (robot) }
+    $11: CP437toUTF8 := '◄';  { left arrow (robot) }
+    $1E: CP437toUTF8 := '▲';  { up arrow (robot) }
+    $1F: CP437toUTF8 := '▼';  { down arrow (robot) }
+  ELSE
+    CP437toUTF8 := Chr(c);    { ASCII or pass through }
+  END;
+END;
+
+{ Convert UTF-8 string back to CP437 byte for file saving }
+FUNCTION UTF8toCP437(s: String): Byte;
+BEGIN
+  IF s = '│' THEN UTF8toCP437 := $B3
+  ELSE IF s = '─' THEN UTF8toCP437 := $C4
+  ELSE IF s = '┌' THEN UTF8toCP437 := $DA
+  ELSE IF s = '┐' THEN UTF8toCP437 := $BF
+  ELSE IF s = '└' THEN UTF8toCP437 := $C0
+  ELSE IF s = '┘' THEN UTF8toCP437 := $D9
+  ELSE IF s = '├' THEN UTF8toCP437 := $C3
+  ELSE IF s = '┤' THEN UTF8toCP437 := $B4
+  ELSE IF s = '┬' THEN UTF8toCP437 := $C2
+  ELSE IF s = '┴' THEN UTF8toCP437 := $C1
+  ELSE IF s = '┼' THEN UTF8toCP437 := $C5
+  ELSE IF s = '·' THEN UTF8toCP437 := $FA
+  ELSE IF s = '►' THEN UTF8toCP437 := $10
+  ELSE IF s = '◄' THEN UTF8toCP437 := $11
+  ELSE IF s = '▲' THEN UTF8toCP437 := $1E
+  ELSE IF s = '▼' THEN UTF8toCP437 := $1F
+  ELSE IF Length(s) > 0 THEN UTF8toCP437 := Ord(s[1])
+  ELSE UTF8toCP437 := Ord(' ');
+END;
+
 PROCEDURE TFeld.WriteFile(VAR S:TStream);
 VAR x,y:Byte;
+    c:Byte;
 BEGIN
   FOR Y:=0 TO SizeY-1 DO
     FOR X:=0 TO SizeX-1 DO
-      S.Write(Feld[y,x].z, 1);
+    BEGIN
+      c := UTF8toCP437(Feld[y,x].z);
+      S.Write(c, 1);
+    END;
 END;
 
 PROCEDURE TFeld.ReadFile(VAR S:TStream);
 VAR x,y:Byte;
+    c:Byte;
 BEGIN
   FOR Y:=0 TO SizeY-1 DO
     FOR X:=0 TO SizeX-1 DO
-      S.Read(Feld[y,x].z, 1);
+    BEGIN
+      S.Read(c, 1);
+      Feld[y,x].z := CP437toUTF8(c);
+    END;
 END;
 
 PROCEDURE TFeld.Save;

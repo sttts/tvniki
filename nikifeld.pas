@@ -13,8 +13,8 @@ TYPE PRobot=^TRobot;
      TRichtung=(rDummy, rLinks, rOben, rRechts, rUnten);
 
      TRobot=OBJECT(TObject)
-              x,y:Integer;
-              Vorrat:Integer;
+              x,y:SmallInt;     { SmallInt = 2 bytes to match file format }
+              Vorrat:SmallInt;  { SmallInt = 2 bytes to match file format }
 
               Feld:PFeldEditor;
 

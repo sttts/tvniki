@@ -21,9 +21,12 @@ all: $(TARGET)
 $(TARGET): $(SOURCES)
 	$(FPC) $(FPCFLAGS) -o$(TARGET) $(MAIN)
 
-clean:
-	rm -f *.o *.ppu *.rsj $(TARGET)
+# Run unit tests (tests all .ROB files)
+test: testload
+	./testload
 
-# Test compilation (show errors only)
-test:
-	$(FPC) $(FPCFLAGS) -o$(TARGET) $(MAIN) 2>&1 || true
+testload: testload.pas
+	$(FPC) -Sh -otestload testload.pas
+
+clean:
+	rm -f *.o *.ppu *.rsj $(TARGET) testload

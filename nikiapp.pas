@@ -52,6 +52,58 @@ CONST HeapSize = (128 * 1024) DIV 16;
       cmReplace     = 83;
       cmSearchAgain = 84;
 
+PROCEDURE ArrangeWindows;
+VAR R: TRect;
+    DeskW, DeskH: Integer;
+    FieldW, FieldH: Integer;
+    EditorW: Integer;
+BEGIN
+  { Get desktop size }
+  Desktop^.GetExtent(R);
+  DeskW := R.B.X - R.A.X;
+  DeskH := R.B.Y - R.A.Y;
+
+  { Field window: 63 wide minimum (61 content + 2 border), as tall as possible }
+  FieldW := 63;
+  IF FieldW > DeskW DIV 2 THEN FieldW := DeskW DIV 2;
+  FieldH := DeskH - 6;  { Leave room for info window below }
+  IF FieldH < 10 THEN FieldH := DeskH;  { If too small, use full height }
+
+  { Editor gets left side }
+  EditorW := DeskW - FieldW;
+
+  { Position editor on left }
+  IF EditWindow <> NIL THEN
+  BEGIN
+    R.A.X := 0;
+    R.A.Y := 0;
+    R.B.X := EditorW;
+    R.B.Y := DeskH;
+    EditWindow^.Locate(R);
+  END;
+
+  { Position field on right }
+  IF FeldWindow <> NIL THEN
+  BEGIN
+    R.A.X := EditorW;
+    R.A.Y := 0;
+    R.B.X := DeskW;
+    R.B.Y := FieldH;
+    FeldWindow^.Locate(R);
+  END;
+
+  { Position info below field on right }
+  IF InfoWindow <> NIL THEN
+  BEGIN
+    R.A.X := DeskW - 17;
+    R.A.Y := FieldH;
+    R.B.X := DeskW;
+    R.B.Y := FieldH + 6;
+    IF R.B.Y > DeskH THEN R.B.Y := DeskH;
+    InfoWindow^.Locate(R);
+  END;
+END;
+
 CONSTRUCTOR TNikiApplication.Init;
 VAR z:Integer;
     P:TPoint;
@@ -73,18 +125,18 @@ BEGIN
 
   CreateClipboard;
 
-  P.X:=80-17;
-  P.Y:=0;
-
+  { Info window - will be repositioned later }
+  P.X := 0;
+  P.Y := 0;
   InfoWindow := New(PInfoDialog, Init(P));
   InsertWindow(InfoWindow);
 
   FeldNeu;
 
   IF ParamCount=0 THEN
-    Neu
+    EditWindow := OpenEditor('', TRUE)
   ELSE
-    FOR z:=1 TO ParamCount DO OpenEditor(ParamStr(z), TRUE);
+    FOR z:=1 TO ParamCount DO EditWindow := OpenEditor(ParamStr(z), TRUE);
 
   Mode := smCO80;
   sMode := GetStrOption('VIDMODE', 'COLOR');
@@ -96,6 +148,9 @@ BEGIN
     Mode := Mode OR smFont8x8;
 
   SetScreenMode(Mode);
+
+  { Arrange windows after screen mode is set }
+  ArrangeWindows;
   Redraw;
 
   Info;
@@ -294,7 +349,9 @@ BEGIN
 END;
 
 PROCEDURE TNikiApplication.Idle;
+{$ifdef Debug}
 VAR x,y:Integer;
+{$endif}
 BEGIN
   INHERITED Idle;
 
@@ -339,7 +396,6 @@ FUNCTION TNikiApplication.OpenFeld(FileName: FNameStr): PFeldWindow;
 VAR
   P: PWindow;
   R: TRect;
-  E: TEvent;
 BEGIN
   IF FeldWindow<>NIL THEN
   BEGIN
@@ -356,6 +412,8 @@ BEGIN
     P := New(PFeldWindow, Init(R, FileName));
     FeldWindow := PFeldWindow(InsertWindow(P));
   END;
+
+  OpenFeld := FeldWindow;
 END;
 
 PROCEDURE TNikiApplication.FeldNeu;
