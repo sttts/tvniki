@@ -8,3 +8,7 @@ NIKI
 # Backup files
 *.orig
 *.bak
+
+# Linker temp files
+link*.res
+linkfiles*.res
