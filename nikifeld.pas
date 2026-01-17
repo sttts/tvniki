@@ -138,6 +138,7 @@ TYPE PRobot=^TRobot;
                    FUNCTION GetTitle(MaxLen: LongInt): ShortString;
 
                    PROCEDURE Run(ADatei:STRING; Debug:BOOLEAN);
+                   FUNCTION IsRunning: BOOLEAN;
                   PRIVATE
                    Feld : PFeldEditor;
                  END;
@@ -1604,6 +1605,14 @@ END;
 PROCEDURE TFeldWindow.UpdateTitle;
 BEGIN
   Frame^.Draw;
+END;
+
+FUNCTION TFeldWindow.IsRunning: BOOLEAN;
+BEGIN
+  IF Feld <> NIL THEN
+    IsRunning := (Feld^.Status = stRunning) OR (Feld^.Status = stDebug)
+  ELSE
+    IsRunning := FALSE;
 END;
 
 PROCEDURE TFeldWindow.Run(ADatei:STRING; Debug:BOOLEAN);

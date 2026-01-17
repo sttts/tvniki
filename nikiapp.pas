@@ -329,6 +329,8 @@ BEGIN
                     NewMode.Row := Event.InfoWord;
                     NewMode.Color := True;
                     SetScreenVideoMode(NewMode);
+                    ArrangeWindows;
+                    Redraw;
                     ClearEvent(Event);
                   END;
                 END;
