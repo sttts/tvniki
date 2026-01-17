@@ -57,17 +57,27 @@ VAR R: TRect;
     DeskW, DeskH: Integer;
     FieldW, FieldH: Integer;
     EditorW: Integer;
+CONST
+    { Field window size = content (61x21) + frame (2x2) }
+    { But field content already includes border at row 0 and 20, so visible area is smaller }
+    MaxFieldW = 63;  { SizeX + 2 }
+    MaxFieldH = 21;  { Actual visible height needed }
 BEGIN
   { Get desktop size }
   Desktop^.GetExtent(R);
   DeskW := R.B.X - R.A.X;
   DeskH := R.B.Y - R.A.Y;
 
-  { Field window: 63 wide minimum (61 content + 2 border), as tall as possible }
-  FieldW := 63;
+  { Field window: sized to show all content + frame }
+  FieldW := MaxFieldW;
   IF FieldW > DeskW DIV 2 THEN FieldW := DeskW DIV 2;
-  FieldH := DeskH - 6;  { Leave room for info window below }
-  IF FieldH < 10 THEN FieldH := DeskH;  { If too small, use full height }
+  { Use exact size needed for content + frame, or full height if desktop is too small }
+  IF DeskH >= MaxFieldH + 6 THEN
+    FieldH := MaxFieldH  { Exact fit with room for info below }
+  ELSE IF DeskH >= MaxFieldH THEN
+    FieldH := MaxFieldH  { Exact fit, no room for info }
+  ELSE
+    FieldH := DeskH;  { Desktop too small, use all available }
 
   { Editor gets left side }
   EditorW := DeskW - FieldW;
@@ -171,6 +181,7 @@ BEGIN
   ClipWindow := New( PEditWindow, Init(R, '', wnNoNumber));
   IF ClipWindow <> NIL THEN
   BEGIN
+    ClipWindow^.State := ClipWindow^.State AND NOT sfShadow;
     ClipWindow^.Hide;
     Clipboard := ClipWindow^.Editor;
     Clipboard^.CanUndo := False;
@@ -396,6 +407,10 @@ FUNCTION TNikiApplication.OpenFeld(FileName: FNameStr): PFeldWindow;
 VAR
   P: PWindow;
   R: TRect;
+CONST
+  { Window size = field content (61x21) + frame (2x2) }
+  FieldWindowW = 63;  { SizeX + 2 }
+  FieldWindowH = 23;  { SizeY + 2 }
 BEGIN
   IF FeldWindow<>NIL THEN
   BEGIN
@@ -408,7 +423,8 @@ BEGIN
 
   IF FeldWindow=NIL THEN
   BEGIN
-    DeskTop^.GetExtent(R);
+    { Create window with exact size needed for content + frame }
+    R.Assign(0, 0, FieldWindowW, FieldWindowH);
     P := New(PFeldWindow, Init(R, FileName));
     FeldWindow := PFeldWindow(InsertWindow(P));
   END;

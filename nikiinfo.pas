@@ -37,6 +37,7 @@ BEGIN
   R.B.Y := R.A.Y + 6;
 
   INHERITED Init(R, 'Info');
+  State := State AND NOT sfShadow;
 
   SetupWindow;
 END;

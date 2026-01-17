@@ -86,6 +86,7 @@ CONSTRUCTOR TNikiEditor.Init(VAR Bounds: TRect;
     FileName: FNameStr; ANumber: Integer);
 BEGIN
   INHERITED Init(Bounds, FileName, ANumber);
+  State := State AND NOT sfShadow;
 
   Editor^.Modified := FALSE;
   Compiled := FALSE;

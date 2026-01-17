@@ -77,6 +77,7 @@ TYPE PFeld=^TFeld;
 
              PROCEDURE Draw; VIRTUAL;
              PROCEDURE DrawLine(y:Integer); VIRTUAL;
+             PROCEDURE DrawLineInner(y, viewY:Integer);
 
              PROCEDURE MakeLogical(VAR x,y:Integer);
              PROCEDURE MakePhysical(VAR x,y:Integer);
@@ -106,7 +107,8 @@ BEGIN
   Options := Options or ofSelectable;
   EventMask := evMouseDown + evMouseAuto + evKeyDown + evCommand + evBroadcast;
   Modified := FALSE;
-  SetLimit(SizeX-1, SizeY-1);
+  { Limit is inner content size (excluding outer border which window frame replaces) }
+  SetLimit(SizeX-2, SizeY-2);
   Datei := ADatei;
   HelpCtx := hcFeldEditor;
 
@@ -290,8 +292,8 @@ PROCEDURE TFeld.SizeLimits(var Min, Max: TPoint);
 BEGIN
   Min.X := 10;
   Min.Y := 2;
-  Max.X := SizeX;
-  Max.Y := SizeY;
+  Max.X := SizeX - 2;
+  Max.Y := SizeY - 2;
 END;
 
 PROCEDURE TFeld.ChangeBounds(VAR Bounds: TRect);
@@ -345,14 +347,16 @@ END;
 
 PROCEDURE TFeld.MakeLogical(VAR x,y:Integer);
 BEGIN
-  x := x + Delta.X;
-  y := y + Delta.Y;
+  { View coords to field coords - add 1 for skipped outer border }
+  x := x + Delta.X + 1;
+  y := y + Delta.Y + 1;
 END;
 
 PROCEDURE TFeld.MakePhysical(VAR x,y:Integer);
 BEGIN
-  x := x - Delta.X;
-  y := y - Delta.Y;
+  { Field coords to view coords - subtract 1 for skipped outer border }
+  x := x - Delta.X - 1;
+  y := y - Delta.Y - 1;
 END;
 
 PROCEDURE TFeld.ClearFeld;
@@ -415,33 +419,78 @@ BEGIN
 END;
 
 PROCEDURE TFeld.Draw;
-VAR y:Integer;
+VAR y, viewY:Integer;
+    B:TDrawBuffer;
+    i:Integer;
+    DefaultColor:Word;
 BEGIN
-  FOR y:=Delta.Y TO Delta.Y+Size.Y-1 DO
-    DrawLine( y );
+  { Draw inner content rows (skip only row 0, window frame is the border) }
+  viewY := 0;
+  FOR y := 1 TO SizeY-1 DO
+  BEGIN
+    IF (y >= Delta.Y + 1) AND (viewY < Size.Y) THEN
+    BEGIN
+      DrawLineInner(y, viewY);
+      Inc(viewY);
+    END;
+  END;
+
+  { Fill remaining rows with spaces if view is larger than content }
+  IF viewY < Size.Y THEN
+  BEGIN
+    DefaultColor := GetColor(1);
+    FOR i := 0 TO Size.X - 1 DO
+    BEGIN
+      Int64Rec(B[i]).Lo := Ord(' ');
+      Int64Rec(B[i]).Hi := DefaultColor;
+    END;
+    WHILE viewY < Size.Y DO
+    BEGIN
+      WriteLine(0, viewY, Size.X, 1, B);
+      Inc(viewY);
+    END;
+  END;
 END;
 
 PROCEDURE TFeld.DrawLine(y:Integer);
-VAR Width:Byte;
+BEGIN
+  { For compatibility - redirect to inner drawing }
+  IF (y > 0) AND (y < SizeY-1) THEN
+    DrawLineInner(y, y - Delta.Y - 1);
+END;
+
+PROCEDURE TFeld.DrawLineInner(y, viewY:Integer);
+VAR ContentWidth:Integer;
     B:TDrawBuffer;
     i,j:Integer;
+    x:Integer;
     s:String[4];
+    DefaultColor:Word;
 BEGIN
-  IF (y>=Delta.Y) AND (y<Delta.Y+Size.Y) THEN
+  { Fill entire buffer with spaces first }
+  DefaultColor := GetColor(1);
+  FOR i := 0 TO Size.X - 1 DO
   BEGIN
-    Width := SizeX-Delta.X;
-    IF Width > Size.X THEN Width := Size.X;
-    { Convert TChar array to TDrawBuffer (Int64 format with UTF-8 support) }
-    FOR i := 0 TO Width-1 DO
-    BEGIN
-      s := Feld[y, Delta.X+i].z;
-      Int64Rec(B[i]).Lo := 0;  { Clear character bytes }
-      FOR j := 1 TO Length(s) DO
-        Int64Rec(B[i]).Bytes[j-1] := Ord(s[j]);
-      Int64Rec(B[i]).Hi := Feld[y, Delta.X+i].f;
-    END;
-    WriteLine(0, y-Delta.Y, Width, 1, B);
+    Int64Rec(B[i]).Lo := Ord(' ');
+    Int64Rec(B[i]).Hi := DefaultColor;
   END;
+
+  { Calculate inner content width (excluding outer border columns) }
+  ContentWidth := SizeX - 2;
+  IF ContentWidth > Size.X THEN ContentWidth := Size.X;
+
+  { Draw inner content (cols 1 to SizeX-2) }
+  FOR i := 0 TO ContentWidth - 1 DO
+  BEGIN
+    x := 1 + Delta.X + i;  { Start from col 1, skip col 0 }
+    IF x >= SizeX - 1 THEN Break;  { Don't go past inner area }
+    s := Feld[y, x].z;
+    Int64Rec(B[i]).Lo := 0;
+    FOR j := 1 TO Length(s) DO
+      Int64Rec(B[i]).Bytes[j-1] := Ord(s[j]);
+    Int64Rec(B[i]).Hi := Feld[y, x].f;
+  END;
+  WriteLine(0, viewY, Size.X, 1, B);
 END;
 
 BEGIN
@@ -450,16 +499,16 @@ BEGIN
   {        8=D, 9=LD, 10=DU, 11=LDU, 12=RD, 13=RLD, 14=RDU, 15=LRDU }
   {        16=mid, 17=no }
   Walls[0]  := '·';  { centered dot for field points }
-  Walls[1]  := '─';  { left }
-  Walls[2]  := '│';  { up }
+  Walls[1]  := '╴';  { left only - half line }
+  Walls[2]  := '╵';  { up only - half line }
   Walls[3]  := '┘';  { LU corner }
-  Walls[4]  := '─';  { right }
-  Walls[5]  := '─';  { horizontal }
+  Walls[4]  := '╶';  { right only - half line }
+  Walls[5]  := '─';  { horizontal LR }
   Walls[6]  := '└';  { RU corner }
   Walls[7]  := '┴';  { RLU T-junction }
-  Walls[8]  := '│';  { down }
+  Walls[8]  := '╷';  { down only - half line }
   Walls[9]  := '┐';  { LD corner }
-  Walls[10] := '│';  { vertical }
+  Walls[10] := '│';  { vertical DU }
   Walls[11] := '┤';  { LDU T-junction }
   Walls[12] := '┌';  { RD corner }
   Walls[13] := '┬';  { RLD T-junction }

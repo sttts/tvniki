@@ -118,10 +118,13 @@ TYPE PRobot=^TRobot;
            END;
 
      PFeldWindow=^TFeldWindow;
+
      TFeldWindow=OBJECT(TWindow)
                    CONSTRUCTOR Init(R:TRect; ADatei:STRING);
                    DESTRUCTOR Done; VIRTUAL;
 
+                   PROCEDURE InitFrame; VIRTUAL;
+                   PROCEDURE Draw; VIRTUAL;
                    FUNCTION CanClose:BOOLEAN;
 
                    PROCEDURE HandleEvent(VAR Event:TEvent); VIRTUAL;
@@ -1135,48 +1138,66 @@ BEGIN
 END;
 
 PROCEDURE TFeldEditor.SetWall(x,y:Integer; Mode:BOOLEAN);
+VAR
+  WallX, WallY: Integer;
+  NeedsFrameRedraw: Boolean;
 BEGIN
+  NeedsFrameRedraw := FALSE;
   IF (x<=SizeX-2) AND (x>=1) AND (y<=SizeY-2) AND (y>=1) THEN
   BEGIN
     IF (x AND 3)=0 THEN
     BEGIN
       IF (y AND 1)=1 THEN
       BEGIN
-        x := x AND NOT 3;
-        y := y AND NOT 1;
+        WallX := x AND NOT 3;
+        WallY := y AND NOT 1;
 
         IF Mode THEN
-          Feld[y+1,x].z := Walls[wVert]
+          Feld[WallY+1,WallX].z := Walls[wVert]
         ELSE
-          Feld[y+1,x].z := Walls[wNo];
+          Feld[WallY+1,WallX].z := Walls[wNo];
 
-        UpdateCorner(x,y);
-        UpdateCorner(x,y+2);
+        UpdateCorner(WallX,WallY);
+        UpdateCorner(WallX,WallY+2);
+
+        { Check if wall touches visible border - need frame redraw }
+        IF (WallY = 0) OR (WallY+2 = SizeY-1) THEN
+          NeedsFrameRedraw := TRUE;
+
+        Modified := TRUE;
       END;
     END ELSE
     IF (y AND 1)=0 THEN
     BEGIN
-      x := x AND NOT 3;
-      y := y AND NOT 1;
+      WallX := x AND NOT 3;
+      WallY := y AND NOT 1;
 
       IF Mode THEN
       BEGIN
-        Feld[y,x+1].z := Walls[wHor];
-        Feld[y,x+2].z := Walls[wHor];
-        Feld[y,x+3].z := Walls[wHor];
+        Feld[WallY,WallX+1].z := Walls[wHor];
+        Feld[WallY,WallX+2].z := Walls[wHor];
+        Feld[WallY,WallX+3].z := Walls[wHor];
       END ELSE
       BEGIN
-        Feld[y,x+1].z := Walls[wNo];
-        Feld[y,x+2].z := Walls[wNo];
-        Feld[y,x+3].z := Walls[wNo];
+        Feld[WallY,WallX+1].z := Walls[wNo];
+        Feld[WallY,WallX+2].z := Walls[wNo];
+        Feld[WallY,WallX+3].z := Walls[wNo];
       END;
 
-      UpdateCorner(x,y);
-      UpdateCorner(x+4,y);
+      UpdateCorner(WallX,WallY);
+      UpdateCorner(WallX+4,WallY);
+
+      { Check if wall touches visible border - need frame redraw }
+      IF (WallX = 0) OR (WallX+4 = SizeX-1) THEN
+        NeedsFrameRedraw := TRUE;
 
       Modified := TRUE;
     END;
   END;
+
+  { Redraw the owner window to update frame junctions }
+  IF NeedsFrameRedraw AND (Owner <> NIL) THEN
+    Owner^.DrawView;
 END;
 
 PROCEDURE TFeldEditor.ChangeVorrat(x,y:Integer; Mode:BOOLEAN);
@@ -1260,7 +1281,8 @@ END;
 PROCEDURE TFeldEditor.Draw;
 VAR y:Integer;
 BEGIN
-  FOR y:=Delta.Y TO Delta.Y+Size.Y-1 DO
+  { Loop includes one extra row because DrawLine uses y-1 for view position }
+  FOR y:=Delta.Y TO Delta.Y+Size.Y DO
     DrawLine( y );
 END;
 
@@ -1338,12 +1360,165 @@ END;
  *                                                    *
  ******************************************************}
 
+PROCEDURE TFeldWindow.InitFrame;
+VAR R: TRect;
+BEGIN
+  { Use standard frame - we'll draw junctions in TFeldWindow.Draw }
+  GetExtent(R);
+  Frame := New(PFrame, Init(R));
+END;
+
+PROCEDURE TFeldWindow.Draw;
+VAR
+  i: Integer;
+  fx, fy: Integer;  { Field coordinates }
+  B: TDrawBuffer;
+  CFrame: Word;
+  WallChar: String[4];
+  IsActive: Boolean;
+
+  { Check if cell has upward wall component: │┴├┤┼╵└┘ }
+  FUNCTION HasUp(y, x: Integer): Boolean;
+  VAR c: String[4];
+  BEGIN
+    IF (y < 0) OR (y >= NikiFlWn.SizeY) OR (x < 0) OR (x >= NikiFlWn.SizeX) THEN
+      HasUp := FALSE
+    ELSE
+    BEGIN
+      c := Feld^.Feld[y, x].z;
+      HasUp := (c = '│') OR (c = '┴') OR (c = '├') OR (c = '┤') OR
+               (c = '┼') OR (c = '╵') OR (c = '└') OR (c = '┘');
+    END;
+  END;
+
+  { Check if cell has downward wall component: │┬├┤┼╷┌┐ }
+  FUNCTION HasDown(y, x: Integer): Boolean;
+  VAR c: String[4];
+  BEGIN
+    IF (y < 0) OR (y >= NikiFlWn.SizeY) OR (x < 0) OR (x >= NikiFlWn.SizeX) THEN
+      HasDown := FALSE
+    ELSE
+    BEGIN
+      c := Feld^.Feld[y, x].z;
+      HasDown := (c = '│') OR (c = '┬') OR (c = '├') OR (c = '┤') OR
+                 (c = '┼') OR (c = '╷') OR (c = '┌') OR (c = '┐');
+    END;
+  END;
+
+  { Check if cell has leftward wall component: ─┬┴┤┼╴┐┘ }
+  FUNCTION HasLeft(y, x: Integer): Boolean;
+  VAR c: String[4];
+  BEGIN
+    IF (y < 0) OR (y >= NikiFlWn.SizeY) OR (x < 0) OR (x >= NikiFlWn.SizeX) THEN
+      HasLeft := FALSE
+    ELSE
+    BEGIN
+      c := Feld^.Feld[y, x].z;
+      HasLeft := (c = '─') OR (c = '┬') OR (c = '┴') OR (c = '┤') OR
+                 (c = '┼') OR (c = '╴') OR (c = '┐') OR (c = '┘');
+    END;
+  END;
+
+  { Check if cell has rightward wall component: ─┬┴├┼╶┌└ }
+  FUNCTION HasRight(y, x: Integer): Boolean;
+  VAR c: String[4];
+  BEGIN
+    IF (y < 0) OR (y >= NikiFlWn.SizeY) OR (x < 0) OR (x >= NikiFlWn.SizeX) THEN
+      HasRight := FALSE
+    ELSE
+    BEGIN
+      c := Feld^.Feld[y, x].z;
+      HasRight := (c = '─') OR (c = '┬') OR (c = '┴') OR (c = '├') OR
+                  (c = '┼') OR (c = '╶') OR (c = '┌') OR (c = '└');
+    END;
+  END;
+
+BEGIN
+  INHERITED Draw;
+
+  { Draw junction characters where field walls meet the window frame }
+  IF Feld = NIL THEN Exit;
+
+  { Match TFrame.Draw logic for active/inactive/dragging state }
+  IF (State AND sfDragging) <> 0 THEN
+  BEGIN
+    IsActive := FALSE;
+    CFrame := GetColor(5) OR (GetColor(5) SHL 8);
+  END
+  ELSE IF (State AND sfActive) = 0 THEN
+  BEGIN
+    IsActive := FALSE;
+    CFrame := GetColor(1) OR (GetColor(1) SHL 8);
+  END
+  ELSE
+  BEGIN
+    IsActive := TRUE;
+    CFrame := GetColor(3) OR (GetColor(5) SHL 8);
+  END;
+
+  { Top edge - check first visible row for DOWNWARD wall component }
+  { Frame position i corresponds to field column Delta.X+i }
+  { Skip corners at position 0 and Size.X-1 }
+  fy := Feld^.Delta.Y;  { First visible field row }
+  FOR i := 1 TO Feld^.Size.X - 2 DO
+  BEGIN
+    fx := Feld^.Delta.X + i;
+    IF (fx < NikiFlWn.SizeX) AND HasDown(fy, fx) THEN
+    BEGIN
+      IF IsActive THEN WallChar := '╤' ELSE WallChar := '┬';
+      MoveStr(B[0], WallChar, CFrame);
+      WriteLine(i, 0, 1, 1, B);
+    END;
+  END;
+
+  { Bottom edge - check last visible row for UPWARD wall component }
+  fy := Feld^.Delta.Y + Feld^.Size.Y - 1;  { Last visible field row }
+  FOR i := 1 TO Feld^.Size.X - 2 DO
+  BEGIN
+    fx := Feld^.Delta.X + i;
+    IF (fx < NikiFlWn.SizeX) AND HasUp(fy, fx) THEN
+    BEGIN
+      IF IsActive THEN WallChar := '╧' ELSE WallChar := '┴';
+      MoveStr(B[0], WallChar, CFrame);
+      WriteLine(i, Size.Y - 1, 1, 1, B);
+    END;
+  END;
+
+  { Left edge - check first visible column for RIGHTWARD wall component }
+  { Skip corners at position 0 and Size.Y-1 }
+  fx := Feld^.Delta.X;  { First visible field column }
+  FOR i := 1 TO Feld^.Size.Y - 2 DO
+  BEGIN
+    fy := Feld^.Delta.Y + i;
+    IF (fy < NikiFlWn.SizeY) AND HasRight(fy, fx) THEN
+    BEGIN
+      IF IsActive THEN WallChar := '╟' ELSE WallChar := '├';
+      MoveStr(B[0], WallChar, CFrame);
+      WriteLine(0, i, 1, 1, B);
+    END;
+  END;
+
+  { Right edge - check last visible column for LEFTWARD wall component }
+  fx := Feld^.Delta.X + Feld^.Size.X - 1;  { Last visible field column }
+  FOR i := 1 TO Feld^.Size.Y - 2 DO
+  BEGIN
+    fy := Feld^.Delta.Y + i;
+    IF (fy < NikiFlWn.SizeY) AND HasLeft(fy, fx) THEN
+    BEGIN
+      IF IsActive THEN WallChar := '╢' ELSE WallChar := '┤';
+      MoveStr(B[0], WallChar, CFrame);
+      WriteLine(Size.X - 1, i, 1, 1, B);
+    END;
+  END;
+END;
+
 CONSTRUCTOR TFeldWindow.Init(R:TRect; ADatei:STRING);
 VAR HScrollbar, VScrollbar:PScrollBar;
 BEGIN
   INHERITED Init(R, ADatei, wnNoNumber);
   Options := Options OR ofTileable;
-  {State := State AND NOT sfShadow;}
+  Flags := Flags OR wfClose OR wfZoom;
+  State := State AND NOT sfShadow;
 
   GrowMode := 0;
 
@@ -1358,10 +1533,10 @@ BEGIN
   Insert(VScrollBar);
 
   GetExtent(R);
-  inc(R.A.X);
-  inc(R.A.Y);
-  dec(R.B.X);
-  dec(R.B.Y);
+  inc(R.A.X);  { Leave room for left frame }
+  inc(R.A.Y);  { Leave room for top frame/title }
+  dec(R.B.X);  { Leave room for right frame }
+  dec(R.B.Y);  { Leave room for bottom frame }
   New(Feld, Init(R, ADatei, HScrollbar, VScrollbar));
   Insert(Feld);
 
