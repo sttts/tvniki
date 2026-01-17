@@ -17,7 +17,7 @@ TYPE PParamLine=^TParamLine;
      TParamLine=OBJECT(TParamText)
                   CONSTRUCTOR Init(VAR Bounds: TRect; CONST AText: String;
                       AParamCount: Integer);
-                  PROCEDURE GetText(VAR S: String); VIRTUAL;
+                  PROCEDURE GetText(VAR S: ShortString); VIRTUAL;
 
                   PROCEDURE HandleEvent(VAR Event:TEvent); VIRTUAL;
                   FUNCTION Execute: WORD; VIRTUAL;
@@ -61,7 +61,7 @@ TYPE PParamLine=^TParamLine;
 
 
 IMPLEMENTATION
-USES Crt, Dos;
+USES SysUtils;
 
 FUNCTION Max(a,b:Integer):Integer;
 BEGIN
@@ -75,33 +75,32 @@ END;
 
 PROCEDURE Beep;
 BEGIN
-  Sound(1000);
-  Delay(200);
-  nosound;
+  { Use terminal bell instead of DOS sound }
+  Write(#7);
 END;
 
 PROCEDURE FDelete(d:String);
-VAR R:Registers;
 BEGIN
-  d[length(d)+1] := #0;
-
-  R.AH := $41;
-  R.DX := Ofs(d[1]);
-  R.DS := Seg(d[1]);
-  Intr($21, R);
+  { Use SysUtils instead of DOS INT 21h }
+  SysUtils.DeleteFile(d);
 END;
 
 FUNCTION GetTemp:String;
 VAR d:String;
 BEGIN
-  d := GetEnv('TEMP');
-  IF d = '' THEN d := GetEnv('TMP');
+  {$IFDEF UNIX}
+  d := GetEnvironmentVariable('TMPDIR');
+  IF d = '' THEN d := '/tmp';
+  {$ELSE}
+  d := GetEnvironmentVariable('TEMP');
+  IF d = '' THEN d := GetEnvironmentVariable('TMP');
+  {$ENDIF}
   GetTemp := d;
 END;
 
 {*******************************}
 
-CONSTRUCTOR TProcess.Init;
+CONSTRUCTOR TProcess.Init(p:TPoint);
 VAR r:TRect;
 BEGIN
   R.Assign(p.x, p.y, p.x+1, p.y+1);
@@ -152,7 +151,7 @@ BEGIN
   ParamList := NIL;
 END;
 
-procedure TParamLine.GetText(var S: String);
+procedure TParamLine.GetText(var S: ShortString);
 begin
   if (Text <> nil) then
   BEGIN
@@ -185,7 +184,7 @@ BEGIN
   Execute := EndState;
 END;
 
-PROCEDURE TParamLine.EndModal;
+PROCEDURE TParamLine.EndModal(Command:WORD);
 BEGIN
   EndState := Command;
 END;
@@ -231,33 +230,25 @@ BEGIN
 END;
 
 PROCEDURE TScrollerLine.Draw;
-VAR p:Integer;
+VAR
     Von,Bis:Integer;
     Color: Byte;
-    Center: Boolean;
     Buf: TDrawBuffer;
-    BufPos:Integer;
+    DisplayStr: String;
 BEGIN
   Color := GetColor(4);
   MoveChar(Buf, ' ', Color, Size.X);
 
-  BufPos:=0;
+  { Build display string from scroll position }
+  Bis := Pos + Size.X;
+  IF Bis > Len THEN Bis := Len;
 
-  Bis := Pos+Size.X;
-  IF Bis>Len THEN Bis := Len;
-  FOR p:=Pos TO Bis DO
-  BEGIN
-    Byte(Buf[BufPos]) := Byte(ScrollText[p]);
-    inc(BufPos);
-  END;
+  DisplayStr := Copy(ScrollText, Pos, Bis - Pos + 1);
+  { Wrap around if needed }
+  IF Length(DisplayStr) < Size.X THEN
+    DisplayStr := DisplayStr + Copy(ScrollText, 1, Size.X - Length(DisplayStr));
 
-  Bis := Size.X-(Bis-Pos);
-  FOR p:=1 TO Bis DO
-  BEGIN
-    Byte(Buf[BufPos]) := Byte(ScrollText[p]);
-    inc(BufPos);
-  END;
-
+  MoveStr(Buf, DisplayStr, Color);
   WriteLine(0, 0, Size.X, 1, Buf);
 end;
 

@@ -1,4 +1,4 @@
-USES NikiApp, Timer, Crt;
+USES NikiApp, Timer, Mouse;
 
 {$M 16385, 0, 655360}
 
@@ -10,10 +10,11 @@ VAR OldExit:Pointer;
 PROCEDURE MyExitProc; FAR;
 BEGIN
   ExitProc := OldExit;
+  DoneMouse;
 
   IF ExitCode<>0 THEN
   BEGIN
-    ClrScr;
+    Write(#27'[2J'#27'[H');  { ANSI: clear screen and home cursor }
 
     Writeln('>>>>>>>>> Fehler <<<<<<<<<');
     Writeln;
@@ -28,6 +29,7 @@ BEGIN
   ExitProc := @MyExitProc;
 
   Install_Timer;
+  InitMouse;
 
   Niki.Init; { Initialisierung }
   Niki.Run;

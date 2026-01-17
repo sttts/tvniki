@@ -73,11 +73,12 @@ BEGIN
   Prog := NIL;
   Stack := NIL;
 
-  IF MaxAvail<SizeOf(Prog^) THEN Status := stNoMemory ELSE
-    New(Prog);
+  { Modern systems have plenty of memory - just allocate directly }
+  New(Prog);
+  IF Prog = NIL THEN Status := stNoMemory;
 
-  IF MaxAvail<SizeOf(Stack^) THEN Status := stNoMemory ELSE
-    New(Stack);
+  New(Stack);
+  IF Stack = NIL THEN Status := stNoMemory;
 
   IF Status=stOk THEN LoadFile(ADatei);
 END;
@@ -127,7 +128,7 @@ BEGIN
   Breakpoint := TRUE;
 END;
 
-PROCEDURE TInterpreter.Error;
+PROCEDURE TInterpreter.Error(e:Integer);
 BEGIN
   Status := e;
 END;

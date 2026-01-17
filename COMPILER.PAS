@@ -9,14 +9,14 @@ INTERFACE
 
   {not $define UserFuncs}
     {noch nicht komplett implementiert:
-     öberall innerhalb der Function mu· der Name gÅltig sein,
-     um einen RÅckgabewert zu liefern
+     √ºberall innerhalb der Function mu√ü der Name g√ºltig sein,
+     um einen R√ºckgabewert zu liefern
 
-     -> die Prozedur "Befehl" mu· erweitert werden, da· Sie Konstrukte wie
+     -> die Prozedur "Befehl" mu√ü erweitert werden, da√ü Sie Konstrukte wie
      "Func := TRUE" verarbeitet
 
-     -> Die Prozedur "Befehl" mu· durch "Anweisung ersetzt werden, die
-     spÑter z.B. auch Rechnungen verarbeiten kann.
+     -> Die Prozedur "Befehl" mu√ü durch "Anweisung ersetzt werden, die
+     sp√§ter z.B. auch Rechnungen verarbeiten kann.
     }
 {$endif}
 
@@ -49,7 +49,7 @@ CONST ErrorLine:Integer=0;
       Lines:Longint=0;
 
 IMPLEMENTATION
-USES Dos, Crt, Objects, Opcodes;
+USES Dos, Objects, Opcodes, SysUtils;
 
 TYPE PProgram=^TProgram;
      TProgram=OBJECT(TObject)
@@ -131,20 +131,15 @@ TYPE PProgram=^TProgram;
 {*****************************************}
 
 PROCEDURE FDelete(d:String);
-VAR R:Registers;
 BEGIN
-  d[length(d)+1] := #0;
-
-  R.AH := $41;
-  R.DX := Ofs(d[1]);
-  R.DS := Seg(d[1]);
-  Intr($21, R);
+  { Use SysUtils instead of DOS INT 21h }
+  SysUtils.DeleteFile(d);
 END;
 
 
 {*****************************************}
 
-CONSTRUCTOR TProgram.Init;
+CONSTRUCTOR TProgram.Init(ADateiName:String; VAR Fehler:Integer);
 BEGIN
   INHERITED Init;
   {$I-}
@@ -391,7 +386,7 @@ BEGIN
   IF IOResult<>0 THEN
   BEGIN
     ErrorNumber := ErrSourceNotFound;
-    ErrorDescribtion := 'Quelldatei nicht gefunden oder kann nicht geîffnet werden';
+    ErrorDescribtion := 'Quelldatei nicht gefunden oder kann nicht ge√∂ffnet werden';
     Compile := FALSE;
   END ELSE
   BEGIN
@@ -590,13 +585,13 @@ BEGIN
     Exit;
   END;
 
-  { Bezeichner gÅltig? }
+  { Bezeichner g√ºltig? }
   IF Keywords^.IsIn(NextExpression) THEN
   BEGIN
     ErrorNumber := ErrKeyId;
     ErrorLine := TokenY;
     ErrorColumn := TokenX;
-    ErrorDescribtion := 'SchlÅsselwort als Bezeichner nicht erlaubt (' +
+    ErrorDescribtion := 'Schl√ºsselwort als Bezeichner nicht erlaubt (' +
       NextExpression + ')';
 
     Exit;
@@ -641,7 +636,7 @@ BEGIN
     WHILE ((NextToken=tkId) AND (NextExpression<>'END')) OR
           (NextToken=tkSemikolon) DO
     BEGIN
-      { öberflÅssige Semikolons }
+      { √ºberfl√ºssige Semikolons }
       WHILE NextToken=tkSemikolon DO
         IF NOT GetNextToken THEN Exit;
 
@@ -956,7 +951,7 @@ BEGIN
     WHILE ((NextToken=tkId) AND (NextExpression<>'UNTIL')) OR
           (NextToken=tkSemikolon) DO
     BEGIN
-      { öberflÅssige Semikolons }
+      { √ºberfl√ºssige Semikolons }
       WHILE NextToken=tkSemikolon DO
         IF NOT GetNextToken THEN Exit;
 
@@ -1058,7 +1053,7 @@ BEGIN
        END
        ELSE
         BEGIN
-          { gÅltiger Anweisung }
+          { g√ºltiger Anweisung }
           Command := Procs^.Search(NextExpression);
           IF Command=NIL THEN
           {$ifdef CallableFuncs}
@@ -1112,13 +1107,13 @@ BEGIN
       Exit;
     END;
 
-    { SchlÅsselwort? }
+    { Schl√ºsselwort? }
     IF Keywords^.IsIn(NextExpression) THEN
     BEGIN
       ErrorNumber := ErrKeyId;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'SchlÅsselwort als Bezeichner nicht erlaubt ('+
+      ErrorDescribtion := 'Schl√ºsselwort als Bezeichner nicht erlaubt ('+
         NextExpression+')';
 
       Exit;
@@ -1165,7 +1160,7 @@ BEGIN
     WHILE ((NextToken=tkId) AND (NextExpression<>'END')) OR
           (NextToken=tkSemikolon) DO
     BEGIN
-      { öberflÅssige Semikolons }
+      { √ºberfl√ºssige Semikolons }
       WHILE NextToken=tkSemikolon DO
         IF NOT GetNextToken THEN Exit;
 
@@ -1227,7 +1222,7 @@ VAR Value:BOOLEAN;
 BEGIN
   FuncDef := FALSE;
 
-  {Bisher noch kein RÅckgabewert}
+  {Bisher noch kein R√ºckgabewert}
   Value := FALSE;
 
   { Bezeichner? }
@@ -1253,13 +1248,13 @@ BEGIN
       Exit;
     END;
 
-    { SchlÅsselwort? }
+    { Schl√ºsselwort? }
     IF Keywords^.IsIn(Name) THEN
     BEGIN
       ErrorNumber := ErrKeyId;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'SchlÅsselwort als Bezeichner nicht erlaubt ('+
+      ErrorDescribtion := 'Schl√ºsselwort als Bezeichner nicht erlaubt ('+
         Name+')';
 
       Exit;

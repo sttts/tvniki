@@ -22,7 +22,7 @@ TYPE PNikiEditor=^TNikiEditor;
                  END;
 
 IMPLEMENTATION
-USES NikiCnst, NikiComp, Compiler, Crt, MsgBox, NikiFeld, Dos, NikiInfo,
+USES NikiCnst, NikiComp, Compiler, MsgBox, NikiFeld, Dos, NikiInfo,
      StdDlg, Hilfe, NikiPrnt, Config;
 
 {$F+}
@@ -45,7 +45,7 @@ BEGIN
       MyEditorDialog := MessageBox('Error creating file %s.',
         @Info, mfError + mfOkButton);
     edSaveModify:
-      MyEditorDialog := MessageBox('%s wurde verÑndert. Speichern?',
+      MyEditorDialog := MessageBox('%s wurde ver√§ndert. Speichern?',
         @Info, mfInformation + mfYesNoCancel);
     edSaveUntitled:
       MyEditorDialog := MessageBox('Unbenannte Datei speichern?',
@@ -82,7 +82,8 @@ end;
 
 {***********************************************}
 
-CONSTRUCTOR TNikiEditor.Init;
+CONSTRUCTOR TNikiEditor.Init(VAR Bounds: TRect;
+    FileName: FNameStr; ANumber: Integer);
 BEGIN
   INHERITED Init(Bounds, FileName, ANumber);
 
@@ -112,7 +113,7 @@ BEGIN
                   cmDebug:BEGIN
                             IF GetNumOption('DEBUG', 1)=0 THEN
                             BEGIN
-                              MessageBox('Der Debug-Modus wurde Åber den Schalter DEBUG in NIKI.CFG deaktiviert.',
+                              MessageBox('Der Debug-Modus wurde √ºber den Schalter DEBUG in NIKI.CFG deaktiviert.',
                                 NIL, mfOkButton);
                             END;
 
@@ -184,7 +185,7 @@ BEGIN
 
   IF FeldWindow=NIL THEN
   BEGIN
-    MessageBox('Sie mÅssen erst ein Roboterfeld laden, um das Programm zu starten',
+    MessageBox('Sie m√ºssen erst ein Roboterfeld laden, um das Programm zu starten',
         NIL, mfOkButton+mfInformation);
   END;
 
@@ -192,9 +193,9 @@ BEGIN
   BEGIN
     Error := FALSE;
 
-    { NIK-Datei mu· noch gesucht werden und die Zeit der letzten énderung
+    { NIK-Datei mu√° noch gesucht werden und die Zeit der letzten ¬énderung
       mit der Zeit der PAS-Datei verglichen werden, um zu ermitteln, ob
-      die Datei neu compiliert werden mu· }
+      die Datei neu compiliert werden mu√° }
 
     IF (Editor^.Modified OR (GetTitle(255)='Untitled')) OR NOT Compiled THEN
       Error := NOT Compile;
@@ -283,7 +284,7 @@ BEGIN
 END;
 
 BEGIN
-  EditorDialog := MyEditorDialog;
+  EditorDialog := @MyEditorDialog;
   EditWindow := NIL;
 END.
 

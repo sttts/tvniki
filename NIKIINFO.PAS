@@ -28,7 +28,7 @@ VAR InfoWindow:PInfoDialog;
 IMPLEMENTATION
 
 
-CONSTRUCTOR TInfoDialog.Init;
+CONSTRUCTOR TInfoDialog.Init(VAR P: TPoint);
 VAR R:TRect;
 BEGIN
   R.A.X := P.X;
@@ -112,7 +112,7 @@ END;
 
 VAR Str:PString;
 
-PROCEDURE TInfoDialog.SetMode;
+PROCEDURE TInfoDialog.SetMode(s:TStatus);
 BEGIN
   CASE s OF
     stEdit : Str^:=  '  Edit';

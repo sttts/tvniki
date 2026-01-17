@@ -49,7 +49,7 @@ TYPE TJustify=(jfLeft, jfRight);
                     END;
 
 IMPLEMENTATION
-USES Compiler, Dos, Crt, Config;
+USES Compiler, Dos, Config;
 
 CONSTRUCTOR TOutputLine.Init(VAR R:TRect; AJustify:TJustify);
 BEGIN

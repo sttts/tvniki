@@ -1,0 +1,13 @@
+# Build artifacts
+*.o
+*.ppu
+*.rsj
+niki
+NIKI
+
+# Backup files
+*.orig
+*.bak
+
+# fv_utf8 is a submodule/external dependency
+fv_utf8/

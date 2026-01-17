@@ -79,7 +79,7 @@ CONST opZeilenNummern=1;
       );
 
 IMPLEMENTATION
-USES App, Strings, Hilfe, Crt, Dos, MsgBox, Printer;
+USES App, Strings, Hilfe, Dos, MsgBox, Printer;
 
 CONST Width=29;
       Height=8;
@@ -89,7 +89,7 @@ CONST Width=29;
 
 {************************************}
 
-CONSTRUCTOR TPrintDialog.Init;
+CONSTRUCTOR TPrintDialog.Init(aMode:Integer);
 VAR R:TRect;
 BEGIN
   Desktop^.GetExtent(R);
@@ -183,7 +183,7 @@ END;
 
 {************************************}
 
-CONSTRUCTOR TEditPrint.Init;
+CONSTRUCTOR TEditPrint.Init(aEditor:PEditor);
 BEGIN
   INHERITED Init;
 
@@ -242,7 +242,7 @@ END;
 
 {************************************}
 
-CONSTRUCTOR TFeldPrint.Init;
+CONSTRUCTOR TFeldPrint.Init(aEditor:PFeldEditor);
 BEGIN
   INHERITED Init;
 

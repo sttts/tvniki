@@ -3,6 +3,7 @@ INTERFACE
 USES Objects, Views, Drivers, Dialogs, TvEnh, Intp, NikiInfo, Editors, NikiFlWn;
 
 CONST CFeldColor=#$0F#$07#$0A;
+      cmTextEnd = 511;  { Editor command from original TV Editors unit }
       CFeldBlackWhite=#$0F#$07#15;
       CFeldMonochrome=#$0F#$07#10;
 
@@ -131,7 +132,7 @@ TYPE PRobot=^TRobot;
                    FUNCTION GetPalette: PPalette; VIRTUAL;
 
                    PROCEDURE UpdateTitle;
-                   FUNCTION GetTitle(MaxSize: Integer): TTitleStr; VIRTUAL;
+                   FUNCTION GetTitle(MaxLen: LongInt): ShortString;
 
                    PROCEDURE Run(ADatei:STRING; Debug:BOOLEAN);
                   PRIVATE
@@ -161,7 +162,7 @@ TYPE PRobot=^TRobot;
 VAR FeldWindow:PFeldWindow;
 
 IMPLEMENTATION
-USES Crt, Dos, Config, NikiCnst, MsgBox, App, StdDlg, Timer, NikiGlob, NikiPrnt;
+USES Dos, Config, NikiCnst, MsgBox, App, StdDlg, Timer, NikiGlob, NikiPrnt;
 
 
 {******************************************************
@@ -245,7 +246,7 @@ CONST {Robots:String='<^>v';}
 
       cRobot = 14 + 0*16;
 
-CONSTRUCTOR TRobot.Init;
+CONSTRUCTOR TRobot.Init(ax,ay:Integer;ARichtung:TRichtung;AFeld:PFeldEditor);
 BEGIN
   INHERITED Init;
 
@@ -265,7 +266,7 @@ BEGIN
   INHERITED Done;
 END;
 
-PROCEDURE TRobot.Store;
+PROCEDURE TRobot.Store(VAR S:TStream);
 BEGIN
   S.Write(x, Sizeof(x));
   S.Write(y, Sizeof(y));
@@ -273,7 +274,7 @@ BEGIN
   S.Write(Richtung, Sizeof(Richtung));
 END;
 
-CONSTRUCTOR TRobot.Load;
+CONSTRUCTOR TRobot.Load(VAR S:TStream; AFeld:PFeldEditor);
 BEGIN
   Feld := AFeld;
 
@@ -488,7 +489,8 @@ END;
  ******************************************************}
 
 
-CONSTRUCTOR TFeldEditor.Init;
+CONSTRUCTOR TFeldEditor.Init(R:TRect; ADatei:String;
+    AHScrollBar, AVScrollBar:PScrollBar);
 BEGIN
   Niki := NIL;
 
@@ -496,12 +498,12 @@ BEGIN
 
   IF Niki=NIL THEN
   BEGIN
-    IF MaxAvail<SizeOf(TRobot) THEN
+    New(Niki, Init(0, 0, rRechts, @Self));
+    IF Niki = NIL THEN
     BEGIN
-      MessageBox('Nicht genug Speicher fÅr ein Feld', NIL, mfOkButton + mfError);
+      MessageBox('Nicht genug Speicher f√ºr ein Feld', NIL, mfOkButton + mfError);
       IsValid := FALSE;
-    END ELSE
-      New(Niki, Init(0, 0, rRechts, @Self));
+    END;
   END;
 
   Pos.X := 2;
@@ -524,7 +526,7 @@ END;
 
 
 {******************************************************
- * ZurÅcksetzen in den Edit-Modus                     *
+ * Zur√ºcksetzen in den Edit-Modus                     *
  ******************************************************}
 
 PROCEDURE TFeldEditor.ResetMode;
@@ -558,12 +560,12 @@ BEGIN
 
   INHERITED ReadFile(S);
 
-  IF MaxAvail<SizeOf(TRobot) THEN
+  New(Niki, Load(S, @Self));
+  IF Niki = NIL THEN
   BEGIN
-    MessageBox('Nicht genug Speicher fÅr ein Feld', NIL, mfOkButton + mfError);
+    MessageBox('Nicht genug Speicher f√ºr ein Feld', NIL, mfOkButton + mfError);
     IsValid := FALSE;
-  END ELSE
-    New(Niki, Load(S, @Self));
+  END;
 END;
 
 
@@ -573,6 +575,7 @@ END;
 
 PROCEDURE TFeldEditor.HandleEvent(VAR Event:TEvent);
 VAR Klick:TPoint;
+    TempX, TempY: SmallInt;
 BEGIN
   CASE Status OF
     stEdit:
@@ -584,7 +587,9 @@ BEGIN
         evMouseMove, evMouseDown :
               BEGIN
                 MakeLocal(Event.Where, Klick);
-                MakeLogical(Event.Where.X, Event.Where.Y);
+                TempX := Klick.X; TempY := Klick.Y;
+                MakeLogical(TempX, TempY);
+                Klick.X := TempX; Klick.Y := TempY;
 
                 IF Event.Buttons=1 THEN
                 BEGIN
@@ -785,19 +790,19 @@ BEGIN
     stNoPalette:   s:='Fehler #%d: Nichts zum Aufnehmen vorhanden';
     stHitWall:     s:='Fehler #%d: Wand im Weg';
     stNoMemory:    s:='Fehler #%d: Zu wenig Speicher vorhanden';
-    stStackErr:    s:='Fehler #%d: StackÅberlauf';
+    stStackErr:    s:='Fehler #%d: Stack√ºberlauf';
     stUnknownOpcode: s:='Interner Interpreter-Fehler #%d an PCode-Position %d';
     stFileError:   s:='Fehler #%d: Dateifehler';
     ELSE s:='Unbekannter Fehler #%d';
   END;
-  IF MaxAvail<SizeOf(TErrorLine) THEN
+  Error := New(PErrorLine, Init(R, s, 2));
+  IF Error = NIL THEN
   BEGIN
     MessageBox('Nicht genug Speicher zum Anzeigen des Fehlers'
       , NIL, mfOkButton + mfError);
     IsValid := FALSE;
   END ELSE
   BEGIN
-    Error := New(PErrorLine, Init(R, s, 2));
     ErrorInfo.Num := Prog^.Status;
     ErrorInfo.Pos := Prog^.IP;
     Error^.SetData( ErrorInfo );
@@ -813,7 +818,7 @@ END;
  * Starten eines Programms                            *
  ******************************************************}
 
-PROCEDURE TFeldEditor.Run;
+PROCEDURE TFeldEditor.Run(ADatei:STRING; Debug:BOOLEAN);
 BEGIN
   IF (Status=stRunning) OR (Status=stPaused) OR (Status=stDebug) THEN StopRun;
   IF SaveFile(GetTemp+'\RUN.TMP') THEN
@@ -830,20 +835,20 @@ BEGIN
     IF MyTimer<0 THEN
     BEGIN
 
-      MessageBox('Nicht genug Resourcen zum AusfÅhren des Programms', NIL, mfOkButton + mfError);
+      MessageBox('Nicht genug Resourcen zum Ausf√ºhren des Programms', NIL, mfOkButton + mfError);
       IsValid := FALSE;
 
       StopRun;
     END ELSE
-    IF MaxAvail<SizeOf(TProgram) THEN
     BEGIN
-
-      MessageBox('Nicht genug Speicher zum AusfÅhren des Programms', NIL, mfOkButton + mfError);
-      IsValid := FALSE;
-
-      StopRun;
-    END ELSE
       New(Prog, Init(ADatei, Niki));
+      IF Prog = NIL THEN
+      BEGIN
+        MessageBox('Nicht genug Speicher zum Ausf√ºhren des Programms', NIL, mfOkButton + mfError);
+        IsValid := FALSE;
+        StopRun;
+      END;
+    END;
   END ELSE
     MessageBox('Can''t write temporal file', NIL, mfError+mfOkButton);
 END;
@@ -876,14 +881,14 @@ BEGIN
   dec(R.B.X);
   R.B.Y:=R.A.Y+1;
 
-  IF MaxAvail<SizeOf(TPAramLine) THEN
+  Msg := New(PParamLine, Init(R, 'Programm beendet', 0));
+  IF Msg = NIL THEN
   BEGIN
     MessageBox('Nicht genug Speicher zum Anzeigen der Fertig-Meldung',
        NIL, mfOkButton + mfError);
     IsValid := FALSE;
   END ELSE
   BEGIN
-    Msg := New(PParamLine, Init(R, 'Programm beendet', 0));
     Owner^.ExecView( Msg );
     Dispose( Msg, Done );
   END;
@@ -1056,7 +1061,7 @@ BEGIN
   END;
 END;
 
-PROCEDURE TFeldEditor.RecordAction;
+PROCEDURE TFeldEditor.RecordAction(Event:TEvent);
 BEGIN
   IF Niki<>NIL THEN
     CASE Event.KeyCode OF
@@ -1101,7 +1106,7 @@ BEGIN
   UpdateInfoWindow;
 END;
 
-PROCEDURE TFeldEditor.TeachLine;
+PROCEDURE TFeldEditor.TeachLine(s:String);
 VAR Alt:Boolean;
 BEGIN
   IF TeachInBuf<>NIL THEN
@@ -1265,16 +1270,16 @@ END;
  ******************************************************}
 
 PROCEDURE TFeldEditor.Vorrat;
-VAR s:STRING;
+VAR s: ShortString;
     v:Integer;
     Code:Integer;
 BEGIN
   System.Str(Niki^.Vorrat, s);
-  IF InputBox('Vorrat Ñndern', 'Vorrat:', s, 2)=cmOk THEN
+  IF InputBox('Vorrat √§ndern', 'Vorrat:', s, 2)=cmOk THEN
   BEGIN
     Val(s, v, Code);
     IF (Code<>0) OR (v<0) OR (v>99) THEN
-      MessageBox('Vorrat mu· zwischen 0 und 99 liegen', NIL,
+      MessageBox('Vorrat mu√ü zwischen 0 und 99 liegen', NIL,
           mfOkButton+mfError)
     ELSE
       BEGIN
@@ -1295,16 +1300,16 @@ END;
  ******************************************************}
 
 PROCEDURE TFeldEditor.SetSpeed;
-VAR s:STRING;
+VAR s: ShortString;
     v:Integer;
     Code:Integer;
 BEGIN
   System.Str(Speed, s);
-  IF InputBox('Geschwindigkeit Ñndern', 'Geschwindigkeit:', s, 2)=cmOk THEN
+  IF InputBox('Geschwindigkeit √§ndern', 'Geschwindigkeit:', s, 2)=cmOk THEN
   BEGIN
     Val(s, v, Code);
     IF (Code<>0) OR (v<0) OR (v>99) THEN
-      MessageBox('Geschwindigkeit mu· zwischen 0 und 99 liegen', NIL,
+      MessageBox('Geschwindigkeit mu√ü zwischen 0 und 99 liegen', NIL,
           mfOkButton+mfError)
     ELSE
       Speed := v;
@@ -1333,7 +1338,7 @@ END;
  *                                                    *
  ******************************************************}
 
-CONSTRUCTOR TFeldWindow.Init;
+CONSTRUCTOR TFeldWindow.Init(R:TRect; ADatei:STRING);
 VAR HScrollbar, VScrollbar:PScrollBar;
 BEGIN
   INHERITED Init(R, ADatei, wnNoNumber);
@@ -1416,7 +1421,7 @@ BEGIN
   GetPalette := @P;
 END;
 
-FUNCTION TFeldWindow.GetTitle(MaxSize: Integer): TTitleStr;
+FUNCTION TFeldWindow.GetTitle(MaxLen: LongInt): ShortString;
 BEGIN
   IF Feld<>NIL THEN GetTitle := Feld^.GetTitle;
 END;

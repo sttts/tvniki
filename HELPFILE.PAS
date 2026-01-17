@@ -11,7 +11,7 @@ unit HelpFile;
 
 interface
 
-uses Objects, Drivers, Views;
+uses Objects, Drivers, Views, SysUtils;
 
 const
   CHelpColor      = #$37#$3F#$3A#$13#$13#$30#$3E#$1E;
@@ -157,8 +157,8 @@ procedure RegisterHelpFile;
 
 procedure NotAssigned(var S: TStream; Value: Integer);
 
-const
-  CrossRefHandler: TCrossRefHandler = NotAssigned;
+var
+  CrossRefHandler: TCrossRefHandler;
 
 implementation
 
@@ -406,7 +406,7 @@ var
   I: Integer;
 begin
   S.Write(NumRefs, SizeOf(Integer));
-  if @CrossRefHandler = @NotAssigned then
+  if Pointer(@CrossRefHandler) = Pointer(@NotAssigned) then
     S.Write(CrossRefs^, SizeOf(TCrossRef) * NumRefs)
   else
     for I := 1 to NumRefs do
@@ -435,37 +435,35 @@ begin
   IsBlank := (Ch = ' ') or (Ch = #13) or (Ch = #10);
 end;
 
-function Scan(var P; Offset, Size: Integer; C: Char): Integer; assembler;
-asm
-	CLD
-	LES	DI,P
-        ADD	DI,&Offset
-        MOV	DX,Size
-        SUB	DX,&Offset
-        OR	DH,DH
-        JZ	@@1
-        MOV	DX,256
-@@1:    MOV	CX,DX
-	MOV	AL, C
-        REPNE	SCASB
-	SUB	CX,DX
-        NEG	CX
-        XCHG	AX,CX
+function Scan(var P; Offset, Size: Integer; C: Char): Integer;
+{ Pure Pascal replacement for x86 assembly - scan for char C in buffer }
+var
+  Buf: PByteArray;
+  Limit, Idx: Integer;
+begin
+  Buf := @P;
+  Limit := Size - Offset;
+  if Limit > 256 then Limit := 256;
+  Scan := 0;
+  for Idx := 0 to Limit - 1 do
+    if Chr(Buf^[Offset + Idx]) = C then
+    begin
+      Scan := Idx + 1;
+      Exit;
+    end;
 end;
 
 procedure TextToLine(var Text; Offset, Length: Integer; var Line: String);
-  assembler;
-asm
-	CLD
-	PUSH	DS
-	LDS	SI,Text
-        ADD	SI,&Offset
-        LES     DI,Line
-        MOV	AX,Length
-        STOSB
-        XCHG	AX,CX
-        REP	MOVSB
-        POP	DS
+{ Pure Pascal replacement for x86 assembly - copy bytes to string }
+var
+  Buf: PByteArray;
+  Idx: Integer;
+begin
+  Buf := @Text;
+  if Length > 255 then Length := 255;
+  SetLength(Line, Length);
+  for Idx := 1 to Length do
+    Line[Idx] := Chr(Buf^[Offset + Idx - 1]);
 end;
 
 begin
@@ -484,7 +482,7 @@ begin
     Dec(I, Offset);
   end;
   TextToLine(Text, Offset, I, Line);
-  if Line[Length(Line)] = #13 then Dec(Line[0]);
+  if (Length(Line) > 0) and (Line[Length(Line)] = #13) then SetLength(Line, Length(Line) - 1);
   Inc(Offset, I);
   WrapText := Line;
 end;
@@ -771,7 +769,7 @@ begin
       if KeyCount = Selected then C := SelKeyword
       else C := Keyword;
       for J := 0 to L-1 do
-        WordRec(B[KeyPoint.X - Delta.X + J]).Hi := C;
+        Int64Rec(B[KeyPoint.X - Delta.X + J]).Hi := C;
       Inc(KeyCount);
       if KeyCount <= Topic^.GetNumCrossRefs then
         Topic^.GetCrossRef(KeyCount, KeyPoint, KeyLength, KeyRef)
@@ -915,4 +913,6 @@ procedure NotAssigned(var S: TStream; Value: Integer);
 begin
 end;
 
+initialization
+  CrossRefHandler := @NotAssigned;
 end.

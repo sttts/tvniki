@@ -32,12 +32,10 @@ CONST cmUpdateTitle = 523;
       wMid = 16;
       wNo  = 17;
 
-      Walls:String='ƒ≥Ÿƒƒ¿¡≥ø≥¥⁄¬√≈  ';
-     {Walls:String='˙˙Ÿ˙ƒ¿¡˙ø≥¥⁄¬√≈  ';}
-     {Walls:String='˙˙º˙Õ» ˙ª∫π…ÀÃŒ  ';}
-
-      cFeld1 = 15 + 0*16;
+CONST cFeld1 = 15 + 0*16;
       cFeld2 = 7 + 0*16;
+
+VAR   Walls: ARRAY[0..17] OF Char;
 
 
 TYPE TChar=RECORD
@@ -96,9 +94,10 @@ TYPE PFeld=^TFeld;
            END;
 
 IMPLEMENTATION
-USES Crt, Dos, NikiCnst, MsgBox, App, StdDlg, Timer, Hilfe;
+USES Dos, NikiCnst, MsgBox, App, StdDlg, Timer, Hilfe;
 
-CONSTRUCTOR TFeld.Init;
+CONSTRUCTOR TFeld.Init(R:TRect; ADatei:String;
+    AHScrollBar, AVScrollBar:PScrollBar);
 BEGIN
   INHERITED Init(R, AHScrollBar, AVScrollBar);
   IsValid := TRUE;
@@ -264,7 +263,7 @@ BEGIN
   IF Modified THEN
   BEGIN
     Str^:=GetTitle;
-    Result := MessageBox('Das Feld %s vor dem Schlie·en speichern?', @Str, mfYesButton+mfNoButton+mfCancelButton+
+    Result := MessageBox('Das Feld %s vor dem Schlie√üen speichern?', @Str, mfYesButton+mfNoButton+mfCancelButton+
       mfConfirmation);
 
     CASE Result OF
@@ -380,6 +379,29 @@ BEGIN
 END;
 
 BEGIN
-  Walls[0] := '˙';
+  { Initialize box-drawing characters for walls }
+  { CP437 codes - may render as box drawing on some terminals }
+  { Index: 0=point, 1=L, 2=U, 3=LU, 4=R, 5=RL, 6=RU, 7=RLU }
+  {        8=D, 9=LD, 10=DU, 11=LDU, 12=RD, 13=RLD, 14=RDU, 15=LRDU }
+  {        16=mid, 17=no }
+  Walls[0]  := Chr(197); { cross ‚îº }
+  Walls[1]  := Chr(196); { left ‚îÄ }
+  Walls[2]  := Chr(179); { up ‚îÇ }
+  Walls[3]  := Chr(217); { LU corner ‚îò }
+  Walls[4]  := Chr(196); { right ‚îÄ }
+  Walls[5]  := Chr(196); { horizontal ‚îÄ }
+  Walls[6]  := Chr(192); { RU corner ‚îî }
+  Walls[7]  := Chr(193); { RLU T-junction ‚î¥ }
+  Walls[8]  := Chr(179); { down ‚îÇ }
+  Walls[9]  := Chr(191); { LD corner ‚îê }
+  Walls[10] := Chr(179); { vertical ‚îÇ }
+  Walls[11] := Chr(180); { LDU T-junction ‚î§ }
+  Walls[12] := Chr(218); { RD corner ‚îå }
+  Walls[13] := Chr(194); { RLD T-junction ‚î¨ }
+  Walls[14] := Chr(195); { RDU T-junction ‚îú }
+  Walls[15] := Chr(197); { LRDU cross ‚îº }
+  Walls[16] := ' ';      { mid (field) }
+  Walls[17] := ' ';      { no wall }
+
   GetMem(Str, 256);
 END.

@@ -9,7 +9,7 @@ FUNCTION GetNumOption(S:String; Default:Integer):INTEGER;
 FUNCTION GetStrOption(S:String; Default:String):String;
 
 IMPLEMENTATION
-USES Crt, Dos, Objects;
+USES Dos, Objects;
 
 TYPE POption=^TOption;
      TOption=OBJECT(TObject)
@@ -36,7 +36,7 @@ TYPE POption=^TOption;
 
 {*****************************************}
 
-CONSTRUCTOR TOption.Init;
+CONSTRUCTOR TOption.Init(aName, aValue:String);
 VAR err:Integer;
 BEGIN
   INHERITED Init;
@@ -111,7 +111,9 @@ VAR f:Text;
     Line:String;
     P:Byte;
     n,v:STRING;
-    Path:String;
+    Path: DirStr;
+    FName: NameStr;
+    FExt: ExtStr;
 BEGIN
   IF Options<>NIL THEN Dispose(Options, Done);
 
@@ -123,7 +125,7 @@ BEGIN
 
   IF IOResult<>0 THEN
   BEGIN
-    FSplit(ParamStr(0), Path, Line, Line);
+    FSplit(ParamStr(0), Path, FName, FExt);
 
     Assign(f, Path+Name);
     Reset(f);
@@ -132,7 +134,7 @@ BEGIN
   WHILE (NOT EoF(f)) AND (IOResult=0) DO
   BEGIN
     Readln(f, Line);
-    IF (Line[1]<>';') AND (Line<>'') AND (Line[1]<>' ') THEN
+    IF (Line<>'') AND (Line[1]<>';') AND (Line[1]<>' ') THEN
     BEGIN
       FOR p:=1 TO Length(Line) DO Line[p]:=UpCase(Line[p]);
 

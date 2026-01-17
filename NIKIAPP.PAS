@@ -43,10 +43,14 @@ TYPE  TNikiApplication = OBJECT(TApplication)
 
 
 IMPLEMENTATION
-USES Dos, NikiCnst, NikiEdit, NikiInfo, Crt, NikiGlob, NikiCopy,
+USES Dos, NikiCnst, NikiEdit, NikiInfo, NikiGlob, NikiCopy,
      NikiHelp, HelpFile, Hilfe, Config;
 
 CONST HeapSize = (128 * 1024) DIV 16;
+      { Editor commands from original TV Editors unit }
+      cmFind        = 82;
+      cmReplace     = 83;
+      cmSearchAgain = 84;
 
 CONSTRUCTOR TNikiApplication.Init;
 VAR z:Integer;
@@ -54,7 +58,7 @@ VAR z:Integer;
     sMode:String;
     Mode:Integer;
 BEGIN
-  MaxHeapSize := HeapSize;
+  { MaxHeapSize and MemAvail removed - not needed on modern systems }
   LoadConfig('NIKI.CFG');
 
   INHERITED Init;
@@ -64,11 +68,6 @@ BEGIN
   RegisterMenus;
   RegisterApp;
   RegisterHelpFile;
-
-  IF MemAvail<64*1024 THEN
-    MessageBox(
-    'Sie haben nur sehr wenig Speicher zur VerfÅgung, so da· es vorkommen kann, da· einige Funktionen nicht funtionieren',
-    NIL, mfError+mfOkButton);
 
   FeldWindow:=NIL;
 
@@ -104,7 +103,9 @@ END;
 
 PROCEDURE TNikiApplication.SwitchVideoMode;
 BEGIN
-  SetScreenMode(ScreenMode XOR smFont8x8);
+  { Toggle 25/50 line mode - simplified for Free Vision }
+  { In Free Vision, ScreenMode is a TVideoMode record, not a simple Word }
+  { This function is a placeholder - line mode switching may need terminal support }
 END;
 
 PROCEDURE TNikiApplication.CreateClipboard;
@@ -141,8 +142,9 @@ BEGIN
   R.A.Y := R.B.Y - 1;
   New(StatusLine, Init(R,
     NewStatusDef(0, $FFFF,
-      NewStatusKey('~Alt-X~ Exit', kbAltX, cmQuit,
-      StdStatusKeys(nil)), nil)));
+      NewStatusKey('~Alt-X~/~Ctrl-Q~ Exit', kbAltX, cmQuit,
+      NewStatusKey('', kbCtrlQ, cmQuit,
+      StdStatusKeys(nil))), nil)));
 END;
 
 PROCEDURE TNikiApplication.InitMenuBar;
@@ -153,7 +155,7 @@ BEGIN
   MenuBar := New (PMenuBar, Init(R, NewMenu(
     NewSubMenu('~D~atei', hcNoContext, NewMenu(
       NewItem('~N~eu', '', 0, cmNew, hcNoContext,
-      NewItem('ô~f~fnen...', 'F3', kbF3, cmOpen, hcNoContext,
+      NewItem('~√ñ~ffnen...', 'F3', kbF3, cmOpen, hcNoContext,
       NewLine(
       NewItem('~S~peichern', 'F2', kbF2, cmSave, hcNoContext,
       NewItem('Speichern ~a~ls...', '', 0, cmSaveAs, hcNoContext,
@@ -165,12 +167,12 @@ BEGIN
       NewItem('~B~eenden', 'Alt-X', kbAltX, cmQuit, hcNoContext,
       NIL))))))))))),
     NewSubMenu('~B~earbeiten', hcNoContext, NewMenu(
-      NewItem('~U~ndo', 'Alt-RÅck', kbAltBack, cmUndo, hcNoContext,
+      NewItem('~U~ndo', 'Alt-Back', kbAltBack, cmUndo, hcNoContext,
       NewLine(
-      NewItem('~A~usschneiden', 'Shift-Entf', kbShiftDel, cmCut, hcNoContext,
-      NewItem('~K~opieren', 'Strg-Einfg', kbCtrlIns, cmCopy, hcNoContext,
-      NewItem('~E~infÅgen', 'Shift-Einfg', kbShiftIns, cmPaste, hcNoContext,
-      NewItem('~L~îschen', 'Strg-Entf', kbCtrlDel, cmClear, hcNoContext,
+      NewItem('~A~usschneiden', 'Shift-Del', kbShiftDel, cmCut, hcNoContext,
+      NewItem('~K~opieren', 'Ctrl-Ins', kbCtrlIns, cmCopy, hcNoContext,
+      NewItem('~E~inf√ºgen', 'Shift-Ins', kbShiftIns, cmPaste, hcNoContext,
+      NewItem('~L~√∂schen', 'Ctrl-Del', kbCtrlDel, cmClear, hcNoContext,
       NewLine(
       NewItem('~Z~eige Clipboard', '', 0, cmShowClip, hcNoContext,
       NIL))))))))),
@@ -180,16 +182,16 @@ BEGIN
       NewItem('~W~eitersuchen', 'Alt-W', kbAltW, cmSearchAgain, hcNoContext,
       NIL)))),
     NewSubMenu('~C~ompiler', hcNoContext, NewMenu(
-      NewItem('~A~usfÅhren', 'Strg-F9', kbCtrlF9, cmRun, hcNoContext,
+      NewItem('~A~usf√ºhren', 'Ctrl-F9', kbCtrlF9, cmRun, hcNoContext,
       NewItem('~C~ompilieren', 'Alt-F9', kbAltF9, cmCompile, hcNoContext,
-      NewItem('~E~inzelschritt', 'Strg-F8', kbCtrlF8, cmDebug, hcNoContext,
-      NewItem('Programm ~z~urÅcksetzen', 'Strg-F2', kbCtrlF2, cmReset, hcNoContext,
+      NewItem('~E~inzelschritt', 'Ctrl-F8', kbCtrlF8, cmDebug, hcNoContext,
+      NewItem('Programm ~z~ur√ºcksetzen', 'Ctrl-F2', kbCtrlF2, cmReset, hcNoContext,
       NewLine(
       NewItem('~T~each in', '', 0, cmTeachIn, hcNoContext,
       NIL))))))),
     NewSubMenu('~F~eld', hcNoContext, NewMenu(
       NewItem('~N~eu', '', 0, cmNewFeld, hcNoContext,
-      NewItem('ô~f~fnen...', '', 0, cmOpenFeld, hcNoContext,
+      NewItem('~√ñ~ffnen...', '', 0, cmOpenFeld, hcNoContext,
       NewLine(
       NewItem('~S~peichern', '', 0, cmSaveFeld, hcNoContext,
       NewItem('Speichern ~a~ls...', '', 0, cmSaveAsFeld, hcNoContext,
@@ -201,20 +203,20 @@ BEGIN
     NewSubMenu('Fe~n~ster', hcNoContext, NewMenu(
       NewItem('~N~ebeneinander', '', kbNoKey, cmTile, hcNoContext,
       NewItem('~H~intereinander', '', kbNoKey, cmCascade, hcNoContext,
-      NewItem('Alle ~s~chlie·en', '', kbNoKey, cmCloseAll, hcNoContext,
+      NewItem('Alle ~s~chlie√üen', '', kbNoKey, cmCloseAll, hcNoContext,
       NewLine(
-      NewItem('~G~rî·e/Position','Ctrl+F5', kbCtrlF5, cmResize, hcNoContext,
-      NewItem('~V~ergrî·ern', 'F5', kbF5, cmZoom, hcNoContext,
-      NewItem('NÑ~c~hstes', 'F6', kbF6, cmNext, hcNoContext,
+      NewItem('~G~r√∂√üe/Position','Ctrl+F5', kbCtrlF5, cmResize, hcNoContext,
+      NewItem('~V~ergr√∂√üern', 'F5', kbF5, cmZoom, hcNoContext,
+      NewItem('N√§~c~hstes', 'F6', kbF6, cmNext, hcNoContext,
       NewItem('V~o~rheriges', 'Shift+F6', kbShiftF6, cmPrev, hcNoContext,
-      NewItem('~S~chlie·en...', 'Alt+F3', kbAltF3, cmClose, hcNoContext,
+      NewItem('~S~chlie√üen...', 'Alt+F3', kbAltF3, cmClose, hcNoContext,
       NewLine(
-      NewItem('~V~ideomodus Ñndern', '', 0, cmVidMode, hcNoContext,
+      NewItem('~V~ideomodus √§ndern', '', 0, cmVidMode, hcNoContext,
       NewItem('~I~nfo-Fenster An/Aus', '', 0, cmInfoWin, hcNoContext,
       NIL))))))))))))),
     NewSubMenu('~H~ilfe', hcNoContext, NewMenu(
       NewItem('I~n~halt', 'F1', kbF1, cmHelp, hcNoContext,
-      NewItem('~P~ASCAL-Hilfe', 'Strg-F1', kbCtrlF1, cmPascalHelp, hcNoContext,
+      NewItem('~P~ASCAL-Hilfe', 'Ctrl-F1', kbCtrlF1, cmPascalHelp, hcNoContext,
       NewLine(
       NewItem('~I~nfo', '', 0, cmInfo, hcNoContext,
       NIL))))),
@@ -308,7 +310,7 @@ PROCEDURE TNikiApplication.Oeffnen;
 VAR DateiName:String[100];
 BEGIN
   DateiName := '*.PAS';
-  IF ExecuteDialog(New(PFileDialog, Init('*.PAS', 'Datei îffnen',
+  IF ExecuteDialog(New(PFileDialog, Init('*.PAS', 'Datei √ñffnen',
          '~N~ame', fdOpenButton, 100)), @DateiName) <> cmCancel
   THEN OpenEditor(DateiName, TRUE);
 END;
@@ -356,7 +358,7 @@ PROCEDURE TNikiApplication.FeldOeffnen;
 VAR DateiName:String[100];
 BEGIN
   DateiName := '*.ROB';
-  IF ExecuteDialog(New(PFileDialog, Init('*.ROB', 'Feld îffnen',
+  IF ExecuteDialog(New(PFileDialog, Init('*.ROB', 'Feld √ñffnen',
          '~N~ame', fdOpenButton, 100)), @DateiName) <> cmCancel
   THEN OpenFeld(DateiName);
 END;
@@ -403,14 +405,14 @@ BEGIN
 END;
 
 
-PROCEDURE TNikiApplication.Hilfe;
+PROCEDURE TNikiApplication.Hilfe(Ctx:Integer; Modal:BOOLEAN);
 VAR Name:String;
     h:PHelpWindow;
 BEGIN
   name := CalcHelpName;
   IF Name='' THEN
   BEGIN
-    MessageBox('Die Hilfedatei kann nicht geîffnet werden',
+    MessageBox('Die Hilfedatei kann nicht ge√∂ffnet werden',
       NIL, mfError+mfOkButton);
   END ELSE
   BEGIN
