@@ -247,8 +247,9 @@ END;
  *                                                    *
  ******************************************************}
 
-CONST {Robots:String='<^>v';}
-      Robots:String=#17#30#16#31;
+CONST { Robot direction characters (UTF-8): index by TRichtung }
+      { rDummy=0, rLinks=1, rOben=2, rRechts=3, rUnten=4 }
+      Robots:ARRAY[0..4] OF String[4] = ('?', '◄', '▲', '►', '▼');
 
       cRobot = 14 + 0*16;
 
@@ -299,7 +300,7 @@ PROCEDURE TRobot.Draw;
 BEGIN
   IF Visible AND (Feld<>NIL) THEN
   BEGIN
-    Feld^.Feld[y,x].z := Robots[byte(Richtung)];
+    Feld^.Feld[y,x].z := Robots[Ord(Richtung)];
     Feld^.Feld[y,x].f := cRobot;
   END;
 END;
