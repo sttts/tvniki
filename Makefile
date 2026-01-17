@@ -10,7 +10,7 @@ FPCFLAGS = -Sh -Fufv_utf8
 TARGET = niki
 
 # Source files
-MAIN = NIKI.PAS
+MAIN = niki.pas
 
 .PHONY: all clean
 
