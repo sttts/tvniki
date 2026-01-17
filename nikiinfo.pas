@@ -11,6 +11,7 @@ TYPE TStatus=(stEdit, stRunning, stTeachIn, stPaused, stDebug);
                    PROCEDURE SetupWindow; VIRTUAL;
 
                    FUNCTION GetPalette: PPalette; VIRTUAL;
+                   PROCEDURE SizeLimits(VAR Min, Max: TPoint); VIRTUAL;
 
                    PROCEDURE HandleEvent(VAR Event:TEvent); VIRTUAL;
 
@@ -33,8 +34,8 @@ VAR R:TRect;
 BEGIN
   R.A.X := P.X;
   R.A.Y := P.Y;
-  R.B.X := R.A.X + 17;
-  R.B.Y := R.A.Y + 6;
+  R.B.X := R.A.X + 38;  { Wider for horizontal layout }
+  R.B.Y := R.A.Y + 3;   { Shorter - just title, content, bottom }
 
   INHERITED Init(R, 'Info');
   State := State AND NOT sfShadow;
@@ -51,26 +52,35 @@ END;
 PROCEDURE TInfoDialog.SetupWindow;
 VAR R:TRect;
 BEGIN
-  R.Assign(2,1,16,2);
-  New(Position, Init(R, 'Pos.:   %2d:%-2d', 2));
+  { Horizontal layout: Pos: x:y  Vorrat: n  Mode }
+  R.Assign(1,1,13,2);
+  New(Position, Init(R, 'Pos: %2d:%-2d', 2));
   SetPosition(0,0);
   Insert(Position);
 
-  R.Assign(2,2,15,3);
-  New(Vorrat, Init(R,   'Vorrat: %2d', 1));
+  R.Assign(14,1,25,2);
+  New(Vorrat, Init(R, 'Vorrat: %2d', 1));
   SetVorrat(0);
   Insert(Vorrat);
 
-  R.Assign(4,4,15,5);
-  New(Mode, Init(R,   '%s', 1));
+  R.Assign(26,1,36,2);
+  New(Mode, Init(R, '%s', 1));
   SetMode(stTeachIn);
   Insert(Mode);
 END;
 
 FUNCTION TInfoDialog.GetPalette: PPalette;
-CONST P: String[Length(CCyanWindow)] = CCyanWindow;
+{ All entries point to index 47 in CAppColor which is $30 = black on cyan }
+CONST CInfoWindow: String[8] = #47#47#47#47#47#47#47#47;
 BEGIN
-  GetPalette := @P;
+  GetPalette := @CInfoWindow;
+END;
+
+PROCEDURE TInfoDialog.SizeLimits(VAR Min, Max: TPoint);
+BEGIN
+  INHERITED SizeLimits(Min, Max);
+  Min.X := 38;  { Minimum width for horizontal layout }
+  Min.Y := 3;   { Minimum height: frame + content + frame }
 END;
 
 TYPE TPosInfo = RECORD

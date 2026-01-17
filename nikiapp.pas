@@ -102,13 +102,14 @@ BEGIN
     FeldWindow^.Locate(R);
   END;
 
-  { Position info below field on right }
+  { Position info to the right of editor, below field }
   IF InfoWindow <> NIL THEN
   BEGIN
-    R.A.X := DeskW - 17;
+    R.A.X := EditorW;
     R.A.Y := FieldH;
-    R.B.X := DeskW;
-    R.B.Y := FieldH + 6;
+    R.B.X := EditorW + 38;  { Width for horizontal layout }
+    IF R.B.X > DeskW THEN R.B.X := DeskW;
+    R.B.Y := FieldH + 3;
     IF R.B.Y > DeskH THEN R.B.Y := DeskH;
     InfoWindow^.Locate(R);
   END;
