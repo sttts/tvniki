@@ -42,20 +42,21 @@ bd sync               # Sync with git
 
 ## Project Overview
 
-tvNiki is a 1996 DOS educational programming environment written in Turbo Pascal/Borland Pascal. It teaches programming concepts through a robot ("Niki") that navigates a grid field, collecting and placing objects. Students write Pascal-like programs to control the robot.
+tvNiki is a 1996 DOS educational programming environment ported to Free Pascal with Unicode Free Vision. It teaches programming concepts through a robot ("Niki") that navigates a grid field, collecting and placing objects. Students write Pascal-like programs to control the robot.
 
 ## Build System
 
-This is a Turbo Pascal 7.0 / Borland Pascal project. Compilation requires:
-- Turbo Pascal 7.0 or Borland Pascal 7.0 with Turbo Vision library
-- DOS environment or DOSBox emulator
+This project uses Free Pascal with a customized UTF-8 Free Vision library (`fv_utf8/`).
 
 To compile:
-```
-tpc NIKI.PAS
+```bash
+make          # Build the niki executable
+make clean    # Remove build artifacts
 ```
 
-The executable `NIKI.EXE` can be compressed with `PKLITE.EXE` using `LITE.BAT`.
+Requirements:
+- Free Pascal Compiler (fpc) with Turbo Pascal mode support
+- macOS or Linux terminal with UTF-8 and mouse support
 
 ## Architecture
 
@@ -64,10 +65,21 @@ The executable `NIKI.EXE` can be compressed with `PKLITE.EXE` using `LITE.BAT`.
 - **NIKI.PAS** - Entry point, initializes TNikiApplication
 - **NIKIAPP.PAS** - Main application class (TNikiApplication), manages windows, menus, and event handling
 - **NIKIFELD.PAS** - Field editor (TFeldEditor) and robot simulation (TRobot), handles the visual grid where Niki operates
+- **NIKIFLWN.PAS** - Field window (TFieldWindow) with info bar showing robot state
 - **NIKICOMP.PAS** - Compilation dialog UI
 - **COMPILER.PAS** - Pascal-subset compiler that generates bytecode (.NIK files)
 - **INTP.PAS** - Bytecode interpreter (TInterpreter) that executes compiled programs
 - **OPCODES.PAS** - Virtual machine opcode definitions
+- **TIMER.PAS** - Cross-platform timing using SysUtils (replaces DOS INT 1Ch)
+
+### Free Vision Customizations (fv_utf8/)
+
+The `fv_utf8/` directory contains a UTF-8 enabled fork of Free Vision with these key modifications:
+
+- **views.pas** - 64-bit TDrawBuffer for UTF-8 characters, drag'n'drop screen updates
+- **drivers.pas** - Mouse event routing fix (keycode 0 -> evNothing for queued mouse events)
+- **keyboard.pp** - SGR 1006 extended mouse protocol parsing
+- **mouse.pp** - Mouse mode 1002 (button-event tracking) for drag support
 
 ### Compilation Pipeline
 
@@ -87,7 +99,7 @@ The executable `NIKI.EXE` can be compressed with `PKLITE.EXE` using `LITE.BAT`.
 
 ### Key Classes
 
-- **TNikiApplication** (NIKIAPP.PAS) - Turbo Vision application, handles menus and windows
+- **TNikiApplication** (NIKIAPP.PAS) - Application class, handles menus and windows
 - **TFeldEditor** (NIKIFELD.PAS) - Grid editor with run/debug/teach-in modes
 - **TRobot** (NIKIFELD.PAS) - Robot state and movement logic
 - **TInterpreter** (INTP.PAS) - Base bytecode VM with stack and instruction pointer
