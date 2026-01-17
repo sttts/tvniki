@@ -36,12 +36,14 @@ TYPE PParamLine=^TParamLine;
      TProcess = OBJECT(TView)
                   Pos:Byte;
                   MyTimer:Integer;
+                  Active:Boolean;
 
                   CONSTRUCTOR Init(p:TPoint);
                   DESTRUCTOR Done; VIRTUAL;
 
                   PROCEDURE Idle; VIRTUAL;
                   PROCEDURE Draw; VIRTUAL;
+                  PROCEDURE SetActive(AActive:Boolean);
                 END;
 
      PScrollerLine=^TScrollerLine;
@@ -108,6 +110,7 @@ BEGIN
 
   GrowMode := gfGrowLoY + gfGrowHiX + gfGrowHiY;
   Pos := 1;
+  Active := FALSE;
 
   MyTimer := NewCounter;
   IF MyTimer<0 THEN Done;
@@ -135,12 +138,21 @@ END;
 
 PROCEDURE TProcess.Draw;
 VAR Buf:TDrawBuffer;
+    Ch:Char;
 BEGIN
-  MoveChar(Buf, Balken[Pos], GetColor(37), 1);
+  IF Active THEN Ch := Balken[Pos] ELSE Ch := ' ';
+  MoveChar(Buf, Ch, GetColor(37), 1);
   WriteLine(0,0,1,1,Buf);
-{  WriteChar(0, 0, Balken[Pos], GetColor(37), 1);}
 END;
 
+PROCEDURE TProcess.SetActive(AActive:Boolean);
+BEGIN
+  IF Active <> AActive THEN
+  BEGIN
+    Active := AActive;
+    Draw;
+  END;
+END;
 
 {*******************************}
 

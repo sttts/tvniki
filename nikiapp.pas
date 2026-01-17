@@ -369,7 +369,18 @@ BEGIN
   INHERITED Idle;
 
   IF FeldWindow<>NIL THEN FeldWindow^.Idle;
-  IF Balken<>NIL THEN Balken^.Idle;
+
+  { Only animate spinner when a program is running }
+  IF Balken<>NIL THEN
+  BEGIN
+    IF (FeldWindow<>NIL) AND FeldWindow^.IsRunning THEN
+    BEGIN
+      Balken^.SetActive(TRUE);
+      Balken^.Idle;
+    END
+    ELSE
+      Balken^.SetActive(FALSE);
+  END;
 
   {$ifdef Debug}
   x := WhereX;
