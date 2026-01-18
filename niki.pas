@@ -88,7 +88,7 @@ PROCEDURE ShowHelp;
 BEGIN
   Writeln('tvNiki 1.11 - Educational programming environment');
   Writeln;
-  Writeln('Usage: niki [options] [file.pas] [file.rob]');
+  Writeln('Usage: tvniki [options] [file.pas] [file.rob]');
   Writeln;
   Writeln('Arguments:');
   Writeln('  file.pas   Program source file to open');

@@ -48,8 +48,8 @@ make
 ## Running
 
 ```bash
-./niki              # Start with empty editor
-./niki program.pas  # Load a program file
+./tvniki              # Start with empty editor
+./tvniki program.pas  # Load a program file
 ```
 
 ## Robot Commands

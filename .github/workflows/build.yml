@@ -29,7 +29,7 @@ jobs:
         run: make test
 
       - name: Rename binary
-        run: mv niki tvniki-linux-x86_64
+        run: mv tvniki tvniki-linux-x86_64
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -62,7 +62,7 @@ jobs:
             '
 
       - name: Rename binary
-        run: mv niki tvniki-linux-arm64
+        run: mv tvniki tvniki-linux-arm64
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

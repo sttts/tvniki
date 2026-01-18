@@ -25,7 +25,7 @@ RUN make clean && make
 
 # Run smoke test: start in tmux, capture screen, validate UI elements
 CMD ["bash", "-c", "\
-  tmux new-session -d -s test -x 100 -y 30 './niki' && \
+  tmux new-session -d -s test -x 100 -y 30 './tvniki' && \
   sleep 2 && \
   OUTPUT=$(tmux capture-pane -t test -p) && \
   tmux kill-session -t test && \

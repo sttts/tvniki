@@ -7,7 +7,7 @@ FPC = fpc
 FPCFLAGS = -Sh -gl -Fufv_utf8
 
 # Main target
-TARGET = niki
+TARGET = tvniki
 
 # Source files - main and all units
 MAIN = niki.pas

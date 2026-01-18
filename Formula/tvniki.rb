@@ -16,7 +16,7 @@ class Tvniki < Formula
     version = version.sub(/^v/, "") # Remove leading 'v'
 
     system "make"
-    bin.install "niki"
+    bin.install "tvniki"
 
     # Install data files
     pkgshare.install "hilfe.hlp"
@@ -38,6 +38,6 @@ class Tvniki < Formula
   end
 
   test do
-    assert_predicate bin/"niki", :executable?
+    assert_predicate bin/"tvniki", :executable?
   end
 end
