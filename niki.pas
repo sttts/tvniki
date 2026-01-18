@@ -1,34 +1,34 @@
-USES NikiApp, Timer, Mouse, BaseUnix;
+USES NikiApp, Timer, Mouse, SysUtils;
 
 {$M 16385, 0, 655360}
 
 VAR Niki : TNikiApplication;
 
 VAR OldExit:Pointer;
+VAR OldErrorProc: TErrorProc;
 VAR AltScreenActive: Boolean = False;
 
-{ Switch from alternate screen back to main screen }
+{ Switch from alternate screen back to main screen and disable mouse }
 PROCEDURE LeaveAltScreen;
 BEGIN
   IF AltScreenActive THEN
   BEGIN
+    { Disable mouse modes first so terminal is usable }
+    Write(#27'[?1006l');
+    Write(#27'[?1000l');
+    { Switch back to main screen }
     Write(#27'[?1049l');
     AltScreenActive := False;
   END;
 END;
 
-{ Signal handler for crashes - switch to main screen before backtrace prints }
-PROCEDURE CrashHandler(Sig: CInt); cdecl;
+{ Called on runtime errors before the error message is printed }
+PROCEDURE MyErrorProc(ErrNo: Longint; Address, Frame: CodePointer);
 BEGIN
   LeaveAltScreen;
-
-  { Disable mouse modes so terminal is usable }
-  Write(#27'[?1006l');
-  Write(#27'[?1000l');
-
-  { Re-raise signal with default handler to get backtrace }
-  FpSignal(Sig, SignalHandler(SIG_DFL));
-  FpKill(FpGetpid, Sig);
+  { Call old handler if any }
+  IF OldErrorProc <> NIL THEN
+    OldErrorProc(ErrNo, Address, Frame);
 END;
 
 PROCEDURE MyExitProc; FAR;
@@ -36,10 +36,10 @@ BEGIN
   ExitProc := OldExit;
   DoneMouse;
 
-  { Switch back to main screen }
+  { Switch back to main screen (for normal exits) }
   LeaveAltScreen;
 
-  { Disable xterm mouse mode }
+  { Disable xterm mouse mode (in case LeaveAltScreen didn't run) }
   Write(#27'[?1006l');  { Disable SGR extended mouse mode }
   Write(#27'[?1000l');  { Disable mouse button tracking }
 END;
@@ -48,11 +48,9 @@ BEGIN
   OldExit := ExitProc;
   ExitProc := @MyExitProc;
 
-  { Install signal handlers before switching screens, so crashes show backtrace }
-  FpSignal(SIGSEGV, SignalHandler(@CrashHandler));
-  FpSignal(SIGBUS, SignalHandler(@CrashHandler));
-  FpSignal(SIGFPE, SignalHandler(@CrashHandler));
-  FpSignal(SIGILL, SignalHandler(@CrashHandler));
+  { Install error handler to switch screens before backtrace prints }
+  OldErrorProc := ErrorProc;
+  ErrorProc := @MyErrorProc;
 
   { Switch to alternate screen }
   Write(#27'[?1049h');

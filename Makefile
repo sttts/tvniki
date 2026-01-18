@@ -4,7 +4,7 @@
 FPC = fpc
 # Use local fv_utf8 for Unicode support instead of system Free Vision
 # Note: fv_utf8 requires ObjFPC mode, not TP mode
-FPCFLAGS = -Sh -Fufv_utf8
+FPCFLAGS = -Sh -gl -Fufv_utf8
 
 # Main target
 TARGET = niki
