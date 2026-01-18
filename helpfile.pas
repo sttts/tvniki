@@ -34,6 +34,14 @@ type
 
 { THelpTopic }
 
+  { TCrossRef16 matches the 16-bit Turbo Pascal file format }
+  TCrossRef16 = packed record
+    Ref: Word;
+    Offset: SmallInt;  { 16-bit in old file format }
+    Length: Byte;
+  end;
+
+  { TCrossRef uses native Integer for runtime operations }
   TCrossRef = record
     Ref: Word;
     Offset: Integer;
@@ -172,20 +180,24 @@ end;
 
 constructor THelpTopic.Load(var S: TStream);
 
+{ Read 16-bit file format written by original Turbo Pascal }
 procedure ReadParagraphs;
 var
   I, Size: Integer;
+  I16, Size16: SmallInt;  { 16-bit values from file }
   PP: ^PParagraph;
 const
   MaxParagraphs = 10000;
   MaxSize = 65000;
 begin
-  S.Read(I, SizeOf(I));
+  S.Read(I16, SizeOf(I16));  { Read 16-bit paragraph count }
+  I := I16;
   if (I < 0) or (I > MaxParagraphs) then I := 0;
   PP := @Paragraphs;
   while I > 0 do
   begin
-    S.Read(Size, SizeOf(Size));
+    S.Read(Size16, SizeOf(Size16));  { Read 16-bit size }
+    Size := Size16;
     if (Size <= 0) or (Size > MaxSize) then
     begin
       PP^ := nil;
@@ -202,16 +214,28 @@ begin
 end;
 
 procedure ReadCrossRefs;
+var
+  NumRefs16: SmallInt;  { 16-bit value from file }
+  CrossRefs16: array of TCrossRef16;
+  J: Integer;
 const
   MaxRefs = 10000;
 begin
-  S.Read(NumRefs, SizeOf(Integer));
+  S.Read(NumRefs16, SizeOf(NumRefs16));  { Read 16-bit count }
+  NumRefs := NumRefs16;
   if (NumRefs < 0) or (NumRefs > MaxRefs) then NumRefs := 0;
   if NumRefs > 0 then
   begin
+    { Read 16-bit format cross-refs, then convert to native format }
+    SetLength(CrossRefs16, NumRefs);
+    S.Read(CrossRefs16[0], SizeOf(TCrossRef16) * NumRefs);
     GetMem(CrossRefs, SizeOf(TCrossRef) * NumRefs);
-    if CrossRefs <> nil then
-      S.Read(CrossRefs^, SizeOf(TCrossRef) * NumRefs);
+    for J := 0 to NumRefs - 1 do
+    begin
+      CrossRefs^[J + 1].Ref := CrossRefs16[J].Ref;
+      CrossRefs^[J + 1].Offset := CrossRefs16[J].Offset;
+      CrossRefs^[J + 1].Length := CrossRefs16[J].Length;
+    end;
   end
   else
     CrossRefs := nil;
@@ -454,22 +478,33 @@ end;
 
 function Scan(var P; Offset, Size: Integer; C: Char): Integer;
 { Pure Pascal replacement for x86 assembly - scan for char C in buffer }
+{ Returns the number of chars until C is found (including C), or the remaining
+  length if C is not found }
 var
   Buf: PByteArray;
   Limit, Idx: Integer;
 begin
-  Scan := 0;
-  if (Offset < 0) or (Offset >= Size) or (Size <= 0) then Exit;
+  if (Offset < 0) or (Offset >= Size) or (Size <= 0) then
+  begin
+    Scan := 0;
+    Exit;
+  end;
   Buf := @P;
   Limit := Size - Offset;
   if Limit > 256 then Limit := 256;
-  if Limit <= 0 then Exit;
+  if Limit <= 0 then
+  begin
+    Scan := 0;
+    Exit;
+  end;
   for Idx := 0 to Limit - 1 do
     if Chr(Buf^[Offset + Idx]) = C then
     begin
-      Scan := Idx + 1;
+      Scan := Idx + 1;  { Return position including the found char }
       Exit;
     end;
+  { Character not found - return the search limit }
+  Scan := Limit;
 end;
 
 procedure TextToLine(var Text; Offset, Length: Integer; var Line: String);
@@ -650,6 +685,7 @@ const
 constructor THelpFile.Init(S: PStream);
 var
   Magic: Longint;
+  ObjType: Word;
 begin
   Magic := 0;
   S^.Seek(0);
@@ -667,7 +703,10 @@ begin
     S^.Seek(8);
     S^.Read(IndexPos, SizeOf(IndexPos));
     S^.Seek(IndexPos);
-    Index := PHelpIndex(S^.Get);
+    { Skip the ObjType word that would be read by Stream.Get }
+    S^.Read(ObjType, SizeOf(ObjType));
+    { Manually create and load THelpIndex to avoid stream registration issues }
+    Index := New(PHelpIndex, Load(S^));
     Modified := False;
   end;
   Stream := S;
@@ -695,12 +734,15 @@ end;
 function THelpFile.GetTopic(I: Word): PHelpTopic;
 var
   Pos: Longint;
+  ObjType: Word;
 begin
   Pos := Index^.Position(I);
   if Pos > 0 then
   begin
     Stream^.Seek(Pos);
-    GetTopic := PHelpTopic(Stream^.Get);
+    { Skip ObjType word and manually create/load topic to avoid stream registration issues }
+    Stream^.Read(ObjType, SizeOf(ObjType));
+    GetTopic := New(PHelpTopic, Load(Stream^));
   end
   else GetTopic := InvalidTopic;
 end;
