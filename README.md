@@ -8,11 +8,38 @@ An educational programming environment where students control a robot named "Nik
 
 tvNiki teaches programming fundamentals through a simple robot simulation. Niki moves on a grid, collects and places objects, and navigates around walls. Students write programs using basic control structures (IF/THEN/ELSE, WHILE/DO, REPEAT/UNTIL) and procedures.
 
-## Building
+## Installation
+
+### Pre-built Binaries
+
+Download the latest release for your platform from [GitHub Releases](https://github.com/sts/tvniki-2026/releases):
+
+- `niki-macos-arm64` - macOS Apple Silicon (M1/M2/M3)
+- `niki-macos-x86_64` - macOS Intel
+- `niki-linux-x86_64` - Linux x86_64
+- `niki-linux-arm64` - Linux ARM64
+
+After downloading, make the binary executable:
+
+```bash
+chmod +x niki-*
+./niki-macos-arm64  # or your platform's binary
+```
+
+### Building from Source
 
 Requires Free Pascal Compiler (fpc):
 
 ```bash
+# macOS
+brew install fpc
+
+# Debian/Ubuntu
+sudo apt-get install fpc
+
+# Clone with submodules
+git clone --recursive https://github.com/sts/tvniki-2026.git
+cd tvniki-2026
 make
 ```
 
