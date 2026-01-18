@@ -27,12 +27,16 @@ tmux kill-session -t <task-id>
 
 ## Worktree Workflow
 
-Merge from worktree into main checkout and clean up:
+Merge from worktree into main checkout, close issue, and clean up:
 ```bash
 cd ../tvniki-2026
-git merge feature-branch
-git worktree remove ../relative-path-title/feature-branch
+git merge <branch>
+bd close <task-id>
+git worktree remove ../<worktree-dir>
+git branch -d <branch>
 ```
+
+**Always close the issue immediately after merging** - don't wait to be asked.
 
 ## Project Overview
 
