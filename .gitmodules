@@ -1,0 +1,3 @@
+[submodule "fv_utf8"]
+	path = fv_utf8
+	url = git@github.com:sttts/fv_utf8.git
