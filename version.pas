@@ -1,0 +1,10 @@
+UNIT Version;
+
+INTERFACE
+
+CONST
+{$I version.inc}
+
+IMPLEMENTATION
+
+END.

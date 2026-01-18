@@ -13,12 +13,16 @@ TARGET = niki
 MAIN = niki.pas
 SOURCES = $(wildcard *.pas)
 
-.PHONY: all clean
+.PHONY: all clean version.inc
 
 all: $(TARGET)
 
+# Generate version from git
+version.inc:
+	@echo "  VersionString = '$(shell git describe --tags --dirty 2>/dev/null || echo unknown)';" > version.inc
+
 # Depend on all .pas files so changes trigger rebuild
-$(TARGET): $(SOURCES)
+$(TARGET): version.inc $(SOURCES)
 	$(FPC) $(FPCFLAGS) -o$(TARGET) $(MAIN)
 
 # Run unit tests (tests all .ROB files)

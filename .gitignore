@@ -12,3 +12,47 @@ NIKI
 # Linker temp files
 link*.res
 linkfiles*.res
+
+# Git worktrees for parallel development
+worktrees/
+# bd worktree
+worktrees/tvniki-ves/
+# bd worktree
+worktrees/tvniki-readme-update/
+# bd worktree
+worktrees/tvniki-field-title-junctions/
+# bd worktree
+worktrees/tvniki-translation/
+# bd worktree
+worktrees/tvniki-interpreter-broken/
+# bd worktree
+worktrees/tvniki-scroll-offbyone/
+# bd worktree
+worktrees/tvniki-run-vs-compile/
+# bd worktree
+worktrees/tvniki-fix-pascal-help/
+# bd worktree
+worktrees/tvniki-field-click-crash/
+# bd worktree
+worktrees/tvniki-remove-video-mode/
+# bd worktree
+worktrees/tvniki-bilingual-commands/
+# bd worktree
+worktrees/tvniki-port-help-system/
+# bd worktree
+worktrees/tvniki-indicator-garbage/
+# bd worktree
+worktrees/tvniki-temp-file-restore/
+# bd worktree
+worktrees/tvniki-translate-pascal-help/
+# bd worktree
+worktrees/tvniki-fix-help-links/
+# bd worktree
+worktrees/tvniki-ctrl-q-field/
+# bd worktree
+worktrees/tvniki-test-linux/
+# bd worktree
+worktrees/tvniki-translate-help/
+# bd worktree
+worktrees/tvniki-github-releases/
+version.inc

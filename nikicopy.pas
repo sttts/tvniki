@@ -20,9 +20,9 @@ TYPE PCopyRightDialog=^TCopyrightDialog;
                  END;
 
 IMPLEMENTATION
-USES App, Strings, Timer, Hilfe;
+USES App, Strings, Timer, Hilfe, Version;
 
-CONST Width=36;
+CONST Width=44;
       Height=9;
 
 
@@ -52,14 +52,16 @@ END;
 
 PROCEDURE TCopyrightDialog.SetupWindow;
 VAR R:TRect;
+    Ver:String;
 BEGIN
-  R.Assign(13,2,27,3);
-  Insert( New(PStaticText, Init(R, 'tvNiki 1.11')));
+  Ver := 'tvNiki ' + VersionString;
+  R.Assign(3,2,41,3);
+  Insert( New(PStaticText, Init(R, Ver)));
 
-  R.Assign(12,4,24,6);
+  R.Assign(16,4,28,6);
   Insert( New(PButton, Init(R, '~O~K', cmOk, bfDefault)));
 
-  R.Assign(1,7,35,8);
+  R.Assign(1,7,43,8);
   New(Scroller, Init(R,
     'tvNiki (c) 1996-2026 Stefan Schimanski, all rights reserved - '));
   Insert(Scroller);
