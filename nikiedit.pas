@@ -6,6 +6,7 @@ USES Objects, App, Views, Drivers, Editors, Dialogs, TVEnh, NikiGlob, Printer;
 TYPE PNikiEditor=^TNikiEditor;
      TNikiEditor=OBJECT(TEditWindow)
                    Compiled:Boolean;
+                   LastCursorLine:Word;
                    CONSTRUCTOR Init(VAR Bounds: TRect;
                        FileName: FNameStr; ANumber: Integer);
                    DESTRUCTOR Done; VIRTUAL;
@@ -14,6 +15,7 @@ TYPE PNikiEditor=^TNikiEditor;
                    PROCEDURE HandleEvent(VAR Event:TEvent); VIRTUAL;
 
                    PROCEDURE UpdateCommands; VIRTUAL;
+                   PROCEDURE CheckCursorSync;
 
                    FUNCTION GetTitle(MaxLen: Sw_Integer): TTitleStr; VIRTUAL;
                    FUNCTION Compile:BOOLEAN;
@@ -24,7 +26,7 @@ TYPE PNikiEditor=^TNikiEditor;
 
 IMPLEMENTATION
 USES NikiCnst, NikiComp, Compiler, MsgBox, NikiFeld, Dos, NikiInfo,
-     StdDlg, Hilfe, NikiPrnt, Config, SysUtils, NikiStrings;
+     StdDlg, Hilfe, NikiPrnt, Config, SysUtils, NikiStrings, NikiDasm;
 
 {$F+}
 FUNCTION MyEditorDialog(Dialog: Integer; Info: Pointer): Word;
@@ -91,6 +93,7 @@ BEGIN
 
   Editor^.Modified := FALSE;
   Compiled := FALSE;
+  LastCursorLine := 0;
   HelpCtx := hcEditor;
 END;
 
@@ -152,6 +155,7 @@ BEGIN
   INHERITED HandleEvent(Event);
 
   Compiled := Compiled AND NOT Editor^.Modified;
+  CheckCursorSync;
 END;
 
 PROCEDURE TNikiEditor.SetState(AState: Word; Enable: Boolean);
@@ -177,7 +181,30 @@ BEGIN
   SetCmdState( cmOpen, m );}
 END;
 
+PROCEDURE TNikiEditor.CheckCursorSync;
+VAR
+  Line: Word;
+  p: LongInt;
+BEGIN
+  IF Editor = NIL THEN Exit;
+
+  { Count lines up to cursor position }
+  Line := 1;
+  FOR p := 0 TO Editor^.CurPtr - 1 DO
+    IF Editor^.BufChar(p) = #10 THEN Inc(Line);
+
+  IF Line <> LastCursorLine THEN
+  BEGIN
+    LastCursorLine := Line;
+    Message(Desktop, evBroadcast, cmSyncDisasm, Pointer(PtrUInt(Line)));
+  END;
+END;
+
 FUNCTION TNikiEditor.Compile:BOOLEAN;
+VAR
+  Dir: DirStr;
+  Name: NameStr;
+  Ext: ExtStr;
 BEGIN
   Compile := FALSE;
 
@@ -189,6 +216,11 @@ BEGIN
     BEGIN
       Compile := TRUE;
       Compiled := TRUE;
+
+      { Broadcast update to disasm window }
+      FSplit(Editor^.FileName, Dir, Name, Ext);
+      DisasmFileName := Dir + Name + '.NIK';
+      Message(Desktop, evBroadcast, cmUpdateDisasm, NIL);
     END ELSE
     BEGIN
       IF ErrorNumber<>0 THEN

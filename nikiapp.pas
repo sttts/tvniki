@@ -42,7 +42,7 @@ TYPE  TNikiApplication = OBJECT(TApplication)
 
 IMPLEMENTATION
 USES Dos, FVConsts, NikiCnst, NikiEdit, NikiInfo, NikiGlob, NikiCopy,
-     NikiHelp, HelpFile, Hilfe, Config, SysUtils, NikiStrings;
+     NikiHelp, HelpFile, Hilfe, Config, SysUtils, NikiStrings, NikiDasm;
 
 CONST HeapSize = (128 * 1024) DIV 16;
       { Editor commands from original TV Editors unit }
@@ -111,11 +111,23 @@ BEGIN
     IF R.B.Y > DeskH THEN R.B.Y := DeskH;
     InfoWindow^.Locate(R);
   END;
+
+  { Position disasm window below info window }
+  IF DisasmWindow <> NIL THEN
+  BEGIN
+    R.A.X := EditorW;
+    R.A.Y := FieldH + 3;
+    R.B.X := DeskW;
+    R.B.Y := DeskH;
+    IF R.B.Y > R.A.Y + 3 THEN
+      DisasmWindow^.Locate(R);
+  END;
 END;
 
 CONSTRUCTOR TNikiApplication.Init;
 VAR z:Integer;
     P:TPoint;
+    R:TRect;
     sMode:String;
     Mode:Integer;
 BEGIN
@@ -139,6 +151,14 @@ BEGIN
   P.Y := 0;
   InfoWindow := New(PInfoDialog, Init(P));
   InsertWindow(InfoWindow);
+
+  { Disassemble window - initially hidden }
+  Desktop^.GetExtent(R);
+  R.A.X := R.B.X - 30;
+  R.B.Y := R.A.Y + 15;
+  DisasmWindow := New(PDisasmWindow, Init(R));
+  DisasmWindow^.Hide;
+  InsertWindow(DisasmWindow);
 
   FeldNeu;
 
@@ -284,7 +304,8 @@ BEGIN
       NewItem(tr('C~l~ose...'), 'Alt+F3', kbAltF3, cmClose, hcNoContext,
       NewLine(
       NewItem(tr('~I~nfo window on/off'), '', 0, cmInfoWin, hcNoContext,
-      NIL)))))))))))),
+      NewItem(tr('~D~isassemble'), '', 0, cmDisasmWin, hcNoContext,
+      NIL))))))))))))),
     NewSubMenu(tr('~H~elp'), hcNoContext, NewMenu(
       NewItem(tr('~C~ontents'), 'F1', kbF1, cmHelp, hcNoContext,
       NewItem(tr('~P~ASCAL help'), 'Ctrl-F1', kbCtrlF1, cmPascalHelp, hcNoContext,
@@ -314,13 +335,23 @@ BEGIN
                                 HideInfo
                               ELSE ShowInfo;
                             END;
-                  cmRun:  IF TypeOf(Desktop^.Current^)<>TypeOf(TNikiEditor) THEN
+                  cmDisasmWin:
+                            IF DisasmWindow <> NIL THEN
+                            BEGIN
+                              IF DisasmWindow^.GetState(sfVisible) THEN
+                                DisasmWindow^.Hide
+                              ELSE BEGIN
+                                DisasmWindow^.Show;
+                                DisasmWindow^.Select;
+                              END;
+                            END;
+                  cmRun:  IF (TypeOf(Desktop^.Current^)<>TypeOf(TNikiEditor)) THEN
                             IF EditWindow<>NIL THEN
                             BEGIN
                               PNikiEditor(EditWindow)^.Run(FALSE);
                               ClearEvent(Event);
                             END;
-                  cmDebug:IF TypeOf(Desktop^.Current^)<>TypeOf(TNikiEditor) THEN
+                  cmDebug:IF (TypeOf(Desktop^.Current^)<>TypeOf(TNikiEditor)) THEN
                             IF EditWindow<>NIL THEN
                             BEGIN
                               PNikiEditor(EditWindow)^.Run(TRUE);

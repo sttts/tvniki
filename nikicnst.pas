@@ -24,6 +24,9 @@ CONST cmIdle=           65535;
       cmPrintFeld=      508;
 
       cmInfoWin=        899;
+      cmDisasmWin=      900;
+      cmUpdateDisasm=   901;
+      cmSyncDisasm=     903;
 
       cmInfo=           999;
       cmPascalHelp=     902;
