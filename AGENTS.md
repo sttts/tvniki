@@ -122,6 +122,8 @@ lldb ./niki -o "image lookup -a 0x0000000100E58C58" -o quit
 
 ### Free Vision Customizations (fv_utf8/)
 
+**Avoid changing fv_utf8** unless necessary. If you do modify it and merge your branch back into master, don't forget to also transfer the fv_utf8 changes to the main fv_utf8 repository.
+
 The `fv_utf8/` directory contains a UTF-8 enabled fork of Free Vision with these key modifications:
 
 - **views.pas** - 64-bit TDrawBuffer for UTF-8 characters, drag'n'drop screen updates
