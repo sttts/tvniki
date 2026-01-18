@@ -168,7 +168,7 @@ TYPE PRobot=^TRobot;
 VAR FeldWindow:PFeldWindow;
 
 IMPLEMENTATION
-USES Dos, Config, NikiCnst, MsgBox, App, StdDlg, Timer, NikiGlob, NikiPrnt, lazutf8, NikiStrings;
+USES Dos, SysUtils, Config, NikiCnst, MsgBox, App, StdDlg, Timer, NikiGlob, NikiPrnt, lazutf8, NikiStrings;
 
 
 {******************************************************
@@ -828,7 +828,7 @@ END;
 PROCEDURE TFeldEditor.Run(ADatei:STRING; Debug:BOOLEAN);
 BEGIN
   IF (Status=stRunning) OR (Status=stPaused) OR (Status=stDebug) THEN StopRun;
-  IF SaveFile(GetTemp+'\RUN.TMP') THEN
+  IF SaveFile(GetTemp+PathDelim+'RUN.TMP') THEN
   BEGIN
     IF Debug THEN Status := stDebug ELSE Status := stRunning;
 
@@ -867,12 +867,12 @@ BEGIN
   IF Prog<>NIL THEN Dispose(Prog, Done);
   Prog := NIL;
 
-  IF NOT LoadFile(GetTemp+'\RUN.TMP') THEN
+  IF NOT LoadFile(GetTemp+PathDelim+'RUN.TMP') THEN
   BEGIN
     MessageBox('Can''t reload temporal file', NIL, mfError+mfOkButton);
   END;
 
-  FDelete(GetTemp+'\RUN.TMP');
+  FDelete(GetTemp+PathDelim+'RUN.TMP');
   Draw;
   Edit;
 END;
@@ -944,66 +944,71 @@ CONST OldLine:Integer=-1;
 BEGIN
   IF (Status=stRunning) THEN
   BEGIN
-    IF (Prog^.Status=stOk) AND (Counter(MyTimer)>=Speed) AND NOT Paused THEN
-    BEGIN
-      IF Prog^.RunStep THEN SetCounter( MyTimer, 0 );
+    { Check interpreter status first - handle completion/errors immediately }
+    CASE Prog^.Status OF
+      stOk:
+        IF (Counter(MyTimer)>=Speed) AND NOT Paused THEN
+        BEGIN
+          IF Prog^.RunStep THEN SetCounter( MyTimer, 0 );
 
-      DrawLine(Niki^.Y-2);
-      DrawLine(Niki^.Y);
-      DrawLine(Niki^.Y+2);
+          DrawLine(Niki^.Y-2);
+          DrawLine(Niki^.Y);
+          DrawLine(Niki^.Y+2);
 
-      UpdateInfoWindow;
-
-      CASE Prog^.Status OF
-        stOk:;
-        stBreak:BEGIN
-                  Finished;
-                  StopRun;
-                END;
-        ELSE BEGIN
-               ShowError;
-               StopRun;
-             END;
-      END;
+          UpdateInfoWindow;
+        END;
+      stBreak:BEGIN
+                Status := stEdit;  { Prevent reentrancy during modal dialog }
+                Finished;
+                StopRun;
+              END;
+      ELSE BEGIN
+             Status := stEdit;  { Prevent reentrancy during modal dialog }
+             ShowError;
+             StopRun;
+           END;
     END;
   END ELSE
   IF (Status=stDebug) THEN
-    IF (Prog^.Status=stOk) AND (Counter(MyTimer)>=Speed) AND NOT Paused
-      AND (ExecCommand = TRUE) THEN
-    BEGIN
-      IF Prog^.RunStep THEN SetCounter( MyTimer, 0 );
-
-      IF Prog^.BreakPoint THEN
-      BEGIN
-        Prog^.BreakPoint := FALSE;
-
-        IF OldLine<>Prog^.ActLine THEN
+  BEGIN
+    { Check interpreter status first - handle completion/errors immediately }
+    CASE Prog^.Status OF
+      stOk:
+        IF (Counter(MyTimer)>=Speed) AND NOT Paused AND (ExecCommand = TRUE) THEN
         BEGIN
-          ExecCommand := FALSE;
-          ShowLine;
+          IF Prog^.RunStep THEN SetCounter( MyTimer, 0 );
+
+          IF Prog^.BreakPoint THEN
+          BEGIN
+            Prog^.BreakPoint := FALSE;
+
+            IF OldLine<>Prog^.ActLine THEN
+            BEGIN
+              ExecCommand := FALSE;
+              ShowLine;
+            END;
+
+            OldLine := Prog^.ActLine;
+          END;
+
+          DrawLine(Niki^.Y-2);
+          DrawLine(Niki^.Y);
+          DrawLine(Niki^.Y+2);
+
+          UpdateInfoWindow;
         END;
-
-        OldLine := Prog^.ActLine;
-      END;
-
-      DrawLine(Niki^.Y-2);
-      DrawLine(Niki^.Y);
-      DrawLine(Niki^.Y+2);
-
-      UpdateInfoWindow;
-
-      CASE Prog^.Status OF
-        stOk:;
-        stBreak:BEGIN
-                  Finished;
-                  StopRun;
-                END;
-        ELSE BEGIN
-               ShowError;
-               StopRun;
-             END;
-      END;
+      stBreak:BEGIN
+                Status := stEdit;  { Prevent reentrancy during modal dialog }
+                Finished;
+                StopRun;
+              END;
+      ELSE BEGIN
+             Status := stEdit;  { Prevent reentrancy during modal dialog }
+             ShowError;
+             StopRun;
+           END;
     END;
+  END;
 
 END;
 
@@ -1018,7 +1023,7 @@ VAR R:TRect;
 BEGIN
   IF (Status=stEdit) THEN
   BEGIN
-    IF SaveFile(GetTemp+'\TEACH.TMP') THEN
+    IF SaveFile(GetTemp+PathDelim+'TEACH.TMP') THEN
     BEGIN
       Status := stTeachIn;
 
@@ -1055,13 +1060,13 @@ BEGIN
     {IF MessageBox('Soll der alte Zustand des Feldes wiederhergestellt werden?',
          NIL, mfYesButton+mfNoButton) = cmYes THEN}
     BEGIN
-      IF NOT LoadFile(GetTemp+'\TEACH.TMP') THEN
+      IF NOT LoadFile(GetTemp+PathDelim+'TEACH.TMP') THEN
       BEGIN
         MessageBox('Can''t reload temporal file', NIL, mfError+mfOkButton);
       END;
     END;
 
-    FDelete(GetTemp+'\TEACH.TMP');
+    FDelete(GetTemp+PathDelim+'TEACH.TMP');
 
     Draw;
     Edit;
