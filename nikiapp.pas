@@ -531,7 +531,18 @@ BEGIN
 END;
 
 FUNCTION TNikiApplication.GetPalette:ppalette;
-CONST CNeuColor=CAppColor+CHelpColor+CFeldColor;
+{ Custom color palette with improved grey dialog frame visibility.
+  Entry 32 changed from $70 (black-on-grey) to $7F (white-on-grey) }
+CONST CAppColorFixed =
+         #$71#$70#$78#$74#$20#$28#$24#$17#$1F#$1A#$31#$31#$1E#$71#$1F +
+     #$37#$3F#$3A#$13#$13#$3E#$21#$3F#$70#$7F#$7A#$13#$13#$70#$7F#$7E +
+     #$7F#$7F#$7A#$13#$13#$70#$70#$7F#$7E#$20#$2B#$2F#$78#$2E#$70#$30 +
+     #$3F#$3E#$1F#$2F#$1A#$20#$72#$31#$31#$30#$2F#$3E#$31#$13#$38#$00 +
+     #$17#$1F#$1A#$71#$71#$1E#$17#$1F#$1E#$20#$2B#$2F#$78#$2E#$10#$30 +
+     #$3F#$3E#$70#$2F#$7A#$20#$12#$31#$31#$30#$2F#$3E#$31#$13#$38#$00 +
+     #$37#$3F#$3A#$13#$13#$3E#$30#$3F#$3E#$20#$2B#$2F#$78#$2E#$30#$70 +
+     #$7F#$7E#$1F#$2F#$1A#$20#$32#$31#$71#$70#$2F#$7E#$71#$13#$38#$00;
+      CNeuColor=CAppColorFixed+CHelpColor+CFeldColor;
       CNeuBW=CAppBlackwhite+CHelpBlackWhite+CFeldBlackWhite;
       CNeuMono=CAppMonochrome+CHelpMonochrome+CFeldMonochrome;
 
