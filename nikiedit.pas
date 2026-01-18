@@ -106,8 +106,6 @@ VAR
 BEGIN
   IF Editor = NIL THEN
     GetTitle := ''
-  ELSE IF Editor^.IsClipboard THEN
-    GetTitle := 'Clipboard'
   ELSE BEGIN
     FileName := Editor^.FileName;
     IF FileName = '' THEN
