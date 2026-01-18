@@ -7,10 +7,11 @@ INTERFACE
 
 FUNCTION tr(const s: String): String;
 PROCEDURE LoadTranslation(const LangCode: String);
+PROCEDURE InitTranslation;
 
 IMPLEMENTATION
 
-USES Classes, SysUtils;
+USES Classes, SysUtils, Dos;
 
 VAR
   Translations: TStringList;
@@ -47,6 +48,19 @@ BEGIN
     Translations.LoadFromFile(FileName);
     Translations.NameValueSeparator := '=';
   END;
+END;
+
+PROCEDURE InitTranslation;
+VAR
+  Lang: String;
+BEGIN
+  { Get language from LANG env var (e.g., "de_DE.UTF-8" -> "de") }
+  Lang := GetEnv('LANG');
+  IF Length(Lang) >= 2 THEN
+    Lang := LowerCase(Copy(Lang, 1, 2))
+  ELSE
+    Lang := 'en';
+  LoadTranslation(Lang);
 END;
 
 INITIALIZATION

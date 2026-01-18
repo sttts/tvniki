@@ -125,8 +125,8 @@ BEGIN
   IF (ParamCount > 0) AND ((ParamStr(1) = '--help') OR (ParamStr(1) = '-h')) THEN
     ShowHelp;
 
-  { Load German translations (default language) }
-  LoadTranslation('de');
+  { Load translations based on LANG environment variable }
+  InitTranslation;
 
   OldExit := ExitProc;
   ExitProc := @MyExitProc;
