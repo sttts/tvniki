@@ -23,5 +23,16 @@ COPY . /app
 # Build from source
 RUN make clean && make
 
-# Run smoke test: start in tmux, capture screen, verify output
-CMD ["bash", "-c", "tmux new-session -d -s test -x 100 -y 30 './niki'; sleep 2; tmux capture-pane -t test -p; tmux kill-session -t test"]
+# Run smoke test: start in tmux, capture screen, validate UI elements
+CMD ["bash", "-c", "\
+  tmux new-session -d -s test -x 100 -y 30 './niki' && \
+  sleep 2 && \
+  OUTPUT=$(tmux capture-pane -t test -p) && \
+  tmux kill-session -t test && \
+  echo \"$OUTPUT\" && \
+  echo '=== Validating UI ===' && \
+  echo \"$OUTPUT\" | grep -q 'File  Edit  Search' || { echo 'FAIL: Menu bar not found'; exit 1; } && \
+  echo \"$OUTPUT\" | grep -q 'tvNiki' || { echo 'FAIL: tvNiki title not found'; exit 1; } && \
+  echo \"$OUTPUT\" | grep -q 'Ctrl-F9' || { echo 'FAIL: Status bar not found'; exit 1; } && \
+  echo 'PASS: All UI elements validated' \
+"]

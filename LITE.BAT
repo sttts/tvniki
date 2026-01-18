@@ -1,1 +1,0 @@
-pklite niki.exe
