@@ -126,6 +126,8 @@ END;
 PROCEDURE TNikiEditor.HandleEvent(VAR Event:TEvent);
 VAR
   TargetLine: Word;
+  LineNum: Word;
+  i: LongInt;
 BEGIN
   CASE Event.What OF
     evCommand : CASE Event.Command OF
@@ -158,6 +160,16 @@ BEGIN
                      TargetLine := Word(PtrUInt(Event.InfoPtr));
                      IF (Editor <> NIL) AND (TargetLine > 0) THEN
                      BEGIN
+                       { Find character position of target line }
+                       LineNum := 1;
+                       i := 0;
+                       WHILE (i < Editor^.BufLen) AND (LineNum < TargetLine) DO
+                       BEGIN
+                         IF Editor^.BufChar(i) = #10 THEN Inc(LineNum);
+                         Inc(i);
+                       END;
+                       { Move cursor (invisible when not focused) }
+                       Editor^.SetCurPtr(i, 0);
                        { Set highlight line and scroll to show it }
                        EditorHighlightLine := TargetLine;
                        Editor^.ScrollTo(0, TargetLine - 1 - Editor^.Size.Y DIV 2);

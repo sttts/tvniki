@@ -482,18 +482,18 @@ BEGIN
   IF BestIndex >= 0 THEN
   BEGIN
     { Skip past all consecutive DBG markers to first real instruction }
-    FocusLine := BestIndex;
-    WHILE (FocusLine < LineCount) AND
-          (Copy(Lines[FocusLine].Mnemonic, 1, 3) = 'DBG') DO
-      Inc(FocusLine);
-    IF FocusLine >= LineCount THEN
-      FocusLine := BestIndex;
+    CursorLine := BestIndex;
+    WHILE (CursorLine < LineCount) AND
+          (Copy(Lines[CursorLine].Mnemonic, 1, 3) = 'DBG') DO
+      Inc(CursorLine);
+    IF CursorLine >= LineCount THEN
+      CursorLine := BestIndex;
 
-    { Scroll to make focus line visible }
-    IF FocusLine < Delta.Y THEN
-      ScrollTo(Delta.X, FocusLine)
-    ELSE IF FocusLine >= Delta.Y + Size.Y THEN
-      ScrollTo(Delta.X, FocusLine - Size.Y + 1);
+    { Scroll to make cursor line visible }
+    IF CursorLine < Delta.Y THEN
+      ScrollTo(Delta.X, CursorLine)
+    ELSE IF CursorLine >= Delta.Y + Size.Y THEN
+      ScrollTo(Delta.X, CursorLine - Size.Y + 1);
 
     DrawView;
   END;
@@ -526,19 +526,18 @@ CONST
   DescCol = 36;    { Description }
 VAR
   B: TDrawBuffer;
-  NormalColor, MnemColor, ExecColor, FocusColor, CursorColor: Byte;
+  NormalColor, MnemColor, ExecColor, CursorColor: Byte;
   i, Y: Integer;
   AddrStr: String[6];
   Mnem, Desc: String;
-  IsExec, IsFocus, IsCursor: Boolean;
+  IsExec, IsCursor: Boolean;
   LineColor: Byte;
 BEGIN
   { Colors }
   NormalColor := $78;     { Dark grey on light grey }
   MnemColor := $70;       { Black on light grey }
   ExecColor := $1F;       { White on blue - execution line }
-  FocusColor := $8F;      { White on dark grey - editor focus line }
-  CursorColor := $0F;     { White on black - keyboard cursor }
+  CursorColor := $0F;     { White on black - cursor line }
 
   FOR Y := 0 TO Size.Y - 1 DO
   BEGIN
@@ -548,19 +547,13 @@ BEGIN
     IF i < LineCount THEN
     BEGIN
       IsExec := (i = ExecLine);
-      IsFocus := (i = FocusLine) AND (NOT IsExec);
-      IsCursor := (i = CursorLine) AND (NOT IsExec) AND (NOT IsFocus);
+      IsCursor := (i = CursorLine) AND (NOT IsExec);
 
       { Choose line color: execution > focus > cursor > normal }
       IF IsExec THEN
       BEGIN
         LineColor := ExecColor;
         MoveChar(B, ' ', ExecColor, Size.X);
-      END
-      ELSE IF IsFocus THEN
-      BEGIN
-        LineColor := FocusColor;
-        MoveChar(B, ' ', FocusColor, Size.X);
       END
       ELSE IF IsCursor THEN
       BEGIN
@@ -579,7 +572,7 @@ BEGIN
 
       { Mnemonic }
       Mnem := Lines[i].Mnemonic;
-      IF IsExec OR IsFocus OR IsCursor THEN
+      IF IsExec OR IsCursor THEN
         MoveStr(B[MnemCol], Mnem, LineColor)
       ELSE
         MoveStr(B[MnemCol], Mnem, MnemColor);
