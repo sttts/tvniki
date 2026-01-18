@@ -17,7 +17,7 @@ tvNiki teaches programming fundamentals through a simple robot simulation. Niki 
 ### macOS (Homebrew)
 
 ```bash
-brew install sttts/tvniki/tvniki
+brew install https://raw.githubusercontent.com/sttts/tvniki/main/Formula/tvniki.rb
 ```
 
 This installs both `tvniki` (the GUI) and `nikic` (the command-line compiler).
