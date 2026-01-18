@@ -531,11 +531,13 @@ VAR
   Name: NameStr;
   Ext: ExtStr;
 BEGIN
-  if Lo(DosVersion) >= 3 then EXEName := ParamStr(0)
-  else EXEName := FSearch('TVDEMO.EXE', GetEnv('PATH'));
+  EXEName := ParamStr(0);
   FSplit(EXEName, Dir, Name, Ext);
-  if Dir[Length(Dir)] = '\' then Dec(Dir[0]);
-  CalcHelpName := FSearch('HILFE.HLP', Dir);
+  { Remove trailing path separator }
+  if (Length(Dir) > 0) and (Dir[Length(Dir)] in ['/', '\']) then
+    Dec(Dir[0]);
+  { Search for help file (case-insensitive on most systems) }
+  CalcHelpName := FSearch('hilfe.hlp', Dir);
 END;
 
 
@@ -543,6 +545,11 @@ PROCEDURE TNikiApplication.Hilfe(Ctx:Integer; Modal:BOOLEAN);
 VAR Name:String;
     h:PHelpWindow;
 BEGIN
+  { TODO: Help system needs 64-bit porting - see tvniki-port-help-system }
+  MessageBox(tr('Help system not yet ported to 64-bit'),
+    NIL, mfInformation + mfOkButton);
+  Exit;
+
   name := CalcHelpName;
   IF Name='' THEN
   BEGIN

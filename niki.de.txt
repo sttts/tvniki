@@ -123,3 +123,4 @@ Command expected=Befehl erwartet
 Unknown command=Unbekannter Befehl
 Duplicate identifier=Doppelter Bezeichner
 Period expected=Punkt erwartet
+Help system not yet ported to 64-bit=Hilfesystem noch nicht auf 64-Bit portiert

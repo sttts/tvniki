@@ -140,7 +140,7 @@ type
 const
   RHelpTopic: TStreamRec = (
      ObjType: 10000;
-     VmtLink: Ofs(TypeOf(THelpTopic)^);
+     VmtLink: TypeOf(THelpTopic);
      Load:    @THelpTopic.Load;
      Store:   @THelpTopic.Store
   );
@@ -148,7 +148,7 @@ const
 const
   RHelpIndex: TStreamRec = (
      ObjType: 10001;
-     VmtLink: Ofs(TypeOf(THelpIndex)^);
+     VmtLink: TypeOf(THelpIndex);
      Load:    @THelpIndex.Load;
      Store:   @THelpIndex.Store
   );
@@ -176,12 +176,21 @@ procedure ReadParagraphs;
 var
   I, Size: Integer;
   PP: ^PParagraph;
+const
+  MaxParagraphs = 10000;
+  MaxSize = 65000;
 begin
   S.Read(I, SizeOf(I));
+  if (I < 0) or (I > MaxParagraphs) then I := 0;
   PP := @Paragraphs;
   while I > 0 do
   begin
     S.Read(Size, SizeOf(Size));
+    if (Size <= 0) or (Size > MaxSize) then
+    begin
+      PP^ := nil;
+      Exit;
+    end;
     GetMem(PP^, SizeOf(PP^^) + Size);
     PP^^.Size := Size;
     S.Read(PP^^.Wrap, SizeOf(Boolean));
@@ -193,11 +202,19 @@ begin
 end;
 
 procedure ReadCrossRefs;
+const
+  MaxRefs = 10000;
 begin
   S.Read(NumRefs, SizeOf(Integer));
-  GetMem(CrossRefs, SizeOf(TCrossRef) * NumRefs);
-  if CrossRefs <> nil then
-    S.Read(CrossRefs^, SizeOf(TCrossRef) * NumRefs);
+  if (NumRefs < 0) or (NumRefs > MaxRefs) then NumRefs := 0;
+  if NumRefs > 0 then
+  begin
+    GetMem(CrossRefs, SizeOf(TCrossRef) * NumRefs);
+    if CrossRefs <> nil then
+      S.Read(CrossRefs^, SizeOf(TCrossRef) * NumRefs);
+  end
+  else
+    CrossRefs := nil;
 end;
 
 begin
@@ -441,10 +458,12 @@ var
   Buf: PByteArray;
   Limit, Idx: Integer;
 begin
+  Scan := 0;
+  if (Offset < 0) or (Offset >= Size) or (Size <= 0) then Exit;
   Buf := @P;
   Limit := Size - Offset;
   if Limit > 256 then Limit := 256;
-  Scan := 0;
+  if Limit <= 0 then Exit;
   for Idx := 0 to Limit - 1 do
     if Chr(Buf^[Offset + Idx]) = C then
     begin
@@ -459,6 +478,8 @@ var
   Buf: PByteArray;
   Idx: Integer;
 begin
+  Line := '';
+  if (Length <= 0) or (Offset < 0) then Exit;
   Buf := @Text;
   if Length > 255 then Length := 255;
   SetLength(Line, Length);
@@ -467,20 +488,30 @@ begin
 end;
 
 begin
+  { Safety: ensure valid bounds }
+  if (Size <= 0) or (Offset >= Size) or (Width <= 0) then
+  begin
+    WrapText := '';
+    Exit;
+  end;
+
   I := Scan(Text, Offset, Size, #13);
   if (I >= Width) and Wrap then
   begin
     I := Offset + Width;
-    if I > Size then I := Size
-    else
+    if I >= Size then I := Size - 1;
+    if I > Offset then
     begin
-      while (I > Offset) and not IsBlank(PCArray(@Text)^[I]) do Dec(I);
+      while (I > Offset) and (I < Size) and not IsBlank(PCArray(@Text)^[I]) do Dec(I);
       if I = Offset then I := Offset + Width
       else Inc(I);
     end;
     if I = Offset then I := Offset + Width;
+    if I > Size then I := Size;
     Dec(I, Offset);
   end;
+  if I <= 0 then I := 1;
+  if Offset + I > Size then I := Size - Offset;
   TextToLine(Text, Offset, I, Line);
   if (Length(Line) > 0) and (Line[Length(Line)] = #13) then SetLength(Line, Length(Line) - 1);
   Inc(Offset, I);
@@ -498,11 +529,16 @@ begin
 end;
 
 constructor THelpIndex.Load(var S: TStream);
+const
+  MaxSize = 10000; { Reasonable limit for help index entries }
 begin
   S.Read(Used, SizeOf(Used));
   S.Read(Size, SizeOf(Size));
-  if Size = 0 then
+  { Safety: ensure Size is within reasonable bounds }
+  if (Size <= 0) or (Size > MaxSize) then
   begin
+    Size := 0;
+    Used := 0;
     Contexts := nil;
     Index := nil;
   end
