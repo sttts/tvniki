@@ -8,38 +8,6 @@ on:
     branches: [master]
 
 jobs:
-  build-macos:
-    strategy:
-      matrix:
-        include:
-          - runner: macos-15
-            arch: arm64
-          - runner: macos-15-large
-            arch: x86_64
-    runs-on: ${{ matrix.runner }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-
-      - name: Install Free Pascal
-        run: brew install fpc
-
-      - name: Build
-        run: make
-
-      - name: Run tests
-        run: make test
-
-      - name: Rename binary
-        run: mv niki niki-macos-${{ matrix.arch }}
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: niki-macos-${{ matrix.arch }}
-          path: niki-macos-${{ matrix.arch }}
-
   build-linux-x86_64:
     runs-on: ubuntu-latest
     steps:
@@ -103,7 +71,7 @@ jobs:
           path: niki-linux-arm64
 
   release:
-    needs: [build-macos, build-linux-x86_64, build-linux-arm64]
+    needs: [build-linux-x86_64, build-linux-arm64]
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     permissions:
@@ -118,8 +86,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/niki-macos-arm64/niki-macos-arm64
-            artifacts/niki-macos-x86_64/niki-macos-x86_64
             artifacts/niki-linux-x86_64/niki-linux-x86_64
             artifacts/niki-linux-arm64/niki-linux-arm64
           generate_release_notes: true
