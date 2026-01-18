@@ -246,8 +246,9 @@ VAR
   i, Y: Integer;
   S: String;
 BEGIN
-  Color := GetColor(1);
-  FocusColor := GetColor(2);
+  { Use direct color attributes to bypass palette chain }
+  Color := $70;       { Black on light grey }
+  FocusColor := $2F;  { White on green }
 
   FOR Y := 0 TO Size.Y - 1 DO
   BEGIN
