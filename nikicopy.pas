@@ -22,15 +22,27 @@ TYPE PCopyRightDialog=^TCopyrightDialog;
 IMPLEMENTATION
 USES App, Strings, Timer, Hilfe, Version;
 
-CONST Width=44;
-      Height=9;
+CONST Height=9;
+      MinWidth=36;
 
 
 {************************************}
 
+FUNCTION CalcWidth: Integer;
+VAR Ver: String;
+BEGIN
+  Ver := 'tvNiki ' + VersionString;
+  IF Length(Ver) + 4 > MinWidth THEN
+    CalcWidth := Length(Ver) + 4
+  ELSE
+    CalcWidth := MinWidth;
+END;
+
 CONSTRUCTOR TCopyrightDialog.Init;
 VAR R:TRect;
+    Width: Integer;
 BEGIN
+  Width := CalcWidth;
   Desktop^.GetExtent(R);
   R.A.X := (R.B.X-Width) DIV 2;
   R.A.Y := (R.B.Y-Height) DIV 2;
@@ -53,15 +65,21 @@ END;
 PROCEDURE TCopyrightDialog.SetupWindow;
 VAR R:TRect;
     Ver:String;
+    Width: Integer;
 BEGIN
+  Width := CalcWidth;
   Ver := 'tvNiki ' + VersionString;
-  R.Assign(3,2,41,3);
+
+  { Centered version string }
+  R.Assign((Width - Length(Ver)) DIV 2, 2, (Width + Length(Ver)) DIV 2, 3);
   Insert( New(PStaticText, Init(R, Ver)));
 
-  R.Assign(16,4,28,6);
+  { Centered OK button }
+  R.Assign((Width - 12) DIV 2, 4, (Width + 12) DIV 2, 6);
   Insert( New(PButton, Init(R, '~O~K', cmOk, bfDefault)));
 
-  R.Assign(1,7,43,8);
+  { Scrolling copyright }
+  R.Assign(1, 7, Width - 1, 8);
   New(Scroller, Init(R,
     'tvNiki (c) 1996-2026 Stefan Schimanski, all rights reserved - '));
   Insert(Scroller);
