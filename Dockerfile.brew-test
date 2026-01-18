@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     file \
     git \
     procps \
+    sudo \
     tmux \
     locales \
     && rm -rf /var/lib/apt/lists/*
@@ -16,20 +17,25 @@ RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 
-# Create non-root user (Homebrew requires this)
-RUN useradd -m -s /bin/bash brewuser
+# Create non-root user with sudo access (Homebrew requires non-root)
+RUN useradd -m -s /bin/bash brewuser && echo "brewuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER brewuser
 WORKDIR /home/brewuser
 
+# Configure git for tap creation
+RUN git config --global user.email "test@test.com" && git config --global user.name "Test"
+
 # Install Homebrew
-RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Add Homebrew to PATH
-ENV PATH="/home/brewuser/.linuxbrew/bin:/home/brewuser/.linuxbrew/sbin:$PATH"
-RUN echo 'eval "$(/home/brewuser/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
+ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
 
-# Install tvniki from the repo
-RUN brew install --head sttts/tvniki-2026/tvniki
+# Create local tap and install formula
+COPY --chown=brewuser:brewuser Formula/tvniki.rb /tmp/tvniki.rb
+RUN brew tap-new local/tvniki && \
+    cp /tmp/tvniki.rb $(brew --repository local/tvniki)/Formula/tvniki.rb && \
+    brew install --head local/tvniki/tvniki
 
 # Run smoke test: start in tmux, capture screen, validate UI elements
 CMD ["bash", "-c", "\
