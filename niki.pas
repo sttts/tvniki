@@ -91,7 +91,11 @@ PROCEDURE ShowHelp;
 BEGIN
   Writeln('tvNiki 1.11 - Educational programming environment');
   Writeln;
-  Writeln('Usage: niki [options] [file.pas]');
+  Writeln('Usage: niki [options] [file.pas] [file.rob]');
+  Writeln;
+  Writeln('Arguments:');
+  Writeln('  file.pas   Program source file to open');
+  Writeln('  file.rob   Field/world file to load');
   Writeln;
   Writeln('Options:');
   Writeln('  --help     Show this help message');

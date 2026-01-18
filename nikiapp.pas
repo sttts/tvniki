@@ -44,7 +44,7 @@ TYPE  TNikiApplication = OBJECT(TApplication)
 
 IMPLEMENTATION
 USES Dos, FVConsts, NikiCnst, NikiEdit, NikiInfo, NikiGlob, NikiCopy,
-     NikiHelp, HelpFile, Hilfe, Config;
+     NikiHelp, HelpFile, Hilfe, Config, SysUtils;
 
 CONST HeapSize = (128 * 1024) DIV 16;
       { Editor commands from original TV Editors unit }
@@ -147,7 +147,13 @@ BEGIN
   IF ParamCount=0 THEN
     EditWindow := OpenEditor('', TRUE)
   ELSE
-    FOR z:=1 TO ParamCount DO EditWindow := OpenEditor(ParamStr(z), TRUE);
+    FOR z:=1 TO ParamCount DO
+    BEGIN
+      IF UpCase(ExtractFileExt(ParamStr(z))) = '.ROB' THEN
+        OpenFeld(ParamStr(z))
+      ELSE
+        EditWindow := OpenEditor(ParamStr(z), TRUE);
+    END;
 
   Mode := smCO80;
   sMode := GetStrOption('VIDMODE', 'COLOR');
