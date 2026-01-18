@@ -1,0 +1,27 @@
+FROM debian:bookworm
+
+# Install Free Pascal and tmux
+RUN apt-get update && apt-get install -y \
+    fpc \
+    make \
+    git \
+    tmux \
+    locales \
+    && rm -rf /var/lib/apt/lists/*
+
+# Remove system Free Vision to avoid conflicts with fv_utf8
+RUN rm -rf /usr/lib/fpc/*/units/*/fv
+
+# Set up locale for proper UTF-8 support
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+
+WORKDIR /app
+COPY . /app
+
+# Build from source
+RUN make clean && make
+
+# Run smoke test: start in tmux, capture screen, verify output
+CMD ["bash", "-c", "tmux new-session -d -s test -x 100 -y 30 './niki'; sleep 2; tmux capture-pane -t test -p; tmux kill-session -t test"]
