@@ -35,18 +35,31 @@ END;
 PROCEDURE LoadTranslation(const LangCode: String);
 VAR
   FileName: String;
+  Lines: TStringList;
+  i: Integer;
+  Line: String;
 BEGIN
   IF Translations = NIL THEN
     Translations := TStringList.Create
   ELSE
     Translations.Clear;
 
+  Translations.NameValueSeparator := '=';
+
   { Look for translation file: niki.de.txt, niki.en.txt, etc. }
   FileName := 'niki.' + LangCode + '.txt';
   IF FileExists(FileName) THEN
   BEGIN
-    Translations.LoadFromFile(FileName);
-    Translations.NameValueSeparator := '=';
+    Lines := TStringList.Create;
+    Lines.LoadFromFile(FileName);
+    FOR i := 0 TO Lines.Count - 1 DO
+    BEGIN
+      Line := Lines[i];
+      { Skip empty lines and comments }
+      IF (Length(Line) > 0) AND (Line[1] <> '#') THEN
+        Translations.Add(Line);
+    END;
+    Lines.Free;
   END;
 END;
 
