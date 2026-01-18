@@ -30,3 +30,4 @@ testload: testload.pas
 
 clean:
 	rm -f *.o *.ppu *.rsj $(TARGET) testload
+	rm -f fv_utf8/*.o fv_utf8/*.ppu

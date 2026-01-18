@@ -15,6 +15,7 @@ TYPE PNikiEditor=^TNikiEditor;
 
                    PROCEDURE UpdateCommands; VIRTUAL;
 
+                   FUNCTION GetTitle(MaxLen: Sw_Integer): TTitleStr; VIRTUAL;
                    FUNCTION Compile:BOOLEAN;
                    PROCEDURE Run(Debug:BOOLEAN);
                    PROCEDURE Print;
@@ -23,7 +24,7 @@ TYPE PNikiEditor=^TNikiEditor;
 
 IMPLEMENTATION
 USES NikiCnst, NikiComp, Compiler, MsgBox, NikiFeld, Dos, NikiInfo,
-     StdDlg, Hilfe, NikiPrnt, Config;
+     StdDlg, Hilfe, NikiPrnt, Config, SysUtils;
 
 {$F+}
 FUNCTION MyEditorDialog(Dialog: Integer; Info: Pointer): Word;
@@ -97,6 +98,28 @@ DESTRUCTOR TNikiEditor.Done;
 BEGIN
   IF EditWindow = @Self THEN EditWindow := NIL;
   INHERITED Done;
+END;
+
+FUNCTION TNikiEditor.GetTitle(MaxLen: Sw_Integer): TTitleStr;
+VAR
+  FileName, RelPath: String;
+BEGIN
+  IF Editor = NIL THEN
+    GetTitle := ''
+  ELSE IF Editor^.IsClipboard THEN
+    GetTitle := 'Clipboard'
+  ELSE BEGIN
+    FileName := Editor^.FileName;
+    IF FileName = '' THEN
+      GetTitle := 'Untitled'
+    ELSE BEGIN
+      RelPath := ExtractRelativePath(GetCurrentDir + PathDelim, FileName);
+      IF Length(RelPath) < Length(FileName) THEN
+        GetTitle := Copy(RelPath, 1, MaxLen)
+      ELSE
+        GetTitle := Copy(FileName, 1, MaxLen);
+    END;
+  END;
 END;
 
 PROCEDURE TNikiEditor.HandleEvent(VAR Event:TEvent);
