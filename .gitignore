@@ -61,3 +61,5 @@ version.inc
 # bd worktree
 worktrees/tvniki-linux-brew-smoketest/
 tvniki
+nikic
+testload

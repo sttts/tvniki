@@ -17,6 +17,7 @@ class Tvniki < Formula
 
     system "make"
     bin.install "tvniki"
+    bin.install "nikic"
 
     # Install data files
     pkgshare.install "hilfe.hlp"

@@ -6,8 +6,9 @@ FPC = fpc
 # Note: fv_utf8 requires ObjFPC mode, not TP mode
 FPCFLAGS = -Sh -gl -Fufv_utf8
 
-# Main target
+# Main targets
 TARGET = tvniki
+COMPILER = nikic
 
 # Source files - main and all units
 MAIN = niki.pas
@@ -15,7 +16,7 @@ SOURCES = $(wildcard *.pas)
 
 .PHONY: all clean version.inc
 
-all: $(TARGET)
+all: $(TARGET) $(COMPILER)
 
 # Generate version from git
 version.inc:
@@ -25,15 +26,25 @@ version.inc:
 $(TARGET): version.inc $(SOURCES)
 	$(FPC) $(FPCFLAGS) -o$(TARGET) $(MAIN)
 
-# Run unit tests (tests all .ROB files)
-test: testload
+# Command-line compiler (no Free Vision dependency)
+$(COMPILER): nikic.pas compiler.pas nikistrings.pas
+	$(FPC) -Sh -gl -o$(COMPILER) nikic.pas
+
+# Example programs to test-compile
+EXAMPLES = laby.pas lager.pas lkw.pas zahl.pas logik.pas
+
+# Run unit tests (tests all .ROB files and compiles example programs)
+test: testload $(COMPILER)
 	./testload
+	@echo "Compiling example programs..."
+	@for f in $(EXAMPLES); do ./$(COMPILER) $$f; done
+	@echo "All tests passed."
 
 testload: testload.pas
 	$(FPC) -Sh -otestload testload.pas
 
 clean:
-	rm -f *.o *.ppu *.rsj $(TARGET) testload
+	rm -f *.o *.ppu *.rsj $(TARGET) $(COMPILER) testload
 	rm -f fv_utf8/*.o fv_utf8/*.ppu
 
 # Integration tests - run in Docker to verify Linux support

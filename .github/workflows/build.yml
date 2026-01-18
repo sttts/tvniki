@@ -28,14 +28,18 @@ jobs:
       - name: Run tests
         run: make test
 
-      - name: Rename binary
-        run: mv tvniki tvniki-linux-x86_64
+      - name: Package binaries
+        run: |
+          mkdir tvniki-linux-x86_64
+          mv tvniki tvniki-linux-x86_64/
+          mv nikic tvniki-linux-x86_64/
+          tar czf tvniki-linux-x86_64.tar.gz tvniki-linux-x86_64
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: tvniki-linux-x86_64
-          path: tvniki-linux-x86_64
+          path: tvniki-linux-x86_64.tar.gz
 
   build-linux-arm64:
     runs-on: ubuntu-latest
@@ -61,14 +65,18 @@ jobs:
               make test
             '
 
-      - name: Rename binary
-        run: mv tvniki tvniki-linux-arm64
+      - name: Package binaries
+        run: |
+          mkdir tvniki-linux-arm64
+          mv tvniki tvniki-linux-arm64/
+          mv nikic tvniki-linux-arm64/
+          tar czf tvniki-linux-arm64.tar.gz tvniki-linux-arm64
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: tvniki-linux-arm64
-          path: tvniki-linux-arm64
+          path: tvniki-linux-arm64.tar.gz
 
   integration:
     runs-on: ubuntu-latest
@@ -96,6 +104,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/tvniki-linux-x86_64/tvniki-linux-x86_64
-            artifacts/tvniki-linux-arm64/tvniki-linux-arm64
+            artifacts/tvniki-linux-x86_64/tvniki-linux-x86_64.tar.gz
+            artifacts/tvniki-linux-arm64/tvniki-linux-arm64.tar.gz
           generate_release_notes: true
