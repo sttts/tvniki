@@ -246,8 +246,9 @@ VAR
   i, Y: Integer;
   S: String;
 BEGIN
-  Color := GetColor(1);
-  FocusColor := GetColor(2);
+  { Direct color attributes: black on light grey, focus = white on blue }
+  Color := $70;       { Black on light grey }
+  FocusColor := $1F;  { White on blue }
 
   FOR Y := 0 TO Size.Y - 1 DO
   BEGIN
