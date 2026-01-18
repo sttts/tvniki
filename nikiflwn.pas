@@ -68,6 +68,7 @@ TYPE PFeld=^TFeld;
 
              PROCEDURE SizeLimits(VAR Min, Max: TPoint); VIRTUAL;
              PROCEDURE ChangeBounds(VAR Bounds: TRect); VIRTUAL;
+             PROCEDURE SetState(AState: Word; Enable: Boolean); VIRTUAL;
 
              FUNCTION GetTitle:String;
              FUNCTION GetPalette:PPalette; VIRTUAL;
@@ -302,14 +303,37 @@ BEGIN
   UpdateScrollbars;
 END;
 
+PROCEDURE TFeld.SetState(AState: Word; Enable: Boolean);
+BEGIN
+  INHERITED SetState(AState, Enable);
+  IF (AState AND (sfSelected + sfActive + sfVisible) <> 0) THEN
+    UpdateScrollbars;
+END;
+
 PROCEDURE TFeld.UpdateScrollbars;
 BEGIN
   Draw;
 
   IF HScrollBar <> NIL THEN
+  BEGIN
+    IF Limit.X > Size.X THEN
+    BEGIN
+      HScrollBar^.Show;
       HScrollBar^.SetParams(Delta.X, 0, Limit.X - Size.X, Size.X DIV 2, 1);
+    END
+    ELSE
+      HScrollBar^.Hide;
+  END;
   IF VScrollBar <> NIL THEN
+  BEGIN
+    IF Limit.Y > Size.Y THEN
+    BEGIN
+      VScrollBar^.Show;
       VScrollBar^.SetParams(Delta.Y, 0, Limit.Y - Size.Y, Size.Y - 1, 1);
+    END
+    ELSE
+      VScrollBar^.Hide;
+  END;
 END;
 
 VAR Str:PShortString;
