@@ -150,8 +150,7 @@ END;
 
 PROCEDURE TCompileDialog.CompileComplete;
 BEGIN
-  Abbrechen^.Hide;
-  Ok^.Show;
+  EndModal(cmOk);
 END;
 
 PROCEDURE TCompileDialog.SetProgramm(ADatei:String);
