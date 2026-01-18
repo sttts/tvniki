@@ -153,7 +153,7 @@ END;
 
 FUNCTION TFeld.SaveFile(ADatei:STRING):BOOLEAN;
 VAR S:TBufStream;
-    Id:String;
+    Id:ShortString;
 BEGIN
   SaveFile := FALSE;
 
