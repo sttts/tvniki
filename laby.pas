@@ -1,28 +1,28 @@
 PROGRAM Laby;
 
-PROCEDURE Suche;
+PROCEDURE Search;
 BEGIN
-  IF Links_Frei THEN
+  IF Left_Clear THEN
   BEGIN
-    Drehe_Links;
-    Vor;
+    Turn_Left;
+    Forward;
   END ELSE
-    IF Vorne_Frei THEN Vor 
+    IF Front_Clear THEN Forward
     ELSE
-      IF Rechts_Frei THEN
+      IF Right_Clear THEN
       BEGIN
-        Drehe_Links;
-        Drehe_Links;
-        Drehe_Links;
-        Vor;
+        Turn_Left;
+        Turn_Left;
+        Turn_Left;
+        Forward;
       END ELSE
       BEGIN
-        Drehe_Links;
-        Drehe_Links;
-        Vor;
+        Turn_Left;
+        Turn_Left;
+        Forward;
       END;
 END;
 
 BEGIN
-  WHILE NOT Platz_belegt DO Suche;
+  WHILE NOT Space_Occupied DO Search;
 END.

@@ -1,96 +1,95 @@
-PROGRAM Lkw;
- 
-PROCEDURE drehe_rechts;
+PROGRAM Truck;
+
+PROCEDURE Turn_Right;
 BEGIN
- drehe_links;
- drehe_links;
- drehe_links;
+  Turn_Left;
+  Turn_Left;
+  Turn_Left;
 END;
- 
-PROCEDURE suche_Lkw;
+
+PROCEDURE Find_Truck;
 BEGIN
- drehe_links;
- REPEAT vor UNTIL NOT vorne_frei;
- drehe_links;
- vor;
- drehe_rechts;
- vor;
+  Turn_Left;
+  REPEAT Forward UNTIL NOT Front_Clear;
+  Turn_Left;
+  Forward;
+  Turn_Right;
+  Forward;
 END;
- 
-PROCEDURE naechste_Seite;
+
+PROCEDURE Next_Side;
 BEGIN
- vor;
- drehe_rechts;
- vor;
- vor;
- drehe_rechts;
- vor;
+  Forward;
+  Turn_Right;
+  Forward;
+  Forward;
+  Turn_Right;
+  Forward;
 END;
- 
-PROCEDURE naechste_Box;
+
+PROCEDURE Next_Box;
 BEGIN
- REPEAT vor UNTIL NOT vorne_frei;
- drehe_links;
- vor;
+  REPEAT Forward UNTIL NOT Front_Clear;
+  Turn_Left;
+  Forward;
 END;
- 
-PROCEDURE gr_Lkw;
+
+PROCEDURE Big_Truck;
 BEGIN
- nimm_auf;
- nimm_auf;
- suche_Lkw;
- gib_ab;
- vor;
- gib_ab;
- vor;
- gib_ab;
- naechste_Seite;
- gib_ab;
- vor;
- gib_ab;
- vor;
- gib_ab;
- naechste_Box;
+  Pick_Up;
+  Pick_Up;
+  Find_Truck;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Next_Side;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Next_Box;
 END;
- 
-PROCEDURE kl_Lkw;
+
+PROCEDURE Small_Truck;
 BEGIN
- suche_Lkw;
- gib_ab;
- vor;
- gib_ab;
- naechste_Seite;
- gib_ab;
- vor;
- gib_ab;
- naechste_Box;
+  Find_Truck;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Next_Side;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Next_Box;
 END;
- 
-PROCEDURE vier_oder_sechs;
+
+PROCEDURE Four_Or_Six;
 BEGIN
- nimm_auf;
- nimm_auf;
- nimm_auf;
- nimm_auf;
- IF Platz_belegt THEN gr_Lkw;
- IF NOT Platz_belegt THEN kl_Lkw;
+  Pick_Up;
+  Pick_Up;
+  Pick_Up;
+  Pick_Up;
+  IF Space_Occupied THEN Big_Truck;
+  IF NOT Space_Occupied THEN Small_Truck;
 END;
- 
-PROCEDURE rueckweg;
+
+PROCEDURE Return_Path;
 BEGIN
- drehe_links;
- vor;
- drehe_links;
- WHILE vorne_frei DO vor;
- drehe_links;
- vor;
- drehe_links;
+  Turn_Left;
+  Forward;
+  Turn_Left;
+  WHILE Front_Clear DO Forward;
+  Turn_Left;
+  Forward;
+  Turn_Left;
 END;
- 
+
 BEGIN
- vor;
- vor;
- WHILE Platz_belegt DO vier_oder_sechs;
- rueckweg;
+  Forward;
+  Forward;
+  WHILE Space_Occupied DO Four_Or_Six;
+  Return_Path;
 END.
- 

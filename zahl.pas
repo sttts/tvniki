@@ -1,340 +1,338 @@
-PROGRAM Nummern_raten;
- 
-PROCEDURE drehe_rechts;
+PROGRAM Guess_Number;
+
+PROCEDURE Turn_Right;
 BEGIN
- drehe_links;
- drehe_links;
- drehe_links;
+  Turn_Left;
+  Turn_Left;
+  Turn_Left;
 END;
- 
-PROCEDURE reihe;
+
+PROCEDURE Row;
 BEGIN
- gib_ab;
- vor;
- gib_ab;
- vor;
- gib_ab;
- vor;
- gib_ab;
- vor;
- gib_ab;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
 END;
- 
-PROCEDURE mitte;
+
+PROCEDURE Middle;
 BEGIN
- gib_ab;
- vor;
- vor;
- gib_ab;
- vor;
- vor;
- gib_ab;
+  Put_Down;
+  Forward;
+  Forward;
+  Put_Down;
+  Forward;
+  Forward;
+  Put_Down;
 END;
- 
-PROCEDURE hinweg;
+
+PROCEDURE Move_Away;
 BEGIN
- drehe_links;
- drehe_links;
- vor;
- drehe_rechts;
- vor;
- vor;
- vor;
- drehe_rechts;
- vor;
- vor;
- vor;
- drehe_links;
- vor;
+  Turn_Left;
+  Turn_Left;
+  Forward;
+  Turn_Right;
+  Forward;
+  Forward;
+  Forward;
+  Turn_Right;
+  Forward;
+  Forward;
+  Forward;
+  Turn_Left;
+  Forward;
 END;
- 
-PROCEDURE Zahl0;
+
+PROCEDURE Digit0;
 BEGIN
- hinweg;
- reihe;
- drehe_rechts;
- vor;
- drehe_rechts;
- gib_ab;
- vor;
- vor;
- vor;
- vor;
- gib_ab;
- drehe_links;
- vor;
- drehe_links;
- reihe;
- vor;
+  Move_Away;
+  Row;
+  Turn_Right;
+  Forward;
+  Turn_Right;
+  Put_Down;
+  Forward;
+  Forward;
+  Forward;
+  Forward;
+  Put_Down;
+  Turn_Left;
+  Forward;
+  Turn_Left;
+  Row;
+  Forward;
 END;
- 
-PROCEDURE Zahl1;
+
+PROCEDURE Digit1;
 BEGIN
- hinweg;
- drehe_rechts;
- vor;
- vor;
- drehe_links;
- reihe;
- vor;
+  Move_Away;
+  Turn_Right;
+  Forward;
+  Forward;
+  Turn_Left;
+  Row;
+  Forward;
 END;
- 
-PROCEDURE Zahl2;
+
+PROCEDURE Digit2;
 BEGIN
- hinweg;
- gib_ab;
- vor;
- gib_ab;
- vor;
- gib_ab;
- vor;
- vor;
- gib_ab;
- drehe_rechts;
- vor;
- drehe_rechts;
- mitte;
- drehe_links;
- vor;
- drehe_links;
- gib_ab;
- vor;
- vor;
- gib_ab;
- vor;
- gib_ab;
- vor;
- gib_ab;
- vor;
+  Move_Away;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Forward;
+  Put_Down;
+  Turn_Right;
+  Forward;
+  Turn_Right;
+  Middle;
+  Turn_Left;
+  Forward;
+  Turn_Left;
+  Put_Down;
+  Forward;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
 END;
- 
-PROCEDURE Zahl3;
+
+PROCEDURE Digit3;
 BEGIN
- hinweg;
- mitte;
- drehe_rechts;
- vor;
- drehe_rechts;
- mitte;
- drehe_links;
- vor;
- drehe_links;
- reihe;
- vor;
+  Move_Away;
+  Middle;
+  Turn_Right;
+  Forward;
+  Turn_Right;
+  Middle;
+  Turn_Left;
+  Forward;
+  Turn_Left;
+  Row;
+  Forward;
 END;
- 
-PROCEDURE Zahl4;
+
+PROCEDURE Digit4;
 BEGIN
- hinweg;
- vor;
- vor;
- gib_ab;
- vor;
- gib_ab;
- vor;
- gib_ab;
- drehe_rechts;
- vor;
- drehe_rechts;
- vor;
- vor;
- gib_ab;
- vor;
- vor;
- drehe_links;
- vor;
- drehe_links;
- reihe;
- vor;
+  Move_Away;
+  Forward;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Turn_Right;
+  Forward;
+  Turn_Right;
+  Forward;
+  Forward;
+  Put_Down;
+  Forward;
+  Forward;
+  Turn_Left;
+  Forward;
+  Turn_Left;
+  Row;
+  Forward;
 END;
- 
-PROCEDURE Zahl5;
+
+PROCEDURE Digit5;
 BEGIN
- hinweg;
- gib_ab;
- vor;
- vor;
- gib_ab;
- vor;
- gib_ab;
- vor;
- gib_ab;
- drehe_rechts;
- vor;
- drehe_rechts;
- mitte;
- drehe_links;
- vor;
- drehe_links;
- gib_ab;
- vor;
- gib_ab;
- vor;
- gib_ab;
- vor;
- vor;
- gib_ab;
- vor;
+  Move_Away;
+  Put_Down;
+  Forward;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Turn_Right;
+  Forward;
+  Turn_Right;
+  Middle;
+  Turn_Left;
+  Forward;
+  Turn_Left;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Forward;
+  Put_Down;
+  Forward;
 END;
- 
-PROCEDURE Zahl6;
+
+PROCEDURE Digit6;
 BEGIN
- hinweg;
- reihe;
- drehe_rechts;
- vor;
- drehe_rechts;
- mitte;
- drehe_links;
- vor;
- drehe_links;
- gib_ab;
- vor;
- gib_ab;
- vor;
- gib_ab;
- vor;
- vor;
- gib_ab;
- vor;
+  Move_Away;
+  Row;
+  Turn_Right;
+  Forward;
+  Turn_Right;
+  Middle;
+  Turn_Left;
+  Forward;
+  Turn_Left;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Forward;
+  Put_Down;
+  Forward;
 END;
- 
-PROCEDURE Zahl7;
+
+PROCEDURE Digit7;
 BEGIN
- hinweg;
- vor;
- vor;
- vor;
- vor;
- gib_ab;
- drehe_rechts;
- vor;
- drehe_rechts;
- gib_ab;
- vor;
- vor;
- vor;
- vor;
- drehe_links;
- vor;
- drehe_links;
- reihe;
- vor;
+  Move_Away;
+  Forward;
+  Forward;
+  Forward;
+  Forward;
+  Put_Down;
+  Turn_Right;
+  Forward;
+  Turn_Right;
+  Put_Down;
+  Forward;
+  Forward;
+  Forward;
+  Forward;
+  Turn_Left;
+  Forward;
+  Turn_Left;
+  Row;
+  Forward;
 END;
- 
-PROCEDURE Zahl8;
+
+PROCEDURE Digit8;
 BEGIN
- hinweg;
- reihe;
- drehe_rechts;
- vor;
- drehe_rechts;
- mitte;
- drehe_links;
- vor;
- drehe_links;
- reihe;
- vor;
+  Move_Away;
+  Row;
+  Turn_Right;
+  Forward;
+  Turn_Right;
+  Middle;
+  Turn_Left;
+  Forward;
+  Turn_Left;
+  Row;
+  Forward;
 END;
- 
-PROCEDURE Zahl9;
+
+PROCEDURE Digit9;
 BEGIN
- hinweg;
- gib_ab;
- vor;
- vor;
- gib_ab;
- vor;
- gib_ab;
- vor;
- gib_ab;
- drehe_rechts;
- vor;
- drehe_rechts;
- mitte;
- drehe_links;
- vor;
- drehe_links;
- reihe;
- vor;
+  Move_Away;
+  Put_Down;
+  Forward;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Forward;
+  Put_Down;
+  Turn_Right;
+  Forward;
+  Turn_Right;
+  Middle;
+  Turn_Left;
+  Forward;
+  Turn_Left;
+  Row;
+  Forward;
 END;
- 
-PROCEDURE rueckweg;
+
+PROCEDURE Return_Path;
 BEGIN
- drehe_links;
- vor;
- vor;
- vor;
- drehe_links;
- WHILE vorne_frei DO vor;
- drehe_rechts;
- vor;
- vor;
- drehe_links;
- vor;
- vor;
- vor;
- drehe_rechts;
- vor;
- drehe_links;
- drehe_links;
+  Turn_Left;
+  Forward;
+  Forward;
+  Forward;
+  Turn_Left;
+  WHILE Front_Clear DO Forward;
+  Turn_Right;
+  Forward;
+  Forward;
+  Turn_Left;
+  Forward;
+  Forward;
+  Forward;
+  Turn_Right;
+  Forward;
+  Turn_Left;
+  Turn_Left;
 END;
- 
-PROCEDURE welche_Zahl;
+
+PROCEDURE Which_Digit;
 BEGIN
- IF NOT Platz_belegt THEN Zahl0;
- IF Platz_belegt THEN
- BEGIN
-  nimm_auf;
-  IF NOT Platz_belegt THEN Zahl1;
-  IF Platz_belegt THEN
+  IF NOT Space_Occupied THEN Digit0;
+  IF Space_Occupied THEN
   BEGIN
-   nimm_auf;
-   IF NOT Platz_belegt THEN Zahl2;
-   IF Platz_belegt THEN
-   BEGIN
-    nimm_auf;
-    IF NOT Platz_belegt THEN Zahl3;
-    IF Platz_belegt THEN
+    Pick_Up;
+    IF NOT Space_Occupied THEN Digit1;
+    IF Space_Occupied THEN
     BEGIN
-     nimm_auf;
-     IF NOT Platz_belegt THEN Zahl4;
-     IF Platz_belegt THEN
-     BEGIN
-      nimm_auf;
-      IF NOT Platz_belegt THEN Zahl5;
-      IF Platz_belegt THEN
+      Pick_Up;
+      IF NOT Space_Occupied THEN Digit2;
+      IF Space_Occupied THEN
       BEGIN
-       nimm_auf;
-       IF NOT Platz_belegt THEN Zahl6;
-       IF Platz_belegt THEN
-       BEGIN
-        nimm_auf;
-        IF NOT Platz_belegt THEN Zahl7;
-        IF Platz_belegt THEN
+        Pick_Up;
+        IF NOT Space_Occupied THEN Digit3;
+        IF Space_Occupied THEN
         BEGIN
-         nimm_auf;
-         IF NOT Platz_belegt THEN Zahl8;
-          IF Platz_belegt THEN
-         BEGIN
-          nimm_auf;
-          IF NOT Platz_belegt THEN Zahl9;
-         END;
+          Pick_Up;
+          IF NOT Space_Occupied THEN Digit4;
+          IF Space_Occupied THEN
+          BEGIN
+            Pick_Up;
+            IF NOT Space_Occupied THEN Digit5;
+            IF Space_Occupied THEN
+            BEGIN
+              Pick_Up;
+              IF NOT Space_Occupied THEN Digit6;
+              IF Space_Occupied THEN
+              BEGIN
+                Pick_Up;
+                IF NOT Space_Occupied THEN Digit7;
+                IF Space_Occupied THEN
+                BEGIN
+                  Pick_Up;
+                  IF NOT Space_Occupied THEN Digit8;
+                  IF Space_Occupied THEN
+                  BEGIN
+                    Pick_Up;
+                    IF NOT Space_Occupied THEN Digit9;
+                  END;
+                END;
+              END;
+            END;
+          END;
         END;
-       END;
       END;
-     END;
     END;
-   END;
   END;
- END;
 END;
- 
- 
- 
+
 BEGIN
- vor;
- vor;
- welche_Zahl;
- rueckweg;
+  Forward;
+  Forward;
+  Which_Digit;
+  Return_Path;
 END.

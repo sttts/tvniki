@@ -1,78 +1,78 @@
-PROGRAM Lager;
+PROGRAM Warehouse;
 
-PROCEDURE Gehe_Bis_Wand;
+PROCEDURE Go_To_Wall;
 BEGIN
-  WHILE Vorne_Frei DO Vor;
+  WHILE Front_Clear DO Forward;
 END;
 
-PROCEDURE Drehe_Rechts;
+PROCEDURE Turn_Right;
 BEGIN
-  Drehe_Links;
-  Drehe_Links;
-  Drehe_Links;
+  Turn_Left;
+  Turn_Left;
+  Turn_Left;
 END;
 
-PROCEDURE Drehen;
+PROCEDURE Turn_Around;
 BEGIN
-  Drehe_Links;
-  Drehe_Links;
+  Turn_Left;
+  Turn_Left;
 END;
 
-PROCEDURE Gehe_zu_Stapel;
+PROCEDURE Go_To_Stack;
 BEGIN
-  Drehe_Links;
-  Gehe_Bis_Wand;
-  Drehe_Links;
-  Vor;
-  Drehen;
+  Turn_Left;
+  Go_To_Wall;
+  Turn_Left;
+  Forward;
+  Turn_Around;
 END;
 
-PROCEDURE Zurueck;
+PROCEDURE Back;
 BEGIN
-  vor;
-  Drehe_Rechts;
-  Gehe_Bis_Wand;
-  Drehe_Links;
+  Forward;
+  Turn_Right;
+  Go_To_Wall;
+  Turn_Left;
 END;
 
-PROCEDURE Abholen;
+PROCEDURE Fetch;
 BEGIN
-  Gehe_zu_Stapel;
-  WHILE Platz_Belegt DO Nimm_Auf;
-  Zurueck;
+  Go_To_Stack;
+  WHILE Space_Occupied DO Pick_Up;
+  Back;
 END;
 
-PROCEDURE Einlagern;
+PROCEDURE Store;
 BEGIN
-  IF Hat_Vorrat THEN
+  IF Has_Supply THEN
   BEGIN
-    Drehe_Links;
-    vor;
-    Gib_Ab;
-    Drehen;
-    Vor;
-    Drehe_Links;
+    Turn_Left;
+    Forward;
+    Put_Down;
+    Turn_Around;
+    Forward;
+    Turn_Left;
   END;
 END;
 
-PROCEDURE Abliefern;
+PROCEDURE Deliver;
 BEGIN
-  Gehe_zu_Stapel;
-  WHILE Hat_Vorrat DO Gib_Ab;
-  Zurueck;
+  Go_To_Stack;
+  WHILE Has_Supply DO Put_Down;
+  Back;
 END;
 
 BEGIN
-  Abholen;
-  WHILE Vorne_Frei DO
+  Fetch;
+  WHILE Front_Clear DO
   BEGIN
-    Vor;
-    Vor;
-    Einlagern;
+    Forward;
+    Forward;
+    Store;
   END;
 
-  Drehen;
-  Gehe_Bis_Wand;
-  Drehen;
-  IF Hat_Vorrat THEN Abliefern;
+  Turn_Around;
+  Go_To_Wall;
+  Turn_Around;
+  IF Has_Supply THEN Deliver;
 END.
