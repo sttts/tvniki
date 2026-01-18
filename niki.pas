@@ -1,34 +1,28 @@
-USES NikiApp, Timer, Mouse, SysUtils;
-
+{$MODE OBJFPC}
 {$M 16385, 0, 655360}
+
+USES NikiApp, Timer, Mouse, SysUtils;
 
 VAR Niki : TNikiApplication;
 
 VAR OldExit:Pointer;
-VAR OldErrorProc: TErrorProc;
 VAR AltScreenActive: Boolean = False;
+VAR CrashLog: Text;
 
 { Switch from alternate screen back to main screen and disable mouse }
 PROCEDURE LeaveAltScreen;
 BEGIN
   IF AltScreenActive THEN
   BEGIN
+    AltScreenActive := False;
     { Disable mouse modes first so terminal is usable }
     Write(#27'[?1006l');
     Write(#27'[?1000l');
     { Switch back to main screen }
     Write(#27'[?1049l');
-    AltScreenActive := False;
+    Writeln;
+    Flush(Output);
   END;
-END;
-
-{ Called on runtime errors before the error message is printed }
-PROCEDURE MyErrorProc(ErrNo: Longint; Address, Frame: CodePointer);
-BEGIN
-  LeaveAltScreen;
-  { Call old handler if any }
-  IF OldErrorProc <> NIL THEN
-    OldErrorProc(ErrNo, Address, Frame);
 END;
 
 PROCEDURE MyExitProc; FAR;
@@ -48,10 +42,6 @@ BEGIN
   OldExit := ExitProc;
   ExitProc := @MyExitProc;
 
-  { Install error handler to switch screens before backtrace prints }
-  OldErrorProc := ErrorProc;
-  ErrorProc := @MyErrorProc;
-
   { Switch to alternate screen }
   Write(#27'[?1049h');
   AltScreenActive := True;
@@ -65,9 +55,31 @@ BEGIN
 
   InitMouse;
 
-  Niki.Init; { Initialisierung }
-  Niki.Run;
-  Niki.Done;
+  TRY
+    Niki.Init;
+    Niki.Run;
+    Niki.Done;
+  EXCEPT
+    ON E: Exception DO
+    BEGIN
+      { Write to crash.log for debugging }
+      Assign(CrashLog, 'crash.log');
+      Rewrite(CrashLog);
+      Writeln(CrashLog, 'Exception: ', E.ClassName, ': ', E.Message);
+      Writeln(CrashLog, 'Backtrace:');
+      DumpExceptionBackTrace(CrashLog);
+      Close(CrashLog);
+
+      LeaveAltScreen;
+      Writeln(StdErr, 'Exception: ', E.ClassName, ': ', E.Message);
+      Writeln(StdErr, 'Backtrace:');
+      DumpExceptionBackTrace(StdErr);
+      Writeln(StdErr);
+      Writeln(StdErr, 'Decode: lldb ./niki -o "image lookup -a <addr>" -o quit');
+      Writeln(StdErr, '(also saved to crash.log)');
+      Halt(1);
+    END;
+  END;
 END.
 
 
