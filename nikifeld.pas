@@ -168,7 +168,7 @@ TYPE PRobot=^TRobot;
 VAR FeldWindow:PFeldWindow;
 
 IMPLEMENTATION
-USES Dos, Config, NikiCnst, MsgBox, App, StdDlg, Timer, NikiGlob, NikiPrnt;
+USES Dos, Config, NikiCnst, MsgBox, App, StdDlg, Timer, NikiGlob, NikiPrnt, NikiStrings;
 
 
 {******************************************************
@@ -508,7 +508,7 @@ BEGIN
     New(Niki, Init(0, 0, rRechts, @Self));
     IF Niki = NIL THEN
     BEGIN
-      MessageBox('Nicht genug Speicher für ein Feld', NIL, mfOkButton + mfError);
+      MessageBox(tr('Not enough memory for a field'), NIL, mfOkButton + mfError);
       IsValid := FALSE;
     END;
   END;
@@ -570,7 +570,7 @@ BEGIN
   New(Niki, Load(S, @Self));
   IF Niki = NIL THEN
   BEGIN
-    MessageBox('Nicht genug Speicher für ein Feld', NIL, mfOkButton + mfError);
+    MessageBox(tr('Not enough memory for a field'), NIL, mfOkButton + mfError);
     IsValid := FALSE;
   END;
 END;
@@ -793,19 +793,19 @@ BEGIN
   R.B.Y:=R.A.Y+1;
 
   CASE Prog^.Status OF
-    stNoVorrat:    s:='Fehler #%d: Nichts zum Ablegen vorhanden oder Platz voll';
-    stNoPalette:   s:='Fehler #%d: Nichts zum Aufnehmen vorhanden';
-    stHitWall:     s:='Fehler #%d: Wand im Weg';
-    stNoMemory:    s:='Fehler #%d: Zu wenig Speicher vorhanden';
-    stStackErr:    s:='Fehler #%d: Stacküberlauf';
-    stUnknownOpcode: s:='Interner Interpreter-Fehler #%d an PCode-Position %d';
-    stFileError:   s:='Fehler #%d: Dateifehler';
-    ELSE s:='Unbekannter Fehler #%d';
+    stNoVorrat:    s:=tr('Error #%d: Nothing to put down or cell is full');
+    stNoPalette:   s:=tr('Error #%d: Nothing to pick up');
+    stHitWall:     s:=tr('Error #%d: Wall in the way');
+    stNoMemory:    s:=tr('Error #%d: Not enough memory');
+    stStackErr:    s:=tr('Error #%d: Stack overflow');
+    stUnknownOpcode: s:=tr('Internal interpreter error #%d at PCode position %d');
+    stFileError:   s:=tr('Error #%d: File error');
+    ELSE s:=tr('Unknown error #%d');
   END;
   Error := New(PErrorLine, Init(R, s, 2));
   IF Error = NIL THEN
   BEGIN
-    MessageBox('Nicht genug Speicher zum Anzeigen des Fehlers'
+    MessageBox(tr('Not enough memory to display error')
       , NIL, mfOkButton + mfError);
     IsValid := FALSE;
   END ELSE
@@ -842,7 +842,7 @@ BEGIN
     IF MyTimer<0 THEN
     BEGIN
 
-      MessageBox('Nicht genug Resourcen zum Ausführen des Programms', NIL, mfOkButton + mfError);
+      MessageBox(tr('Not enough resources to run the program'), NIL, mfOkButton + mfError);
       IsValid := FALSE;
 
       StopRun;
@@ -851,7 +851,7 @@ BEGIN
       New(Prog, Init(ADatei, Niki));
       IF Prog = NIL THEN
       BEGIN
-        MessageBox('Nicht genug Speicher zum Ausführen des Programms', NIL, mfOkButton + mfError);
+        MessageBox(tr('Not enough memory to run the program'), NIL, mfOkButton + mfError);
         IsValid := FALSE;
         StopRun;
       END;
@@ -888,10 +888,10 @@ BEGIN
   dec(R.B.X);
   R.B.Y:=R.A.Y+1;
 
-  Msg := New(PParamLine, Init(R, 'Programm beendet', 0));
+  Msg := New(PParamLine, Init(R, tr('Program finished'), 0));
   IF Msg = NIL THEN
   BEGIN
-    MessageBox('Nicht genug Speicher zum Anzeigen der Fertig-Meldung',
+    MessageBox(tr('Not enough memory to display completion message'),
        NIL, mfOkButton + mfError);
     IsValid := FALSE;
   END ELSE
@@ -1048,7 +1048,7 @@ BEGIN
     BEGIN
       TeachLine('END.');
 
-      IF MessageBox('Wollen sie den aufgenommenen Teil als Programm speichern?',
+      IF MessageBox(tr('Do you want to save the recorded part as a program?'),
            NIL, mfYesButton+mfNoButton)=cmYes THEN TeachInBuf^.Save;
     END;
 
@@ -1301,11 +1301,11 @@ VAR s: ShortString;
     Code:Integer;
 BEGIN
   System.Str(Niki^.Vorrat, s);
-  IF InputBox('Vorrat ändern', 'Vorrat:', s, 2)=cmOk THEN
+  IF InputBox(tr('Change supply'), tr('Supply:'), s, 2)=cmOk THEN
   BEGIN
     Val(s, v, Code);
     IF (Code<>0) OR (v<0) OR (v>99) THEN
-      MessageBox('Vorrat muß zwischen 0 und 99 liegen', NIL,
+      MessageBox(tr('Supply must be between 0 and 99'), NIL,
           mfOkButton+mfError)
     ELSE
       BEGIN
@@ -1331,11 +1331,11 @@ VAR s: ShortString;
     Code:Integer;
 BEGIN
   System.Str(Speed, s);
-  IF InputBox('Geschwindigkeit ändern', 'Geschwindigkeit:', s, 2)=cmOk THEN
+  IF InputBox(tr('Change speed'), tr('Speed:'), s, 2)=cmOk THEN
   BEGIN
     Val(s, v, Code);
     IF (Code<>0) OR (v<0) OR (v>99) THEN
-      MessageBox('Geschwindigkeit muß zwischen 0 und 99 liegen', NIL,
+      MessageBox(tr('Speed must be between 0 and 99'), NIL,
           mfOkButton+mfError)
     ELSE
       Speed := v;

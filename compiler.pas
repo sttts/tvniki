@@ -49,7 +49,7 @@ CONST ErrorLine:Integer=0;
       Lines:Longint=0;
 
 IMPLEMENTATION
-USES Dos, Objects, Opcodes, SysUtils;
+USES Dos, Objects, Opcodes, SysUtils, NikiStrings;
 
 TYPE PProgram=^TProgram;
      TProgram=OBJECT(TObject)
@@ -386,7 +386,7 @@ BEGIN
   IF IOResult<>0 THEN
   BEGIN
     ErrorNumber := ErrSourceNotFound;
-    ErrorDescribtion := 'Quelldatei nicht gefunden oder kann nicht geöffnet werden';
+    ErrorDescribtion := tr('Source file not found or cannot be opened');
     Compile := FALSE;
   END ELSE
   BEGIN
@@ -394,7 +394,7 @@ BEGIN
     IF Error<>0 THEN
     BEGIN
       ErrorNumber := ErrDestNotFound;
-      ErrorDescribtion := 'Zieldatei kann nicht erzeugt werden';
+      ErrorDescribtion := tr('Cannot create destination file');
       Compile := False;
     END ELSE
     BEGIN
@@ -521,7 +521,7 @@ BEGIN
                 ErrorNumber := ErrUnClosedComment;
                 ErrorLine := TokenY;
                 ErrorColumn := TokenX;
-                ErrorDescribtion := 'Nicht geschlossenes Kommentar';
+                ErrorDescribtion := tr('Unclosed comment');
 
                 Exit;
               END;
@@ -542,7 +542,7 @@ BEGIN
                   ErrorNumber := ErrUnClosedComment;
                   ErrorLine := TokenY;
                   ErrorColumn := TokenX;
-                  ErrorDescribtion := 'Nicht geschlossenes Kommentar';
+                  ErrorDescribtion := tr('Unclosed comment');
 
                   Exit;
                 END;
@@ -580,7 +580,7 @@ BEGIN
     ErrorNumber := ErrIdWanted;
     ErrorLine := TokenY;
     ErrorColumn := TokenX;
-    ErrorDescribtion := 'Bezeichner erwartet';
+    ErrorDescribtion := tr('Identifier expected');
 
     Exit;
   END;
@@ -591,7 +591,7 @@ BEGIN
     ErrorNumber := ErrKeyId;
     ErrorLine := TokenY;
     ErrorColumn := TokenX;
-    ErrorDescribtion := 'Schlüsselwort als Bezeichner nicht erlaubt (' +
+    ErrorDescribtion := tr('Keyword not allowed as identifier') + ' (' +
       NextExpression + ')';
 
     Exit;
@@ -608,7 +608,7 @@ BEGIN
     ErrorNumber := ErrSemikolonWanted;
     ErrorLine := TokenY;
     ErrorColumn := TokenX;
-    ErrorDescribtion := 'Semikolon (;) erwartet';
+    ErrorDescribtion := tr('Semicolon (;) expected');
 
     Exit;
   END;
@@ -655,7 +655,7 @@ BEGIN
         ErrorNumber := ErrEndWanted;
         ErrorLine := TokenY;
         ErrorColumn := TokenX;
-        ErrorDescribtion := 'Semikolon erwartet';
+        ErrorDescribtion := tr('Semicolon expected');
 
         Exit;
       END;
@@ -671,7 +671,7 @@ BEGIN
       ErrorNumber := ErrEndWanted;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'END oder Befehl erwartet';
+      ErrorDescribtion := tr('END or command expected');
 
       Exit;
     END;
@@ -681,7 +681,7 @@ BEGIN
     ErrorNumber := ErrBeginWanted;
     ErrorLine := TokenY;
     ErrorColumn := TokenX;
-    ErrorDescribtion := 'BEGIN erwartet';
+    ErrorDescribtion := tr('BEGIN expected');
 
     Exit;
   END;
@@ -709,7 +709,7 @@ BEGIN
       ErrorNumber := ErrRightBracket;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'Rechte Klammer erwartet';
+      ErrorDescribtion := tr('Right bracket expected');
       Exit;
     END;
 
@@ -721,7 +721,7 @@ BEGIN
       ErrorNumber := ErrFuncWanted;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'Funktion erwartet';
+      ErrorDescribtion := tr('Function expected');
       Exit;
     END
     ELSE
@@ -741,7 +741,7 @@ BEGIN
           ErrorNumber := ErrUnkownFunc;
           ErrorLine := TokenY;
           ErrorColumn := TokenX;
-          ErrorDescribtion := 'Unbekannte Funktion ('+NextExpression+')';
+          ErrorDescribtion := tr('Unknown function') + ' ('+NextExpression+')';
           Exit;
         END
         ELSE
@@ -868,7 +868,7 @@ BEGIN
       ErrorNumber := ErrThenWanted;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'THEN erwartet';
+      ErrorDescribtion := tr('THEN expected');
       Exit;
     END ELSE
     BEGIN
@@ -916,7 +916,7 @@ BEGIN
       ErrorNumber := ErrDoWanted;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'DO erwartet';
+      ErrorDescribtion := tr('DO expected');
       Exit;
     END ELSE
     BEGIN
@@ -970,7 +970,7 @@ BEGIN
         ErrorNumber := ErrSemikolonWanted;
         ErrorLine := TokenY;
         ErrorColumn := TokenX;
-        ErrorDescribtion := 'Semikolon erwartet';
+        ErrorDescribtion := tr('Semicolon expected');
 
         Exit;
       END;
@@ -983,7 +983,7 @@ BEGIN
       ErrorNumber := ErrUntilWanted;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'UNTIL erwartet';
+      ErrorDescribtion := tr('UNTIL expected');
       Exit;
     END ELSE
     BEGIN
@@ -1021,7 +1021,7 @@ BEGIN
     ErrorNumber := ErrEndWanted;
     ErrorLine := TokenY;
     ErrorColumn := TokenX;
-    ErrorDescribtion := 'Befehl erwartet';
+    ErrorDescribtion := tr('Command expected');
     Exit;
   END ELSE
   BEGIN
@@ -1065,7 +1065,7 @@ BEGIN
               ErrorNumber := ErrUnkownProc;
               ErrorLine := TokenY;
               ErrorColumn := TokenX;
-              ErrorDescribtion := 'Unbekannter Befehl ('+NextExpression+')';
+              ErrorDescribtion := tr('Unknown command') + ' ('+NextExpression+')';
               Exit;
             END;
           {$ifdef CallableFuncs}
@@ -1093,7 +1093,7 @@ BEGIN
     ErrorNumber := ErrIdWanted;
     ErrorLine := TokenY;
     ErrorColumn := TokenX;
-    ErrorDescribtion := 'Bezeichner erwartet';
+    ErrorDescribtion := tr('Identifier expected');
     Exit;
   END ELSE
   BEGIN
@@ -1103,7 +1103,7 @@ BEGIN
       ErrorNumber := ErrUsedId;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'Doppelter Bezeichner ('+NextExpression+')';
+      ErrorDescribtion := tr('Duplicate identifier') + ' ('+NextExpression+')';
       Exit;
     END;
 
@@ -1113,7 +1113,7 @@ BEGIN
       ErrorNumber := ErrKeyId;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'Schlüsselwort als Bezeichner nicht erlaubt ('+
+      ErrorDescribtion := tr('Keyword not allowed as identifier') + ' ('+
         NextExpression+')';
 
       Exit;
@@ -1131,7 +1131,7 @@ BEGIN
       ErrorNumber := ErrSemikolonWanted;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'Semikolon erwartet';
+      ErrorDescribtion := tr('Semicolon expected');
       Exit;
     END;
 
@@ -1182,7 +1182,7 @@ BEGIN
         ErrorNumber := ErrEndWanted;
         ErrorLine := TokenY;
         ErrorColumn := TokenX;
-        ErrorDescribtion := 'Semikolon erwartet';
+        ErrorDescribtion := tr('Semicolon expected');
 
         Exit;
       END;
@@ -1196,7 +1196,7 @@ BEGIN
       ErrorNumber := ErrEndWanted;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'END oder Befehl erwartet';
+      ErrorDescribtion := tr('END or command expected');
 
       Exit;
     END;
@@ -1206,7 +1206,7 @@ BEGIN
     ErrorNumber := ErrBeginWanted;
     ErrorLine := TokenY;
     ErrorColumn := TokenX;
-    ErrorDescribtion := 'BEGIN erwartet';
+    ErrorDescribtion := tr('BEGIN expected');
 
     Exit;
   END;
@@ -1232,7 +1232,7 @@ BEGIN
     ErrorNumber := ErrIdWanted;
     ErrorLine := TokenY;
     ErrorColumn := TokenX;
-    ErrorDescribtion := 'Bezeichner erwartet';
+    ErrorDescribtion := tr('Identifier expected');
     Exit;
   END ELSE
   BEGIN
@@ -1244,7 +1244,7 @@ BEGIN
       ErrorNumber := ErrUsedId;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'Doppelter Bezeichner ('+Name+')';
+      ErrorDescribtion := tr('Duplicate identifier') + ' ('+Name+')';
       Exit;
     END;
 
@@ -1254,7 +1254,7 @@ BEGIN
       ErrorNumber := ErrKeyId;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'Schlüsselwort als Bezeichner nicht erlaubt ('+
+      ErrorDescribtion := tr('Keyword not allowed as identifier') + ' ('+
         Name+')';
 
       Exit;
@@ -1270,7 +1270,7 @@ BEGIN
       ErrorNumber := ErrSemikolonWanted;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'Semikolon erwartet';
+      ErrorDescribtion := tr('Semicolon expected');
       Exit;
     END;
 
@@ -1317,7 +1317,7 @@ BEGIN
       ErrorNumber := ErrSemikolonWanted;
       ErrorLine := TokenY;
       ErrorColumn := TokenX;
-      ErrorDescribtion := 'Semikolon erwartet';
+      ErrorDescribtion := tr('Semicolon expected');
       Exit;
     END;
     IF NOT GetNextToken THEN Exit;
@@ -1335,7 +1335,7 @@ BEGIN
     ErrorNumber := ErrPointWanted;
     ErrorLine := TokenY;
     ErrorColumn := TokenX;
-    ErrorDescribtion := 'Punkt erwartet';
+    ErrorDescribtion := tr('Period expected');
   END;
 
   { Break }

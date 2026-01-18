@@ -95,7 +95,7 @@ TYPE PFeld=^TFeld;
            END;
 
 IMPLEMENTATION
-USES Dos, SysUtils, NikiCnst, MsgBox, App, StdDlg, Timer, Hilfe;
+USES Dos, SysUtils, NikiCnst, MsgBox, App, StdDlg, Timer, Hilfe, NikiStrings;
 
 CONSTRUCTOR TFeld.Init(R:TRect; ADatei:String;
     AHScrollBar, AVScrollBar:PScrollBar);
@@ -259,7 +259,7 @@ VAR DateiName:String[100];
 BEGIN
   DateiName := '*.ROB';
   IF Application^.ExecuteDialog(New(PFileDialog, Init('*.ROB',
-         'Datei speichern', '~N~ame', fdOkButton, 100)), @DateiName)
+         tr('Save file'), tr('~N~ame'), fdOkButton, 100)), @DateiName)
      <> cmCancel
   THEN
     BEGIN
@@ -320,7 +320,7 @@ BEGIN
   IF Modified THEN
   BEGIN
     Str^:=GetTitle;
-    Result := MessageBox('Das Feld %s vor dem Schließen speichern?', @Str, mfYesButton+mfNoButton+mfCancelButton+
+    Result := MessageBox(tr('Save field %s before closing?'), @Str, mfYesButton+mfNoButton+mfCancelButton+
       mfConfirmation);
 
     CASE Result OF
@@ -410,7 +410,7 @@ VAR
   RelPath: String;
 BEGIN
   IF Datei='' THEN
-    GetTitle := 'Untitled'
+    GetTitle := tr('Untitled')
   ELSE BEGIN
     RelPath := ExtractRelativePath(GetCurrentDir + PathDelim, Datei);
     IF Length(RelPath) < Length(Datei) THEN
