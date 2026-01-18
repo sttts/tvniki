@@ -1,0 +1,35 @@
+FROM debian:bookworm
+
+# Install dependencies for Homebrew and tmux
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    file \
+    git \
+    procps \
+    tmux \
+    locales \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set up locale for proper UTF-8 support
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+
+# Create non-root user (Homebrew requires this)
+RUN useradd -m -s /bin/bash brewuser
+USER brewuser
+WORKDIR /home/brewuser
+
+# Install Homebrew
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Add Homebrew to PATH
+ENV PATH="/home/brewuser/.linuxbrew/bin:/home/brewuser/.linuxbrew/sbin:$PATH"
+RUN echo 'eval "$(/home/brewuser/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
+
+# Install tvniki from the repo
+RUN brew install --head sttts/tvniki-2026/tvniki
+
+# Default command runs tvniki in tmux for smoke test
+CMD ["bash", "-c", "tmux new-session -d -s test -x 100 -y 30 'tvniki'; sleep 2; tmux capture-pane -t test -p; tmux kill-session -t test"]
