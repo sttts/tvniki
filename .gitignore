@@ -4,6 +4,8 @@
 *.rsj
 niki
 NIKI
+*.NIK
+crash.log
 
 # Backup files
 *.orig
@@ -56,3 +58,5 @@ worktrees/tvniki-translate-help/
 # bd worktree
 worktrees/tvniki-github-releases/
 version.inc
+# bd worktree
+worktrees/tvniki-linux-brew-smoketest/
