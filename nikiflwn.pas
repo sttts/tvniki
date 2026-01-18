@@ -406,10 +406,18 @@ BEGIN
 END;
 
 FUNCTION TFeld.GetTitle:String;
+VAR
+  RelPath: String;
 BEGIN
-  IF Datei<>'' THEN
-    GetTitle := Datei
-  ELSE GetTitle:='Untitled';
+  IF Datei='' THEN
+    GetTitle := 'Untitled'
+  ELSE BEGIN
+    RelPath := ExtractRelativePath(GetCurrentDir + PathDelim, Datei);
+    IF Length(RelPath) < Length(Datei) THEN
+      GetTitle := RelPath
+    ELSE
+      GetTitle := Datei;
+  END;
 END;
 
 FUNCTION TFeld.GetPalette: PPalette;
