@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/sttts/tvniki-2026/actions/workflows/build.yml/badge.svg)](https://github.com/sttts/tvniki-2026/actions/workflows/build.yml)
 
-An educational programming environment where students control a robot named "Niki" through a Pascal-like language. Originally created in 1996 for DOS, now ported to Free Pascal with UTF-8 support.
+An educational programming environment where students control a robot named "Niki" through a Pascal-like language. Originally created in **1996** for DOS, now ported to Free Pascal with UTF-8 support in **2026** — 30 years of teaching programming!
 
 ![tvNiki Screenshot](screenshot.png)
 
@@ -18,16 +18,19 @@ tvNiki teaches programming fundamentals through a simple robot simulation. Niki 
 brew install --head sttts/tvniki-2026/tvniki
 ```
 
+This installs both `tvniki` (the GUI) and `nikic` (the command-line compiler).
+
 ### Linux (Pre-built Binaries)
 
 Download from [GitHub Releases](https://github.com/sttts/tvniki-2026/releases):
 
-- `tvniki-linux-x86_64` - Linux x86_64
-- `tvniki-linux-arm64` - Linux ARM64
+- `tvniki-linux-x86_64.tar.gz` - Linux x86_64
+- `tvniki-linux-arm64.tar.gz` - Linux ARM64
 
 ```bash
-chmod +x tvniki-linux-*
-./tvniki-linux-x86_64
+tar xzf tvniki-linux-x86_64.tar.gz
+cd tvniki-linux-x86_64
+./tvniki
 ```
 
 ### Building from Source
@@ -50,57 +53,68 @@ make
 ```bash
 ./tvniki              # Start with empty editor
 ./tvniki program.pas  # Load a program file
+./tvniki field.rob    # Load a field file
+```
+
+### Command-Line Compiler
+
+```bash
+./nikic program.pas           # Compile to program.nik
+./nikic -o output.nik src.pas # Specify output file
+./nikic -d program.pas        # Include debug info
 ```
 
 ## Robot Commands
 
-| Command | Description |
-|---------|-------------|
-| `Vor` | Move forward one cell |
-| `Drehe_Links` | Turn left 90 degrees |
-| `Nimm_Auf` | Pick up object from current cell |
-| `Gib_Ab` | Place object on current cell |
+Both English and German commands are supported:
+
+| English | German | Description |
+|---------|--------|-------------|
+| `Forward` | `Vor` | Move forward one cell |
+| `Turn_Left` | `Drehe_Links` | Turn left 90 degrees |
+| `Pick_Up` | `Nimm_Auf` | Pick up object from current cell |
+| `Put_Down` | `Gib_Ab` | Place object on current cell |
 
 ## Sensor Functions
 
-| Function | Returns true when... |
-|----------|---------------------|
-| `Vorne_Frei` | Cell ahead is free |
-| `Links_Frei` | Cell to the left is free |
-| `Rechts_Frei` | Cell to the right is free |
-| `Platz_Belegt` | Current cell has an object |
-| `Hat_Vorrat` | Robot is carrying objects |
+| English | German | Returns true when... |
+|---------|--------|---------------------|
+| `Front_Clear` | `Vorne_Frei` | Cell ahead is free |
+| `Left_Clear` | `Links_Frei` | Cell to the left is free |
+| `Right_Clear` | `Rechts_Frei` | Cell to the right is free |
+| `Space_Occupied` | `Platz_Belegt` | Current cell has an object |
+| `Has_Supply` | `Hat_Vorrat` | Robot is carrying objects |
 
 ## Example Program
 
 ```pascal
 PROGRAM Laby;
 
-PROCEDURE Suche;
+PROCEDURE Search;
 BEGIN
-  IF Links_Frei THEN
+  IF Left_Clear THEN
   BEGIN
-    Drehe_Links;
-    Vor;
+    Turn_Left;
+    Forward;
   END ELSE
-    IF Vorne_Frei THEN Vor
+    IF Front_Clear THEN Forward
     ELSE
-      IF Rechts_Frei THEN
+      IF Right_Clear THEN
       BEGIN
-        Drehe_Links;
-        Drehe_Links;
-        Drehe_Links;
-        Vor;
+        Turn_Left;
+        Turn_Left;
+        Turn_Left;
+        Forward;
       END ELSE
       BEGIN
-        Drehe_Links;
-        Drehe_Links;
-        Vor;
+        Turn_Left;
+        Turn_Left;
+        Forward;
       END;
 END;
 
 BEGIN
-  WHILE NOT Platz_Belegt DO Suche;
+  WHILE NOT Space_Occupied DO Search;
 END.
 ```
 
@@ -135,3 +149,12 @@ Features:
 - Current execution line highlighted in blue with `-->` marker
 - Shows instruction pointer (IP) and carry flag in the status bar
 - Follows execution during run and single-step debugging
+
+## Localization
+
+tvNiki automatically loads translations based on the `LANG` environment variable. Supported languages: German (default), English, Spanish, French, Italian, Dutch, Portuguese, Norwegian, Swedish, Icelandic.
+
+```bash
+LANG=en_US ./tvniki   # Run in English
+LANG=es_ES ./tvniki   # Run in Spanish
+```
