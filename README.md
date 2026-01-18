@@ -1,5 +1,7 @@
 # tvNiki
 
+[![Build](https://github.com/sttts/tvniki-2026/actions/workflows/build.yml/badge.svg)](https://github.com/sttts/tvniki-2026/actions/workflows/build.yml)
+
 An educational programming environment where students control a robot named "Niki" through a Pascal-like language. Originally created in 1996 for DOS, now ported to Free Pascal with UTF-8 support.
 
 ![tvNiki Screenshot](screenshot.png)

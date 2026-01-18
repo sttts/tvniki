@@ -36,16 +36,10 @@ clean:
 	rm -f *.o *.ppu *.rsj $(TARGET) testload
 	rm -f fv_utf8/*.o fv_utf8/*.ppu
 
-# Linux smoke test - build from source and verify startup
-.PHONY: smoke-test-linux
-smoke-test-linux:
-	docker build -t tvniki-smoke-source -f Dockerfile.smoke-test .
-	@echo "=== Running Linux smoke test ==="
-	docker run --rm tvniki-smoke-source
-
-# Linux brew smoke test - install via Homebrew and verify startup
-.PHONY: smoke-test-linux-brew
-smoke-test-linux-brew:
-	docker build -t tvniki-smoke-brew -f Dockerfile.brew-test .
-	@echo "=== Running Linux brew smoke test ==="
-	docker run --rm tvniki-smoke-brew
+# Integration tests - run in Docker to verify Linux support
+.PHONY: integration
+integration:
+	@echo "=== Building from source in Docker ==="
+	docker build -t tvniki-integration -f Dockerfile.smoke-test .
+	@echo "=== Running integration test ==="
+	docker run --rm tvniki-integration

@@ -70,8 +70,18 @@ jobs:
           name: tvniki-linux-arm64
           path: tvniki-linux-arm64
 
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Run integration tests
+        run: make integration
+
   release:
-    needs: [build-linux-x86_64, build-linux-arm64]
+    needs: [build-linux-x86_64, build-linux-arm64, integration]
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     permissions:
