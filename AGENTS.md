@@ -49,6 +49,8 @@ tmux capture-pane -t <task-id> -p
 tmux kill-session -t <task-id>
 ```
 
+**Tip**: Pass a .PAS file as command-line argument to load it directly: `./niki laby.pas`
+
 ## Worktree Workflow
 
 Use `bd worktree` (not `git worktree` directly) to ensure beads configuration is shared:
