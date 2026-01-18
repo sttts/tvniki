@@ -1,0 +1,1495 @@
+.topic Muster
+ █ Mall
+ ██████
+
+Se även:
+ {Innehåll:NoContext}
+
+
+
+
+.topic NoContext=0
+ █ tvNiki-hjälp
+ ██████████████
+
+ █ Innehåll:
+ █
+ █ {Användning:Bedienung}
+ █ {Tangentbord:Tastatur}
+ █
+ █ {PASCAL}
+ █ {Kompilatorfelmeddelanden:Fehler}
+ █ {Teach-In-läge:Teach}
+ █ {Steg-för-steg-läge:Debug}
+ █
+ █ {Systemkrav:Hardware}
+ █ {Installation}
+ █
+ █ {Buggar i tvNiki:Bugs}
+ █ {tvNikis historia:Geschichte}
+ █ {Copyright}
+
+
+
+.topic Installation
+ █ Installation
+ ███████████████
+
+För att installera tvNiki på din dator, kopiera den till en mapp efter eget
+val. Minimalversionen av tvNiki består av filen NIKI.EXE. För att använda
+hjälpen behövs också filen HILFE.HLP.
+
+För att starta Niki, skriv bara NIKI om du befinner dig i Niki-mappen. För att
+kunna starta Niki från andra mappar kan du antingen utöka din sökväg i
+AUTOEXEC.BAT så att DOS automatiskt söker i Niki-mappen, eller skapa en enkel
+batch-fil som anropar tvNiki.
+
+tvNiki behöver skrivrättigheter i den aktuella mappen. Det betyder att
+användning i nätverk bara kan ske från en enhet som inte är skrivskyddad. Det
+viktiga är att bara den aktuella mappen behöver ha denna egenskap. Det spelar
+ingen roll om mappen som innehåller NIKI.EXE är skrivbar eller inte.
+
+Det räcker att göra bara en version av NIKI.EXE tillgänglig på nätverket för
+alla användare.
+
+Användningen av tvNiki i nätverk faller INTE under privat användning, så en
+licens måste köpas från {författaren:Copyright}.
+
+
+Se även:
+ {Copyright}
+ {Buggar i tvNiki:Bugs}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Hardware
+ █ Systemkrav
+ █████████████
+
+För att använda Niki bör din dator ha minst 400KB ledigt DOS-minne. Alla
+processorer från i8088 stöds. Minst 100KB behövs på hårddisken eller disketten.
+Dessutom bör minst MS-DOS 3.3 användas.
+
+tvNiki är fullt kompatibel med Windows 95. Dock kan inte långa filnamn användas.
+
+Användningen under Windows NT har ännu inte testats. Fel kan därför inte
+uteslutas.
+
+I ett {nätverk:Installation} kan Niki göras tillgänglig för alla användare.
+Dock stöds ännu inte riktig fillåsning. Trots det finns det inga problem med
+att installera tvNiki på t.ex. en Netware-server.
+
+
+Se även:
+ {Installation}
+ {Copyright}
+ {Buggar i tvNiki:Bugs}
+ {Innehåll:NoContext}
+
+
+
+
+
+
+
+.topic Teach
+ █ Teach-In
+ ███████████
+
+tvNiki har ett så kallat Teach-In-läge. Normalt måste ett program matas in rad
+för rad via {editorn:Editor}. För korta och enkla uppgifter finns dock också
+detta läge tillgängligt, där Niki kan styras med olika tangenter.
+{Kommandosekvensen:Befehle} lagras i urklipp och kan sparas som ett komplett
+körbart program i slutet av inspelningen.
+
+För att gå in i Teach-In-läge, välj menypunkten Kompilator|Teach-In. Nu kan du
+svänga Niki och gå framåt med piltangenterna Vänster och Upp. Med Delete-
+tangenten plockar Niki upp pallar. Med Insert lägger han ner dem.
+
+Om ett fel uppstår eller om du avbryter inspelningen med ESC, visas en
+dialogruta som frågar om du vill spara programmet. Oavsett om du sparar det
+eller inte, finns det nu i urklipp och kan {klistras in:Blockbefehle} för att
+fortsätta arbeta.
+
+Se även:
+ {Användning av editorn:Editor}
+ {Innehåll:NoContext}
+
+
+
+.topic Debug
+ █ Steg-för-steg-läge
+ █████████████████████
+
+tvNiki har ett steg-för-steg-läge där ett program kan köras steg för steg.
+Det kan användas för att söka efter fel i program eller för att kontrollera
+program.
+
+För att gå in i detta läge, tryck antingen på F8 under programkörningen eller
+starta programmet direkt i steg-för-steg-läge via Alt-F8.
+
+Genom att trycka på F9 kan ett program köras igen i full hastighet.
+
+Se även:
+ {Användning av editorn:Editor}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Bedienung
+ █ Användning av tvNiki
+ ███████████████████████
+
+I tvNiki finns det tre olika fönster. Fönstret som är synligt vid programmets
+start är {texteditorn:Editor}, där du kan mata in och redigera program.
+
+Det andra fönstret är {fälteditorn:Feldeditor}. I den redigeras robotfält,
+där Niki roboten rör sig.
+
+Det sista fönstret är Info-fönstret. I Info-fönstret visas kontinuerligt
+aktuell information om {fältfönstret:Feldeditor}. Där kan du t.ex. läsa den
+aktuella förrådet och positionen för Niki. Dessutom anger den nedersta raden
+det aktuella läget som fälteditorn befinner sig i.
+
+ {1. Användning av texteditorn:Editor}
+ {2. Skapa och redigera fält:Feldeditor}
+
+
+Se även:
+ {Tangentbord:Tastatur}
+ {Innehåll:NoContext}
+
+
+
+.topic Feldeditor
+ █ Fälteditor
+ █████████████
+
+Fälteditorn består av ett svart fönster som innehåller en indelning på 15
+gånger 10 fält. I den kan du skapa robotfält där Niki kan röra sig.
+
+För att placera hinder som Niki inte kan gå igenom, använd antingen musen
+genom att klicka med vänsterknappen mellan två punkter, eller flytta markören
+med piltangenterna och placera hinder med mellanslagstangenten.
+
+Genom att klicka igen eller trycka på Mellanslag igen tas väggar bort.
+
+För att flytta Niki, klicka med höger musknapp i mitten mellan 4 punkter. Att
+klicka igen vrider Niki runt sin egen axel. Med tangentbordet görs detta med
+P-tangenten.
+
+Med tangenterna + och - kan du lägga ner eller ta upp pallar på den aktuella
+markörpositionen. För att flytta markören, klicka med vänster musknapp på
+önskad position eller flytta den med piltangenterna.
+
+För att ge Niki ett pallförråd innan ett program startas, välj menypunkten
+Fält|Förråd.
+
+Körhastigheten för ett program ställs in via menypunkten Fält|Hastighet.
+
+Se även:
+ {Användning av tvNiki:Bedienung}
+ {Användning av texteditorn:Editor}
+ {Teach-In-läge:Teach}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Editor
+ █ Användning av texteditorn
+ ████████████████████████████
+
+Editorn i tvNiki är en helt vanlig Wordstar-kompatibel texteditor. Med den kan
+textfiler upp till 64KB storlek redigeras. Via menyerna Arkiv, Redigera och
+Sök kan editorns funktioner anropas.
+
+Dessutom kan texten i editorn, om det är ett {PASCAL-program:PASCAL}, kompileras
+och köras i {fälteditorn:Feldeditor}. Via menyn Kompilator kan dessa funktioner
+aktiveras. Om ändringar har gjorts i programmet visas en dialogruta som
+informerar om aktuell kompileringsstatus. Om ett fel uppstår visas en rad i
+editorn som beskriver {felet:Fehler}. Med F1-tangenten kan du visa mer
+information om felet som uppstod. Dessutom hoppar editorn till raden där
+{felet:Fehler} hittades. Om inget fel uppstod visas en OK-knapp i
+statusfönstret, som stänger dialogrutan genom att trycka på Enter.
+
+Se även:
+ {Användning av fälteditorn:Feldeditor}
+ {Tangentbordsanvändning av editorn:Editortastatur}
+ {Innehåll:NoContext}
+
+
+
+
+
+.topic Tastatur
+ █ tvNiki-tangentbordslayout
+ ████████████████████████████
+
+{Allmänna snabbkommandon:Hotkeys}
+
+{Tangentbordsanvändning av fälteditorn:Feldeditor}
+{Tangentbordsanvändning av editorn:Editortastatur}
+
+{Användning i Teach-In-läge:Teach}
+
+
+Se även:
+ {Användning:Bedienung}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Editortastatur
+ █ Tangentbordsanvändning av texteditorn
+ █████████████████████████████████████████
+
+ {Markörstyrning:Cursor}
+ {Blockfunktioner:Blockbefehle}
+ {Infogning och radering:InsDel}
+
+Se även:
+ {Tangentbordsanvändning:Tastatur}
+ {Innehåll:NoContext}
+
+
+
+
+.topic InsDel
+ █ Kommandon för infogning och radering
+ ███████████████████████████████████████
+
+ █████████████████████████████████████████████████████████
+  Infogningsläge på/av           █ Ctrl-V eller Insert
+  Infoga rad                     █ Ctrl-N
+  Radera rad                     █ Ctrl-Y
+  Radera till radslut            █ Ctrl-Q Y
+  Radera tecken till vänster     █ Ctrl-H eller Backsteg
+  Radera tecken under markör     █ Ctrl-G eller Delete
+  Radera ord till höger          █ Ctrl-T
+
+Se även:
+ {Tangentbordsanvändning av texteditorn:Editortastatur}
+ {Blockkommandon:Blockbefehle}
+ {Markörstyrning:Cursor}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Cursor
+ █ Markörförflyttningar
+ ███████████████████████
+
+ ███████████████████████████████████████████████████████
+  Tecken till vänster  █ Ctrl-S eller Pil vänster
+  Tecken till höger    █ Ctrl-D eller Pil höger
+  Ord till vänster     █ Ctrl-A eller Ctrl+Pil vänster
+  Ord till höger       █ Ctrl-F eller Ctrl+Pil höger
+  Rad upp              █ Ctrl-E eller Pil upp
+  Rad ner              █ Ctrl-X eller Pil ner
+  Rulla upp            █ Ctrl-W
+  Rulla ner            █ Ctrl-Z
+  Sida upp             █ Ctrl-R eller Page Up
+  Sida ner             █ Ctrl-C eller Page Down
+
+Se även:
+ {Tangentbordsanvändning av texteditorn:Editortastatur}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Blockbefehle
+ █ Blockkommandon
+ █████████████████
+
+ ██████████████████████████████████████████████████
+  Markera blockstart             █ Ctrl-K B
+  Markera blockslut              █ Ctrl-K K
+  Markera ord                    █ Ctrl-K T
+  Kopiera block                  █ Ctrl-K C
+  Flytta block                   █ Ctrl-K V
+  Radera block                   █ Ctrl-K Y
+  Läs block från disk            █ Ctrl-K R
+  Skriv block till disk          █ Ctrl-K W
+  Blockvisning på/av             █ Ctrl-K H
+  Skriv ut block                 █ Ctrl-K P
+  Flytta block ett tecken vänster█ Ctrl-K U
+  Flytta block ett tecken höger  █ Ctrl-K I
+  Gå till blockstart             █ Ctrl+Q B
+  Gå till blockslut              █ Ctrl+Q K
+  Aktivera menyrad               █ Ctrl+K D
+  Markera rad                    █ Ctrl+K L
+  Kopiera till urklipp           █ Ctrl+Insert
+  Klipp ut och kopiera till      █
+  urklipp                        █ Shift+Delete
+  Radera block                   █ Ctrl+Delete
+  Klistra in från urklipp        █ Shift+Insert
+
+
+Se även:
+ {Tangentbordsanvändning:Tastatur}
+ {Användning:Bedienung}
+ {Innehåll:NoContext}
+
+
+
+.topic Hotkeys
+ █ Tangentbordslayout
+ █████████████████████
+
+ ██████████████████████████████████████████████████
+  Öppna en fil                   █ F3
+  Spara aktuell fil              █ F2
+  Avsluta tvNiki                 █ Alt-X
+  Ångra                          █ Alt-Backsteg
+  Kör ett program                █ Ctrl-F9
+  Kompilera ett program          █ Alt-F9
+  Sök vidare                     █ Alt-W
+  Storlek/Position på fönster    █ Ctrl-F5
+  Förstora fönster               █ F5
+  Välj nästa fönster             █ F6
+  Välj föregående fönster        █ Shift-F6
+  Stäng fönster                  █ Alt-F3
+  Visa hjälp                     █ F1
+  Hjälp om PASCAL-språket        █ Ctrl+F1
+
+
+Se även:
+ {Tangentbordsanvändning:Tastatur}
+ {Blockkommandon:Blockbefehle}
+ {Användning:Bedienung}
+ {Innehåll:NoContext}
+
+
+
+.topic PASCAL
+ █ PASCAL-språket
+ █████████████████
+
+tvNiki innehåller en delmängd av programmeringsspråket PASCAL. Det betyder att
+inte alla konstruktioner som är giltiga i PASCAL stöds av tvNiki. Dock är ALLA
+strukturer som fungerar i tvNiki kompatibla med PASCAL.
+
+ {Programstruktur:Aufbau}
+ {Strukturer:Strukturen}
+ {Underprogram:Unterprogramme}
+ {Logiska operationer:Logik}
+ {Kommentarer:Kommentare}
+
+
+tvNiki tillhandahåller olika kommandon och sensorer som inte tillhör
+PASCAL-standarden. De är alltså bara tillgängliga i Niki-programmeringsmiljön.
+
+ {Kommandon:Befehle}
+ {Sensorer:Sensoren}
+
+
+Se även:
+ {Innehåll:NoContext}
+
+
+
+.topic   Kommentare
+ █ Kommentarer
+ ██████████████
+
+Kommentarer är beskrivningar och tillägg till programtexter som INTE behandlas
+av kompilatorn, dvs. de har absolut ingen betydelse för programmets funktion,
+men gör ett program mer läsbart och förståeligt om de används rätt.
+
+I PASCAL finns det två typer av kommentarer. Den ena omges av klammerparenteser,
+den andra av runda parenteser följt av en asterisk:
+
+  {Detta är en kommentar}
+  (* Detta är också en kommentar *)
+
+Kommentarer kan stå var som helst i programmet, även inuti {IF-THEN:If}
+satser etc.
+
+  IF Vorne_Frei {Här kommentaren} THEN Vor;
+
+
+Se även:
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+.topic Befehle
+ █ Kommandon
+ ████████████
+
+tvNiki tillhandahåller diverse kommandon för att navigera Niki i robotfältet.
+Dessa kommandon tillhör inte det normala PASCAL-språket. Användningen är dock
+analog till riktiga PASCAL-kommandon.
+
+ {Vor}
+ {Drehe_Links}
+ {Nimm_Auf}
+ {Gib_Ab}
+
+
+Se även:
+ {PASCAL-språket:PASCAL}
+ {Sensorer:Sensoren}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Vor
+ █ Vor
+ ███████████
+
+"Vor" låter Niki gå ett steg framåt. Om det finns en {vägg:Feldeditor} framför
+honom avbryts programmet med ett fel.
+
+
+Se även:
+ {Kommandon:Befehle}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Drehe_Links
+ █ Drehe_Links
+ ███████████
+
+"Drehe_Links" låter Niki svänga 90° moturs.
+
+
+Se även:
+ {Kommandon:Befehle}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Nimm_Auf
+ █ Nimm_Auf
+ ███████████
+
+"Nimm_Auf" låter Niki plocka upp en pall. Om det inte ligger någon pall på den
+aktuella platsen avbryts programmet med ett fel.
+
+
+Se även:
+ {Kommandon:Befehle}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Gib_Ab
+ █ Gib_Ab
+ ███████████
+
+"Gib_Ab" låter Niki lägga ner en pall på den aktuella positionen. Om han inte
+har någon pall laddad längre avbryts programmet.
+
+
+Se även:
+ {Kommandon:Befehle}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Sensoren
+ █ Sensorer
+ ███████████
+
+tvNiki tillhandahåller olika sensorer som inte tillhör PASCAL-standarden.
+Användningen är dock exakt densamma som för PASCAL-funktioner.
+
+Alla tvNiki-sensorer har ett Boolean-returvärde, dvs. de har antingen värdet
+TRUE (sant) eller värdet FALSE (falskt). Ingen av funktionerna returnerar ett
+numeriskt värde. Niki kan t.ex. bara fastställa om han fortfarande har pallar
+laddade, men inte antalet laddade pallar.
+
+Sensorer kan bara användas i {strukturer:Strukturen}, användning som
+{kommandon:Befehle} är inte möjlig.
+
+ {Platz_Belegt}
+
+ {Vorne_Frei}
+ {Links_Frei}
+ {Rechts_Frei}
+
+ {Hat_Vorrat}
+
+ Exempel:
+
+   IF {Vorne_Frei} THEN {Vor};
+
+   WHILE {Hat_Vorrat} DO {Gib_Ab};
+
+
+Se även:
+ {PASCAL-språket:PASCAL}
+ {Strukturer:Strukturen}
+ {Kommandon:Befehle}
+ {Logiska operationer:Logik}
+ {Innehåll:NoContext}
+
+
+
+.topic Platz_Belegt
+ █ Platz_Belegt
+ ███████████████
+
+Sensorn "Platz_Belegt" har värdet TRUE om en eller flera pallar ligger under
+Niki. Om ingen pall finns har "Platz_Belegt" värdet FALSE.
+
+
+Se även:
+ {Sensorer:Sensoren}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Vorne_Frei
+ █ Vorne_Frei
+ ███████████████
+
+Sensorn "Vorne_Frei" har värdet TRUE om det inte finns någon vägg framför Niki.
+
+
+Se även:
+ {Sensorer:Sensoren}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Links_Frei
+ █ Links_Frei
+ ███████████████
+
+Sensorn "Links_Frei" har värdet TRUE om det inte finns någon vägg till vänster
+om Niki.
+
+
+Se även:
+ {Sensorer:Sensoren}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Rechts_Frei
+ █ Rechts_Frei
+ ███████████████
+
+Sensorn "Rechts_Frei" har värdet TRUE om det inte finns någon vägg till höger
+om Niki.
+
+
+Se även:
+ {Sensorer:Sensoren}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Hat_Vorrat
+ █ Hat_Vorrat
+ █████████████
+
+Sensorn "Hat_Vorrat" returnerar värdet TRUE om Niki har en eller flera pallar
+laddade.
+
+
+Se även:
+ {Sensorer:Sensoren}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Strukturen
+ █ PASCAL-strukturer
+ ████████████████████
+
+tvNiki stöder tre olika strukturtyper. Det handlar om de två looptyperna
+{REPEAT UNTIL:Repeat} och {WHILE DO:While} samt det enkla beslutet
+{IF THEN:If} eller {IF THEN ELSE:If}.
+
+
+
+Se även:
+ {PASCAL-språket:PASCAL}
+ {Logiska operationer:Logik}
+ {Strukturen hos PASCAL-program:Aufbau}
+ {Underprogram:Unterprogramme}
+ {Innehåll:NoContext}
+
+
+
+
+.topic If
+ █ IF THEN ELSE
+ ███████████████
+
+ IF {Sensor:Sensoren} THEN {Kommando:Befehle};
+
+ IF {Sensor:Sensoren} THEN {Kommando:Befehle} ELSE {Kommando:Befehle};
+
+ IF {Sensor:Sensoren} THEN
+ BEGIN
+   {Kommando:Befehle};
+   {Kommando:Befehle};
+ END;
+
+Om sensorn mellan IF och THEN har värdet TRUE utförs kommandot eller blocket
+efter THEN. Om det också finns en ELSE-gren utförs denna om värdet är FALSE.
+
+ Exempel:
+
+   IF {Hat_Vorrat} THEN {Gib_Ab} ELSE {Vor};
+
+
+Istället för sensorn kan du också använda en {logisk koppling:Logik} av flera
+sensorer.
+
+ Exempel:
+
+   IF Hat_Vorrat AND Vorne_Frei THEN
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+
+Se även:
+ {Sensorer:Sensoren}
+ {Logiska operationer:Logik}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic While
+ █ WHILE DO
+ ███████████
+
+ WHILE {Sensor:Sensoren} DO {Kommando:Befehle};
+
+ WHILE {Sensor:Sensoren} DO
+ BEGIN
+   {Kommando:Befehle};
+   {Kommando:Befehle};
+ END;
+
+Så länge sensorn mellan WHILE och DO har värdet TRUE utförs kommandot eller
+blocket efter DO.
+
+ Exempel:
+
+   WHILE {Platz_Belegt} DO {Nimm_Auf};
+
+Här kontrolleras först om sensorn är TRUE, sedan utförs kommandot. Däremot
+utför {REPEAT UNTIL:Repeat} först kommandot och kontrollerar sedan.
+
+Om flera kommandon beroende av WHILE DO ska utföras måste ett BEGIN-END-block
+användas;
+
+ Exempel:
+
+   WHILE Hat_Vorrat DO
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+
+Istället för sensorn kan du också använda en {logisk koppling:Logik} av flera
+sensorer.
+
+ Exempel:
+
+   WHILE Hat_Vorrat AND Vorne_Frei DO
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+
+Se även:
+ {Sensorer:Sensoren}
+ {Logiska operationer:Logik}
+ {REPEAT UNTIL:Repeat}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Repeat
+ █ REPEAT UNTIL
+ ███████████████
+
+ REPEAT {Kommando:Befehle}; UNTIL {Sensor:Sensoren};
+
+ REPEAT
+   {Kommando:Befehle};
+   {Kommando:Befehle};
+ UNTIL {Sensor:Sensoren};
+
+Kommandot eller blocket mellan REPEAT och UNTIL utförs tills sensorn efter
+UNTIL returnerar värdet TRUE.
+
+ Exempel:
+
+   REPEAT {Vor}; UNTIL NOT {Vorne_Frei};
+
+
+Här utför {REPEAT UNTIL:Repeat} först kommandot och kontrollerar sedan om
+sensorn är TRUE. Däremot kontrolleras vid {WHILE DO:While} först om sensorn
+är TRUE, sedan utförs kommandot.
+
+Istället för sensorn kan du också använda en {logisk koppling:Logik} av flera
+sensorer.
+
+ Exempel:
+
+   REPEAT
+     Gib_Ab;
+     Vor;
+   UNTIL NOT (Hat_Vorrat AND Vorne_Frei);
+
+Se även:
+ {Sensorer:Sensoren}
+ {Logiska operationer:Logik}
+ {WHILE DO:While}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Logik
+ █ Logiska operationer
+ ██████████████████████
+
+{Sensorer:Sensoren} kan kopplas ihop i PASCAL med logiska operatorer. Så kan
+du realisera frågor som beror på mer än en sensor.
+
+ Exempel:
+
+   WHILE (Hat_Vorrat AND Vorne_Frei) DO
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+För detta finns de två operatorerna OR och AND tillgängliga.
+
+
+Operatorn OR kopplar två {sensorer:Sensoren} så att returvärdet är TRUE om
+minst en av de två returnerar TRUE.
+
+ Exempel:
+
+   IF Links_Frei OR Rechts_Frei THEN Vor;
+
+ Sanningstabell:
+
+   Links_Frei OR Rechts_Frei =
+   ████████████████████████████████████
+   FALSE      │  FALSE       │ FALSE
+   TRUE       │  FALSE       │ TRUE
+   FALSE      │  TRUE        │ TRUE
+   TRUE       │  TRUE        │ TRUE
+   ████████████████████████████████████
+
+
+Operatorn AND kopplar två {sensorer:Sensoren} så att returvärdet är TRUE om
+båda {sensorerna:Sensoren} returnerar TRUE.
+
+ Exempel:
+
+   IF Links_Frei AND Rechts_Frei THEN Vor;
+
+ Sanningstabell:
+
+   Links_Frei AND Rechts_Frei =
+   ████████████████████████████████████
+   FALSE      │  FALSE       │ FALSE
+   TRUE       │  FALSE       │ FALSE
+   FALSE      │  TRUE        │ FALSE
+   TRUE       │  TRUE        │ TRUE
+   ████████████████████████████████████
+
+
+Genom att använda mer än en operator kan du också koppla ihop flera sensorer.
+
+ Exempel:
+
+   IF Links_Frei OR Rechts_Frei OR Vorne_Frei THEN Nimm_Auf;
+
+När olika operatorer förekommer i en sådan koppling uppstår frågan om
+utvärderingsordningen. Grundprincipen är: NOT före AND, AND före OR. Dvs. att
+först NOT-, sedan AND- och sedan OR-kopplingarna utvärderas.
+
+ Exempel:
+
+   IF Vorne_Frei OR Links_Frei AND Rechts_Frei THEN ...
+
+   motsvarar
+
+   IF Vorne_Frei OR (Links_Frei AND Rechts_Frei) THEN ...
+
+
+ Prioritet       motsvarar i matematik
+ ████████████████████████████████████████████
+ 1   │  NOT    │ - (negation)
+ 2   │  AND    │ */ (multiplikation/division)
+ 3   │  OR     │ +- (addition/subtraktion)
+ ████████████████████████████████████████████
+
+
+Se även:
+ {Sensorer:Sensoren}
+ {Strukturer:Strukturen}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Unterprogramme
+ █ Underprogram
+ ███████████████
+
+I PASCAL kan du ersätta lika delar i ett program med underprogram. Dessa
+underprogram kan sedan användas precis som riktiga {kommandon:Befehle}.
+
+Dessa underprogram kallas "procedurer" i PASCAL. De definieras före
+huvudprogrammet och är uppbyggda som små PASCAL-program.
+
+ Exempel:
+
+   PROGRAM Exempel;
+
+     PROCEDURE Drehe_Rechts;
+     BEGIN
+       Drehe_Links;
+       Drehe_Links;
+       Drehe_Links;
+     END;
+
+   BEGIN
+     Vor;
+     Drehe_Rechts;
+   END.
+
+Mellan BEGIN och END kan godtyckliga {kommandon:Befehle} och {strukturer:Strukturen}
+användas. När en procedur anropas utförs kommandona i proceduren efter varandra.
+Sedan återgår man till anropspunkten.
+
+Programmet ovan skulle alltså också kunna skrivas så här:
+
+  PROGRAM Exempel;
+  BEGIN
+    Vor;
+    Drehe_Links;
+    Drehe_Links;
+    Drehe_Links;
+  END;
+
+
+Dock, så fort det måste svängas höger flera gånger i ett program, bör du
+använda en procedur för det, eftersom programmet därmed blir kortare och
+framförallt tydligare. Procedurer hör alltså till en god programmeringsstil.
+
+
+Procedurer kan anropa sig själva eller andra procedurer, förutsatt att de
+redan är definierade vid tidpunkten för anropet. De måste alltså vara
+definierade ovanför anropet i programtexten. När procedurer anropar sig
+själva kallas det "rekursiv programmering". Vid rekursiv programmering måste
+man se till att det inte bildas en ändlös loop, annars uppstår vid något
+tillfälle ett "stackspill" och programmet avbryts. Med riktiga PASCAL-program
+kan det till och med leda till att datorn kraschar.
+
+ Exempel:
+
+   PROGRAM Fel;
+
+     PROCEDURE Gehe;
+     BEGIN
+       Vor;
+       Gehe;
+     END;
+
+   BEGIN
+     Gehe;
+   END.
+
+Eftersom de flesta problem också kan lösas utan denna ibland förvirrande
+teknik, bör linjär programmering föredras. Rekursiv programmering bör
+verkligen bara användas där det är absolut nödvändigt.
+
+
+Se även:
+ {Strukturen hos PASCAL-program:Aufbau}
+ {Kommandon:Befehle}
+ {Strukturer:Strukturen}
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Aufbau
+ █ Strukturen hos PASCAL-program
+ ████████████████████████████████
+
+Ett PASCAL-program eller Niki-program har alltid samma struktur:
+
+I den första raden anges ett namn för programmet.
+
+  PROGRAM Namn;
+
+Namnet får inte vara detsamma som ett fördefinierat nyckelord i PASCAL eller
+ett kommando i Niki. Ett program med namnet "Vor" är alltså inte möjligt.
+
+Sedan kommer alla definitioner. I tvNiki är detta alla definierade
+{procedurer:Unterprogramme}.
+
+Slutligen måste varje PASCAL-program innehålla ett huvudprogram. Detta
+huvudprogram börjar med BEGIN och slutar med END följt av en punkt. Däremellan
+kan {kommandon:Befehle} stå. Varje kommando avslutas med ett semikolon.
+
+  BEGIN
+    {Drehe_Links};
+    {Vor};
+  END.
+
+Vid programmets start börjar körningen vid det första kommandot i huvudprogrammet.
+
+Giltiga PASCAL-program kan alltså se ut så här:
+
+  PROGRAM Exempel1;
+
+  BEGIN
+    {Vor};
+    {Vor};
+    {Drehe_Links};
+  END.
+
+
+  PROGRAM Exempel2;
+
+    {PROCEDURE:Unterprogramme} Lagra;
+    BEGIN
+      {Drehe_Links};
+      {Vor};
+      {Gib_Ab};
+      {Drehe_Links};
+      {Drehe_Links};
+      {Vor};
+      {Drehe_Links};
+    END;
+
+  BEGIN
+    {Nimm_Auf};
+    {Nimm_Auf};
+    {Nimm_Auf};
+    Lagra;
+    Lagra;
+    Lagra;
+  END.
+
+
+Se även:
+ {PASCAL-språket:PASCAL}
+ {Underprogram:Unterprogramme}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Fehler
+ █ Kompilatorfel
+ ████████████████
+
+   Felnummer    Beskrivning
+ ██████████████████████████████████████████████████████████████████████████
+   1            {Källfil hittades inte eller kan inte öppnas:Fehler1}
+   2            {Målfil kan inte skapas:Fehler2}
+   3            {BEGIN förväntad:Fehler3}
+   4            {END eller kommando förväntad:Fehler4}
+   5            {Punkt förväntad:Fehler5}
+   6            {Identifierare förväntad:Fehler6}
+   7            {Semikolon (;) förväntat:Fehler7}
+   8            {Oavslutad kommentar:Fehler8}
+   9            {Okänt kommando:Fehler9}
+   10           {Dubbel identifierare:Fehler10}
+   11           {Nyckelord inte tillåtet som identifierare:Fehler11}
+   12           {THEN förväntad:Fehler12}
+   13           {Okänd funktion:Fehler13}
+   14           {Funktion förväntad:Fehler14}
+   15           {DO förväntad:Fehler15}
+   16           {UNTIL förväntad:Fehler16}
+   17           {Högerparentes förväntad:Fehler17}
+
+
+Se även:
+ {PASCAL-språket:PASCAL}
+ {Innehåll:NoContext}
+
+
+.topic Fehler1
+ █ Fel 1
+ ████████
+Källfil hittades inte eller kan inte öppnas
+
+Av någon anledning sparades inte källkoden före kompilering. Spara manuellt
+före kompilering för att lösa problemet.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler2
+ █ Fel 2
+ ████████
+Målfil kan inte skapas
+
+Den kompilerade filen kan inte skapas eftersom skrivåtkomst till den aktuella
+mappen inte är tillåten eller databäraren är full. Byt till en "skrivbar" mapp
+som innehåller tillräckligt med ledigt utrymme.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler3
+ █ Fel 3
+ ████████
+BEGIN förväntad
+
+Kompilatorn förväntar sig ett BEGIN på det angivna stället.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler4
+ █ Fel 4
+ ████████
+END eller kommando förväntad
+
+Kompilatorn förväntar sig ett END på det angivna stället, t.ex. eftersom ett
+BEGIN END block inte avslutades.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler5
+ █ Fel 5
+ ████████
+Punkt förväntad
+
+Kompilatorn förväntar sig en punkt på det angivna stället. Förmodligen kommer
+något efter slutet av {huvudprogrammet:Aufbau}.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler6
+ █ Fel 6
+ ████████
+Identifierare förväntad
+
+Kompilatorn förväntar sig en identifierare för en {PROCEDURE:Unterprogramme}
+eller efter {PROGRAM-satsen:Aufbau} på det angivna stället.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler7
+ █ Fel 7
+ ████████
+Semikolon (;) förväntat
+
+Ett semikolon förväntas efter ett {kommando:Befehle} eller efter en sats som
+{PROGRAM:Aufbau}, {PROCEDURE:Unterprogramme} etc. Detta fel kan också uppstå
+om ett omljud eller andra specialtecken används i en identifierare.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler8
+ █ Fel 8
+ ████████
+Oavslutad kommentar
+
+En kommentar avslutades inte. Antingen ett } eller ett *) glömdes bort.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler9
+ █ Fel 9
+ ████████
+Okänt kommando
+
+Den angivna identifieraren för ett {kommando:Befehle} är inte känd. T.ex.
+användes en {PROCEDURE:Unterprogramme} innan den var definierad, eller det
+handlar om ett skrivfel.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler10
+ █ Fel 10
+ █████████
+Dubbel identifierare
+
+Den angivna identifieraren för en {PROCEDURE:Unterprogramme} används dubbelt.
+Två {PROCEDURER:Unterprogramme} har samma namn eller man försöker namnge en
+{PROCEDURE:Unterprogramme} som ett fördefinierat kommando.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler11
+ █ Fel 11
+ █████████
+Nyckelord inte tillåtet som identifierare
+
+Den angivna identifieraren för en {PROCEDURE:Unterprogramme} eller efter
+satsen {PROGRAM:Aufbau} är reserverad för ett PASCAL-nyckelord.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler12
+ █ Fel 12
+ █████████
+THEN förväntad
+
+Efter en {IF-sats:If} saknas THEN.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler13
+ █ Fel 13
+ █████████
+Okänd funktion
+
+Den använda funktionen eller den använda {sensorn:Sensoren} är inte känd,
+t.ex. eftersom den stavades fel.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler14
+ █ Fel 14
+ █████████
+Funktion förväntad
+
+I en {loop:Strukturen} eller efter {IF} förväntas en funktion eller en
+{sensor:Sensoren} eller en {logisk koppling:Logik}.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler15
+ █ Fel 15
+ █████████
+DO förväntad
+
+Efter en {WHILE:While}-sats förväntas DO.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler16
+ █ Fel 16
+ █████████
+UNTIL förväntad
+
+Efter en {REPEAT:Repeat}-sats förväntas UNTIL.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Fehler17
+ █ Fel 17
+ █████████
+Högerparentes förväntad
+
+En vänsterparentes saknar motsvarande högerparentes.
+
+Se även:
+ {Kompileringsfel:Fehler}
+ {Innehåll:NoContext}
+
+
+
+.topic Geschichte
+ █ Historia
+ ███████████
+
+ alpha 1 - Början av september 96
+
+ - Implementering av procedurer och kommandon
+ - Kompilering och körning av program
+
+
+
+ beta 1 - 10.9.96
+
+ - Implementering av strukturer (IF, WHILE, REPEAT)
+ - Användning av sensorer
+ - Användning av BEGIN/END-block
+
+
+ beta 2 - 15.9.96
+
+ - Lösning av minnesproblem
+ - Färdigställande av Teach-In-läge
+ - Förbättrad nätverkskompatibilitet
+ - Bearbetning av filer med tabbar
+ - EGA-videoläge
+ - DOS-skal
+ - Mappbyte i programmet
+ - Ny Info-dialogruta
+
+
+ beta 3 - 21.9.96
+
+ - Inbyggnad av en hjälpfunktion
+ - Kombination av sensorer med logiska operationer (AND/OR)
+
+
+ beta 4 - 13.10.96
+
+ - Utökning av hjälpen
+ - Korrigerade fel i hjälpen
+ - Korrekt utvärdering av logiska kopplingar (vänsterassociativ)
+ - Storleken på EXE-filen minskad till 50%
+
+
+ 1.0a - 19.10.96
+
+ - Funktion under Win95 testad
+ - Installationsinstruktioner i hjälpen
+ - Testad övertagning av källkoder från original Niki från Klett-Verlag
+ - Utskrift av källkoder och fält
+ - Korrekt positionering av markören vid kompileringsfel
+
+
+ 1.0b - 20.10.96
+
+ - Felmeddelande om hjälpfilen saknas (istället för krasch)
+ - Ingen krasch längre när hjälp öppnas i en dialog medan icke-modal hjälp
+   finns i bakgrunden
+ - Korrekt frigörande av minnet för ett modalt hjälpfönster
+ - Konfigurationsfil NIKI.CFG där inställningar kan göras
+   (se NIKI.CFG för beskrivning)
+ - Lösning av en bugg om datorn redan var i 80x50-läge före tvNiki
+ - Korrekt visning av stapeln i nedre högra hörnet även i 80x50-läge
+ - Visning av förrådet samt namnet vid utskrift av ett fält eller källkod
+
+
+ 1.0c - 28.10.96
+
+ - Korrekt tolkning av AND och OR: AND har högre prioritet än OR, utvärderas
+   alltså först
+
+
+ 1.0d - 29.10.96
+
+ - Borttagen utmatning av felmeddelande även vid felfri avslutning av tvNiki
+ - Korrekt förstoring och förminskning av fältfönstret vid byte av videoläge
+ - Inställning av videoläge i NIKI.CFG
+
+
+ 1.0e - 1.11.96
+
+ - Alternativ BIGHELP (NIKI.CFG): Hjälpen tar hela skärmen
+ - Alternativ SPEED (NIKI.CFG): Initial tolkarhastighet
+ - Korrigering av några menypunkter
+
+
+ 1.0f - 9.11.96
+
+ - Utvärderad längd på identifierare ökad till 255 tecken
+ - Bugg borttagen: Hopp utvärderade bara Lo-byten -> program som var längre
+   än 256 byte (kompilerade) fungerade inte korrekt
+   ( Word( ByteArray[IP] ) <> ByteArray[IP]+ByteArray[IP+1]*256 )
+
+
+ 1.1 beta 1 - 9.11.96
+
+ - Inbyggnad av ett steg-för-steg-läge, med vilket program kan köras steg
+   för steg
+ - Visning av aktuell rad i steg-för-steg-läge i editorfönstret
+
+
+ 1.1 beta 2 - 13.11.96
+
+ - Felmeddelande tillagt när det redan ligger 9 pallar på en plats
+ - Några fel i hjälpen åtgärdade
+ - Äntligen utvärderas NOT före AND och OR :-(
+
+
+ Möjliga framtida funktioner:
+
+ - Definition av egna sensorer (funktioner)
+ - Grafisk utmatning av fältet
+ - Portering till Graphics Vision (grafisk Turbo Vision)
+ - Riktiga breakpoints
+ - Riktig låsning av öppna filer
+ - Nätverkskompatibel {protected mode-version:Bugs}
+ - Angivande av utdataport vid utskrift
+ - Nätverksversion: Två Nikar kämpar mot varandra, var och en med sitt
+   eget program
+ - Fullständig tysk översättning av Turbo Vision
+ - Bättre editor
+ - Bättre hjälpfönster
+ - Färginställningar
+ - Sparande av gränssnittet
+ - Inställning av alternativ i programmet
+ .
+ .
+ .
+
+
+Se även:
+ {Fel i tvNiki:Bugs}
+ {Innehåll:NoContext}
+
+
+
+.topic Bugs
+ █ Fel i tvNiki
+ ███████████████
+
+Stora fel i tvNiki är för närvarande inte kända. Dock kan ingen garanti ges
+för att allt fungerar felfritt.
+
+Små buggar:
+
+ - Protected mode-versionen är inte nätverkskompatibel. Den kan bara startas
+   en gång på nätverket (hänger på något sätt ihop med DOS-extendern från
+   Borland Pascal 7.0)
+ - Hjälpfönstret kan inte öppnas i dialoger om det redan finns ett "normalt"
+   hjälpfönster i bakgrunden (radering av icke-modala fönster i en dialog
+   fungerar inte korrekt)
+ - ...
+
+
+Se även:
+ {tvNikis historia:Geschichte}
+ {Innehåll:NoContext}
+
+
+
+
+.topic Copyright
+ █ Copyright
+ ████████████
+
+ █████████████████████████████████
+ █tvNiki v1.1 av 1Stein          █
+ █                               █
+ █Copyright av Stefan Schimanski,█
+ █Alla rättigheter förbehållna   █
+ █████████████████████████████████
+
+
+Denna version av tvNiki är gratis att använda för privata ändamål. Användning
+i undervisning och för andra offentliga ändamål är INTE tillåten utan
+registrering hos författaren.
+
+"Ett program som är värt att användas av dig är också värt att du betalar
+för det..."
+
+Den aktuella versionen av tvNiki finns att ladda ner på hemsidan för
+dator-AG vid Große Schule på internet:
+
+http://www.tigersoft.de/wf-net/info/computer-ag
+
+
+
+För ytterligare information:
+
+ Stefan Schimanski
+ Ginsterweg 19
+ D-38300 Wolfenbüttel
+ Tel.: 05331/63268
+
+
+
+Se även:
+ {Historia:Geschichte}
+ {Innehåll:NoContext}

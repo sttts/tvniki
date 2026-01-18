@@ -4,7 +4,7 @@
 # Status bar
 Wall=Parede
 Niki/turn=Niki/virar
-Supply=Reserva
+Payload=Carga
 Run=Executar
 
 # Menus

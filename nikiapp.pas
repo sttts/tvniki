@@ -567,13 +567,25 @@ VAR
   Dir: DirStr;
   Name: NameStr;
   Ext: ExtStr;
+  Lang: String;
+  Result: PathStr;
 BEGIN
   EXEName := ParamStr(0);
   FSplit(EXEName, Dir, Name, Ext);
   { Remove trailing path separator }
   if (Length(Dir) > 0) and (Dir[Length(Dir)] in ['/', '\']) then
     Dec(Dir[0]);
-  { Search for help file (case-insensitive on most systems) }
+
+  { Try language-specific help file first (e.g., hilfe.en.hlp) }
+  Lang := GetCurrentLang;
+  Result := FSearch('hilfe.' + Lang + '.hlp', Dir);
+  IF Result <> '' THEN
+  BEGIN
+    CalcHelpName := Result;
+    Exit;
+  END;
+
+  { Fall back to default help file }
   CalcHelpName := FSearch('hilfe.hlp', Dir);
 END;
 

@@ -1,0 +1,1492 @@
+.topic Muster
+ █ Sýnishorn
+ ███████████
+
+Sjá einnig:
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic NoContext=0
+ █ tvNiki hjálp
+ ██████████████
+
+ █ Efnisyfirlit:
+ █
+ █ {Notkun:Bedienung}
+ █ {Lyklaborð:Tastatur}
+ █
+ █ {PASCAL}
+ █ {Villuboð þýðanda:Fehler}
+ █ {Teach-In ham:Teach}
+ █ {Eitt-skref ham:Debug}
+ █
+ █ {Kerfiskröfur:Hardware}
+ █ {Uppsetning:Installation}
+ █
+ █ {Villur í tvNiki:Bugs}
+ █ {Saga tvNiki:Geschichte}
+ █ {Höfundarréttur:Copyright}
+
+
+
+.topic Installation
+ █ Uppsetning
+ █████████████
+
+Til að setja upp tvNiki á tölvunni þinni skaltu afrita það í möppu að eigin
+vali. Lágmarksútgáfa tvNiki samanstendur af NIKI.EXE skránni. Til að nota
+hjálpina þarf einnig HILFE.HLP skrána.
+
+Til að ræsa Niki skaltu einfaldlega slá inn NIKI ef þú ert í Niki möppunni.
+Til að geta ræst Niki úr öðrum möppum geturðu annaðhvort bætt við leitarslóðina
+þína í AUTOEXEC.BAT svo að DOS leiti sjálfkrafa í Niki möppunni, eða búið til
+einfalda batch-skrá sem kallar á tvNiki.
+
+tvNiki þarf skrifheimildir í núverandi möppu. Það þýðir að notkun á netkerfi
+getur aðeins farið fram frá drifi sem er ekki skrifvarið. Mikilvægt er að
+aðeins núverandi mappa þurfi að hafa þessa eiginleika. Það skiptir ekki máli
+hvort mappan sem inniheldur NIKI.EXE sé skrifanleg eða ekki.
+
+Það er nóg að hafa eitt eintak af NIKI.EXE á netkerfinu fyrir alla notendur.
+
+Notkun tvNiki á netkerfi fellur EKKI undir einkaafnot, svo leyfi þarf að
+kaupa frá {höfundi:Copyright}.
+
+
+Sjá einnig:
+ {Höfundarréttur:Copyright}
+ {Villur í tvNiki:Bugs}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Hardware
+ █ Kerfiskröfur
+ ███████████████
+
+Til að nota Niki þarf tölvan þín að hafa að minnsta kosti 400KB af lausu
+DOS-minni. Allir örgjörvar frá i8088 eru studdir. Að minnsta kosti 100KB er
+þörf á hörðum diski eða disklingi. Að auki ætti að nota MS-DOS 3.3 eða nýrra.
+
+tvNiki er fullkomlega samhæft við Windows 95. Þó er ekki hægt að nota löng
+skráarnöfn.
+
+Notkun undir Windows NT hefur ekki enn verið prófuð. Villur eru því ekki
+útilokaðar.
+
+Á {netkerfi:Installation} er hægt að gera Niki aðgengilegan öllum notendum.
+Þó er raunveruleg skráalæsing ekki enn studd. Engu að síður eru engin vandamál
+við að setja upp tvNiki á Netware þjóni, til dæmis.
+
+
+Sjá einnig:
+ {Uppsetning:Installation}
+ {Höfundarréttur:Copyright}
+ {Villur í tvNiki:Bugs}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+
+
+
+.topic Teach
+ █ Teach-In
+ ███████████
+
+tvNiki er með svokallað Teach-In ham. Venjulega þarf að slá inn forrit línu
+fyrir línu í gegnum {ritilinn:Editor}. Fyrir stutt og einföld verkefni er
+þessi hamur einnig í boði, þar sem hægt er að stjórna Niki með ýmsum lyklum.
+{Skipanaröðin:Befehle} er geymd á klippiborðinu og hægt er að vista sem fullbúið
+keyranleg forrit í lok upptöku.
+
+Til að komast í Teach-In ham skaltu velja valmyndaatriðið Þýðandi|Teach-In.
+Nú geturðu snúið Niki og farið áfram með örvalyklunum Vinstri og Upp. Með
+Delete lyklinum tekur Niki upp bretti. Með Insert leggur hann þau niður.
+
+Ef villa kemur upp eða þú hættir við upptöku með ESC birtist gluggi sem
+spyr hvort þú viljir vista forritið. Hvort sem þú vistar það eða ekki er
+það nú á klippiborðinu og hægt er að {líma:Blockbefehle} til að halda áfram
+að vinna.
+
+Sjá einnig:
+ {Notkun á ritli:Editor}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Debug
+ █ Eitt-skref ham
+ █████████████████
+
+tvNiki er með eitt-skref ham þar sem hægt er að keyra forrit skref fyrir skref.
+Hann er hægt að nota til að leita að villum í forritum eða til að yfirfara
+forrit.
+
+Til að komast í þennan ham ýtirðu annaðhvort á F8 meðan forritið keyrir eða
+ræsir forritið beint í eitt-skref ham með Alt-F8.
+
+Með því að ýta á F9 er hægt að keyra forrit aftur á fullum hraða.
+
+Sjá einnig:
+ {Notkun á ritli:Editor}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Bedienung
+ █ Notkun tvNiki
+ ████████████████
+
+Í tvNiki eru þrír mismunandi gluggar. Glugginn sem birtist við ræsingu
+forritsins er {textaritillinn:Editor}, þar sem hægt er að slá inn og breyta
+forritum.
+
+Annar glugginn er {svæðaritillinn:Feldeditor}. Þar eru vélmennjasvæði, þar sem
+Niki vélmennið hreyfist, breytt.
+
+Síðasti glugginn er upplýsingaglugginn. Í upplýsingaglugganum eru stöðugt
+birtar upplýsingar um {svæðagluggann:Feldeditor}. Þar er til dæmis hægt að
+lesa núverandi birgðir og staðsetningu Niki. Að auki sýnir neðsta línan
+núverandi ham sem svæðaritillinn er í.
+
+ {1. Notkun textaritils:Editor}
+ {2. Búa til og breyta svæðum:Feldeditor}
+
+
+Sjá einnig:
+ {Lyklaborð:Tastatur}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Feldeditor
+ █ Svæðaritill
+ ██████████████
+
+Svæðaritillinn samanstendur af svörtum glugga sem inniheldur 15 sinnum 10
+reita. Þar er hægt að búa til vélmennjasvæði þar sem Niki getur hreyft sig.
+
+Til að setja hindranir sem Niki getur ekki farið í gegnum, notaðu annaðhvort
+músina með því að smella með vinstri hnappnum á milli tveggja punkta, eða
+færðu bendilinn með örvalyklum og settu hindranir með bilslánni.
+
+Með því að smella aftur eða ýta aftur á bilslá eru veggir fjarlægðir.
+
+Til að færa Niki skaltu smella með hægri músarhnappi í miðjunni á milli
+4 punkta. Að smella aftur snýr Niki um sjálfan sig. Með lyklaborðinu er
+þetta gert með P lyklinum.
+
+Með + og - lyklunum geturðu lagt niður eða tekið upp bretti á núverandi
+bendilsstaðsetningu. Til að færa bendilinn skaltu smella með vinstri
+músarhnappnum á æskilega staðsetningu eða færa hann með örvalyklum.
+
+Til að gefa Niki brettabirgðir áður en forrit er ræst skaltu velja
+valmyndaatriðið Svæði|Birgðir.
+
+Keyrsluhraði forrits er stilltur í gegnum valmyndaatriðið Svæði|Hraði.
+
+Sjá einnig:
+ {Notkun tvNiki:Bedienung}
+ {Notkun textaritils:Editor}
+ {Teach-In ham:Teach}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Editor
+ █ Notkun textaritils
+ █████████████████████
+
+Ritillinn í tvNiki er venjulegur Wordstar-samhæfður textaritill. Með honum
+er hægt að breyta textaskrám allt að 64KB. Aðgerðir ritilsins er hægt að
+kalla fram í gegnum valmyndirnar Skrá, Breyta og Leita.
+
+Að auki er hægt að þýða textann í ritlinum, ef um er að ræða {PASCAL forrit:PASCAL},
+og keyra í {svæðaritlinum:Feldeditor}. Þessar aðgerðir er hægt að virkja í
+gegnum Þýðanda valmyndina. Ef breytingar hafa verið gerðar á forritinu birtist
+gluggi sem upplýsir um núverandi þýðingarstöðu. Ef villa kemur upp birtist
+lína í ritlinum sem lýsir {villunni:Fehler}. Með F1 lyklinum er hægt að birta
+meiri upplýsingar um villuna sem kom upp. Að auki hoppar ritillinn í línuna
+þar sem {villan:Fehler} fannst. Ef engin villa kom upp birtist OK hnappur í
+stöðuglugganum sem lokar glugganum með því að ýta á Enter.
+
+Sjá einnig:
+ {Notkun svæðaritils:Feldeditor}
+ {Lyklaborðsstýring ritils:Editortastatur}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+
+.topic Tastatur
+ █ tvNiki lyklaborðsúthlutun
+ ████████████████████████████
+
+{Almennir flýtilyklar:Hotkeys}
+
+{Lyklaborðsstýring svæðaritils:Feldeditor}
+{Lyklaborðsstýring ritils:Editortastatur}
+
+{Notkun í Teach-In ham:Teach}
+
+
+Sjá einnig:
+ {Notkun:Bedienung}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Editortastatur
+ █ Lyklaborðsstýring textaritils
+ █████████████████████████████████
+
+ {Bendilshreyfingar:Cursor}
+ {Blokkaaðgerðir:Blockbefehle}
+ {Innsetning og eyðing:InsDel}
+
+Sjá einnig:
+ {Lyklaborðsstýring:Tastatur}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic InsDel
+ █ Skipanir fyrir innsetningu og eyðingu
+ █████████████████████████████████████████
+
+ ██████████████████████████████████████████████████████
+  Innsetningarhamur kveikt/slökkt █ Ctrl-V eða Insert
+  Setja inn línu                  █ Ctrl-N
+  Eyða línu                       █ Ctrl-Y
+  Eyða til línuenda               █ Ctrl-Q Y
+  Eyða staf til vinstri           █ Ctrl-H eða Backspace
+  Eyða staf undir bendli          █ Ctrl-G eða Delete
+  Eyða orði til hægri             █ Ctrl-T
+
+Sjá einnig:
+ {Lyklaborðsstýring textaritils:Editortastatur}
+ {Blokkaskipanir:Blockbefehle}
+ {Bendilshreyfingar:Cursor}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Cursor
+ █ Bendilshreyfingar
+ ████████████████████
+
+ ███████████████████████████████████████████████████
+  Stafur til vinstri  █ Ctrl-S eða Vinstri ör
+  Stafur til hægri    █ Ctrl-D eða Hægri ör
+  Orð til vinstri     █ Ctrl-A eða Ctrl+Vinstri ör
+  Orð til hægri       █ Ctrl-F eða Ctrl+Hægri ör
+  Lína upp            █ Ctrl-E eða Upp ör
+  Lína niður          █ Ctrl-X eða Niður ör
+  Skruna upp          █ Ctrl-W
+  Skruna niður        █ Ctrl-Z
+  Síða upp            █ Ctrl-R eða Page Up
+  Síða niður          █ Ctrl-C eða Page Down
+
+Sjá einnig:
+ {Lyklaborðsstýring textaritils:Editortastatur}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Blockbefehle
+ █ Blokkaskipanir
+ █████████████████
+
+ ████████████████████████████████████████████
+  Merkja blokkupphaf            █ Ctrl-K B
+  Merkja blokkenda              █ Ctrl-K K
+  Merkja orð                    █ Ctrl-K T
+  Afrita blokk                  █ Ctrl-K C
+  Færa blokk                    █ Ctrl-K V
+  Eyða blokk                    █ Ctrl-K Y
+  Lesa blokk af diski           █ Ctrl-K R
+  Skrifa blokk á disk           █ Ctrl-K W
+  Blokkbirting kveikt/slökkt    █ Ctrl-K H
+  Prenta blokk                  █ Ctrl-K P
+  Færa blokk um staf til vinstri█ Ctrl-K U
+  Færa blokk um staf til hægri  █ Ctrl-K I
+  Fara í blokkupphaf            █ Ctrl+Q B
+  Fara í blokkenda              █ Ctrl+Q K
+  Virkja valmyndaslá            █ Ctrl+K D
+  Merkja línu                   █ Ctrl+K L
+  Afrita á klippiborð           █ Ctrl+Insert
+  Klippa og afrita á            █
+  klippiborð                    █ Shift+Delete
+  Eyða blokk                    █ Ctrl+Delete
+  Líma af klippiborði           █ Shift+Insert
+
+
+Sjá einnig:
+ {Lyklaborðsstýring:Tastatur}
+ {Notkun:Bedienung}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Hotkeys
+ █ Lyklaborðsúthlutun
+ █████████████████████
+
+ ████████████████████████████████████████████
+  Opna skrá                      █ F3
+  Vista núverandi skrá           █ F2
+  Hætta tvNiki                   █ Alt-X
+  Afturkalla                     █ Alt-Backspace
+  Keyra forrit                   █ Ctrl-F9
+  Þýða forrit                    █ Alt-F9
+  Leita aftur                    █ Alt-W
+  Stærð/staðsetning glugga       █ Ctrl-F5
+  Stækka glugga                  █ F5
+  Velja næsta glugga             █ F6
+  Velja fyrri glugga             █ Shift-F6
+  Loka glugga                    █ Alt-F3
+  Sýna hjálp                     █ F1
+  Hjálp um PASCAL tungumál       █ Ctrl+F1
+
+
+Sjá einnig:
+ {Lyklaborðsstýring:Tastatur}
+ {Blokkaskipanir:Blockbefehle}
+ {Notkun:Bedienung}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic PASCAL
+ █ PASCAL tungumál
+ ██████████████████
+
+tvNiki inniheldur undirmengi forritunarmálsins PASCAL. Það þýðir að ekki allar
+uppbyggingar sem eru gildar í PASCAL eru studdar af tvNiki. Hins vegar eru
+ALLAR uppbyggingar sem virka í tvNiki samhæfðar við PASCAL.
+
+ {Uppbygging forrita:Aufbau}
+ {Uppbyggingar:Strukturen}
+ {Undirforrit:Unterprogramme}
+ {Rökræn tengsl:Logik}
+ {Athugasemdir:Kommentare}
+
+
+tvNiki býður upp á ýmsar skipanir og skynjara sem eru ekki hluti af PASCAL
+staðlinum. Þeir eru því aðeins tiltækir í Niki forritunarkerfinu.
+
+ {Skipanir:Befehle}
+ {Skynjarar:Sensoren}
+
+
+Sjá einnig:
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic   Kommentare
+ █ Athugasemdir
+ ███████████████
+
+Athugasemdir eru lýsingar og viðbætur við forritatexta sem eru EKKI meðhöndlaðar
+af þýðandanum, þ.e. þær hafa enga þýðingu fyrir virkni forritsins, en gera
+forrit læsilegra og skiljanlegra ef þær eru notaðar rétt.
+
+Í PASCAL eru tvenns konar athugasemdir. Annað er umlukið slaufusvigum, hitt með
+svigum og síðan stjörnu:
+
+  {Þetta er athugasemd}
+  (* Þetta er líka athugasemd *)
+
+Athugasemdir geta verið hvar sem er í forritinu, jafnvel innan {IF-THEN:If}
+setninga o.s.frv.
+
+  IF Vorne_Frei {Hér er athugasemd} THEN Vor;
+
+
+Sjá einnig:
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Befehle
+ █ Skipanir
+ ███████████
+
+tvNiki býður upp á ýmsar skipanir til að stjórna Niki á vélmennjasvæðinu.
+Þessar skipanir eru ekki hluti af venjulegu PASCAL tungumáli. Notkunin er
+þó svipuð og raunverulegra PASCAL skipana.
+
+ {Vor}
+ {Drehe_Links}
+ {Nimm_Auf}
+ {Gib_Ab}
+
+
+Sjá einnig:
+ {PASCAL tungumálið:PASCAL}
+ {Skynjarar:Sensoren}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Vor
+ █ Vor
+ ███████████
+
+"Vor" lætur Niki taka eitt skref áfram. Ef það er {veggur:Feldeditor} fyrir
+framan hann er forritið hætt með villu.
+
+
+Sjá einnig:
+ {Skipanir:Befehle}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Drehe_Links
+ █ Drehe_Links
+ ███████████
+
+"Drehe_Links" lætur Niki snúa 90° gegn lyklinum.
+
+
+Sjá einnig:
+ {Skipanir:Befehle}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Nimm_Auf
+ █ Nimm_Auf
+ ███████████
+
+"Nimm_Auf" lætur Niki taka upp bretti. Ef ekkert bretti er á núverandi stað
+er forritið hætt með villu.
+
+
+Sjá einnig:
+ {Skipanir:Befehle}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Gib_Ab
+ █ Gib_Ab
+ ███████████
+
+"Gib_Ab" lætur Niki leggja niður bretti á núverandi stað. Ef hann hefur ekki
+lengur neitt bretti hlaðið er forritið hætt.
+
+
+Sjá einnig:
+ {Skipanir:Befehle}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Sensoren
+ █ Skynjarar
+ ████████████
+
+tvNiki býður upp á ýmsa skynjara sem eru ekki hluti af PASCAL staðlinum.
+Notkunin er þó nákvæmlega eins og PASCAL falla.
+
+Allir tvNiki skynjarar hafa Boolean skilagildi, þ.e. þeir hafa annaðhvort
+gildið TRUE (satt) eða FALSE (ósatt). Engin af föllunum skilar tölugildi.
+Niki getur til dæmis aðeins fundið út hvort hann hafi enn bretti hlaðin, en
+ekki fjölda hlaðinna bretta.
+
+Skynjara er aðeins hægt að nota í {uppbyggingum:Strukturen}, notkun sem
+{skipanir:Befehle} er ekki möguleg.
+
+ {Platz_Belegt}
+
+ {Vorne_Frei}
+ {Links_Frei}
+ {Rechts_Frei}
+
+ {Hat_Vorrat}
+
+ Dæmi:
+
+   IF {Vorne_Frei} THEN {Vor};
+
+   WHILE {Hat_Vorrat} DO {Gib_Ab};
+
+
+Sjá einnig:
+ {PASCAL tungumálið:PASCAL}
+ {Uppbyggingar:Strukturen}
+ {Skipanir:Befehle}
+ {Rökræn tengsl:Logik}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Platz_Belegt
+ █ Platz_Belegt
+ ███████████████
+
+Skynjarinn "Platz_Belegt" hefur gildið TRUE ef eitt eða fleiri bretti eru
+undir Niki. Ef ekkert bretti er til staðar hefur "Platz_Belegt" gildið FALSE.
+
+
+Sjá einnig:
+ {Skynjarar:Sensoren}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Vorne_Frei
+ █ Vorne_Frei
+ ███████████████
+
+Skynjarinn "Vorne_Frei" hefur gildið TRUE ef enginn veggur er fyrir framan Niki.
+
+
+Sjá einnig:
+ {Skynjarar:Sensoren}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Links_Frei
+ █ Links_Frei
+ ███████████████
+
+Skynjarinn "Links_Frei" hefur gildið TRUE ef enginn veggur er til vinstri
+við Niki.
+
+
+Sjá einnig:
+ {Skynjarar:Sensoren}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Rechts_Frei
+ █ Rechts_Frei
+ ███████████████
+
+Skynjarinn "Rechts_Frei" hefur gildið TRUE ef enginn veggur er til hægri
+við Niki.
+
+
+Sjá einnig:
+ {Skynjarar:Sensoren}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Hat_Vorrat
+ █ Hat_Vorrat
+ █████████████
+
+Skynjarinn "Hat_Vorrat" skilar gildinu TRUE ef Niki hefur eitt eða fleiri
+bretti hlaðin.
+
+
+Sjá einnig:
+ {Skynjarar:Sensoren}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Strukturen
+ █ PASCAL uppbyggingar
+ ██████████████████████
+
+tvNiki styður þrjár mismunandi uppbyggingagerðir. Það eru tvenns konar lykkjur
+{REPEAT UNTIL:Repeat} og {WHILE DO:While} ásamt einfaldri ákvörðun
+{IF THEN:If} eða {IF THEN ELSE:If}.
+
+
+
+Sjá einnig:
+ {PASCAL tungumálið:PASCAL}
+ {Rökræn tengsl:Logik}
+ {Uppbygging PASCAL forrita:Aufbau}
+ {Undirforrit:Unterprogramme}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic If
+ █ IF THEN ELSE
+ ███████████████
+
+ IF {Skynjari:Sensoren} THEN {Skipun:Befehle};
+
+ IF {Skynjari:Sensoren} THEN {Skipun:Befehle} ELSE {Skipun:Befehle};
+
+ IF {Skynjari:Sensoren} THEN
+ BEGIN
+   {Skipun:Befehle};
+   {Skipun:Befehle};
+ END;
+
+Ef skynjarinn á milli IF og THEN hefur gildið TRUE er skipunin eða blokkinn
+á eftir THEN keyrð. Ef það er líka ELSE grein er hún keyrð ef gildið er FALSE.
+
+ Dæmi:
+
+   IF {Hat_Vorrat} THEN {Gib_Ab} ELSE {Vor};
+
+
+Í stað skynjara geturðu líka notað {rökræna tengingu:Logik} margra skynjara.
+
+ Dæmi:
+
+   IF Hat_Vorrat AND Vorne_Frei THEN
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+
+Sjá einnig:
+ {Skynjarar:Sensoren}
+ {Rökræn tengsl:Logik}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic While
+ █ WHILE DO
+ ███████████
+
+ WHILE {Skynjari:Sensoren} DO {Skipun:Befehle};
+
+ WHILE {Skynjari:Sensoren} DO
+ BEGIN
+   {Skipun:Befehle};
+   {Skipun:Befehle};
+ END;
+
+Svo lengi sem skynjarinn á milli WHILE og DO hefur gildið TRUE er skipunin
+eða blokkinn á eftir DO keyrð.
+
+ Dæmi:
+
+   WHILE {Platz_Belegt} DO {Nimm_Auf};
+
+Fyrst er athugað hvort skynjarinn sé TRUE, síðan er skipunin keyrð.
+Hins vegar keyrir {REPEAT UNTIL:Repeat} fyrst skipunina og athugar síðan.
+
+Ef margar skipanir sem eru háðar WHILE DO þurfa að keyra þarf að nota
+BEGIN-END blokk;
+
+ Dæmi:
+
+   WHILE Hat_Vorrat DO
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+
+Í stað skynjara geturðu líka notað {rökræna tengingu:Logik} margra skynjara.
+
+ Dæmi:
+
+   WHILE Hat_Vorrat AND Vorne_Frei DO
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+
+Sjá einnig:
+ {Skynjarar:Sensoren}
+ {Rökræn tengsl:Logik}
+ {REPEAT UNTIL:Repeat}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Repeat
+ █ REPEAT UNTIL
+ ███████████████
+
+ REPEAT {Skipun:Befehle}; UNTIL {Skynjari:Sensoren};
+
+ REPEAT
+   {Skipun:Befehle};
+   {Skipun:Befehle};
+ UNTIL {Skynjari:Sensoren};
+
+Skipunin eða blokkinn á milli REPEAT og UNTIL er keyrð þar til skynjarinn
+á eftir UNTIL skilar gildinu TRUE.
+
+ Dæmi:
+
+   REPEAT {Vor}; UNTIL NOT {Vorne_Frei};
+
+
+{REPEAT UNTIL:Repeat} keyrir fyrst skipunina og athugar síðan hvort skynjarinn
+sé TRUE. Hins vegar, með {WHILE DO:While}, er skynjarinn fyrst athugaður
+hvort hann sé TRUE, síðan er skipunin keyrð.
+
+Í stað skynjara geturðu líka notað {rökræna tengingu:Logik} margra skynjara.
+
+ Dæmi:
+
+   REPEAT
+     Gib_Ab;
+     Vor;
+   UNTIL NOT (Hat_Vorrat AND Vorne_Frei);
+
+Sjá einnig:
+ {Skynjarar:Sensoren}
+ {Rökræn tengsl:Logik}
+ {WHILE DO:While}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Logik
+ █ Rökræn tengsl
+ █████████████████
+
+Hægt er að tengja {skynjara:Sensoren} í PASCAL með rökrænum virkjum. Þannig
+er hægt að útfæra fyrirspurnir sem eru háðar fleiri en einum skynjara.
+
+ Dæmi:
+
+   WHILE (Hat_Vorrat AND Vorne_Frei) DO
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+Tveir virkjar eru tiltækir: OR og AND.
+
+
+Virkinn OR tengir tvo {skynjara:Sensoren} þannig að skilagildið er TRUE ef
+að minnsta kosti annar þeirra skilar TRUE.
+
+ Dæmi:
+
+   IF Links_Frei OR Rechts_Frei THEN Vor;
+
+ Sannleikstafla:
+
+   Links_Frei OR Rechts_Frei =
+   ████████████████████████████████████
+   FALSE      │  FALSE       │ FALSE
+   TRUE       │  FALSE       │ TRUE
+   FALSE      │  TRUE        │ TRUE
+   TRUE       │  TRUE        │ TRUE
+   ████████████████████████████████████
+
+
+Virkinn AND tengir tvo {skynjara:Sensoren} þannig að skilagildið er TRUE ef
+báðir {skynjararnir:Sensoren} skila TRUE.
+
+ Dæmi:
+
+   IF Links_Frei AND Rechts_Frei THEN Vor;
+
+ Sannleikstafla:
+
+   Links_Frei AND Rechts_Frei =
+   ████████████████████████████████████
+   FALSE      │  FALSE       │ FALSE
+   TRUE       │  FALSE       │ FALSE
+   FALSE      │  TRUE        │ FALSE
+   TRUE       │  TRUE        │ TRUE
+   ████████████████████████████████████
+
+
+Með því að nota fleiri en einn virkja geturðu líka tengt marga skynjara.
+
+ Dæmi:
+
+   IF Links_Frei OR Rechts_Frei OR Vorne_Frei THEN Nimm_Auf;
+
+Þegar mismunandi virkjar koma fyrir í slíkri tengingu kemur upp spurningin
+um röð útreiknings. Almenna reglan er: NOT á undan AND, AND á undan OR.
+Það þýðir að NOT tengingar eru reiknaðar fyrst, síðan AND, og síðast OR.
+
+ Dæmi:
+
+   IF Vorne_Frei OR Links_Frei AND Rechts_Frei THEN ...
+
+   jafngildir
+
+   IF Vorne_Frei OR (Links_Frei AND Rechts_Frei) THEN ...
+
+
+ Forgangur       jafngildir í stærðfræði
+ ████████████████████████████████████████████
+ 1   │  NOT    │ - (neikvæð)
+ 2   │  AND    │ */ (margföldun/deiling)
+ 3   │  OR     │ +- (samlagning/frádráttur)
+ ████████████████████████████████████████████
+
+
+Sjá einnig:
+ {Skynjarar:Sensoren}
+ {Uppbyggingar:Strukturen}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Unterprogramme
+ █ Undirforrit
+ ██████████████
+
+Í PASCAL er hægt að skipta út eins hlutum í forriti með undirforritum. Þessi
+undirforrit er síðan hægt að nota nákvæmlega eins og raunverulegar {skipanir:Befehle}.
+
+Þessi undirforrit eru kölluð "ferlar" í PASCAL. Þau eru skilgreind fyrir
+aðalforritið og eru byggð upp eins og lítil PASCAL forrit.
+
+ Dæmi:
+
+   PROGRAM Daemi;
+
+     PROCEDURE Drehe_Rechts;
+     BEGIN
+       Drehe_Links;
+       Drehe_Links;
+       Drehe_Links;
+     END;
+
+   BEGIN
+     Vor;
+     Drehe_Rechts;
+   END.
+
+Á milli BEGIN og END er hægt að nota hvaða {skipanir:Befehle} og {uppbyggingar:Strukturen}
+sem er. Þegar ferall er kallaður á eru skipanirnar í ferlinum keyrðar hver
+á eftir annarri. Síðan er snúið aftur til köllunarstaðarins.
+
+Forritið hér að ofan gæti því líka verið skrifað svona:
+
+  PROGRAM Daemi;
+  BEGIN
+    Vor;
+    Drehe_Links;
+    Drehe_Links;
+    Drehe_Links;
+  END;
+
+
+Hins vegar, um leið og forrit þarf að snúa til hægri oft, ættirðu að nota
+feril fyrir það, þar sem forritið verður þá styttra og aðallega skýrara.
+Ferlar eru því hluti af góðum forritunarvenjum.
+
+
+Ferlar geta kallað á sig sjálfa eða aðra ferla, að því tilskildu að þeir séu
+nú þegar skilgreindir á þeim tíma sem þeir eru kallaðir á. Þeir verða því
+að vera skilgreindir fyrir ofan kallið í forritatextanum. Þegar ferlar kalla
+á sig sjálfa er það kallað "endurkvæm forritun". Í endurkvæmri forritun verður
+að gæta þess að engin endalaus lykkja myndist, annars verður "staflayfirflæði"
+að lokum og forritið er hætt. Með raunverulegum PASCAL forritum getur þetta
+jafnvel valdið hruni tölvunnar.
+
+ Dæmi:
+
+   PROGRAM Rangt;
+
+     PROCEDURE Gehe;
+     BEGIN
+       Vor;
+       Gehe;
+     END;
+
+   BEGIN
+     Gehe;
+   END.
+
+Þar sem flest vandamál er líka hægt að leysa án þessarar stundum ruglingslegu
+tækni ætti línuleg forritun að vera valin. Endurkvæm forritun ætti aðeins að
+vera notuð þar sem það er bráðnauðsynlegt.
+
+
+Sjá einnig:
+ {Uppbygging PASCAL forrita:Aufbau}
+ {Skipanir:Befehle}
+ {Uppbyggingar:Strukturen}
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Aufbau
+ █ Uppbygging PASCAL forrita
+ ████████████████████████████
+
+PASCAL forrit eða Niki forrit hefur alltaf sömu uppbyggingu:
+
+Fyrsta línan tilgreinir nafn á forritinu.
+
+  PROGRAM Nafn;
+
+Nafnið má ekki vera eins og fyrirfram skilgreint PASCAL lykilorð eða
+Niki skipun. Forrit að nafni "Vor" er því ekki mögulegt.
+
+Síðan koma allar skilgreiningar. Í tvNiki eru það allir skilgreindir
+{ferlar:Unterprogramme}.
+
+Að lokum verður hvert PASCAL forrit að innihalda aðalforrit. Þetta aðalforrit
+byrjar með BEGIN og endar með END og síðan punkti. Þar á milli geta verið
+{skipanir:Befehle}. Hver skipun endar með semíkommu.
+
+  BEGIN
+    {Drehe_Links};
+    {Vor};
+  END.
+
+Þegar forritið er ræst byrjar keyrslan við fyrstu skipun aðalforritsins.
+
+Gild PASCAL forrit geta því litið svona út:
+
+  PROGRAM Daemi1;
+
+  BEGIN
+    {Vor};
+    {Vor};
+    {Drehe_Links};
+  END.
+
+
+  PROGRAM Daemi2;
+
+    {PROCEDURE:Unterprogramme} Geyma;
+    BEGIN
+      {Drehe_Links};
+      {Vor};
+      {Gib_Ab};
+      {Drehe_Links};
+      {Drehe_Links};
+      {Vor};
+      {Drehe_Links};
+    END;
+
+  BEGIN
+    {Nimm_Auf};
+    {Nimm_Auf};
+    {Nimm_Auf};
+    Geyma;
+    Geyma;
+    Geyma;
+  END.
+
+
+Sjá einnig:
+ {PASCAL tungumálið:PASCAL}
+ {Undirforrit:Unterprogramme}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Fehler
+ █ Þýðandavillur
+ █████████████████
+
+   Villunúmer  Lýsing
+ ██████████████████████████████████████████████████████████████████████████
+   1            {Upprunaskrá finnst ekki eða ekki hægt að opna:Fehler1}
+   2            {Ekki hægt að búa til áfangaskrá:Fehler2}
+   3            {BEGIN væntanlegt:Fehler3}
+   4            {END eða skipun væntanleg:Fehler4}
+   5            {Punktur væntanlegur:Fehler5}
+   6            {Auðkenni væntanlegt:Fehler6}
+   7            {Semíkomma (;) væntanleg:Fehler7}
+   8            {Ólokuð athugasemd:Fehler8}
+   9            {Óþekkt skipun:Fehler9}
+   10           {Tvöfalt auðkenni:Fehler10}
+   11           {Lykilorð ekki leyft sem auðkenni:Fehler11}
+   12           {THEN væntanlegt:Fehler12}
+   13           {Óþekkt fall:Fehler13}
+   14           {Fall væntanlegt:Fehler14}
+   15           {DO væntanlegt:Fehler15}
+   16           {UNTIL væntanlegt:Fehler16}
+   17           {Hægri svigi væntanlegur:Fehler17}
+
+
+Sjá einnig:
+ {PASCAL tungumálið:PASCAL}
+ {Efnisyfirlit:NoContext}
+
+
+.topic Fehler1
+ █ Villa 1
+ ██████████
+Upprunaskrá finnst ekki eða ekki hægt að opna
+
+Af einhverjum ástæðum var upprunakóðinn ekki vistaður fyrir þýðingu.
+Vistaðu handvirkt fyrir þýðingu til að leysa vandamálið.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler2
+ █ Villa 2
+ ██████████
+Ekki hægt að búa til áfangaskrá
+
+Þýdda skráin verður ekki búin til vegna þess að skrifaðgangur að núverandi
+möppu er ekki leyfður eða gagnageymir er fullur. Skiptu yfir í "skriflega"
+möppu sem inniheldur nægilegt laust pláss.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler3
+ █ Villa 3
+ ██████████
+BEGIN væntanlegt
+
+Þýðandinn býst við BEGIN á tilgreindum stað.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler4
+ █ Villa 4
+ ██████████
+END eða skipun væntanleg
+
+Þýðandinn býst við END á tilgreindum stað, til dæmis vegna þess að BEGIN END
+blokk var ekki lokað.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler5
+ █ Villa 5
+ ██████████
+Punktur væntanlegur
+
+Þýðandinn býst við punkti á tilgreindum stað. Líklega kemur eitthvað á eftir
+lok {aðalforritsins:Aufbau}.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler6
+ █ Villa 6
+ ██████████
+Auðkenni væntanlegt
+
+Þýðandinn býst við auðkenni fyrir {PROCEDURE:Unterprogramme} eða á eftir
+{PROGRAM setningunni:Aufbau} á tilgreindum stað.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler7
+ █ Villa 7
+ ██████████
+Semíkomma (;) væntanleg
+
+Semíkomma er væntanleg á eftir {skipun:Befehle} eða á eftir setningu eins og
+{PROGRAM:Aufbau}, {PROCEDURE:Unterprogramme}, o.s.frv. Þessi villa getur
+líka komið upp ef broddstafur eða aðrir sérstafir eru notaðir í auðkenni.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler8
+ █ Villa 8
+ ██████████
+Ólokuð athugasemd
+
+Athugasemd var ekki lokað. Annað hvort } eða *) var gleymt.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler9
+ █ Villa 9
+ ██████████
+Óþekkt skipun
+
+Tilgreint auðkenni fyrir {skipun:Befehle} er ekki þekkt. Til dæmis var
+{PROCEDURE:Unterprogramme} notaður áður en hann var skilgreindur, eða
+það er innsláttarvilla.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler10
+ █ Villa 10
+ ███████████
+Tvöfalt auðkenni
+
+Tilgreint auðkenni fyrir {PROCEDURE:Unterprogramme} er notað tvisvar.
+Tveir {FERLAR:Unterprogramme} hafa sama nafn eða reynt er að nefna
+{FERIL:Unterprogramme} eins og fyrirfram skilgreinda skipun.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler11
+ █ Villa 11
+ ███████████
+Lykilorð ekki leyft sem auðkenni
+
+Tilgreint auðkenni fyrir {PROCEDURE:Unterprogramme} eða á eftir
+{PROGRAM:Aufbau} setningunni er frátekið fyrir PASCAL lykilorð.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler12
+ █ Villa 12
+ ███████████
+THEN væntanlegt
+
+Á eftir {IF setningu:If} vantar THEN.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler13
+ █ Villa 13
+ ███████████
+Óþekkt fall
+
+Notaða fallið eða notaði {skynjarinn:Sensoren} er ekki þekktur, til dæmis
+vegna þess að hann var rangt stafsett.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler14
+ █ Villa 14
+ ███████████
+Fall væntanlegt
+
+Í {lykkju:Strukturen} eða á eftir {IF} er fall eða {skynjari:Sensoren} eða
+{rökræn tenging:Logik} væntanleg.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler15
+ █ Villa 15
+ ███████████
+DO væntanlegt
+
+Á eftir {WHILE:While} setningu er DO væntanlegt.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler16
+ █ Villa 16
+ ███████████
+UNTIL væntanlegt
+
+Á eftir {REPEAT:Repeat} setningu er UNTIL væntanlegt.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Fehler17
+ █ Villa 17
+ ███████████
+Hægri svigi væntanlegur
+
+Vinstri svigi vantar samsvarandi hægri sviga.
+
+Sjá einnig:
+ {Þýðingavillur:Fehler}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Geschichte
+ █ Saga
+ ███████
+
+ alpha 1 - Byrjun september 96
+
+ - Útfærsla ferla og skipana
+ - Þýðing og keyrsla forrita
+
+
+
+ beta 1 - 10.9.96
+
+ - Útfærsla uppbygginga (IF, WHILE, REPEAT)
+ - Notkun skynjara
+ - Notkun BEGIN/END blokka
+
+
+ beta 2 - 15.9.96
+
+ - Lagfæring minnisvandamála
+ - Lokið við Teach-In ham
+ - Bætt netsamhæfni
+ - Úrvinnsla skráa með flipum
+ - EGA myndbandsstilling
+ - DOS skeljaham
+ - Möppuskipti í forriti
+ - Nýr upplýsingagluggi
+
+
+ beta 3 - 21.9.96
+
+ - Innsetning hjálparaðgerðar
+ - Samsetning skynjara með rökrænum virkjum (AND/OR)
+
+
+ beta 4 - 13.10.96
+
+ - Útvíkkun hjálparinnar
+ - Lagfærðar villur í hjálpinni
+ - Rétt útreikning á rökrænum tengslum (vinstritengt)
+ - Stærð EXE skráarinnar minnkuð í 50%
+
+
+ 1.0a - 19.10.96
+
+ - Virkni undir Win95 prófuð
+ - Uppsetningarleiðbeiningar í hjálpinni
+ - Prófuð endurnýting upprunakóða frá upprunalega Niki frá Klett-Verlag
+ - Prentun upprunakóða og svæða
+ - Rétt staðsetning bendils við þýðingavillur
+
+
+ 1.0b - 20.10.96
+
+ - Villuboð ef hjálparskrá vantar (í stað hruns)
+ - Ekkert hrun lengur þegar hjálp er opnuð í glugga þegar ómodalískt
+   hjálpargluggi er í bakgrunni
+ - Rétt losun minnis á modallískri hjálparglugginum
+ - Stillingarskrá NIKI.CFG til að gera stillingar
+   (sjá NIKI.CFG fyrir lýsingu)
+ - Lagfæring á villu ef tölvan var nú þegar í 80x50 ham fyrir tvNiki
+ - Rétt birting slánnar í neðra hægra horni líka í 80x50 ham
+ - Birting birgða og nafns við prentun svæðis eða upprunakóða
+
+
+ 1.0c - 28.10.96
+
+ - Rétt túlkun AND og OR: AND hefur hærri forgang en OR, þannig að það
+   er reiknað fyrst
+
+
+ 1.0d - 29.10.96
+
+ - Fjarlægð birting villuboða jafnvel við villulausan lokun tvNiki
+ - Rétt stækkun og minnkun svæðagluggans við breytingu á myndbandsstillingu
+ - Stilling á myndbandsstillingu í NIKI.CFG
+
+
+ 1.0e - 1.11.96
+
+ - BIGHELP valkostur (NIKI.CFG): Hjálpin tekur allan skjáinn
+ - SPEED valkostur (NIKI.CFG): Upphafshraði túlksins
+ - Lagfæring á sumum valmyndaatriðum
+
+
+ 1.0f - 9.11.96
+
+ - Reiknuð lengd auðkenna aukin í 255 stafi
+ - Villa fjarlægð: Stökk reiknuðu aðeins Lo-bæti -> forrit sem voru lengri
+   en 256 bæti (þýdd) virkuðu ekki rétt
+   ( Word( ByteArray[IP] ) <> ByteArray[IP]+ByteArray[IP+1]*256 )
+
+
+ 1.1 beta 1 - 9.11.96
+
+ - Innsetning eitt-skref hams, þar sem hægt er að keyra forrit skref
+   fyrir skref
+ - Birting núverandi línu í eitt-skref ham í ritilglugganum
+
+
+ 1.1 beta 2 - 13.11.96
+
+ - Villuboð bætt við þegar þegar eru 9 bretti á sama stað
+ - Nokkrar villur í hjálpinni lagfærðar
+ - Loksins er NOT reiknað á undan AND og OR :-(
+
+
+ Mögulegir framtíðareiginleikar:
+
+ - Skilgreining á sérsniðnum skynjurum (föllum)
+ - Myndræn úttak af svæði
+ - Flutningur til Graphics Vision (myndrænt Turbo Vision)
+ - Raunveruleg stöðvunarpunktar
+ - Raunveruleg læsing opinna skráa
+ - {Vernduð ham útgáfa:Bugs} sem virkar á netkerfi
+ - Tilgreining úttaksportar við prentun
+ - Netkerfisútgáfa: Tveir Nikar berjast hver á móti öðrum, hver með
+   sitt eigið forrit
+ - Fullständig þýska þýðing á Turbo Vision
+ - Betri ritill
+ - Betri hjálpargluggi
+ - Litastillingar
+ - Vista viðmótsins
+ - Stilla valkosti í forritinu
+ .
+ .
+ .
+
+
+Sjá einnig:
+ {Villur í tvNiki:Bugs}
+ {Efnisyfirlit:NoContext}
+
+
+
+.topic Bugs
+ █ Villur í tvNiki
+ ██████████████████
+
+Engar stórar villur eru þekktar í tvNiki eins og er. Hins vegar er ekki hægt
+að ábyrgjast að allt virki villulaust.
+
+Litlar villur:
+
+ - Vernduð ham útgáfan virkar ekki á netkerfi. Hana er aðeins hægt að ræsa
+   einu sinni á netkerfinu (tengist einhvern veginn DOS framlengjanum
+   frá Borland Pascal 7.0)
+ - Ekki er hægt að opna hjálpargluggann í gluggum ef "venjulegur"
+   hjálpargluggi er nú þegar í bakgrunni (eyðing ómodalískra glugga í
+   glugga virkar ekki rétt)
+ - ...
+
+
+Sjá einnig:
+ {Saga tvNiki:Geschichte}
+ {Efnisyfirlit:NoContext}
+
+
+
+
+.topic Copyright
+ █ Höfundarréttur
+ █████████████████
+
+ █████████████████████████████████
+ █tvNiki v1.1 eftir 1Stein       █
+ █                               █
+ █Höfundarréttur Stefan Schimanski,█
+ █Allur réttur áskilinn          █
+ █████████████████████████████████
+
+
+Þessi útgáfa af tvNiki er ókeypis til einkanota. Notkun í kennslu og í öðrum
+opinberum tilgangi er EKKI leyfð án skráningar hjá höfundi.
+
+"Forrit sem er þess virði að þú notir það er líka þess virði að þú borgir
+fyrir það..."
+
+Núverandi útgáfa af tvNiki er hægt að sækja á heimasíðu tölvuklúbbsins
+Große Schule á Netinu:
+
+http://www.tigersoft.de/wf-net/info/computer-ag
+
+
+
+Fyrir frekari upplýsingar:
+
+ Stefan Schimanski
+ Ginsterweg 19
+ D-38300 Wolfenbüttel
+ Sími: 05331/63268
+
+
+
+Sjá einnig:
+ {Saga:Geschichte}
+ {Efnisyfirlit:NoContext}

@@ -4,7 +4,7 @@
 # Status bar
 Wall=Wand
 Niki/turn=Niki/drehen
-Supply=Vorrat
+Payload=Vorrat
 Run=Ausführen
 
 # Menus
