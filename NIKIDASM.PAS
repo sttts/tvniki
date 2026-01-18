@@ -246,9 +246,8 @@ VAR
   i, Y: Integer;
   S: String;
 BEGIN
-  { Direct color attributes: black on light grey, focus = white on blue }
-  Color := $70;       { Black on light grey }
-  FocusColor := $1F;  { White on blue }
+  Color := GetColor(1);
+  FocusColor := GetColor(2);
 
   FOR Y := 0 TO Size.Y - 1 DO
   BEGIN
@@ -300,10 +299,8 @@ BEGIN
 END;
 
 FUNCTION TDisasmWindow.GetPalette: PPalette;
-{ Window palette: all entries use black on light grey ($70) }
-{ Entries: 1=frame passive, 2=frame active, 3=frame icons, 4=scrollbar page,
-  5=scrollbar controls, 6=scroller normal, 7=scroller selected, 8=reserved }
-CONST CDisasm: String[8] = #$70#$70#$70#$70#$70#$70#$70#$70;
+{ Use grey dialog palette (CGrayDialog indices 32-39) }
+CONST CDisasm: String[8] = #32#33#34#35#36#37#38#39;
 BEGIN
   GetPalette := @CDisasm;
 END;
