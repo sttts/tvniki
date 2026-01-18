@@ -124,6 +124,8 @@ BEGIN
 END;
 
 PROCEDURE TNikiEditor.HandleEvent(VAR Event:TEvent);
+VAR
+  TargetLine: Word;
 BEGIN
   CASE Event.What OF
     evCommand : CASE Event.Command OF
@@ -151,6 +153,20 @@ BEGIN
                               Print;
                             END;
                 END;
+    evBroadcast: CASE Event.Command OF
+                   cmGotoEditorLine: BEGIN
+                     TargetLine := Word(PtrUInt(Event.InfoPtr));
+                     IF (Editor <> NIL) AND (TargetLine > 0) THEN
+                     BEGIN
+                       { Set highlight line and scroll to show it }
+                       EditorHighlightLine := TargetLine;
+                       Editor^.ScrollTo(0, TargetLine - 1 - Editor^.Size.Y DIV 2);
+                       DrawView;
+                     END;
+                     ClearEvent(Event);
+                     Exit;
+                   END;
+                 END;
   END;
   INHERITED HandleEvent(Event);
 

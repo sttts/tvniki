@@ -951,6 +951,10 @@ BEGIN
         BEGIN
           IF Prog^.RunStep THEN SetCounter( MyTimer, 0 );
 
+          { Update disassemble window with current IP, carry, and supply count }
+          Message(Desktop, evBroadcast, cmUpdateDisasmIP,
+            Pointer(PtrUInt((PtrUInt(Ord(Prog^.Carry)) SHL 32) OR (Niki^.Vorrat SHL 16) OR Prog^.IP)));
+
           DrawLine(Niki^.Y-2);
           DrawLine(Niki^.Y);
           DrawLine(Niki^.Y+2);
@@ -977,6 +981,10 @@ BEGIN
         IF (Counter(MyTimer)>=Speed) AND NOT Paused AND (ExecCommand = TRUE) THEN
         BEGIN
           IF Prog^.RunStep THEN SetCounter( MyTimer, 0 );
+
+          { Update disassemble window with current IP, carry, and supply count }
+          Message(Desktop, evBroadcast, cmUpdateDisasmIP,
+            Pointer(PtrUInt((PtrUInt(Ord(Prog^.Carry)) SHL 32) OR (Niki^.Vorrat SHL 16) OR Prog^.IP)));
 
           IF Prog^.BreakPoint THEN
           BEGIN

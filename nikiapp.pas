@@ -152,12 +152,11 @@ BEGIN
   InfoWindow := New(PInfoDialog, Init(P));
   InsertWindow(InfoWindow);
 
-  { Disassemble window - initially hidden }
+  { Disassemble window }
   Desktop^.GetExtent(R);
   R.A.X := R.B.X - 30;
   R.B.Y := R.A.Y + 15;
   DisasmWindow := New(PDisasmWindow, Init(R));
-  DisasmWindow^.Hide;
   InsertWindow(DisasmWindow);
 
   FeldNeu;
@@ -280,7 +279,8 @@ BEGIN
       NewItem(tr('~R~eset program'), 'Ctrl-F2', kbCtrlF2, cmReset, hcNoContext,
       NewLine(
       NewItem(tr('~T~each in'), '', 0, cmTeachIn, hcNoContext,
-      NIL))))))),
+      NewItem(tr('~D~isassemble'), '', 0, cmDisasmWin, hcNoContext,
+      NIL)))))))),
     NewSubMenu(tr('F~i~eld'), hcNoContext, NewMenu(
       NewItem(tr('~N~ew'), '', 0, cmNewFeld, hcNoContext,
       NewItem(tr('~O~pen...'), '', 0, cmOpenFeld, hcNoContext,
@@ -304,8 +304,7 @@ BEGIN
       NewItem(tr('C~l~ose...'), 'Alt+F3', kbAltF3, cmClose, hcNoContext,
       NewLine(
       NewItem(tr('~I~nfo window on/off'), '', 0, cmInfoWin, hcNoContext,
-      NewItem(tr('~D~isassemble'), '', 0, cmDisasmWin, hcNoContext,
-      NIL))))))))))))),
+      NIL)))))))))))),
     NewSubMenu(tr('~H~elp'), hcNoContext, NewMenu(
       NewItem(tr('~C~ontents'), 'F1', kbF1, cmHelp, hcNoContext,
       NewItem(tr('~P~ASCAL help'), 'Ctrl-F1', kbCtrlF1, cmPascalHelp, hcNoContext,
@@ -338,12 +337,9 @@ BEGIN
                   cmDisasmWin:
                             IF DisasmWindow <> NIL THEN
                             BEGIN
-                              IF DisasmWindow^.GetState(sfVisible) THEN
-                                DisasmWindow^.Hide
-                              ELSE BEGIN
+                              IF NOT DisasmWindow^.GetState(sfVisible) THEN
                                 DisasmWindow^.Show;
-                                DisasmWindow^.Select;
-                              END;
+                              DisasmWindow^.Select;
                             END;
                   cmRun:  IF (TypeOf(Desktop^.Current^)<>TypeOf(TNikiEditor)) THEN
                             IF EditWindow<>NIL THEN

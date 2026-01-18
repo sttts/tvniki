@@ -27,6 +27,8 @@ CONST cmIdle=           65535;
       cmDisasmWin=      900;
       cmUpdateDisasm=   901;
       cmSyncDisasm=     903;
+      cmUpdateDisasmIP= 904;
+      cmGotoEditorLine= 905;
 
       cmInfo=           999;
       cmPascalHelp=     902;
