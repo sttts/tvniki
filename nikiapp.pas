@@ -403,11 +403,20 @@ END;
 
 PROCEDURE TNikiApplication.Oeffnen;
 VAR DateiName:String[100];
+    OldWindow: PEditWindow;
 BEGIN
   DateiName := '*.PAS';
   IF ExecuteDialog(New(PFileDialog, Init('*.PAS', 'Datei Öffnen',
          '~N~ame', fdOpenButton, 100)), @DateiName) <> cmCancel
-  THEN OpenEditor(DateiName, TRUE);
+  THEN BEGIN
+    { Remember untitled unmodified window to close after opening new file }
+    OldWindow := NIL;
+    IF (EditWindow <> NIL) AND (EditWindow^.Editor <> NIL) THEN
+      IF (EditWindow^.Editor^.FileName = '') AND NOT EditWindow^.Editor^.Modified THEN
+        OldWindow := EditWindow;
+    OpenEditor(DateiName, TRUE);
+    IF OldWindow <> NIL THEN OldWindow^.Close;
+  END;
 END;
 
 PROCEDURE TNikiApplication.ZeigeClipboard;
