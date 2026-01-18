@@ -1,13 +1,62 @@
 {$MODE OBJFPC}
 {$M 16385, 0, 655360}
 
-USES NikiApp, Timer, Mouse, SysUtils;
+USES NikiApp, Timer, Mouse, SysUtils, Process, Classes;
 
 VAR Niki : TNikiApplication;
 
 VAR OldExit:Pointer;
 VAR AltScreenActive: Boolean = False;
 VAR CrashLog: Text;
+
+VAR DecodedBacktrace: TStringList;
+
+{ Decode stack addresses using platform-specific tool }
+PROCEDURE DecodeBacktrace;
+VAR
+  P: TProcess;
+  J: Integer;
+  LoadAddr, FileAddr: PtrUInt;
+BEGIN
+  DecodedBacktrace := TStringList.Create;
+
+  { Calculate load address from PASCALMAIN's runtime address }
+  { PASCALMAIN is at file offset ~0xe20, so round down to page boundary }
+  LoadAddr := PtrUInt(@PASCALMAIN) AND $FFFFFFFFFFFFF000;
+
+  P := TProcess.Create(NIL);
+  TRY
+    {$IFDEF DARWIN}
+    P.Executable := 'atos';
+    P.Parameters.Add('-o');
+    P.Parameters.Add(ParamStr(0));
+    P.Parameters.Add('-l');
+    P.Parameters.Add('0x' + HexStr(Pointer(LoadAddr)));
+    FOR J := 0 TO ExceptFrameCount - 1 DO
+      P.Parameters.Add('0x' + HexStr(ExceptFrames[J]));
+    {$ELSE}
+    { On Linux, convert runtime addresses to file addresses }
+    P.Executable := 'addr2line';
+    P.Parameters.Add('-e');
+    P.Parameters.Add(ParamStr(0));
+    P.Parameters.Add('-f');
+    P.Parameters.Add('-C');
+    P.Parameters.Add('-p');
+    FOR J := 0 TO ExceptFrameCount - 1 DO
+    BEGIN
+      { Subtract load address to get file offset }
+      FileAddr := PtrUInt(ExceptFrames[J]) - LoadAddr;
+      P.Parameters.Add('0x' + HexStr(Pointer(FileAddr)));
+    END;
+    {$ENDIF}
+    P.Options := [poWaitOnExit, poUsePipes];
+    P.Execute;
+    DecodedBacktrace.LoadFromStream(P.Output);
+  EXCEPT
+    { Decoding failed, leave empty }
+  END;
+  P.Free;
+END;
 
 { Switch from alternate screen back to main screen and disable mouse }
 PROCEDURE LeaveAltScreen;
@@ -62,22 +111,33 @@ BEGIN
   EXCEPT
     ON E: Exception DO
     BEGIN
-      { Write to crash.log for debugging }
+      { Decode backtrace first while we're still running }
+      DecodeBacktrace;
+
+      LeaveAltScreen;
+
+      { Write to crash.log }
       Assign(CrashLog, 'crash.log');
       Rewrite(CrashLog);
       Writeln(CrashLog, 'Exception: ', E.ClassName, ': ', E.Message);
       Writeln(CrashLog, 'Backtrace:');
-      DumpExceptionBackTrace(CrashLog);
+      IF DecodedBacktrace.Count > 0 THEN
+        Writeln(CrashLog, DecodedBacktrace.Text)
+      ELSE
+        DumpExceptionBackTrace(CrashLog);
       Close(CrashLog);
 
-      LeaveAltScreen;
+      { Write to stderr }
       Writeln(StdErr, 'Exception: ', E.ClassName, ': ', E.Message);
       Writeln(StdErr, 'Backtrace:');
-      DumpExceptionBackTrace(StdErr);
-      Writeln(StdErr);
-      Writeln(StdErr, 'To decode: lldb ', ParamStr(0), ' -o "image lookup -a <addr>" -o quit');
+      IF DecodedBacktrace.Count > 0 THEN
+        Write(StdErr, DecodedBacktrace.Text)
+      ELSE
+        DumpExceptionBackTrace(StdErr);
       Writeln(StdErr);
       Writeln(StdErr, '(also saved to crash.log)');
+
+      DecodedBacktrace.Free;
       Halt(1);
     END;
   END;
