@@ -1,7 +1,7 @@
 {$MODE OBJFPC}
 {$M 16385, 0, 655360}
 
-USES NikiApp, Timer, Mouse, SysUtils, Process, Classes;
+USES NikiApp, Timer, Mouse, SysUtils, Process, Classes, NikiStrings;
 
 VAR Niki : TNikiApplication;
 
@@ -124,6 +124,9 @@ BEGIN
   { Handle --help before doing anything else }
   IF (ParamCount > 0) AND ((ParamStr(1) = '--help') OR (ParamStr(1) = '-h')) THEN
     ShowHelp;
+
+  { Load German translations (default language) }
+  LoadTranslation('de');
 
   OldExit := ExitProc;
   ExitProc := @MyExitProc;

@@ -24,7 +24,7 @@ TYPE PNikiEditor=^TNikiEditor;
 
 IMPLEMENTATION
 USES NikiCnst, NikiComp, Compiler, MsgBox, NikiFeld, Dos, NikiInfo,
-     StdDlg, Hilfe, NikiPrnt, Config, SysUtils;
+     StdDlg, Hilfe, NikiPrnt, Config, SysUtils, NikiStrings;
 
 {$F+}
 FUNCTION MyEditorDialog(Dialog: Integer; Info: Pointer): Word;
@@ -46,20 +46,20 @@ BEGIN
       MyEditorDialog := MessageBox('Error creating file %s.',
         @Info, mfError + mfOkButton);
     edSaveModify:
-      MyEditorDialog := MessageBox('%s wurde verändert. Speichern?',
+      MyEditorDialog := MessageBox(tr('%s has been modified. Save?'),
         @Info, mfInformation + mfYesNoCancel);
     edSaveUntitled:
-      MyEditorDialog := MessageBox('Unbenannte Datei speichern?',
+      MyEditorDialog := MessageBox(tr('Save untitled file?'),
         nil, mfInformation + mfYesNoCancel);
     edSaveAs:
       MyEditorDialog :=
         Application^.ExecuteDialog(New(PFileDialog, Init('*.PAS',
-        'Speichern als', '~N~ame', fdOkButton, 101)), Info);
+        tr('Save as'), tr('~N~ame'), fdOkButton, 101)), Info);
     edFind:
       MyEditorDialog :=
         Application^.ExecuteDialog(CreateFindDialog, Info);
     edSearchFailed:
-      MyEditorDialog := MessageBox('Suchtext nicht gefunden.',
+      MyEditorDialog := MessageBox(tr('Search string not found.'),
         nil, mfError + mfOkButton);
     edReplace:
       MyEditorDialog :=
@@ -73,7 +73,7 @@ BEGIN
         Inc(T.Y);
         if TPoint(Info).Y <= T.Y then
           R.Move(0, Desktop^.Size.Y - R.B.Y - 2);
-        MyEditorDialog := MessageBoxRect(R, 'Dieses Vorkommen ersetzen?',
+        MyEditorDialog := MessageBoxRect(R, tr('Replace this occurrence?'),
           nil, mfYesNoCancel + mfInformation);
       end;
   end;
@@ -109,7 +109,7 @@ BEGIN
   ELSE BEGIN
     FileName := Editor^.FileName;
     IF FileName = '' THEN
-      GetTitle := 'Untitled'
+      GetTitle := tr('Untitled')
     ELSE BEGIN
       RelPath := ExtractRelativePath(GetCurrentDir + PathDelim, FileName);
       IF Length(RelPath) < Length(FileName) THEN
@@ -135,7 +135,7 @@ BEGIN
                   cmDebug:BEGIN
                             IF GetNumOption('DEBUG', 1)=0 THEN
                             BEGIN
-                              MessageBox('Der Debug-Modus wurde über den Schalter DEBUG in NIKI.CFG deaktiviert.',
+                              MessageBox(tr('Debug mode has been disabled via the DEBUG switch in NIKI.CFG.'),
                                 NIL, mfOkButton);
                             END;
 
@@ -212,7 +212,7 @@ BEGIN
 
   IF FeldWindow=NIL THEN
   BEGIN
-    MessageBox('Sie müssen erst ein Roboterfeld laden, um das Programm zu starten',
+    MessageBox(tr('You must load a robot field first to run the program'),
         NIL, mfOkButton+mfInformation);
   END;
 
@@ -297,7 +297,7 @@ BEGIN
   dec(R.B.X);
   R.B.Y:=R.A.Y+1;
 
-  Error := New(PErrorLine, Init(R, 'Fehler #%d in Zeile %d: %s', 3));
+  Error := New(PErrorLine, Init(R, tr('Error #%d at line %d: %s'), 3));
 
   ErrorInfo.Number := ErrorNumber;
   ErrorInfo.Desc := @ErrorDescribtion;

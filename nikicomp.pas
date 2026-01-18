@@ -50,7 +50,7 @@ TYPE TJustify=(jfLeft, jfRight);
                     END;
 
 IMPLEMENTATION
-USES Compiler, Dos, Config;
+USES Compiler, Dos, Config, NikiStrings;
 
 CONSTRUCTOR TOutputLine.Init(VAR R:TRect; AJustify:TJustify);
 BEGIN
@@ -91,7 +91,7 @@ CONSTRUCTOR TCompileDialog.Init(ADatei:String);
 VAR R:TRect;
 BEGIN
   R.Assign(18, 5, 62, 16);
-  INHERITED Init(R, 'Compilieren');
+  INHERITED Init(R, tr('Compiling'));
 
   pProgramm := NIL;
   pDatei := NIL;
@@ -112,26 +112,26 @@ PROCEDURE TCompileDialog.SetupWindow;
 VAR R:TRect;
 BEGIN
   R.Assign(3, 2, 19, 3);
-  Insert( New(PStaticText, Init(R, 'Programm      :')));
+  Insert( New(PStaticText, Init(R, tr('Program       :'))));
   R.Assign(19, 2, 41, 3);
   Programm := New(PParamLine, Init(R, '%22s', 1));
   Insert( Programm );
 
   R.Assign(3, 3, 19, 4);
-  Insert( New(PStaticText, Init(R, 'Aktuelle Datei:')));
+  Insert( New(PStaticText, Init(R, tr('Current file  :'))));
   R.Assign(19, 3, 41, 4);
   Datei := New(PParamLine, Init(R, '%22s', 1));
   Insert( Datei );
 
   R.Assign(3, 5, 19, 6);
-  Insert( New(PStaticText, Init(R, 'Zeilen        :')));
+  Insert( New(PStaticText, Init(R, tr('Lines         :'))));
   R.Assign(19, 5, 25, 6);
   Zeilen := New(PParamLine, Init(R, '%6d', 1));
   Zeilen^.SetData(nZeilen);
   Insert( Zeilen );
 
   R.Assign(3, 6, 19, 7);
-  Insert( New(PStaticText, Init(R, 'Gesamte Zeilen:')));
+  Insert( New(PStaticText, Init(R, tr('Total lines   :'))));
   R.Assign(19, 6, 25, 7);
   GesamtZeilen := New(PParamLine, Init(R, '%6d', 1));
   GesamtZeilen^.SetData(nGesamtZeilen);
@@ -139,11 +139,11 @@ BEGIN
 
 
   R.Assign(15, 8, 28, 10);
-  Abbrechen := New(PButton, Init(R, '~A~bbrechen', cmCancel, bfDefault));
+  Abbrechen := New(PButton, Init(R, tr('~C~ancel'), cmCancel, bfDefault));
   Insert( Abbrechen );
 
   R.Assign(15, 8, 28, 10);
-  OK := New(PButton, Init(R, '~O~k', cmOk, bfDefault));
+  OK := New(PButton, Init(R, tr('~O~k'), cmOk, bfDefault));
   Insert( OK );
   OK^.Hide;
 END;

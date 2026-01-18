@@ -1,0 +1,124 @@
+# German translation for tvNiki
+# Format: English=German
+
+# Status bar
+Wall=Wand
+Niki/turn=Niki/drehen
+Supply=Vorrat
+Run=Ausführen
+
+# Menus
+~F~ile=~D~atei
+~N~ew=~N~eu
+~O~pen...=~Ö~ffnen...
+~S~ave=~S~peichern
+Save ~a~s...=Speichern ~a~ls...
+~P~rint...=~D~rucken...
+~C~hange directory...=~V~erzeichnis wechseln...
+~Q~uit=~B~eenden
+~E~dit=~B~earbeiten
+~U~ndo=~U~ndo
+Cu~t~=~A~usschneiden
+~C~opy=~K~opieren
+~P~aste=~E~infügen
+C~l~ear=~L~öschen
+~S~how clipboard=~Z~eige Clipboard
+~S~earch=~S~uchen
+~F~ind...=~S~uchen...
+~R~eplace...=~E~rsetzen...
+Search ~a~gain=~W~eitersuchen
+~C~ompiler=~C~ompiler
+C~o~mpile=~C~ompilieren
+~S~ingle step=~E~inzelschritt
+~R~eset program=Programm ~z~urücksetzen
+~T~each in=~T~each in
+F~i~eld=~F~eld
+S~u~pply...=~V~orrat...
+Sp~e~ed...=~G~eschwindigkeit...
+~W~indow=Fe~n~ster
+~T~ile=~N~ebeneinander
+~C~ascade=~H~intereinander
+Cl~o~se all=Alle ~s~chließen
+Si~z~e/move=~G~röße/Position
+~Z~oom=~V~ergrößern
+~N~ext=Nä~c~hstes
+~P~revious=V~o~rheriges
+C~l~ose...=~S~chließen...
+~V~ideo mode=~V~ideomodus ändern
+~I~nfo window on/off=~I~nfo-Fenster An/Aus
+~H~elp=~H~ilfe
+~C~ontents=I~n~halt
+~P~ASCAL help=~P~ASCAL-Hilfe
+~A~bout=~I~nfo
+
+# Dialogs
+Open File=Datei Öffnen
+Open Field=Feld Öffnen
+Save file=Datei speichern
+Save as=Speichern als
+~N~ame=~N~ame
+Cannot open help file=Die Hilfedatei kann nicht geöffnet werden
+Compiling=Compilieren
+Program       :=Programm      :
+Current file  :=Aktuelle Datei:
+Lines         :=Zeilen        :
+Total lines   :=Gesamte Zeilen:
+~C~ancel=~A~bbrechen
+~O~k=~O~k
+
+# Editor messages
+%s has been modified. Save?=%s wurde verändert. Speichern?
+Save untitled file?=Unbenannte Datei speichern?
+Search string not found.=Suchtext nicht gefunden.
+Replace this occurrence?=Dieses Vorkommen ersetzen?
+Debug mode has been disabled via the DEBUG switch in NIKI.CFG.=Der Debug-Modus wurde über den Schalter DEBUG in NIKI.CFG deaktiviert.
+You must load a robot field first to run the program=Sie müssen erst ein Roboterfeld laden, um das Programm zu starten
+Error #%d at line %d: %s=Fehler #%d in Zeile %d: %s
+Untitled=Untitled
+
+# Field messages
+Save field %s before closing?=Das Feld %s vor dem Schließen speichern?
+Not enough memory for a field=Nicht genug Speicher für ein Feld
+Change supply=Vorrat ändern
+Supply:=Vorrat:
+Supply must be between 0 and 99=Vorrat muß zwischen 0 und 99 liegen
+Change speed=Geschwindigkeit ändern
+Speed:=Geschwindigkeit:
+Speed must be between 0 and 99=Geschwindigkeit muß zwischen 0 und 99 liegen
+Do you want to save the recorded part as a program?=Wollen sie den aufgenommenen Teil als Programm speichern?
+Program finished=Programm beendet
+
+# Runtime errors
+Error #%d: Nothing to put down or cell is full=Fehler #%d: Nichts zum Ablegen vorhanden oder Platz voll
+Error #%d: Nothing to pick up=Fehler #%d: Nichts zum Aufnehmen vorhanden
+Error #%d: Wall in the way=Fehler #%d: Wand im Weg
+Error #%d: Not enough memory=Fehler #%d: Zu wenig Speicher vorhanden
+Error #%d: Stack overflow=Fehler #%d: Stacküberlauf
+Internal interpreter error #%d at PCode position %d=Interner Interpreter-Fehler #%d an PCode-Position %d
+Error #%d: File error=Fehler #%d: Dateifehler
+Unknown error #%d=Unbekannter Fehler #%d
+Not enough memory to display error=Nicht genug Speicher zum Anzeigen des Fehlers
+Not enough resources to run the program=Nicht genug Resourcen zum Ausführen des Programms
+Not enough memory to run the program=Nicht genug Speicher zum Ausführen des Programms
+Not enough memory to display completion message=Nicht genug Speicher zum Anzeigen der Fertig-Meldung
+
+# Compiler errors
+Source file not found or cannot be opened=Quelldatei nicht gefunden oder kann nicht geöffnet werden
+Cannot create destination file=Zieldatei kann nicht erzeugt werden
+Unclosed comment=Nicht geschlossenes Kommentar
+Identifier expected=Bezeichner erwartet
+Keyword not allowed as identifier=Schlüsselwort als Bezeichner nicht erlaubt
+Semicolon (;) expected=Semikolon (;) erwartet
+Semicolon expected=Semikolon erwartet
+END or command expected=END oder Befehl erwartet
+BEGIN expected=BEGIN erwartet
+Right bracket expected=Rechte Klammer erwartet
+Function expected=Funktion erwartet
+Unknown function=Unbekannte Funktion
+THEN expected=THEN erwartet
+DO expected=DO erwartet
+UNTIL expected=UNTIL erwartet
+Command expected=Befehl erwartet
+Unknown command=Unbekannter Befehl
+Duplicate identifier=Doppelter Bezeichner
+Period expected=Punkt erwartet

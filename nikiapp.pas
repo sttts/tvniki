@@ -44,7 +44,7 @@ TYPE  TNikiApplication = OBJECT(TApplication)
 
 IMPLEMENTATION
 USES Dos, FVConsts, NikiCnst, NikiEdit, NikiInfo, NikiGlob, NikiCopy,
-     NikiHelp, HelpFile, Hilfe, Config, SysUtils;
+     NikiHelp, HelpFile, Hilfe, Config, SysUtils, NikiStrings;
 
 CONST HeapSize = (128 * 1024) DIV 16;
       { Editor commands from original TV Editors unit }
@@ -215,14 +215,14 @@ BEGIN
   R.A.Y := R.B.Y - 1;
   New(StatusLine, Init(R,
     NewStatusDef(hcFeldeditor, hcFeldeditor,
-      NewStatusKey('~Space~=Wand', kbNoKey, cmIdle,
-      NewStatusKey('~P~=Niki/drehen', kbNoKey, cmIdle,
-      NewStatusKey('~+/-~=Vorrat', kbNoKey, cmIdle,
-      NewStatusKey('~Ctrl-F9~=Ausführen', kbCtrlF9, cmRun,
+      NewStatusKey('~Space~=' + tr('Wall'), kbNoKey, cmIdle,
+      NewStatusKey('~P~=' + tr('Niki/turn'), kbNoKey, cmIdle,
+      NewStatusKey('~+/-~=' + tr('Supply'), kbNoKey, cmIdle,
+      NewStatusKey('~Ctrl-F9~=' + tr('Run'), kbCtrlF9, cmRun,
       NewStatusKey('~Alt-X~ Exit', kbAltX, cmQuit,
       nil))))),
     NewStatusDef(0, $FFFF,
-      NewStatusKey('~Ctrl-F9~ Ausführen', kbCtrlF9, cmRun,
+      NewStatusKey('~Ctrl-F9~ ' + tr('Run'), kbCtrlF9, cmRun,
       NewStatusKey('~Alt-X~/~Ctrl-Q~ Exit', kbAltX, cmQuit,
       NewStatusKey('', kbCtrlQ, cmQuit,
       StdStatusKeys(nil)))), nil))));
@@ -234,72 +234,72 @@ BEGIN
   GetExtent(R);
   R.B.Y := R.A.Y + 1;
   MenuBar := New (PMenuBar, Init(R, NewMenu(
-    NewSubMenu('~D~atei', hcNoContext, NewMenu(
-      NewItem('~N~eu', '', 0, cmNew, hcNoContext,
-      NewItem('~Ö~ffnen...', 'F3', kbF3, cmOpen, hcNoContext,
+    NewSubMenu(tr('~F~ile'), hcNoContext, NewMenu(
+      NewItem(tr('~N~ew'), '', 0, cmNew, hcNoContext,
+      NewItem(tr('~O~pen...'), 'F3', kbF3, cmOpen, hcNoContext,
       NewLine(
-      NewItem('~S~peichern', 'F2', kbF2, cmSave, hcNoContext,
-      NewItem('Speichern ~a~ls...', '', 0, cmSaveAs, hcNoContext,
-      NewItem('~D~rucken...', '', kbNoKey, cmPrint, hcNoContext,
+      NewItem(tr('~S~ave'), 'F2', kbF2, cmSave, hcNoContext,
+      NewItem(tr('Save ~a~s...'), '', 0, cmSaveAs, hcNoContext,
+      NewItem(tr('~P~rint...'), '', kbNoKey, cmPrint, hcNoContext,
       NewLine(
-      NewItem('~V~erzeichnis wechseln...', '', kbNoKey, cmChangeDir, hcNoContext,
+      NewItem(tr('~C~hange directory...'), '', kbNoKey, cmChangeDir, hcNoContext,
 {      NewItem('~D~OS aufrufen', '', kbNoKey, cmDosShell, hcNoContext,}
       NewLine(
-      NewItem('~B~eenden', 'Alt-X', kbAltX, cmQuit, hcNoContext,
+      NewItem(tr('~Q~uit'), 'Alt-X', kbAltX, cmQuit, hcNoContext,
       NIL))))))))))),
-    NewSubMenu('~B~earbeiten', hcNoContext, NewMenu(
-      NewItem('~U~ndo', 'Alt-Back', kbAltBack, cmUndo, hcNoContext,
+    NewSubMenu(tr('~E~dit'), hcNoContext, NewMenu(
+      NewItem(tr('~U~ndo'), 'Alt-Back', kbAltBack, cmUndo, hcNoContext,
       NewLine(
-      NewItem('~A~usschneiden', 'Shift-Del', kbShiftDel, cmCut, hcNoContext,
-      NewItem('~K~opieren', 'Ctrl-Ins', kbCtrlIns, cmCopy, hcNoContext,
-      NewItem('~E~infügen', 'Shift-Ins', kbShiftIns, cmPaste, hcNoContext,
-      NewItem('~L~öschen', 'Ctrl-Del', kbCtrlDel, cmClear, hcNoContext,
+      NewItem(tr('Cu~t~'), 'Shift-Del', kbShiftDel, cmCut, hcNoContext,
+      NewItem(tr('~C~opy'), 'Ctrl-Ins', kbCtrlIns, cmCopy, hcNoContext,
+      NewItem(tr('~P~aste'), 'Shift-Ins', kbShiftIns, cmPaste, hcNoContext,
+      NewItem(tr('C~l~ear'), 'Ctrl-Del', kbCtrlDel, cmClear, hcNoContext,
       NewLine(
-      NewItem('~Z~eige Clipboard', '', 0, cmShowClip, hcNoContext,
+      NewItem(tr('~S~how clipboard'), '', 0, cmShowClip, hcNoContext,
       NIL))))))))),
-    NewSubMenu('~S~uchen', hcNoContext, NewMenu(
-      NewItem('~S~uchen...', '', kbNoKey, cmFind, hcNoContext,
-      NewItem('~E~rsetzen...', '', kbNoKey, cmReplace, hcNoContext,
-      NewItem('~W~eitersuchen', 'Alt-W', kbAltW, cmSearchAgain, hcNoContext,
+    NewSubMenu(tr('~S~earch'), hcNoContext, NewMenu(
+      NewItem(tr('~F~ind...'), '', kbNoKey, cmFind, hcNoContext,
+      NewItem(tr('~R~eplace...'), '', kbNoKey, cmReplace, hcNoContext,
+      NewItem(tr('Search ~a~gain'), 'Alt-W', kbAltW, cmSearchAgain, hcNoContext,
       NIL)))),
-    NewSubMenu('~C~ompiler', hcNoContext, NewMenu(
-      NewItem('~A~usführen', 'Ctrl-F9', kbCtrlF9, cmRun, hcNoContext,
-      NewItem('~C~ompilieren', 'Alt-F9', kbAltF9, cmCompile, hcNoContext,
-      NewItem('~E~inzelschritt', 'Ctrl-F8', kbCtrlF8, cmDebug, hcNoContext,
-      NewItem('Programm ~z~urücksetzen', 'Ctrl-F2', kbCtrlF2, cmReset, hcNoContext,
+    NewSubMenu(tr('~C~ompiler'), hcNoContext, NewMenu(
+      NewItem(tr('~R~un'), 'Ctrl-F9', kbCtrlF9, cmRun, hcNoContext,
+      NewItem(tr('C~o~mpile'), 'Alt-F9', kbAltF9, cmCompile, hcNoContext,
+      NewItem(tr('~S~ingle step'), 'Ctrl-F8', kbCtrlF8, cmDebug, hcNoContext,
+      NewItem(tr('~R~eset program'), 'Ctrl-F2', kbCtrlF2, cmReset, hcNoContext,
       NewLine(
-      NewItem('~T~each in', '', 0, cmTeachIn, hcNoContext,
+      NewItem(tr('~T~each in'), '', 0, cmTeachIn, hcNoContext,
       NIL))))))),
-    NewSubMenu('~F~eld', hcNoContext, NewMenu(
-      NewItem('~N~eu', '', 0, cmNewFeld, hcNoContext,
-      NewItem('~Ö~ffnen...', '', 0, cmOpenFeld, hcNoContext,
+    NewSubMenu(tr('F~i~eld'), hcNoContext, NewMenu(
+      NewItem(tr('~N~ew'), '', 0, cmNewFeld, hcNoContext,
+      NewItem(tr('~O~pen...'), '', 0, cmOpenFeld, hcNoContext,
       NewLine(
-      NewItem('~S~peichern', '', 0, cmSaveFeld, hcNoContext,
-      NewItem('Speichern ~a~ls...', '', 0, cmSaveAsFeld, hcNoContext,
-      NewItem('~D~rucken...', '', 0, cmPrintFeld, hcNoContext,
+      NewItem(tr('~S~ave'), '', 0, cmSaveFeld, hcNoContext,
+      NewItem(tr('Save ~a~s...'), '', 0, cmSaveAsFeld, hcNoContext,
+      NewItem(tr('~P~rint...'), '', 0, cmPrintFeld, hcNoContext,
       NewLine(
-      NewItem('~V~orrat...', '', 0, cmVorrat, hcNoContext,
-      NewItem('~G~eschwindigkeit...', '', 0, cmSpeed, hcNoContext,
+      NewItem(tr('S~u~pply...'), '', 0, cmVorrat, hcNoContext,
+      NewItem(tr('Sp~e~ed...'), '', 0, cmSpeed, hcNoContext,
       NIL)))))))))),
-    NewSubMenu('Fe~n~ster', hcNoContext, NewMenu(
-      NewItem('~N~ebeneinander', '', kbNoKey, cmTile, hcNoContext,
-      NewItem('~H~intereinander', '', kbNoKey, cmCascade, hcNoContext,
-      NewItem('Alle ~s~chließen', '', kbNoKey, cmCloseAll, hcNoContext,
+    NewSubMenu(tr('~W~indow'), hcNoContext, NewMenu(
+      NewItem(tr('~T~ile'), '', kbNoKey, cmTile, hcNoContext,
+      NewItem(tr('~C~ascade'), '', kbNoKey, cmCascade, hcNoContext,
+      NewItem(tr('Cl~o~se all'), '', kbNoKey, cmCloseAll, hcNoContext,
       NewLine(
-      NewItem('~G~röße/Position','Ctrl+F5', kbCtrlF5, cmResize, hcNoContext,
-      NewItem('~V~ergrößern', 'F5', kbF5, cmZoom, hcNoContext,
-      NewItem('Nä~c~hstes', 'F6', kbF6, cmNext, hcNoContext,
-      NewItem('V~o~rheriges', 'Shift+F6', kbShiftF6, cmPrev, hcNoContext,
-      NewItem('~S~chließen...', 'Alt+F3', kbAltF3, cmClose, hcNoContext,
+      NewItem(tr('Si~z~e/move'),'Ctrl+F5', kbCtrlF5, cmResize, hcNoContext,
+      NewItem(tr('~Z~oom'), 'F5', kbF5, cmZoom, hcNoContext,
+      NewItem(tr('~N~ext'), 'F6', kbF6, cmNext, hcNoContext,
+      NewItem(tr('~P~revious'), 'Shift+F6', kbShiftF6, cmPrev, hcNoContext,
+      NewItem(tr('C~l~ose...'), 'Alt+F3', kbAltF3, cmClose, hcNoContext,
       NewLine(
-      NewItem('~V~ideomodus ändern', '', 0, cmVidMode, hcNoContext,
-      NewItem('~I~nfo-Fenster An/Aus', '', 0, cmInfoWin, hcNoContext,
+      NewItem(tr('~V~ideo mode'), '', 0, cmVidMode, hcNoContext,
+      NewItem(tr('~I~nfo window on/off'), '', 0, cmInfoWin, hcNoContext,
       NIL))))))))))))),
-    NewSubMenu('~H~ilfe', hcNoContext, NewMenu(
-      NewItem('I~n~halt', 'F1', kbF1, cmHelp, hcNoContext,
-      NewItem('~P~ASCAL-Hilfe', 'Ctrl-F1', kbCtrlF1, cmPascalHelp, hcNoContext,
+    NewSubMenu(tr('~H~elp'), hcNoContext, NewMenu(
+      NewItem(tr('~C~ontents'), 'F1', kbF1, cmHelp, hcNoContext,
+      NewItem(tr('~P~ASCAL help'), 'Ctrl-F1', kbCtrlF1, cmPascalHelp, hcNoContext,
       NewLine(
-      NewItem('~I~nfo', '', 0, cmInfo, hcNoContext,
+      NewItem(tr('~A~bout'), '', 0, cmInfo, hcNoContext,
       NIL))))),
     NIL))))))))));
 
@@ -432,8 +432,8 @@ VAR DateiName:String[100];
     OldWindow: PEditWindow;
 BEGIN
   DateiName := '*.PAS';
-  IF ExecuteDialog(New(PFileDialog, Init('*.PAS', 'Datei Öffnen',
-         '~N~ame', fdOpenButton, 100)), @DateiName) <> cmCancel
+  IF ExecuteDialog(New(PFileDialog, Init('*.PAS', tr('Open File'),
+         tr('~N~ame'), fdOpenButton, 100)), @DateiName) <> cmCancel
   THEN BEGIN
     { Remember untitled unmodified window to close after opening new file }
     OldWindow := NIL;
@@ -503,8 +503,8 @@ PROCEDURE TNikiApplication.FeldOeffnen;
 VAR DateiName:String[100];
 BEGIN
   DateiName := '*.ROB';
-  IF ExecuteDialog(New(PFileDialog, Init('*.ROB', 'Feld Öffnen',
-         '~N~ame', fdOpenButton, 100)), @DateiName) <> cmCancel
+  IF ExecuteDialog(New(PFileDialog, Init('*.ROB', tr('Open Field'),
+         tr('~N~ame'), fdOpenButton, 100)), @DateiName) <> cmCancel
   THEN OpenFeld(DateiName);
 END;
 
@@ -557,7 +557,7 @@ BEGIN
   name := CalcHelpName;
   IF Name='' THEN
   BEGIN
-    MessageBox('Die Hilfedatei kann nicht geöffnet werden',
+    MessageBox(tr('Cannot open help file'),
       NIL, mfError+mfOkButton);
   END ELSE
   BEGIN
