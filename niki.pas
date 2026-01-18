@@ -75,19 +75,10 @@ BEGIN
       Writeln(StdErr, 'Backtrace:');
       DumpExceptionBackTrace(StdErr);
       Writeln(StdErr);
-      Writeln(StdErr, 'Decode: lldb ./niki -o "image lookup -a <addr>" -o quit');
+      Writeln(StdErr, 'To decode: lldb ', ParamStr(0), ' -o "image lookup -a <addr>" -o quit');
+      Writeln(StdErr);
       Writeln(StdErr, '(also saved to crash.log)');
       Halt(1);
     END;
   END;
 END.
-
-
-
-
-
-
-
-
-
-
