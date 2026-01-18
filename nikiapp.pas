@@ -356,7 +356,11 @@ VAR
   P: PWindow;
   R: TRect;
 BEGIN
-  DeskTop^.GetExtent(R);
+  { Inherit size and position from current editor if one exists }
+  IF EditWindow <> NIL THEN
+    EditWindow^.GetBounds(R)
+  ELSE
+    DeskTop^.GetExtent(R);
   P := New(PNikiEditor, Init(R, FileName, wnNoNumber));
   IF NOT Visible THEN P^.Hide;
   OpenEditor := PNikiEditor(InsertWindow(P));
