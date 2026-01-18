@@ -214,10 +214,18 @@ BEGIN
 
   R.A.Y := R.B.Y - 1;
   New(StatusLine, Init(R,
+    NewStatusDef(hcFeldeditor, hcFeldeditor,
+      NewStatusKey('~Space~=Wand', kbNoKey, cmIdle,
+      NewStatusKey('~P~=Niki/drehen', kbNoKey, cmIdle,
+      NewStatusKey('~+/-~=Vorrat', kbNoKey, cmIdle,
+      NewStatusKey('~Ctrl-F9~=Ausführen', kbCtrlF9, cmRun,
+      NewStatusKey('~Alt-X~ Exit', kbAltX, cmQuit,
+      nil))))),
     NewStatusDef(0, $FFFF,
+      NewStatusKey('~Ctrl-F9~ Ausführen', kbCtrlF9, cmRun,
       NewStatusKey('~Alt-X~/~Ctrl-Q~ Exit', kbAltX, cmQuit,
       NewStatusKey('', kbCtrlQ, cmQuit,
-      StdStatusKeys(nil))), nil)));
+      StdStatusKeys(nil)))), nil))));
 END;
 
 PROCEDURE TNikiApplication.InitMenuBar;
