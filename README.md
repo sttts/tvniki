@@ -1,8 +1,10 @@
 # tvNiki
 
-[![Build](https://github.com/sttts/tvniki-2026/actions/workflows/build.yml/badge.svg)](https://github.com/sttts/tvniki-2026/actions/workflows/build.yml)
+[![Build](https://github.com/sttts/tvniki/actions/workflows/build.yml/badge.svg)](https://github.com/sttts/tvniki/actions/workflows/build.yml)
 
-An educational programming environment where students control a robot named "Niki" through a Pascal-like language. Originally created in **1996** for DOS, now ported to Free Pascal with UTF-8 support in **2026** — 30 years of teaching programming!
+> Looking for the original 1996 DOS version? See the [`original` branch](https://github.com/sttts/tvniki/tree/original).
+
+An educational programming environment where students control a robot named "Niki" through a Pascal-like language. Includes `tvniki` (GUI) and `nikic` (command-line compiler). Originally created in **1996** for DOS, now ported to Free Pascal with UTF-8 support in **2026** — 30 years of teaching programming!
 
 ![tvNiki Screenshot](screenshot.png)
 
@@ -15,14 +17,14 @@ tvNiki teaches programming fundamentals through a simple robot simulation. Niki 
 ### macOS (Homebrew)
 
 ```bash
-brew install --head sttts/tvniki-2026/tvniki
+brew install --head sttts/tvniki/tvniki
 ```
 
 This installs both `tvniki` (the GUI) and `nikic` (the command-line compiler).
 
 ### Linux (Pre-built Binaries)
 
-Download from [GitHub Releases](https://github.com/sttts/tvniki-2026/releases):
+Download from [GitHub Releases](https://github.com/sttts/tvniki/releases):
 
 - `tvniki-linux-x86_64.tar.gz` - Linux x86_64
 - `tvniki-linux-arm64.tar.gz` - Linux ARM64
@@ -43,8 +45,8 @@ brew install fpc
 sudo apt-get install fpc
 
 # Clone and build
-git clone --recursive https://github.com/sttts/tvniki-2026.git
-cd tvniki-2026
+git clone --recursive https://github.com/sttts/tvniki.git
+cd tvniki
 make
 ```
 

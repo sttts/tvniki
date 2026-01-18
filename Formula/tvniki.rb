@@ -1,8 +1,8 @@
 class Tvniki < Formula
   desc "Educational programming environment with robot simulation"
-  homepage "https://github.com/sttts/tvniki-2026"
+  homepage "https://github.com/sttts/tvniki"
   license "MIT"
-  head "https://github.com/sttts/tvniki-2026.git", branch: "master"
+  head "https://github.com/sttts/tvniki.git", branch: "main"
 
   depends_on "fpc" => :build
 
