@@ -16,6 +16,8 @@ bd create --id <id> --title "Title" --body "Description"  # Create new issue
 bd comments add <id> "Comment text"  # Add comment to issue
 ```
 
+**Note:** `bd ready` shows both open and in_progress issues. When presenting results (e.g., for "What's next?"), always list in-progress issues first in a separate section, then open issues. Only suggest or choose an in-progress issue when the user explicitly asks to continue one.
+
 ## Testing with tmux
 
 When running the application for testing, use tmux sessions named after your current task:
@@ -29,12 +31,20 @@ tmux kill-session -t <task-id>
 
 ## Worktree Workflow
 
+Use `bd worktree` (not `git worktree` directly) to ensure beads configuration is shared:
+
+```bash
+bd worktree create worktrees/<task-id>    # Create worktree with beads redirect
+cd worktrees/<task-id>
+# ... do work ...
+```
+
 Merge from worktree into main checkout, close issue, and clean up:
 ```bash
-cd ../tvniki-2026
+cd /Users/sts/Quellen/tvniki-2026
 git merge <branch>
 bd close <task-id>
-git worktree remove ../<worktree-dir>
+git worktree remove worktrees/<task-id>
 git branch -d <branch>
 ```
 
