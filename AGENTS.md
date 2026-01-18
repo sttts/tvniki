@@ -12,6 +12,7 @@ bd show <id>          # View issue details
 bd update <id> --status in_progress  # Claim work
 bd close <id>         # Complete work
 bd sync               # Sync with git
+bd create --id <id> --title "Title" --body "Description"  # Create new issue
 ```
 
 ## Testing with tmux
