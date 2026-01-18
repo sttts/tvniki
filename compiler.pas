@@ -142,6 +142,7 @@ END;
 CONSTRUCTOR TProgram.Init(ADateiName:String; VAR Fehler:Integer);
 BEGIN
   INHERITED Init;
+  Pos := 0;
   {$I-}
   Assign(Datei, ADateiName);
   Rewrite(Datei,1);
@@ -728,7 +729,7 @@ BEGIN
       IF NextExpression='NOT' THEN
       BEGIN
         IF NOT GetNextToken THEN Exit;
-        IF NOT Sensor THEN Exit;
+        IF NOT Sensor() THEN Exit;
 
         Dest^.SetAdresse( Dest^.ActPos - 2, Dest^.ActPos + 3 );
 
