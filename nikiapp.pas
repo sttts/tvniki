@@ -545,11 +545,6 @@ PROCEDURE TNikiApplication.Hilfe(Ctx:Integer; Modal:BOOLEAN);
 VAR Name:String;
     h:PHelpWindow;
 BEGIN
-  { TODO: Help system needs 64-bit porting - see tvniki-port-help-system }
-  MessageBox(tr('Help system not yet ported to 64-bit'),
-    NIL, mfInformation + mfOkButton);
-  Exit;
-
   name := CalcHelpName;
   IF Name='' THEN
   BEGIN
