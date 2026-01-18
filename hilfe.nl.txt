@@ -1,0 +1,1514 @@
+.topic Muster
+ █ Sjabloon
+ ███████████
+
+Zie ook:
+ {Inhoud:NoContext}
+
+
+
+
+.topic NoContext=0
+ █ tvNiki-help
+ ██████████████
+
+ █ Inhoud:
+ █
+ █ {Bediening:Bedienung}
+ █ {Toetsenbord:Tastatur}
+ █
+ █ {PASCAL}
+ █ {Compiler-foutmeldingen:Fehler}
+ █ {Teach-In modus:Teach}
+ █ {Stap-voor-stap modus:Debug}
+ █
+ █ {Systeemvereisten:Hardware}
+ █ {Installatie:Installation}
+ █
+ █ {Bugs in tvNiki:Bugs}
+ █ {Geschiedenis van tvNiki:Geschichte}
+ █ {Copyright}
+
+
+
+.topic Installation
+ █ Installatie
+ ██████████████
+
+Om tvNiki op je computer te installeren, kopieer je het naar een map naar
+keuze. De minimale versie van tvNiki bestaat uit het bestand NIKI.EXE.
+Om de help te kunnen gebruiken is ook het bestand HILFE.HLP nodig.
+
+Om Niki te starten, typ je gewoon NIKI als je je in de Niki-map bevindt.
+Om Niki ook vanuit andere mappen te kunnen starten, kun je je zoekpad in
+AUTOEXEC.BAT uitbreiden zodat DOS automatisch in de Niki-map zoekt, of je
+kunt een eenvoudig batchbestand maken dat tvNiki aanroept.
+
+tvNiki heeft schrijfrechten nodig in de huidige map. Dit betekent dat gebruik
+op een netwerk alleen kan vanaf een station dat niet schrijfbeveiligd is.
+Belangrijk is dat alleen de huidige map deze eigenschap hoeft te hebben. Het
+maakt niet uit of de map waarin NIKI.EXE staat beschrijfbaar is of niet.
+
+Het is voldoende om slechts één versie van NIKI.EXE op het netwerk beschikbaar
+te stellen voor alle gebruikers.
+
+Het gebruik van tvNiki op een netwerk valt NIET onder privégebruik, dus moet
+daarvoor een licentie bij de {auteur:Copyright} worden aangeschaft.
+
+
+Zie ook:
+ {Copyright}
+ {Bugs in tvNiki:Bugs}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Hardware
+ █ Systeemvereisten
+ ███████████████████
+
+Om Niki te kunnen gebruiken, moet je computer minimaal 400KB vrij DOS-geheugen
+hebben. Alle processors vanaf de i8088 worden ondersteund. Op de harde schijf
+of diskette is minimaal 100KB nodig. Bovendien moet minimaal MS-DOS 3.3 worden
+gebruikt.
+
+tvNiki is volledig compatibel met Windows 95. Echter, lange bestandsnamen
+kunnen niet worden gebruikt.
+
+Het gebruik onder Windows NT is nog niet getest. Fouten kunnen dus niet worden
+uitgesloten.
+
+Op een {netwerk:Installation} kan Niki voor alle gebruikers beschikbaar worden
+gemaakt. Echter, echte bestandsvergrendeling wordt nog niet ondersteund. Toch
+zijn er geen problemen om tvNiki op bijvoorbeeld een Netware-server te
+installeren.
+
+
+Zie ook:
+ {Installatie:Installation}
+ {Copyright}
+ {Bugs in tvNiki:Bugs}
+ {Inhoud:NoContext}
+
+
+
+
+
+
+
+.topic Teach
+ █ Teach-In
+ ███████████
+
+tvNiki beschikt over een zogenaamde Teach-In modus. Normaal gesproken moet een
+programma regel voor regel via de {editor:Editor} worden ingevoerd. Voor korte
+en eenvoudige taken is echter ook deze modus beschikbaar, waarin Niki met
+verschillende toetsen kan worden bestuurd. De {commandoreeks:Befehle} wordt in
+het klembord opgeslagen en kan aan het einde van de opname als compleet
+uitvoerbaar programma worden opgeslagen.
+
+Om in de Teach-In modus te komen, selecteer je het menu-item Compiler|Teach-In.
+Nu kun je Niki draaien en vooruit laten gaan met de pijltjestoetsen Links en
+Omhoog. Met de Delete-toets pakt Niki pallets op. Met Insert legt hij ze neer.
+
+Als er een fout optreedt of je de opname afbreekt met ESC, verschijnt er een
+dialoogvenster met de vraag of je het programma wilt opslaan. Of je het opslaat
+of niet, het staat nu in het klembord en kan worden {geplakt:Blockbefehle} om
+verder te werken.
+
+Zie ook:
+ {Bediening van de editor:Editor}
+ {Inhoud:NoContext}
+
+
+
+.topic Debug
+ █ Stap-voor-stap modus
+ ███████████████████████
+
+tvNiki beschikt over een stap-voor-stap modus waarin een programma stap voor
+stap kan worden uitgevoerd. Deze kan worden gebruikt om fouten in programma's
+te zoeken of om programma's te controleren.
+
+Om in deze modus te komen, druk je tijdens het uitvoeren van het programma op
+F8 of start je het programma direct in stap-voor-stap modus via Alt-F8.
+
+Door op F9 te drukken kan een programma weer op volle snelheid worden uitgevoerd.
+
+Zie ook:
+ {Bediening van de editor:Editor}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Bedienung
+ █ Bediening van tvNiki
+ ███████████████████████
+
+In tvNiki zijn er drie verschillende vensters. Het venster dat bij het starten
+van het programma zichtbaar is, is de {teksteditor:Editor}, waarin je
+programma's kunt invoeren en bewerken.
+
+Het tweede venster is de {veldeditor:Feldeditor}. Hierin worden robotvelden,
+waarin Niki de robot beweegt, bewerkt.
+
+Het laatste venster is het Info-venster. In het Info-venster wordt voortdurend
+actuele informatie over het {veldvenster:Feldeditor} weergegeven. Daar kun je
+bijvoorbeeld de huidige voorraad en de positie van Niki aflezen. Bovendien geeft
+de onderste regel de huidige modus aan waarin de veldeditor zich bevindt.
+
+ {1. Bediening van de teksteditor:Editor}
+ {2. Aanmaken en bewerken van velden:Feldeditor}
+
+
+Zie ook:
+ {Toetsenbord:Tastatur}
+ {Inhoud:NoContext}
+
+
+
+.topic Feldeditor
+ █ Veldeditor
+ █████████████
+
+De veldeditor bestaat uit een zwart venster dat een indeling van 15 bij 10
+velden bevat. Hierin kun je robotvelden maken waarin Niki kan rondlopen.
+
+Om obstakels te plaatsen waar Niki niet doorheen kan, gebruik je de muis door
+met de linkermuisknop tussen twee punten te klikken, of je beweegt met de
+pijltjestoetsen de cursor en plaatst obstakels met de spatiebalk.
+
+Door opnieuw te klikken of opnieuw op Spatie te drukken, worden muren verwijderd.
+
+Om Niki te verplaatsen, klik je met de rechtermuisknop in het midden tussen
+4 punten. Opnieuw klikken draait Niki om zijn as. Met het toetsenbord gebeurt
+dit met de P-toets.
+
+Met de toetsen + en - kun je op de huidige cursorpositie pallets neerleggen of
+wegnemen. Om de cursor te verplaatsen, klik je met de linkermuisknop op de
+gewenste positie of beweeg je hem met de pijltjestoetsen.
+
+Om Niki voor het starten van een programma een palletvoorraad te geven,
+selecteer je het menu-item Veld|Voorraad.
+
+De uitvoersnelheid van een programma wordt ingesteld via het menu-item
+Veld|Snelheid.
+
+Zie ook:
+ {Bediening van tvNiki:Bedienung}
+ {Bediening van de teksteditor:Editor}
+ {Teach-In modus:Teach}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Editor
+ █ Bediening van de teksteditor
+ ███████████████████████████████
+
+De editor in tvNiki is een normale Wordstar-compatibele teksteditor. Hiermee
+kunnen tekstbestanden tot 64KB worden bewerkt. Via de menu's Bestand, Bewerken
+en Zoeken kunnen de functies van de editor worden aangeroepen.
+
+Daarnaast kan de tekst in de editor, als het een {PASCAL-programma:PASCAL} is,
+worden gecompileerd en in de {veldeditor:Feldeditor} worden uitgevoerd. Via het
+menu Compiler kunnen deze functies worden geactiveerd. Als er wijzigingen aan
+het programma zijn aangebracht, verschijnt een dialoogvenster met informatie
+over de huidige compilatiestatus. Als er een fout optreedt, wordt in de editor
+een regel weergegeven die de {fout:Fehler} beschrijft. Met de F1-toets kun je
+meer informatie over de opgetreden fout weergeven. Bovendien springt de editor
+naar de regel waar de {fout:Fehler} werd gevonden. Als er geen fout optrad,
+verschijnt er een OK-knop in het statusvenster, die het dialoogvenster sluit
+door op Enter te drukken.
+
+Zie ook:
+ {Bediening van de veldeditor:Feldeditor}
+ {Toetsenbordbediening van de editor:Editortastatur}
+ {Inhoud:NoContext}
+
+
+
+
+
+.topic Tastatur
+ █ tvNiki-toetsenbordindeling
+ █████████████████████████████
+
+{Algemene sneltoetsen:Hotkeys}
+
+{Toetsenbordbediening van de veldeditor:Feldeditor}
+{Toetsenbordbediening van de editor:Editortastatur}
+
+{Bediening in Teach-In modus:Teach}
+
+
+Zie ook:
+ {Bediening:Bedienung}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Editortastatur
+ █ Toetsenbordbediening van de teksteditor
+ ██████████████████████████████████████████
+
+ {Cursorbesturing:Cursor}
+ {Blokfuncties:Blockbefehle}
+ {Invoegen en verwijderen:InsDel}
+
+Zie ook:
+ {Toetsenbordbediening:Tastatur}
+ {Inhoud:NoContext}
+
+
+
+
+.topic InsDel
+ █ Commando's voor invoegen en verwijderen
+ ██████████████████████████████████████████
+
+ ███████████████████████████████████████████████████████
+  Invoegmodus aan/uit            █ Ctrl-V of Insert
+  Regel invoegen                 █ Ctrl-N
+  Regel verwijderen              █ Ctrl-Y
+  Verwijderen tot regeleinde     █ Ctrl-Q Y
+  Teken links verwijderen        █ Ctrl-H of Backspace
+  Teken onder cursor verwijderen █ Ctrl-G of Delete
+  Woord rechts verwijderen       █ Ctrl-T
+
+Zie ook:
+ {Toetsenbordbediening van de teksteditor:Editortastatur}
+ {Blokcommando's:Blockbefehle}
+ {Cursorbesturing:Cursor}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Cursor
+ █ Cursorbewegingen
+ ███████████████████
+
+ ██████████████████████████████████████████████████████
+  Teken naar links    █ Ctrl-S of Pijl links
+  Teken naar rechts   █ Ctrl-D of Pijl rechts
+  Woord naar links    █ Ctrl-A of Ctrl+Pijl links
+  Woord naar rechts   █ Ctrl-F of Ctrl+Pijl rechts
+  Regel omhoog        █ Ctrl-E of Pijl omhoog
+  Regel omlaag        █ Ctrl-X of Pijl omlaag
+  Naar boven scrollen █ Ctrl-W
+  Naar beneden scrollen█ Ctrl-Z
+  Pagina omhoog       █ Ctrl-R of Page Up
+  Pagina omlaag       █ Ctrl-C of Page Down
+
+Zie ook:
+ {Toetsenbordbediening van de teksteditor:Editortastatur}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Blockbefehle
+ █ Blokcommando's
+ █████████████████
+
+ ██████████████████████████████████████████████
+  Blokbegin markeren             █ Ctrl-K B
+  Blokeinde markeren             █ Ctrl-K K
+  Woord markeren                 █ Ctrl-K T
+  Blok kopiëren                  █ Ctrl-K C
+  Blok verplaatsen               █ Ctrl-K V
+  Blok verwijderen               █ Ctrl-K Y
+  Blok van schijf lezen          █ Ctrl-K R
+  Blok naar schijf schrijven     █ Ctrl-K W
+  Blokweergave aan/uit           █ Ctrl-K H
+  Blok afdrukken                 █ Ctrl-K P
+  Blok een teken naar links      █ Ctrl-K U
+  Blok een teken naar rechts     █ Ctrl-K I
+  Naar blokbegin gaan            █ Ctrl+Q B
+  Naar blokeinde gaan            █ Ctrl+Q K
+  Menubalk activeren             █ Ctrl+K D
+  Regel markeren                 █ Ctrl+K L
+  Kopiëren naar klembord         █ Ctrl+Insert
+  Knippen en kopiëren naar       █
+  klembord                       █ Shift+Delete
+  Blok verwijderen               █ Ctrl+Delete
+  Plakken vanuit klembord        █ Shift+Insert
+
+
+Zie ook:
+ {Toetsenbordbediening:Tastatur}
+ {Bediening:Bedienung}
+ {Inhoud:NoContext}
+
+
+
+.topic Hotkeys
+ █ Toetsenbordindeling
+ ██████████████████████
+
+ ██████████████████████████████████████████████
+  Een bestand openen             █ F3
+  Huidig bestand opslaan         █ F2
+  tvNiki afsluiten               █ Alt-X
+  Ongedaan maken                 █ Alt-Backspace
+  Programma uitvoeren            █ Ctrl-F9
+  Programma compileren           █ Alt-F9
+  Verder zoeken                  █ Alt-W
+  Grootte/Positie van venster    █ Ctrl-F5
+  Venster vergroten              █ F5
+  Volgend venster selecteren     █ F6
+  Vorig venster selecteren       █ Shift-F6
+  Venster sluiten                █ Alt-F3
+  Help weergeven                 █ F1
+  Help over PASCAL-taal          █ Ctrl+F1
+
+
+Zie ook:
+ {Toetsenbordbediening:Tastatur}
+ {Blokcommando's:Blockbefehle}
+ {Bediening:Bedienung}
+ {Inhoud:NoContext}
+
+
+
+.topic PASCAL
+ █ PASCAL-taal
+ ██████████████
+
+tvNiki bevat een subset van de programmeertaal PASCAL. Dit betekent dat niet
+alle constructies die in PASCAL geldig zijn, door tvNiki worden ondersteund.
+Echter, ALLE structuren die in tvNiki werken, zijn compatibel met PASCAL.
+
+ {Opbouw van programma's:Aufbau}
+ {Structuren:Strukturen}
+ {Subprogramma's:Unterprogramme}
+ {Logische bewerkingen:Logik}
+ {Commentaar:Kommentare}
+
+
+tvNiki biedt verschillende commando's en sensoren die niet tot de PASCAL-
+standaard behoren. Ze zijn dus alleen beschikbaar in de Niki-programmeeromgeving.
+
+ {Commando's:Befehle}
+ {Sensoren:Sensoren}
+
+
+Zie ook:
+ {Inhoud:NoContext}
+
+
+
+.topic   Kommentare
+ █ Commentaar
+ █████████████
+
+Commentaar zijn beschrijvingen en aanvullingen op programmateksten die NIET
+door de compiler worden verwerkt, d.w.z. ze hebben absoluut geen betekenis voor
+de werking van het programma, maar maken een programma, als ze correct worden
+gebruikt, leesbaarder en begrijpelijker.
+
+In PASCAL zijn er twee soorten commentaar. Het ene wordt omgeven door accolades,
+het andere door ronde haakjes gevolgd door een asterisk:
+
+  {Dit is commentaar}
+  (* Dit is ook commentaar *)
+
+Commentaar kan overal in het programma staan, zelfs binnen {IF-THEN:If}
+instructies enz.
+
+  IF Vorne_Frei {Hier het commentaar} THEN Vor;
+
+
+Zie ook:
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+.topic Befehle
+ █ Commando's
+ █████████████
+
+tvNiki biedt diverse commando's om Niki in het robotveld te navigeren. Deze
+commando's behoren niet tot de normale PASCAL-taal. Het gebruik is echter
+analoog aan echte PASCAL-commando's.
+
+ {Vor}
+ {Drehe_Links}
+ {Nimm_Auf}
+ {Gib_Ab}
+
+
+Zie ook:
+ {De PASCAL-taal:PASCAL}
+ {Sensoren:Sensoren}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Vor
+ █ Vor
+ ███████████
+
+"Vor" laat Niki een stap vooruit gaan. Als er een {muur:Feldeditor} voor hem
+staat, wordt het programma met een fout afgebroken.
+
+
+Zie ook:
+ {Commando's:Befehle}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Drehe_Links
+ █ Drehe_Links
+ ███████████
+
+"Drehe_Links" laat Niki 90° tegen de klok in draaien.
+
+
+Zie ook:
+ {Commando's:Befehle}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Nimm_Auf
+ █ Nimm_Auf
+ ███████████
+
+"Nimm_Auf" laat Niki een pallet oppakken. Als er geen pallet op de huidige
+plaats ligt, wordt het programma met een fout afgebroken.
+
+
+Zie ook:
+ {Commando's:Befehle}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Gib_Ab
+ █ Gib_Ab
+ ███████████
+
+"Gib_Ab" laat Niki een pallet op de huidige positie neerleggen. Als hij geen
+pallet meer geladen heeft, wordt het programma afgebroken.
+
+
+Zie ook:
+ {Commando's:Befehle}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Sensoren
+ █ Sensoren
+ ███████████
+
+tvNiki biedt verschillende sensoren die niet tot de PASCAL-standaard behoren.
+Het gebruik is echter precies hetzelfde als dat van PASCAL-functies.
+
+Alle tvNiki-sensoren hebben een Boolean-retourwaarde, d.w.z. ze hebben of de
+waarde TRUE (waar) of de waarde FALSE (onwaar). Geen van de functies geeft een
+numerieke waarde terug. Niki kan bijvoorbeeld alleen vaststellen of hij nog
+pallets geladen heeft, maar niet het aantal geladen pallets.
+
+Sensoren kunnen alleen in {structuren:Strukturen} worden gebruikt, het gebruik
+als {commando's:Befehle} is niet mogelijk.
+
+ {Platz_Belegt}
+
+ {Vorne_Frei}
+ {Links_Frei}
+ {Rechts_Frei}
+
+ {Hat_Vorrat}
+
+ Voorbeelden:
+
+   IF {Vorne_Frei} THEN {Vor};
+
+   WHILE {Hat_Vorrat} DO {Gib_Ab};
+
+
+Zie ook:
+ {De PASCAL-taal:PASCAL}
+ {Structuren:Strukturen}
+ {Commando's:Befehle}
+ {Logische bewerkingen:Logik}
+ {Inhoud:NoContext}
+
+
+
+.topic Platz_Belegt
+ █ Platz_Belegt
+ ███████████████
+
+De sensor "Platz_Belegt" heeft de waarde TRUE als er een of meer pallets onder
+Niki liggen. Als er geen pallet aanwezig is, heeft "Platz_Belegt" de waarde FALSE.
+
+
+Zie ook:
+ {Sensoren:Sensoren}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Vorne_Frei
+ █ Vorne_Frei
+ ███████████████
+
+De sensor "Vorne_Frei" heeft de waarde TRUE als er geen muur voor Niki staat.
+
+
+Zie ook:
+ {Sensoren:Sensoren}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Links_Frei
+ █ Links_Frei
+ ███████████████
+
+De sensor "Links_Frei" heeft de waarde TRUE als er geen muur links van Niki staat.
+
+
+Zie ook:
+ {Sensoren:Sensoren}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Rechts_Frei
+ █ Rechts_Frei
+ ███████████████
+
+De sensor "Rechts_Frei" heeft de waarde TRUE als er geen muur rechts van
+Niki staat.
+
+
+Zie ook:
+ {Sensoren:Sensoren}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Hat_Vorrat
+ █ Hat_Vorrat
+ █████████████
+
+De sensor "Hat_Vorrat" geeft de waarde TRUE terug als Niki een of meer
+pallets geladen heeft.
+
+
+Zie ook:
+ {Sensoren:Sensoren}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Strukturen
+ █ PASCAL-structuren
+ ████████████████████
+
+tvNiki ondersteunt drie verschillende structuurtypes. Het betreft de twee
+lustypen {REPEAT UNTIL:Repeat} en {WHILE DO:While} evenals de eenvoudige
+beslissing {IF THEN:If} of {IF THEN ELSE:If}.
+
+
+
+Zie ook:
+ {De PASCAL-taal:PASCAL}
+ {Logische bewerkingen:Logik}
+ {Opbouw van PASCAL-programma's:Aufbau}
+ {Subprogramma's:Unterprogramme}
+ {Inhoud:NoContext}
+
+
+
+
+.topic If
+ █ IF THEN ELSE
+ ███████████████
+
+ IF {Sensor:Sensoren} THEN {Commando:Befehle};
+
+ IF {Sensor:Sensoren} THEN {Commando:Befehle} ELSE {Commando:Befehle};
+
+ IF {Sensor:Sensoren} THEN
+ BEGIN
+   {Commando:Befehle};
+   {Commando:Befehle};
+ END;
+
+Als de sensor tussen IF en THEN de waarde TRUE heeft, wordt het commando of
+het blok achter THEN uitgevoerd. Als er ook een ELSE-tak bestaat, wordt deze
+uitgevoerd als de waarde FALSE is.
+
+ Voorbeeld:
+
+   IF {Hat_Vorrat} THEN {Gib_Ab} ELSE {Vor};
+
+
+In plaats van de sensor kun je ook een {logische bewerking:Logik} van meerdere
+sensoren gebruiken.
+
+ Voorbeeld:
+
+   IF Hat_Vorrat AND Vorne_Frei THEN
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+
+Zie ook:
+ {Sensoren:Sensoren}
+ {Logische bewerkingen:Logik}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic While
+ █ WHILE DO
+ ███████████
+
+ WHILE {Sensor:Sensoren} DO {Commando:Befehle};
+
+ WHILE {Sensor:Sensoren} DO
+ BEGIN
+   {Commando:Befehle};
+   {Commando:Befehle};
+ END;
+
+Zolang de sensor tussen WHILE en DO de waarde TRUE heeft, wordt het commando
+of het blok achter DO uitgevoerd.
+
+ Voorbeeld:
+
+   WHILE {Platz_Belegt} DO {Nimm_Auf};
+
+Hierbij wordt eerst gecontroleerd of de sensor TRUE is, pas dan wordt het
+commando uitgevoerd. Daarentegen voert {REPEAT UNTIL:Repeat} eerst het commando
+uit en controleert dan.
+
+Als meerdere commando's afhankelijk van WHILE DO moeten worden uitgevoerd,
+moet een BEGIN-END-blok worden gebruikt;
+
+ Voorbeeld:
+
+   WHILE Hat_Vorrat DO
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+
+In plaats van de sensor kun je ook een {logische bewerking:Logik} van meerdere
+sensoren gebruiken.
+
+ Voorbeeld:
+
+   WHILE Hat_Vorrat AND Vorne_Frei DO
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+
+Zie ook:
+ {Sensoren:Sensoren}
+ {Logische bewerkingen:Logik}
+ {REPEAT UNTIL:Repeat}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Repeat
+ █ REPEAT UNTIL
+ ███████████████
+
+ REPEAT {Commando:Befehle}; UNTIL {Sensor:Sensoren};
+
+ REPEAT
+   {Commando:Befehle};
+   {Commando:Befehle};
+ UNTIL {Sensor:Sensoren};
+
+Het commando of het blok tussen REPEAT en UNTIL wordt uitgevoerd totdat de
+sensor achter UNTIL de waarde TRUE teruggeeft.
+
+ Voorbeeld:
+
+   REPEAT {Vor}; UNTIL NOT {Vorne_Frei};
+
+
+Hierbij voert {REPEAT UNTIL:Repeat} eerst het commando uit en controleert
+dan of de sensor TRUE is. Daarentegen wordt bij {WHILE DO:While} eerst
+gecontroleerd of de sensor TRUE is, pas dan wordt het commando uitgevoerd.
+
+In plaats van de sensor kun je ook een {logische bewerking:Logik} van meerdere
+sensoren gebruiken.
+
+ Voorbeeld:
+
+   REPEAT
+     Gib_Ab;
+     Vor;
+   UNTIL NOT (Hat_Vorrat AND Vorne_Frei);
+
+Zie ook:
+ {Sensoren:Sensoren}
+ {Logische bewerkingen:Logik}
+ {WHILE DO:While}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Logik
+ █ Logische bewerkingen
+ ███████████████████████
+
+{Sensoren:Sensoren} kunnen in PASCAL met logische operatoren worden
+gecombineerd. Zo kun je queries realiseren die van meer dan één sensor afhangen.
+
+ Voorbeeld:
+
+   WHILE (Hat_Vorrat AND Vorne_Frei) DO
+   BEGIN
+     Gib_Ab;
+     Vor;
+   END;
+
+Hiervoor zijn de twee operatoren OR en AND beschikbaar.
+
+
+De operator OR combineert twee {sensoren:Sensoren} zodanig dat de retourwaarde
+TRUE is als minstens een van beide TRUE teruggeeft.
+
+ Voorbeeld:
+
+   IF Links_Frei OR Rechts_Frei THEN Vor;
+
+ Waarheidstabel:
+
+   Links_Frei OR Rechts_Frei =
+   ████████████████████████████████████
+   FALSE      │  FALSE       │ FALSE
+   TRUE       │  FALSE       │ TRUE
+   FALSE      │  TRUE        │ TRUE
+   TRUE       │  TRUE        │ TRUE
+   ████████████████████████████████████
+
+
+De operator AND combineert twee {sensoren:Sensoren} zodanig dat de retourwaarde
+TRUE is als beide {sensoren:Sensoren} TRUE teruggeven.
+
+ Voorbeeld:
+
+   IF Links_Frei AND Rechts_Frei THEN Vor;
+
+ Waarheidstabel:
+
+   Links_Frei AND Rechts_Frei =
+   ████████████████████████████████████
+   FALSE      │  FALSE       │ FALSE
+   TRUE       │  FALSE       │ FALSE
+   FALSE      │  TRUE        │ FALSE
+   TRUE       │  TRUE        │ TRUE
+   ████████████████████████████████████
+
+
+Door meer dan één operator te gebruiken, kun je ook meerdere sensoren combineren.
+
+ Voorbeeld:
+
+   IF Links_Frei OR Rechts_Frei OR Vorne_Frei THEN Nimm_Auf;
+
+Wanneer verschillende operatoren in zo'n combinatie voorkomen, rijst de vraag
+naar de evaluatievolgorde. In principe geldt: NOT voor AND, AND voor OR.
+D.w.z. dat eerst de NOT-, dan de AND- en dan pas de OR-bewerking wordt
+geëvalueerd.
+
+ Voorbeeld:
+
+   IF Vorne_Frei OR Links_Frei AND Rechts_Frei THEN ...
+
+   komt overeen met
+
+   IF Vorne_Frei OR (Links_Frei AND Rechts_Frei) THEN ...
+
+
+ Prioriteit      komt overeen met in wiskunde
+ ████████████████████████████████████████████
+ 1   │  NOT    │ - (negatie)
+ 2   │  AND    │ */ (vermenigvuldiging/deling)
+ 3   │  OR     │ +- (optelling/aftrekking)
+ ████████████████████████████████████████████
+
+
+Zie ook:
+ {Sensoren:Sensoren}
+ {Structuren:Strukturen}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Unterprogramme
+ █ Subprogramma's
+ █████████████████
+
+In PASCAL kun je gelijke delen in een programma vervangen door subprogramma's.
+Deze subprogramma's kunnen dan net zo worden gebruikt als echte {commando's:Befehle}.
+
+Deze subprogramma's worden in PASCAL "procedures" genoemd. Ze worden vóór het
+hoofdprogramma gedefinieerd en zijn voor zichzelf opgebouwd als kleine
+PASCAL-programma's.
+
+ Voorbeeld:
+
+   PROGRAM Voorbeeld;
+
+     PROCEDURE Drehe_Rechts;
+     BEGIN
+       Drehe_Links;
+       Drehe_Links;
+       Drehe_Links;
+     END;
+
+   BEGIN
+     Vor;
+     Drehe_Rechts;
+   END.
+
+Tussen BEGIN en END kunnen willekeurige {commando's:Befehle} en {structuren:Strukturen}
+worden gebruikt. Wanneer een procedure wordt aangeroepen, worden de commando's
+in de procedure achter elkaar uitgevoerd. Daarna wordt teruggekeerd naar het
+aanroeppunt.
+
+Het bovenstaande programma zou dus ook als volgt kunnen worden geschreven:
+
+  PROGRAM Voorbeeld;
+  BEGIN
+    Vor;
+    Drehe_Links;
+    Drehe_Links;
+    Drehe_Links;
+  END;
+
+
+Echter, zodra er meerdere keren in een programma naar rechts moet worden
+gedraaid, zou je daarvoor een procedure moeten gebruiken, omdat het programma
+daardoor korter en vooral overzichtelijker wordt. Procedures horen dus bij een
+goede programmeerstijl.
+
+
+Procedures kunnen zichzelf of andere procedures aanroepen, op voorwaarde dat
+ze op het moment van de aanroep al gedefinieerd zijn. Ze moeten dus boven de
+aanroep in de programmatekst gedefinieerd zijn. Wanneer procedures zichzelf
+aanroepen, noemt men dat "recursief programmeren". Bij recursief programmeren
+moet erop worden gelet dat er geen eindeloze lus ontstaat, anders treedt er
+op een gegeven moment een "stack overflow" op en wordt het programma afgebroken.
+Bij echte PASCAL-programma's kan dit zelfs ertoe leiden dat de computer crasht.
+
+ Voorbeeld:
+
+   PROGRAM Fout;
+
+     PROCEDURE Gehe;
+     BEGIN
+       Vor;
+       Gehe;
+     END;
+
+   BEGIN
+     Gehe;
+   END.
+
+Omdat de meeste problemen ook zonder deze soms verwarrende techniek kunnen
+worden opgelost, zou lineair programmeren de voorkeur moeten hebben. Recursief
+programmeren zou echt alleen daar moeten worden ingezet waar het absoluut
+noodzakelijk is.
+
+
+Zie ook:
+ {Opbouw van PASCAL-programma's:Aufbau}
+ {Commando's:Befehle}
+ {Structuren:Strukturen}
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Aufbau
+ █ Opbouw van PASCAL-programma's
+ ████████████████████████████████
+
+Een PASCAL-programma of Niki-programma heeft altijd dezelfde opbouw:
+
+In de eerste regel wordt een naam voor het programma opgegeven.
+
+  PROGRAM Naam;
+
+De naam mag niet luiden als een voorgedefinieerd sleutelwoord van PASCAL of
+een commando van Niki. Een programma met de naam "Vor" is dus niet mogelijk.
+
+Daarna komen alle definities. Bij tvNiki zijn dit alle gedefinieerde
+{procedures:Unterprogramme}.
+
+Als laatste moet elk PASCAL-programma een hoofdprogramma bevatten. Dit
+hoofdprogramma begint met BEGIN en eindigt met END gevolgd door een punt.
+Daartussen kunnen {commando's:Befehle} staan. Elk commando wordt afgesloten
+met een puntkomma.
+
+  BEGIN
+    {Drehe_Links};
+    {Vor};
+  END.
+
+Bij het starten van het programma begint de uitvoering bij het eerste commando
+van het hoofdprogramma.
+
+Geldige PASCAL-programma's kunnen er dus als volgt uitzien:
+
+  PROGRAM Voorbeeld1;
+
+  BEGIN
+    {Vor};
+    {Vor};
+    {Drehe_Links};
+  END.
+
+
+  PROGRAM Voorbeeld2;
+
+    {PROCEDURE:Unterprogramme} Opslaan;
+    BEGIN
+      {Drehe_Links};
+      {Vor};
+      {Gib_Ab};
+      {Drehe_Links};
+      {Drehe_Links};
+      {Vor};
+      {Drehe_Links};
+    END;
+
+  BEGIN
+    {Nimm_Auf};
+    {Nimm_Auf};
+    {Nimm_Auf};
+    Opslaan;
+    Opslaan;
+    Opslaan;
+  END.
+
+
+Zie ook:
+ {De PASCAL-taal:PASCAL}
+ {Subprogramma's:Unterprogramme}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Fehler
+ █ Compilerfouten
+ █████████████████
+
+   Foutnummer  Beschrijving
+ ██████████████████████████████████████████████████████████████████████████
+   1            {Bronbestand niet gevonden of kan niet worden geopend:Fehler1}
+   2            {Doelbestand kan niet worden aangemaakt:Fehler2}
+   3            {BEGIN verwacht:Fehler3}
+   4            {END of commando verwacht:Fehler4}
+   5            {Punt verwacht:Fehler5}
+   6            {Identificatie verwacht:Fehler6}
+   7            {Puntkomma (;) verwacht:Fehler7}
+   8            {Niet afgesloten commentaar:Fehler8}
+   9            {Onbekend commando:Fehler9}
+   10           {Dubbele identificatie:Fehler10}
+   11           {Sleutelwoord niet toegestaan als identificatie:Fehler11}
+   12           {THEN verwacht:Fehler12}
+   13           {Onbekende functie:Fehler13}
+   14           {Functie verwacht:Fehler14}
+   15           {DO verwacht:Fehler15}
+   16           {UNTIL verwacht:Fehler16}
+   17           {Rechter haakje verwacht:Fehler17}
+
+
+Zie ook:
+ {De PASCAL-taal:PASCAL}
+ {Inhoud:NoContext}
+
+
+.topic Fehler1
+ █ Fout 1
+ █████████
+Bronbestand niet gevonden of kan niet worden geopend
+
+Om een of andere reden is de broncode voor het compileren niet opgeslagen.
+Sla handmatig op voor het compileren om het probleem op te lossen.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler2
+ █ Fout 2
+ █████████
+Doelbestand kan niet worden aangemaakt
+
+Het gecompileerde bestand kan niet worden aangemaakt omdat schrijftoegang tot
+de huidige map niet is toegestaan of de gegevensdrager vol is. Ga naar een
+"beschrijfbare" map die voldoende vrije ruimte bevat.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler3
+ █ Fout 3
+ █████████
+BEGIN verwacht
+
+De compiler verwacht een BEGIN op de aangegeven plaats.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler4
+ █ Fout 4
+ █████████
+END of commando verwacht
+
+De compiler verwacht een END op de aangegeven plaats, bijv. omdat een BEGIN
+END blok niet is afgesloten.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler5
+ █ Fout 5
+ █████████
+Punt verwacht
+
+De compiler verwacht een punt op de aangegeven plaats. Waarschijnlijk komt
+er na het einde van het {hoofdprogramma:Aufbau} nog iets.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler6
+ █ Fout 6
+ █████████
+Identificatie verwacht
+
+De compiler verwacht een identificatie voor een {PROCEDURE:Unterprogramme}
+of achter de {PROGRAM-instructie:Aufbau} op de aangegeven plaats.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler7
+ █ Fout 7
+ █████████
+Puntkomma (;) verwacht
+
+Achter een {commando:Befehle} of achter een instructie zoals {PROGRAM:Aufbau},
+{PROCEDURE:Unterprogramme} enz. wordt een puntkomma verwacht. Deze fout kan
+ook optreden als een umlaut of andere speciale tekens in een identificatie
+worden gebruikt.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler8
+ █ Fout 8
+ █████████
+Niet afgesloten commentaar
+
+Een commentaar is niet afgesloten. Er is een } of een *) vergeten.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler9
+ █ Fout 9
+ █████████
+Onbekend commando
+
+De opgegeven identificatie voor een {commando:Befehle} is niet bekend. Bijv.
+is een {PROCEDURE:Unterprogramme} gebruikt voordat deze was gedefinieerd, of
+het betreft een typefout.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler10
+ █ Fout 10
+ ██████████
+Dubbele identificatie
+
+De opgegeven identificatie voor een {PROCEDURE:Unterprogramme} wordt dubbel
+gebruikt. Twee {PROCEDURES:Unterprogramme} hebben dezelfde naam of er wordt
+geprobeerd een {PROCEDURE:Unterprogramme} te noemen zoals een voorgedefinieerd
+commando.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler11
+ █ Fout 11
+ ██████████
+Sleutelwoord niet toegestaan als identificatie
+
+De opgegeven identificatie voor een {PROCEDURE:Unterprogramme} of achter de
+instructie {PROGRAM:Aufbau} is gereserveerd voor een PASCAL-sleutelwoord.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler12
+ █ Fout 12
+ ██████████
+THEN verwacht
+
+Achter een {IF-instructie:If} ontbreekt het THEN.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler13
+ █ Fout 13
+ ██████████
+Onbekende functie
+
+De gebruikte functie of de gebruikte {sensor:Sensoren} is niet bekend, bijv.
+omdat deze verkeerd is gespeld.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler14
+ █ Fout 14
+ ██████████
+Functie verwacht
+
+In een {lus:Strukturen} of achter {IF} wordt een functie of een {sensor:Sensoren}
+of een {logische bewerking:Logik} verwacht.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler15
+ █ Fout 15
+ ██████████
+DO verwacht
+
+Achter een {WHILE:While}-instructie wordt het DO verwacht.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler16
+ █ Fout 16
+ ██████████
+UNTIL verwacht
+
+Achter een {REPEAT:Repeat}-instructie wordt het UNTIL verwacht.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Fehler17
+ █ Fout 17
+ ██████████
+Rechter haakje verwacht
+
+Bij een linker haakje ontbreekt het rechter haakje.
+
+Zie ook:
+ {Compileerfouten:Fehler}
+ {Inhoud:NoContext}
+
+
+
+.topic Geschichte
+ █ Geschiedenis
+ ███████████████
+
+ alpha 1 - Begin september 96
+
+ - Implementatie van procedures en commando's
+ - Compileren en uitvoeren van programma's
+
+
+
+ beta 1 - 10.9.96
+
+ - Implementatie van structuren (IF, WHILE, REPEAT)
+ - Gebruik van sensoren
+ - Gebruik van BEGIN/END-blokken
+
+
+ beta 2 - 15.9.96
+
+ - Oplossen van geheugenproblemen
+ - Afronding van de Teach-In modus
+ - Verbeterde netwerkcompatibiliteit
+ - Verwerking van bestanden met tabs
+ - EGA-videomodus
+ - DOS-shell
+ - Mapwisseling in het programma
+ - Nieuw Info-dialoogvenster
+
+
+ beta 3 - 21.9.96
+
+ - Inbouw van een helpfunctie
+ - Combineren van sensoren met logische bewerkingen (AND/OR)
+
+
+ beta 4 - 13.10.96
+
+ - Uitbreiding van de help
+ - Gecorrigeerde fouten in de help
+ - Correcte evaluatie van logische bewerkingen (linksassociatief)
+ - Grootte van het EXE-bestand met 50% verminderd
+
+
+ 1.0a - 19.10.96
+
+ - Werking onder Win95 getest
+ - Installatie-instructies in de help
+ - Overnemen van broncodes van de originele Niki van Klett-Verlag getest
+ - Afdrukken van broncodes en velden
+ - Correcte positionering van de cursor bij compileerfouten
+
+
+ 1.0b - 20.10.96
+
+ - Foutmelding als helpbestand ontbreekt (in plaats van crash)
+ - Geen crash meer wanneer help in een dialoog wordt geopend terwijl er
+   niet-modale help in de achtergrond bestaat
+ - Correct vrijgeven van het geheugen van een modaal helpvenster
+ - Configuratiebestand NIKI.CFG waarin instellingen kunnen worden gemaakt
+   (zie NIKI.CFG voor beschrijving)
+ - Oplossen van een bug als de computer al voor tvNiki in 80x50-modus was
+ - Correcte weergave van de balk in de rechter onderhoek ook in 80x50-modus
+ - Weergave van de voorraad en de naam bij het afdrukken van een veld of broncode
+
+
+ 1.0c - 28.10.96
+
+ - Correcte interpretatie van AND en OR: AND heeft een hogere prioriteit dan
+   OR, wordt dus eerst geëvalueerd
+
+
+ 1.0d - 29.10.96
+
+ - Verwijderd uitvoeren van een foutmelding ook bij foutloos afsluiten van tvNiki
+ - Correct vergroten en verkleinen van het veldvenster bij wisseling van
+   de videomodus
+ - Instellen van de videomodus in NIKI.CFG
+
+
+ 1.0e - 1.11.96
+
+ - Optie BIGHELP (NIKI.CFG): Help neemt het hele scherm in
+ - Optie SPEED (NIKI.CFG): Initiële interpretersnelheid
+ - Correctie van enkele menu-items
+
+
+ 1.0f - 9.11.96
+
+ - Geëvalueerde lengte van identificaties verhoogd naar 255 tekens
+ - Bug verwijderd: Sprongen evalueerden alleen de Lo-byte -> programma's
+   die meer dan 256 bytes lengte (gecompileerd) hadden, werkten niet correct
+   ( Word( ByteArray[IP] ) <> ByteArray[IP]+ByteArray[IP+1]*256 )
+
+
+ 1.1 beta 1 - 9.11.96
+
+ - Inbouw van een stap-voor-stap modus waarmee programma's stap voor stap
+   kunnen worden uitgevoerd
+ - Weergave van de huidige regel in stap-voor-stap modus in het editorvenster
+
+
+ 1.1 beta 2 - 13.11.96
+
+ - Foutmelding toegevoegd wanneer er al 9 pallets op een plaats liggen
+ - Enkele fouten in de help opgelost
+ - Eindelijk wordt NOT voor AND en OR geëvalueerd :-(
+
+
+ Mogelijke toekomstige functies:
+
+ - Definitie van eigen sensoren (functies)
+ - Grafische uitvoer van het veld
+ - Portering naar Graphics Vision (grafisch Turbo Vision)
+ - Echte breakpoints
+ - Echt vergrendelen van geopende bestanden
+ - Op het netwerk werkende {protected mode-versie:Bugs}
+ - Opgeven van de uitvoerpoort bij het afdrukken
+ - Netwerkversie: Twee Niki's vechten tegen elkaar, elk met zijn eigen programma
+ - Complete Duitse vertaling van Turbo Vision
+ - Betere editor
+ - Beter helpvenster
+ - Kleurinstellingen
+ - Opslaan van de interface
+ - Instellen van de opties in het programma
+ .
+ .
+ .
+
+
+Zie ook:
+ {Fouten in tvNiki:Bugs}
+ {Inhoud:NoContext}
+
+
+
+.topic Bugs
+ █ Fouten in tvNiki
+ ███████████████████
+
+Grote fouten in tvNiki zijn momenteel niet bekend. Er kan echter geen garantie
+worden gegeven dat alles foutloos werkt.
+
+Kleine bugs:
+
+ - De protected mode-versie is niet netwerkcompatibel. Deze kan slechts
+   eenmaal op het netwerk worden gestart (hangt op een of andere manier
+   samen met de DOS-extender van Borland Pascal 7.0)
+ - Het helpvenster kan niet in dialogen worden geopend als er al een
+   "normaal" helpvenster in de achtergrond is (verwijderen van niet-modale
+   vensters in een dialoog werkt niet correct)
+ - ...
+
+
+Zie ook:
+ {Geschiedenis van tvNiki:Geschichte}
+ {Inhoud:NoContext}
+
+
+
+
+.topic Copyright
+ █ Copyright
+ ████████████
+
+ █████████████████████████████████
+ █tvNiki v1.1 door 1Stein        █
+ █                               █
+ █Copyright door Stefan Schimanski,█
+ █Alle rechten voorbehouden      █
+ █████████████████████████████████
+
+
+Deze versie van tvNiki is gratis te gebruiken voor privédoeleinden. Het
+gebruik in het onderwijs en voor andere openbare doeleinden is zonder
+registratie bij de auteur NIET toegestaan.
+
+"Een programma dat het waard is om door jou te worden gebruikt, is het ook
+waard dat je ervoor betaalt..."
+
+De huidige versie van tvNiki staat op de homepage van de Computer-AG van de
+Große Schule op het internet om te downloaden:
+
+http://www.tigersoft.de/wf-net/info/computer-ag
+
+
+
+Voor meer informatie:
+
+ Stefan Schimanski
+ Ginsterweg 19
+ D-38300 Wolfenbüttel
+ Tel.: 05331/63268
+
+
+
+Zie ook:
+ {Geschiedenis:Geschichte}
+ {Inhoud:NoContext}
