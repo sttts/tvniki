@@ -14,7 +14,7 @@ interface
 uses Objects, Drivers, Views, SysUtils, LazUTF8;
 
 const
-  CHelpColor      = #$37#$31#$1F#$13#$13#$30#$3E#$1E;
+  CHelpColor      = #$37#$3F#$3A#$13#$13#$30#$31#$1F;
   CHelpBlackWhite = #$07#$0F#$07#$70#$70#$07#$0F#$70;
   CHelpMonochrome = #$07#$0F#$07#$70#$70#$07#$0F#$70;
   CHelpViewer     = #6#7#8;
