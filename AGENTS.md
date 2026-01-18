@@ -16,6 +16,16 @@ bd create --id <id> --title "Title" --body "Description"  # Create new issue
 bd comments add <id> "Comment text"  # Add comment to issue
 ```
 
+## Starting Work
+
+**Always** create a worktree when starting work on an issue:
+
+```bash
+bd update <id> --status in_progress
+bd worktree create worktrees/<id>
+cd worktrees/<id>
+```
+
 **Note:** `bd ready` shows both open and in_progress issues. When presenting results (e.g., for "What's next?"), always show two separate sections:
 
 ```
