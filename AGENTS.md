@@ -56,6 +56,22 @@ Requirements:
 - Free Pascal Compiler (fpc) with Turbo Pascal mode support
 - macOS or Linux terminal with UTF-8 and mouse support
 
+## Debugging Crashes
+
+On crash, tvNiki switches back to the main terminal screen and displays the error with stack addresses:
+```
+An unhandled exception occurred at $000000018CA2E2F4:
+EAccessViolation: Access violation
+  $000000018CA2E2F4
+  $0000000100E58C58
+  ...
+```
+
+To decode addresses to file:line, use lldb:
+```bash
+lldb ./niki -o "image lookup -a 0x0000000100E58C58" -o quit
+```
+
 ## Architecture
 
 ### Main Components
