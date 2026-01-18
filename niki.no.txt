@@ -1,0 +1,124 @@
+# Norwegian translation for tvNiki
+# Format: English=Norwegian
+
+# Status bar
+Wall=Vegg
+Niki/turn=Niki/snu
+Supply=Forråd
+Run=Kjør
+
+# Menus
+~F~ile=~F~il
+~N~ew=~N~y
+~O~pen...=~Å~pne...
+~S~ave=~L~agre
+Save ~a~s...=Lagre s~o~m...
+~P~rint...=Skr~i~v ut...
+~C~hange directory...=~B~ytt mappe...
+~Q~uit=~A~vslutt
+~E~dit=R~e~diger
+~U~ndo=~A~ngre
+Cu~t~=Kli~p~p
+~C~opy=~K~opier
+~P~aste=~L~im inn
+C~l~ear=~T~øm
+~S~how clipboard=~V~is utklippstavle
+~S~earch=~S~øk
+~F~ind...=~F~inn...
+~R~eplace...=~E~rstatt...
+Search ~a~gain=Søk ~i~gjen
+~C~ompiler=~C~ompiler
+C~o~mpile=C~o~mpiler
+~S~ingle step=~S~teg for steg
+~R~eset program=~T~ilbakestill program
+~T~each in=~T~each in
+F~i~eld=Fe~l~t
+S~u~pply...=Forr~å~d...
+Sp~e~ed...=Ha~s~tighet...
+~W~indow=~V~indu
+~T~ile=Side ved ~s~ide
+~C~ascade=~O~verlappende
+Cl~o~se all=~L~ukk alle
+Si~z~e/move=Størr~e~lse/flytt
+~Z~oom=~Z~oom
+~N~ext=~N~este
+~P~revious=~F~orrige
+C~l~ose...=~L~ukk...
+~V~ideo mode=~V~ideomodus
+~I~nfo window on/off=~I~nfovindu på/av
+~H~elp=~H~jelp
+~C~ontents=I~n~nhold
+~P~ASCAL help=~P~ASCAL hjelp
+~A~bout=~O~m
+
+# Dialogs
+Open File=Åpne fil
+Open Field=Åpne felt
+Save file=Lagre fil
+Save as=Lagre som
+~N~ame=~N~avn
+Cannot open help file=Kan ikke åpne hjelpefil
+Compiling=Kompilerer
+Program       :=Program      :
+Current file  :=Gjeldende fil:
+Lines         :=Linjer       :
+Total lines   :=Totalt linjer:
+~C~ancel=~A~vbryt
+~O~k=~O~k
+
+# Editor messages
+%s has been modified. Save?=%s er endret. Lagre?
+Save untitled file?=Lagre navnløs fil?
+Search string not found.=Søketeksten ble ikke funnet.
+Replace this occurrence?=Erstatt denne forekomsten?
+Debug mode has been disabled via the DEBUG switch in NIKI.CFG.=Feilsøkingsmodus er deaktivert via DEBUG-bryteren i NIKI.CFG.
+You must load a robot field first to run the program=Du må først laste inn et robotfelt for å kjøre programmet
+Error #%d at line %d: %s=Feil #%d på linje %d: %s
+Untitled=Navnløs
+
+# Field messages
+Save field %s before closing?=Lagre felt %s før lukking?
+Not enough memory for a field=Ikke nok minne for et felt
+Change supply=Endre forråd
+Supply:=Forråd:
+Supply must be between 0 and 99=Forrådet må være mellom 0 og 99
+Change speed=Endre hastighet
+Speed:=Hastighet:
+Speed must be between 0 and 99=Hastigheten må være mellom 0 og 99
+Do you want to save the recorded part as a program?=Vil du lagre den innspilte delen som et program?
+Program finished=Programmet fullført
+
+# Runtime errors
+Error #%d: Nothing to put down or cell is full=Feil #%d: Ingenting å legge ned eller cellen er full
+Error #%d: Nothing to pick up=Feil #%d: Ingenting å plukke opp
+Error #%d: Wall in the way=Feil #%d: Vegg i veien
+Error #%d: Not enough memory=Feil #%d: Ikke nok minne
+Error #%d: Stack overflow=Feil #%d: Stakkoverflyt
+Internal interpreter error #%d at PCode position %d=Intern tolkefeil #%d ved PCode-posisjon %d
+Error #%d: File error=Feil #%d: Filfeil
+Unknown error #%d=Ukjent feil #%d
+Not enough memory to display error=Ikke nok minne til å vise feil
+Not enough resources to run the program=Ikke nok ressurser til å kjøre programmet
+Not enough memory to run the program=Ikke nok minne til å kjøre programmet
+Not enough memory to display completion message=Ikke nok minne til å vise fullføringsmelding
+
+# Compiler errors
+Source file not found or cannot be opened=Kildefilen ble ikke funnet eller kan ikke åpnes
+Cannot create destination file=Kan ikke opprette målfil
+Unclosed comment=Uavsluttet kommentar
+Identifier expected=Identifikator forventet
+Keyword not allowed as identifier=Nøkkelord ikke tillatt som identifikator
+Semicolon (;) expected=Semikolon (;) forventet
+Semicolon expected=Semikolon forventet
+END or command expected=END eller kommando forventet
+BEGIN expected=BEGIN forventet
+Right bracket expected=Høyre parentes forventet
+Function expected=Funksjon forventet
+Unknown function=Ukjent funksjon
+THEN expected=THEN forventet
+DO expected=DO forventet
+UNTIL expected=UNTIL forventet
+Command expected=Kommando forventet
+Unknown command=Ukjent kommando
+Duplicate identifier=Duplikat identifikator
+Period expected=Punktum forventet

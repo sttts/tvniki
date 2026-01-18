@@ -1,0 +1,124 @@
+# Icelandic translation for tvNiki
+# Format: English=Icelandic
+
+# Status bar
+Wall=Veggur
+Niki/turn=Niki/snúa
+Supply=Birgðir
+Run=Keyra
+
+# Menus
+~F~ile=~S~krá
+~N~ew=~N~ý
+~O~pen...=~O~pna...
+~S~ave=~V~ista
+Save ~a~s...=Vista se~m~...
+~P~rint...=~P~renta...
+~C~hange directory...=~B~reyta möppu...
+~Q~uit=~H~ætta
+~E~dit=Br~e~yta
+~U~ndo=~A~fturkalla
+Cu~t~=Kli~p~pa
+~C~opy=~A~frita
+~P~aste=~L~íma
+C~l~ear=~H~reinsa
+~S~how clipboard=~S~ýna klippispjald
+~S~earch=~L~eita
+~F~ind...=~F~inna...
+~R~eplace...=~S~kipta...
+Search ~a~gain=Leita ~a~ftur
+~C~ompiler=~Þ~ýðandi
+C~o~mpile=Þ~ý~ða
+~S~ingle step=~E~itt skref
+~R~eset program=E~n~durstilla forrit
+~T~each in=~T~each in
+F~i~eld=Sv~æ~ði
+S~u~pply...=~B~irgðir...
+Sp~e~ed...=~H~raði...
+~W~indow=~G~luggi
+~T~ile=~F~lísar
+~C~ascade=~L~ag
+Cl~o~se all=L~o~ka öllu
+Si~z~e/move=Stæ~r~ð/færa
+~Z~oom=~S~tækka
+~N~ext=~N~æsta
+~P~revious=~F~yrra
+C~l~ose...=~L~oka...
+~V~ideo mode=~M~yndstilling
+~I~nfo window on/off=~U~pplýsingagluggi kveikt/slökkt
+~H~elp=~H~jálp
+~C~ontents=~E~fnisyfirlit
+~P~ASCAL help=~P~ASCAL hjálp
+~A~bout=~U~m
+
+# Dialogs
+Open File=Opna skrá
+Open Field=Opna svæði
+Save file=Vista skrá
+Save as=Vista sem
+~N~ame=~N~afn
+Cannot open help file=Get ekki opnað hjálparskrá
+Compiling=Þýði
+Program       :=Forrit       :
+Current file  :=Núverandi skrá:
+Lines         :=Línur        :
+Total lines   :=Línur alls   :
+~C~ancel=~H~ætta við
+~O~k=~Í~ lagi
+
+# Editor messages
+%s has been modified. Save?=%s hefur breyst. Vista?
+Save untitled file?=Vista ónefnda skrá?
+Search string not found.=Leitarstrengur fannst ekki.
+Replace this occurrence?=Skipta út þessu tilviki?
+Debug mode has been disabled via the DEBUG switch in NIKI.CFG.=Villuleitarhamur hefur verið óvirkjaður með DEBUG rofanum í NIKI.CFG.
+You must load a robot field first to run the program=Þú verður fyrst að hlaða inn vélmennasvæði til að keyra forritið
+Error #%d at line %d: %s=Villa #%d í línu %d: %s
+Untitled=Ónefnt
+
+# Field messages
+Save field %s before closing?=Vista svæði %s áður en lokað er?
+Not enough memory for a field=Ekki nóg minni fyrir svæði
+Change supply=Breyta birgðum
+Supply:=Birgðir:
+Supply must be between 0 and 99=Birgðir verða að vera á milli 0 og 99
+Change speed=Breyta hraða
+Speed:=Hraði:
+Speed must be between 0 and 99=Hraði verður að vera á milli 0 og 99
+Do you want to save the recorded part as a program?=Viltu vista upptöku sem forrit?
+Program finished=Forriti lokið
+
+# Runtime errors
+Error #%d: Nothing to put down or cell is full=Villa #%d: Ekkert til að setja niður eða reitur fullur
+Error #%d: Nothing to pick up=Villa #%d: Ekkert til að taka upp
+Error #%d: Wall in the way=Villa #%d: Veggur í veginum
+Error #%d: Not enough memory=Villa #%d: Ekki nóg minni
+Error #%d: Stack overflow=Villa #%d: Staflayfirflæði
+Internal interpreter error #%d at PCode position %d=Innri túlksvilla #%d við PCode stöðu %d
+Error #%d: File error=Villa #%d: Skráarvilla
+Unknown error #%d=Óþekkt villa #%d
+Not enough memory to display error=Ekki nóg minni til að sýna villu
+Not enough resources to run the program=Ekki nóg auðlindir til að keyra forritið
+Not enough memory to run the program=Ekki nóg minni til að keyra forritið
+Not enough memory to display completion message=Ekki nóg minni til að sýna lokaboð
+
+# Compiler errors
+Source file not found or cannot be opened=Frumskrá fannst ekki eða er ekki hægt að opna
+Cannot create destination file=Get ekki búið til markskrá
+Unclosed comment=Ólokað athugasemd
+Identifier expected=Auðkenni væntanlegt
+Keyword not allowed as identifier=Lykilorð ekki leyft sem auðkenni
+Semicolon (;) expected=Semíkomma (;) væntanleg
+Semicolon expected=Semíkomma væntanleg
+END or command expected=END eða skipun væntanleg
+BEGIN expected=BEGIN væntanlegt
+Right bracket expected=Hægri svigi væntanlegur
+Function expected=Fall væntanlegt
+Unknown function=Óþekkt fall
+THEN expected=THEN væntanlegt
+DO expected=DO væntanlegt
+UNTIL expected=UNTIL væntanlegt
+Command expected=Skipun væntanleg
+Unknown command=Óþekkt skipun
+Duplicate identifier=Tvítekið auðkenni
+Period expected=Punktur væntanlegur

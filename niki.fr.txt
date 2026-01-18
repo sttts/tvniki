@@ -1,0 +1,124 @@
+# French translation for tvNiki
+# Format: English=French
+
+# Status bar
+Wall=Mur
+Niki/turn=Niki/tourner
+Supply=Réserve
+Run=Exécuter
+
+# Menus
+~F~ile=~F~ichier
+~N~ew=~N~ouveau
+~O~pen...=~O~uvrir...
+~S~ave=~E~nregistrer
+Save ~a~s...=Enregistrer ~s~ous...
+~P~rint...=Im~p~rimer...
+~C~hange directory...=~C~hanger de répertoire...
+~Q~uit=~Q~uitter
+~E~dit=~E~dition
+~U~ndo=Ann~u~ler
+Cu~t~=Co~u~per
+~C~opy=~C~opier
+~P~aste=Co~l~ler
+C~l~ear=E~f~facer
+~S~how clipboard=~A~fficher presse-papiers
+~S~earch=~R~echerche
+~F~ind...=~R~echercher...
+~R~eplace...=R~e~mplacer...
+Search ~a~gain=Rechercher ~e~ncore
+~C~ompiler=~C~ompilateur
+C~o~mpile=C~o~mpiler
+~S~ingle step=Pa~s~ à pas
+~R~eset program=~R~éinitialiser programme
+~T~each in=~T~each in
+F~i~eld=Terra~i~n
+S~u~pply...=Ré~s~erve...
+Sp~e~ed...=Vit~e~sse...
+~W~indow=Fe~n~être
+~T~ile=~M~osaïque
+~C~ascade=~C~ascade
+Cl~o~se all=~F~ermer tout
+Si~z~e/move=~T~aille/position
+~Z~oom=~Z~oom
+~N~ext=Suiva~n~t
+~P~revious=~P~récédent
+C~l~ose...=~F~ermer...
+~V~ideo mode=Mode ~v~idéo
+~I~nfo window on/off=Fenêtre ~i~nfo on/off
+~H~elp=~A~ide
+~C~ontents=~S~ommaire
+~P~ASCAL help=Aide ~P~ASCAL
+~A~bout=À pr~o~pos
+
+# Dialogs
+Open File=Ouvrir fichier
+Open Field=Ouvrir terrain
+Save file=Enregistrer fichier
+Save as=Enregistrer sous
+~N~ame=~N~om
+Cannot open help file=Impossible d'ouvrir le fichier d'aide
+Compiling=Compilation
+Program       :=Programme     :
+Current file  :=Fichier actuel:
+Lines         :=Lignes        :
+Total lines   :=Total lignes  :
+~C~ancel=~A~nnuler
+~O~k=~O~k
+
+# Editor messages
+%s has been modified. Save?=%s a été modifié. Enregistrer?
+Save untitled file?=Enregistrer le fichier sans titre?
+Search string not found.=Texte recherché non trouvé.
+Replace this occurrence?=Remplacer cette occurrence?
+Debug mode has been disabled via the DEBUG switch in NIKI.CFG.=Le mode débogage a été désactivé via le commutateur DEBUG dans NIKI.CFG.
+You must load a robot field first to run the program=Vous devez d'abord charger un terrain pour exécuter le programme
+Error #%d at line %d: %s=Erreur #%d à la ligne %d: %s
+Untitled=Sans titre
+
+# Field messages
+Save field %s before closing?=Enregistrer le terrain %s avant de fermer?
+Not enough memory for a field=Pas assez de mémoire pour un terrain
+Change supply=Modifier réserve
+Supply:=Réserve:
+Supply must be between 0 and 99=La réserve doit être entre 0 et 99
+Change speed=Modifier vitesse
+Speed:=Vitesse:
+Speed must be between 0 and 99=La vitesse doit être entre 0 et 99
+Do you want to save the recorded part as a program?=Voulez-vous enregistrer la partie enregistrée comme programme?
+Program finished=Programme terminé
+
+# Runtime errors
+Error #%d: Nothing to put down or cell is full=Erreur #%d: Rien à déposer ou cellule pleine
+Error #%d: Nothing to pick up=Erreur #%d: Rien à ramasser
+Error #%d: Wall in the way=Erreur #%d: Mur sur le chemin
+Error #%d: Not enough memory=Erreur #%d: Pas assez de mémoire
+Error #%d: Stack overflow=Erreur #%d: Débordement de pile
+Internal interpreter error #%d at PCode position %d=Erreur interne de l'interpréteur #%d à la position PCode %d
+Error #%d: File error=Erreur #%d: Erreur de fichier
+Unknown error #%d=Erreur inconnue #%d
+Not enough memory to display error=Pas assez de mémoire pour afficher l'erreur
+Not enough resources to run the program=Pas assez de ressources pour exécuter le programme
+Not enough memory to run the program=Pas assez de mémoire pour exécuter le programme
+Not enough memory to display completion message=Pas assez de mémoire pour afficher le message de fin
+
+# Compiler errors
+Source file not found or cannot be opened=Fichier source non trouvé ou impossible à ouvrir
+Cannot create destination file=Impossible de créer le fichier de destination
+Unclosed comment=Commentaire non fermé
+Identifier expected=Identificateur attendu
+Keyword not allowed as identifier=Mot-clé non autorisé comme identificateur
+Semicolon (;) expected=Point-virgule (;) attendu
+Semicolon expected=Point-virgule attendu
+END or command expected=END ou commande attendu
+BEGIN expected=BEGIN attendu
+Right bracket expected=Parenthèse droite attendue
+Function expected=Fonction attendue
+Unknown function=Fonction inconnue
+THEN expected=THEN attendu
+DO expected=DO attendu
+UNTIL expected=UNTIL attendu
+Command expected=Commande attendue
+Unknown command=Commande inconnue
+Duplicate identifier=Identificateur en double
+Period expected=Point attendu

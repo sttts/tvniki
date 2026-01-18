@@ -1,0 +1,124 @@
+# Swedish translation for tvNiki
+# Format: English=Swedish
+
+# Status bar
+Wall=Vägg
+Niki/turn=Niki/sväng
+Supply=Förråd
+Run=Kör
+
+# Menus
+~F~ile=~A~rkiv
+~N~ew=~N~y
+~O~pen...=~Ö~ppna...
+~S~ave=~S~para
+Save ~a~s...=Spara s~o~m...
+~P~rint...=Skr~i~v ut...
+~C~hange directory...=~B~yt mapp...
+~Q~uit=~A~vsluta
+~E~dit=R~e~digera
+~U~ndo=Ång~r~a
+Cu~t~=Kli~p~p
+~C~opy=~K~opiera
+~P~aste=Kl~i~stra in
+C~l~ear=~R~ensa
+~S~how clipboard=~V~isa urklipp
+~S~earch=~S~ök
+~F~ind...=~H~itta...
+~R~eplace...=~E~rsätt...
+Search ~a~gain=Sök i~g~en
+~C~ompiler=~C~ompiler
+C~o~mpile=C~o~mpilera
+~S~ingle step=~S~teg för steg
+~R~eset program=Åte~r~ställ program
+~T~each in=~T~each in
+F~i~eld=Fä~l~t
+S~u~pply...=~F~örråd...
+Sp~e~ed...=Ha~s~tighet...
+~W~indow=~F~önster
+~T~ile=~S~ida vid sida
+~C~ascade=~Ö~verlappande
+Cl~o~se all=Stäng a~l~la
+Si~z~e/move=Stor~l~ek/flytta
+~Z~oom=~Z~ooma
+~N~ext=~N~ästa
+~P~revious=~F~öregående
+C~l~ose...=~S~täng...
+~V~ideo mode=~V~ideoläge
+~I~nfo window on/off=~I~nfofönster på/av
+~H~elp=~H~jälp
+~C~ontents=~I~nnehåll
+~P~ASCAL help=~P~ASCAL hjälp
+~A~bout=~O~m
+
+# Dialogs
+Open File=Öppna fil
+Open Field=Öppna fält
+Save file=Spara fil
+Save as=Spara som
+~N~ame=~N~amn
+Cannot open help file=Kan inte öppna hjälpfil
+Compiling=Kompilerar
+Program       :=Program      :
+Current file  :=Aktuell fil  :
+Lines         :=Rader        :
+Total lines   :=Totalt rader :
+~C~ancel=~A~vbryt
+~O~k=~O~k
+
+# Editor messages
+%s has been modified. Save?=%s har ändrats. Spara?
+Save untitled file?=Spara namnlös fil?
+Search string not found.=Söksträngen hittades inte.
+Replace this occurrence?=Ersätt denna förekomst?
+Debug mode has been disabled via the DEBUG switch in NIKI.CFG.=Felsökningsläget har inaktiverats via DEBUG-omkopplaren i NIKI.CFG.
+You must load a robot field first to run the program=Du måste först ladda ett robotfält för att köra programmet
+Error #%d at line %d: %s=Fel #%d på rad %d: %s
+Untitled=Namnlös
+
+# Field messages
+Save field %s before closing?=Spara fält %s innan stängning?
+Not enough memory for a field=Inte tillräckligt med minne för ett fält
+Change supply=Ändra förråd
+Supply:=Förråd:
+Supply must be between 0 and 99=Förrådet måste vara mellan 0 och 99
+Change speed=Ändra hastighet
+Speed:=Hastighet:
+Speed must be between 0 and 99=Hastigheten måste vara mellan 0 och 99
+Do you want to save the recorded part as a program?=Vill du spara den inspelade delen som ett program?
+Program finished=Programmet avslutat
+
+# Runtime errors
+Error #%d: Nothing to put down or cell is full=Fel #%d: Inget att lägga ner eller cellen är full
+Error #%d: Nothing to pick up=Fel #%d: Inget att plocka upp
+Error #%d: Wall in the way=Fel #%d: Vägg i vägen
+Error #%d: Not enough memory=Fel #%d: Inte tillräckligt med minne
+Error #%d: Stack overflow=Fel #%d: Stackspill
+Internal interpreter error #%d at PCode position %d=Internt tolkfel #%d vid PCode-position %d
+Error #%d: File error=Fel #%d: Filfel
+Unknown error #%d=Okänt fel #%d
+Not enough memory to display error=Inte tillräckligt med minne för att visa fel
+Not enough resources to run the program=Inte tillräckligt med resurser för att köra programmet
+Not enough memory to run the program=Inte tillräckligt med minne för att köra programmet
+Not enough memory to display completion message=Inte tillräckligt med minne för att visa färdigmeddelande
+
+# Compiler errors
+Source file not found or cannot be opened=Källfilen hittades inte eller kan inte öppnas
+Cannot create destination file=Kan inte skapa målfil
+Unclosed comment=Oavslutad kommentar
+Identifier expected=Identifierare förväntad
+Keyword not allowed as identifier=Nyckelord tillåts inte som identifierare
+Semicolon (;) expected=Semikolon (;) förväntat
+Semicolon expected=Semikolon förväntat
+END or command expected=END eller kommando förväntat
+BEGIN expected=BEGIN förväntat
+Right bracket expected=Höger parentes förväntad
+Function expected=Funktion förväntad
+Unknown function=Okänd funktion
+THEN expected=THEN förväntat
+DO expected=DO förväntat
+UNTIL expected=UNTIL förväntat
+Command expected=Kommando förväntat
+Unknown command=Okänt kommando
+Duplicate identifier=Dubblerad identifierare
+Period expected=Punkt förväntad

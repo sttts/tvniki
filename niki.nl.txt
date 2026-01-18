@@ -1,0 +1,124 @@
+# Dutch translation for tvNiki
+# Format: English=Dutch
+
+# Status bar
+Wall=Muur
+Niki/turn=Niki/draaien
+Supply=Voorraad
+Run=Uitvoeren
+
+# Menus
+~F~ile=~B~estand
+~N~ew=~N~ieuw
+~O~pen...=~O~penen...
+~S~ave=Op~s~laan
+Save ~a~s...=Opslaan ~a~ls...
+~P~rint...=Af~d~rukken...
+~C~hange directory...=~M~ap wijzigen...
+~Q~uit=~A~fsluiten
+~E~dit=B~e~werken
+~U~ndo=~O~ngedaan maken
+Cu~t~=Kni~p~pen
+~C~opy=~K~opiëren
+~P~aste=~P~lakken
+C~l~ear=~W~issen
+~S~how clipboard=Klembord ~t~onen
+~S~earch=~Z~oeken
+~F~ind...=~Z~oeken...
+~R~eplace...=Ve~r~vangen...
+Search ~a~gain=~O~pnieuw zoeken
+~C~ompiler=~C~ompiler
+C~o~mpile=C~o~mpileren
+~S~ingle step=~S~tap voor stap
+~R~eset program=Programma ~h~erstellen
+~T~each in=~T~each in
+F~i~eld=Ve~l~d
+S~u~pply...=~V~oorraad...
+Sp~e~ed...=Sn~e~lheid...
+~W~indow=Ve~n~ster
+~T~ile=~T~egels
+~C~ascade=~C~ascade
+Cl~o~se all=Alles s~l~uiten
+Si~z~e/move=~G~rootte/verplaatsen
+~Z~oom=~Z~oom
+~N~ext=Vol~g~ende
+~P~revious=~V~orige
+C~l~ose...=S~l~uiten...
+~V~ideo mode=~V~ideomodus
+~I~nfo window on/off=~I~nfovenster aan/uit
+~H~elp=~H~ulp
+~C~ontents=I~n~houd
+~P~ASCAL help=~P~ASCAL hulp
+~A~bout=~O~ver
+
+# Dialogs
+Open File=Bestand openen
+Open Field=Veld openen
+Save file=Bestand opslaan
+Save as=Opslaan als
+~N~ame=~N~aam
+Cannot open help file=Kan helpbestand niet openen
+Compiling=Compileren
+Program       :=Programma    :
+Current file  :=Huidig bestand:
+Lines         :=Regels       :
+Total lines   :=Totaal regels:
+~C~ancel=~A~nnuleren
+~O~k=~O~k
+
+# Editor messages
+%s has been modified. Save?=%s is gewijzigd. Opslaan?
+Save untitled file?=Naamloos bestand opslaan?
+Search string not found.=Zoektekst niet gevonden.
+Replace this occurrence?=Dit exemplaar vervangen?
+Debug mode has been disabled via the DEBUG switch in NIKI.CFG.=Debugmodus is uitgeschakeld via de DEBUG schakelaar in NIKI.CFG.
+You must load a robot field first to run the program=U moet eerst een robotveld laden om het programma uit te voeren
+Error #%d at line %d: %s=Fout #%d op regel %d: %s
+Untitled=Naamloos
+
+# Field messages
+Save field %s before closing?=Veld %s opslaan voor sluiten?
+Not enough memory for a field=Niet genoeg geheugen voor een veld
+Change supply=Voorraad wijzigen
+Supply:=Voorraad:
+Supply must be between 0 and 99=Voorraad moet tussen 0 en 99 liggen
+Change speed=Snelheid wijzigen
+Speed:=Snelheid:
+Speed must be between 0 and 99=Snelheid moet tussen 0 en 99 liggen
+Do you want to save the recorded part as a program?=Wilt u het opgenomen deel als programma opslaan?
+Program finished=Programma voltooid
+
+# Runtime errors
+Error #%d: Nothing to put down or cell is full=Fout #%d: Niets om neer te leggen of cel is vol
+Error #%d: Nothing to pick up=Fout #%d: Niets om op te pakken
+Error #%d: Wall in the way=Fout #%d: Muur in de weg
+Error #%d: Not enough memory=Fout #%d: Niet genoeg geheugen
+Error #%d: Stack overflow=Fout #%d: Stack overflow
+Internal interpreter error #%d at PCode position %d=Interne interpreterfout #%d op PCode positie %d
+Error #%d: File error=Fout #%d: Bestandsfout
+Unknown error #%d=Onbekende fout #%d
+Not enough memory to display error=Niet genoeg geheugen om fout te tonen
+Not enough resources to run the program=Niet genoeg middelen om het programma uit te voeren
+Not enough memory to run the program=Niet genoeg geheugen om het programma uit te voeren
+Not enough memory to display completion message=Niet genoeg geheugen om voltooiingsbericht te tonen
+
+# Compiler errors
+Source file not found or cannot be opened=Bronbestand niet gevonden of kan niet worden geopend
+Cannot create destination file=Kan doelbestand niet aanmaken
+Unclosed comment=Niet afgesloten commentaar
+Identifier expected=Identifier verwacht
+Keyword not allowed as identifier=Sleutelwoord niet toegestaan als identifier
+Semicolon (;) expected=Puntkomma (;) verwacht
+Semicolon expected=Puntkomma verwacht
+END or command expected=END of opdracht verwacht
+BEGIN expected=BEGIN verwacht
+Right bracket expected=Rechter haakje verwacht
+Function expected=Functie verwacht
+Unknown function=Onbekende functie
+THEN expected=THEN verwacht
+DO expected=DO verwacht
+UNTIL expected=UNTIL verwacht
+Command expected=Opdracht verwacht
+Unknown command=Onbekende opdracht
+Duplicate identifier=Dubbele identifier
+Period expected=Punt verwacht
