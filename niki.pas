@@ -16,17 +16,18 @@ PROCEDURE DecodeBacktrace;
 VAR
   P: TProcess;
   J: Integer;
-  LoadAddr, FileAddr: PtrUInt;
+  {$IFDEF DARWIN}
+  LoadAddr: PtrUInt;
+  {$ENDIF}
 BEGIN
   DecodedBacktrace := TStringList.Create;
-
-  { Calculate load address from PASCALMAIN's runtime address }
-  { PASCALMAIN is at file offset ~0xe20, so round down to page boundary }
-  LoadAddr := PtrUInt(@PASCALMAIN) AND $FFFFFFFFFFFFF000;
 
   P := TProcess.Create(NIL);
   TRY
     {$IFDEF DARWIN}
+    { Calculate load address from PASCALMAIN's runtime address }
+    { PASCALMAIN is at file offset ~0xe20, so round down to page boundary }
+    LoadAddr := PtrUInt(@PASCALMAIN) AND $FFFFFFFFFFFFF000;
     P.Executable := 'atos';
     P.Parameters.Add('-o');
     P.Parameters.Add(ParamStr(0));
@@ -35,7 +36,7 @@ BEGIN
     FOR J := 0 TO ExceptFrameCount - 1 DO
       P.Parameters.Add('0x' + HexStr(ExceptFrames[J]));
     {$ELSE}
-    { On Linux, convert runtime addresses to file addresses }
+    { On Linux, use addr2line with raw addresses }
     P.Executable := 'addr2line';
     P.Parameters.Add('-e');
     P.Parameters.Add(ParamStr(0));
@@ -43,11 +44,7 @@ BEGIN
     P.Parameters.Add('-C');
     P.Parameters.Add('-p');
     FOR J := 0 TO ExceptFrameCount - 1 DO
-    BEGIN
-      { Subtract load address to get file offset }
-      FileAddr := PtrUInt(ExceptFrames[J]) - LoadAddr;
-      P.Parameters.Add('0x' + HexStr(Pointer(FileAddr)));
-    END;
+      P.Parameters.Add('0x' + HexStr(ExceptFrames[J]));
     {$ENDIF}
     P.Options := [poWaitOnExit, poUsePipes];
     P.Execute;
