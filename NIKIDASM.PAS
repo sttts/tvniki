@@ -300,9 +300,10 @@ BEGIN
 END;
 
 FUNCTION TDisasmWindow.GetPalette: PPalette;
-{ Window palette - scroller uses entries 6 and 7 for normal/highlight }
-{ Entry 6 = normal text (cyan on blue), Entry 7 = focus line (yellow on blue) }
-CONST CDisasm: String[8] = #30#31#31#30#30#30#31#78;
+{ Window palette: all entries use black on light grey ($70) }
+{ Entries: 1=frame passive, 2=frame active, 3=frame icons, 4=scrollbar page,
+  5=scrollbar controls, 6=scroller normal, 7=scroller selected, 8=reserved }
+CONST CDisasm: String[8] = #$70#$70#$70#$70#$70#$70#$70#$70;
 BEGIN
   GetPalette := @CDisasm;
 END;
