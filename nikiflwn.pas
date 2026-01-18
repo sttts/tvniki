@@ -307,9 +307,9 @@ BEGIN
   Draw;
 
   IF HScrollBar <> NIL THEN
-      HScrollBar^.SetParams(Delta.X, 0, Limit.X - Size.X + 1, Size.X DIV 2, 1);
+      HScrollBar^.SetParams(Delta.X, 0, Limit.X - Size.X, Size.X DIV 2, 1);
   IF VScrollBar <> NIL THEN
-      VScrollBar^.SetParams(Delta.Y, 0, Limit.Y - Size.Y + 1, Size.Y - 1, 1);
+      VScrollBar^.SetParams(Delta.Y, 0, Limit.Y - Size.Y, Size.Y - 1, 1);
 END;
 
 VAR Str:PShortString;
