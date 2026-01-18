@@ -189,7 +189,7 @@ BEGIN
   SetDatei(Quelle);
 
   FSplit(Quelle, Dir, Name, Ext);
-  Ziel := Dir+Name+'.NIK';
+  Ziel := Dir+Name+'.nik';
 
   SetProgramm(Ziel);
 

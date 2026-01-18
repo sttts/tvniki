@@ -106,9 +106,9 @@ END.
 
 ## File Types
 
-- `.PAS` - Program source code
-- `.NIK` - Compiled bytecode
-- `.ROB` - Field/world files (grid layout)
+- `.pas` - Program source code
+- `.nik` - Compiled bytecode
+- `.rob` - Field/world files (grid layout)
 
 ## Keyboard Shortcuts
 

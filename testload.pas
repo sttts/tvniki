@@ -190,11 +190,11 @@ end;
 procedure TestAllROBFiles;
 const
   ROBFiles: array[0..4] of String = (
-    'LABY.ROB',
-    'LAGER.ROB',
-    'LKW.ROB',
-    'CONTAIN1.ROB',
-    'ZAHL.ROB'
+    'laby.rob',
+    'lager.rob',
+    'lkw.rob',
+    'contain1.rob',
+    'zahl.rob'
   );
 var
   i: Integer;

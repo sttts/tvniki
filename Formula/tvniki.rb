@@ -20,7 +20,7 @@ class Tvniki < Formula
 
     # Install data files
     pkgshare.install "hilfe.hlp"
-    pkgshare.install Dir["*.ROB"]
+    pkgshare.install Dir["*.rob"]
 
     # Record version for reference
     (pkgshare/"VERSION").write version
@@ -31,8 +31,8 @@ class Tvniki < Formula
       Example world files and help are installed in:
         #{pkgshare}
 
-      Run from a directory containing .ROB world files, or copy examples:
-        cp #{pkgshare}/*.ROB .
+      Run from a directory containing .rob world files, or copy examples:
+        cp #{pkgshare}/*.rob .
         cp #{pkgshare}/hilfe.hlp .
     EOS
   end

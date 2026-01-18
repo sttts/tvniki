@@ -284,7 +284,7 @@ BEGIN
 
       { Broadcast update to disasm window }
       FSplit(Editor^.FileName, Dir, Name, Ext);
-      DisasmFileName := Dir + Name + '.NIK';
+      DisasmFileName := Dir + Name + '.nik';
       IF Desktop <> NIL THEN
         Message(Desktop, evBroadcast, cmUpdateDisasm, NIL);
 
@@ -331,7 +331,7 @@ BEGIN
     IF NOT Error THEN
     BEGIN
       FSplit(Editor^.FileName, Dir, Name, Ext);
-      Ziel := Dir+Name+'.NIK';
+      Ziel := Dir+Name+'.nik';
       IF InfoWindow<>NIL THEN
       BEGIN
         InfoWindow^.Show;

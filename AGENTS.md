@@ -49,7 +49,7 @@ tmux capture-pane -t <task-id> -p
 tmux kill-session -t <task-id>
 ```
 
-**Tip**: Pass a .PAS file as command-line argument to load it directly: `./niki laby.pas`
+**Tip**: Pass a .pas file as command-line argument to load it directly: `./niki laby.pas`
 
 ## Worktree Workflow
 
@@ -110,15 +110,15 @@ lldb ./niki -o "image lookup -a 0x0000000100E58C58" -o quit
 
 ### Main Components
 
-- **NIKI.PAS** - Entry point, initializes TNikiApplication
-- **NIKIAPP.PAS** - Main application class (TNikiApplication), manages windows, menus, and event handling
-- **NIKIFELD.PAS** - Field editor (TFeldEditor) and robot simulation (TRobot), handles the visual grid where Niki operates
-- **NIKIFLWN.PAS** - Field window (TFieldWindow) with info bar showing robot state
-- **NIKICOMP.PAS** - Compilation dialog UI
-- **COMPILER.PAS** - Pascal-subset compiler that generates bytecode (.NIK files)
-- **INTP.PAS** - Bytecode interpreter (TInterpreter) that executes compiled programs
-- **OPCODES.PAS** - Virtual machine opcode definitions
-- **TIMER.PAS** - Cross-platform timing using SysUtils (replaces DOS INT 1Ch)
+- **NIKI.pas** - Entry point, initializes TNikiApplication
+- **NIKIAPP.pas** - Main application class (TNikiApplication), manages windows, menus, and event handling
+- **NIKIFELD.pas** - Field editor (TFeldEditor) and robot simulation (TRobot), handles the visual grid where Niki operates
+- **NIKIFLWN.pas** - Field window (TFieldWindow) with info bar showing robot state
+- **NIKICOMP.pas** - Compilation dialog UI
+- **COMPILER.pas** - Pascal-subset compiler that generates bytecode (.nik files)
+- **INTP.pas** - Bytecode interpreter (TInterpreter) that executes compiled programs
+- **OPCODES.pas** - Virtual machine opcode definitions
+- **TIMER.pas** - Cross-platform timing using SysUtils (replaces DOS INT 1Ch)
 
 ### Free Vision Customizations (fv_utf8/)
 
@@ -133,27 +133,27 @@ The `fv_utf8/` directory contains a UTF-8 enabled fork of Free Vision with these
 
 ### Compilation Pipeline
 
-1. Source files (.PAS) are compiled by COMPILER.PAS into bytecode (.NIK)
+1. Source files (.pas) are compiled by COMPILER.pas into bytecode (.nik)
 2. The compiler is a recursive descent parser supporting: PROGRAM, PROCEDURE, BEGIN/END, IF/THEN/ELSE, WHILE/DO, REPEAT/UNTIL
 3. Built-in commands: VOR (forward), DREHE_LINKS (turn left), NIMM_AUF (pick up), GIB_AB (put down)
 4. Built-in functions: VORNE_FREI, LINKS_FREI, RECHTS_FREI, PLATZ_BELEGT, HAT_VORRAT
-5. TProgInterpreter (in NIKIFELD.PAS) extends TInterpreter to connect bytecode execution to the robot
+5. TProgInterpreter (in NIKIFELD.pas) extends TInterpreter to connect bytecode execution to the robot
 
 ### File Types
 
-- `.PAS` - Student program source code
-- `.NIK` - Compiled bytecode
-- `.ROB` - Field/world files (grid layout with walls and objects)
+- `.pas` - Student program source code
+- `.nik` - Compiled bytecode
+- `.rob` - Field/world files (grid layout with walls and objects)
 - `.HLP` - Help file (HILFE.HLP)
 - `.CFG` - Configuration (NIKI.CFG)
 
 ### Key Classes
 
-- **TNikiApplication** (NIKIAPP.PAS) - Application class, handles menus and windows
-- **TFeldEditor** (NIKIFELD.PAS) - Grid editor with run/debug/teach-in modes
-- **TRobot** (NIKIFELD.PAS) - Robot state and movement logic
-- **TInterpreter** (INTP.PAS) - Base bytecode VM with stack and instruction pointer
-- **TProgInterpreter** (NIKIFELD.PAS) - Connects interpreter to robot actions
+- **TNikiApplication** (NIKIAPP.pas) - Application class, handles menus and windows
+- **TFeldEditor** (NIKIFELD.pas) - Grid editor with run/debug/teach-in modes
+- **TRobot** (NIKIFELD.pas) - Robot state and movement logic
+- **TInterpreter** (INTP.pas) - Base bytecode VM with stack and instruction pointer
+- **TProgInterpreter** (NIKIFELD.pas) - Connects interpreter to robot actions
 
 ### Configuration
 
