@@ -19,8 +19,6 @@ TYPE  TNikiApplication = OBJECT(TApplication)
                            FUNCTION OpenEditor(FileName: FNameStr; Visible: Boolean): PEditWindow;
                            FUNCTION OpenFeld(FileName:FNameStr):PFeldWindow;
 
-                           PROCEDURE SwitchVideoMode;
-
                            PROCEDURE Idle; VIRTUAL;
 
                            PROCEDURE Neu;
@@ -173,13 +171,6 @@ BEGIN
   Info;
 END;
 
-PROCEDURE TNikiApplication.SwitchVideoMode;
-BEGIN
-  { Toggle 25/50 line mode - simplified for Free Vision }
-  { In Free Vision, ScreenMode is a TVideoMode record, not a simple Word }
-  { This function is a placeholder - line mode switching may need terminal support }
-END;
-
 PROCEDURE TNikiApplication.CreateClipboard;
 VAR
   R: TRect;
@@ -292,9 +283,8 @@ BEGIN
       NewItem(tr('~P~revious'), 'Shift+F6', kbShiftF6, cmPrev, hcNoContext,
       NewItem(tr('C~l~ose...'), 'Alt+F3', kbAltF3, cmClose, hcNoContext,
       NewLine(
-      NewItem(tr('~V~ideo mode'), '', 0, cmVidMode, hcNoContext,
       NewItem(tr('~I~nfo window on/off'), '', 0, cmInfoWin, hcNoContext,
-      NIL))))))))))))),
+      NIL)))))))))))),
     NewSubMenu(tr('~H~elp'), hcNoContext, NewMenu(
       NewItem(tr('~C~ontents'), 'F1', kbF1, cmHelp, hcNoContext,
       NewItem(tr('~P~ASCAL help'), 'Ctrl-F1', kbCtrlF1, cmPascalHelp, hcNoContext,
@@ -346,7 +336,6 @@ BEGIN
                               IF InfoWindow<>NIL THEN InfoWindow^.Select;
                               FeldWindow^.Select;
                             END;
-                  cmVidMode: SwitchVideoMode;
                   cmChangeDir: ChangeDir;
                   cmHelp: Hilfe(hcNoContext, FALSE);
                   cmPascalHelp: Hilfe(hcPascal, FALSE);

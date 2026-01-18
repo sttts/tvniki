@@ -23,7 +23,6 @@ CONST cmIdle=           65535;
       cmSpeed=          507;
       cmPrintFeld=      508;
 
-      cmVidMode=        898;
       cmInfoWin=        899;
 
       cmInfo=           999;
