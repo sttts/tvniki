@@ -1,6 +1,6 @@
 UNIT NikiInfo;
 INTERFACE
-USES Dialogs, Objects, Views, Drivers, TVEnh;
+USES Dialogs, Objects, Views, Drivers, TVEnh, NikiStrings;
 
 TYPE TStatus=(stEdit, stRunning, stTeachIn, stPaused, stDebug);
 
@@ -58,8 +58,8 @@ BEGIN
   SetPosition(0,0);
   Insert(Position);
 
-  R.Assign(14,1,25,2);
-  New(Vorrat, Init(R, 'Vorrat: %2d', 1));
+  R.Assign(14,1,27,2);
+  New(Vorrat, Init(R, tr('Payload') + ': %2d', 1));
   SetVorrat(0);
   Insert(Vorrat);
 

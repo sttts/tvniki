@@ -6,6 +6,7 @@ UNIT NikiStrings;
 INTERFACE
 
 FUNCTION tr(const s: String): String;
+FUNCTION GetCurrentLang: String;
 PROCEDURE LoadTranslation(const LangCode: String);
 PROCEDURE InitTranslation;
 
@@ -15,6 +16,7 @@ USES Classes, SysUtils, Dos;
 
 VAR
   Translations: TStringList;
+  CurrentLang: String;
 
 FUNCTION tr(const s: String): String;
 VAR
@@ -32,6 +34,11 @@ BEGIN
   tr := s;
 END;
 
+FUNCTION GetCurrentLang: String;
+BEGIN
+  GetCurrentLang := CurrentLang;
+END;
+
 PROCEDURE LoadTranslation(const LangCode: String);
 VAR
   FileName: String;
@@ -39,6 +46,8 @@ VAR
   i: Integer;
   Line: String;
 BEGIN
+  CurrentLang := LangCode;
+
   IF Translations = NIL THEN
     Translations := TStringList.Create
   ELSE
@@ -78,6 +87,7 @@ END;
 
 INITIALIZATION
   Translations := NIL;
+  CurrentLang := 'en';
 
 FINALIZATION
   IF Translations <> NIL THEN
