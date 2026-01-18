@@ -361,8 +361,14 @@ BEGIN
   IF (Event.What=evKeyDown) AND (Event.KeyCode=kbF1) THEN
   BEGIN
     Event.What := evNothing;
-
     Hilfe(GetHelpCtx, TopView <> @Self);
+  END;
+
+  { Global quit shortcut - Ctrl-Q works regardless of focused view }
+  IF (Event.What=evKeyDown) AND (Event.KeyCode=kbCtrlQ) THEN
+  BEGIN
+    Event.What := evCommand;
+    Event.Command := cmQuit;
   END;
 END;
 
