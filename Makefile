@@ -39,7 +39,10 @@ clean:
 # Integration tests - run in Docker to verify Linux support
 .PHONY: integration
 integration:
-	@echo "=== Building from source in Docker ==="
-	docker build -t tvniki-integration -f Dockerfile.smoke-test .
-	@echo "=== Running integration test ==="
-	docker run --rm tvniki-integration
+	@echo "=== Integration test: build from source ==="
+	docker build -t tvniki-integration-source -f Dockerfile.smoke-test .
+	docker run --rm tvniki-integration-source
+	@echo ""
+	@echo "=== Integration test: install via Homebrew ==="
+	docker build -t tvniki-integration-brew -f Dockerfile.brew-test .
+	docker run --rm tvniki-integration-brew
