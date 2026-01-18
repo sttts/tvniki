@@ -20,12 +20,12 @@ brew install --head sttts/tvniki-2026/tvniki
 
 Download from [GitHub Releases](https://github.com/sttts/tvniki-2026/releases):
 
-- `niki-linux-x86_64` - Linux x86_64
-- `niki-linux-arm64` - Linux ARM64
+- `tvniki-linux-x86_64` - Linux x86_64
+- `tvniki-linux-arm64` - Linux ARM64
 
 ```bash
-chmod +x niki-linux-*
-./niki-linux-x86_64
+chmod +x tvniki-linux-*
+./tvniki-linux-x86_64
 ```
 
 ### Building from Source

@@ -29,13 +29,13 @@ jobs:
         run: make test
 
       - name: Rename binary
-        run: mv niki niki-linux-x86_64
+        run: mv niki tvniki-linux-x86_64
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: niki-linux-x86_64
-          path: niki-linux-x86_64
+          name: tvniki-linux-x86_64
+          path: tvniki-linux-x86_64
 
   build-linux-arm64:
     runs-on: ubuntu-latest
@@ -62,13 +62,13 @@ jobs:
             '
 
       - name: Rename binary
-        run: mv niki niki-linux-arm64
+        run: mv niki tvniki-linux-arm64
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: niki-linux-arm64
-          path: niki-linux-arm64
+          name: tvniki-linux-arm64
+          path: tvniki-linux-arm64
 
   release:
     needs: [build-linux-x86_64, build-linux-arm64]
@@ -86,6 +86,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/niki-linux-x86_64/niki-linux-x86_64
-            artifacts/niki-linux-arm64/niki-linux-arm64
+            artifacts/tvniki-linux-x86_64/tvniki-linux-x86_64
+            artifacts/tvniki-linux-arm64/tvniki-linux-arm64
           generate_release_notes: true
