@@ -1,14 +1,16 @@
 class Tvniki < Formula
   desc "Educational programming environment with robot simulation"
   homepage "https://github.com/sttts/tvniki"
-  url "https://github.com/sttts/tvniki/archive/refs/tags/v2.0.0.tar.gz"
-  sha256 "c21c6027981fbf08a07830dac86c8f84aaa558bddf39b39ffe2df7a555f58c4d"
   license "MIT"
   head "https://github.com/sttts/tvniki.git", branch: "main"
+  url "https://github.com/sttts/tvniki.git", tag: "v2.0.0"
 
   depends_on "fpc" => :build
 
   def install
+    # Initialize submodules (fv_utf8)
+    system "git", "submodule", "update", "--init", "--recursive"
+
     # Remove system Free Vision to avoid conflicts with bundled fv_utf8
     fv_system = "#{Formula["fpc"].lib}/fpc/#{Formula["fpc"].version}/units/#{Hardware::CPU.arch}-darwin/fv"
     rm_rf fv_system if Dir.exist?(fv_system)
