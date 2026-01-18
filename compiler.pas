@@ -358,17 +358,30 @@ BEGIN
   DebugMode := Debug;
 
   New(Procs, Init);
+  { German commands }
   Procs^.Insert(New(PCommand, Init('VOR', ocGO)));
   Procs^.Insert(New(PCommand, Init('DREHE_LINKS', ocTURN)));
   Procs^.Insert(New(PCommand, Init('NIMM_AUF', ocTAKE)));
   Procs^.Insert(New(PCommand, Init('GIB_AB', ocPUT)));
+  { English commands }
+  Procs^.Insert(New(PCommand, Init('FORWARD', ocGO)));
+  Procs^.Insert(New(PCommand, Init('TURN_LEFT', ocTURN)));
+  Procs^.Insert(New(PCommand, Init('PICK_UP', ocTAKE)));
+  Procs^.Insert(New(PCommand, Init('PUT_DOWN', ocPUT)));
 
   New(Funcs, Init);
+  { German functions }
   Funcs^.Insert(New(PFunction, Init('VORNE_FREI', ocCVF)));
   Funcs^.Insert(New(PFunction, Init('LINKS_FREI', ocCLF)));
   Funcs^.Insert(New(PFunction, Init('RECHTS_FREI', ocCRF)));
   Funcs^.Insert(New(PFunction, Init('PLATZ_BELEGT', ocCPB)));
   Funcs^.Insert(New(PFunction, Init('HAT_VORRAT', ocCV)));
+  { English functions }
+  Funcs^.Insert(New(PFunction, Init('FRONT_CLEAR', ocCVF)));
+  Funcs^.Insert(New(PFunction, Init('LEFT_CLEAR', ocCLF)));
+  Funcs^.Insert(New(PFunction, Init('RIGHT_CLEAR', ocCRF)));
+  Funcs^.Insert(New(PFunction, Init('SPACE_OCCUPIED', ocCPB)));
+  Funcs^.Insert(New(PFunction, Init('HAS_SUPPLY', ocCV)));
 
 
   ErrorNumber := 0;
