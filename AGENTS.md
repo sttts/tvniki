@@ -25,6 +25,8 @@ tmux capture-pane -t <task-id> -p
 tmux kill-session -t <task-id>
 ```
 
+**Tip**: Pass a .PAS file as command-line argument to load it directly: `./niki laby.pas`
+
 ## Worktree Workflow
 
 Merge from worktree into main checkout, close issue, and clean up:

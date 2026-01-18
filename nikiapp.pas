@@ -407,7 +407,26 @@ BEGIN
   DateiName := '*.PAS';
   IF ExecuteDialog(New(PFileDialog, Init('*.PAS', 'Datei Öffnen',
          '~N~ame', fdOpenButton, 100)), @DateiName) <> cmCancel
-  THEN OpenEditor(DateiName, TRUE);
+  THEN BEGIN
+    { Reuse empty untitled editor instead of opening new window }
+    IF (EditWindow <> NIL) AND
+       (EditWindow^.Editor^.FileName = '') AND
+       (EditWindow^.Editor^.BufLen = 0) AND
+       (NOT EditWindow^.Editor^.Modified) THEN
+    BEGIN
+      EditWindow^.Editor^.FileName := FExpand(DateiName);
+      IF EditWindow^.Editor^.LoadFile THEN
+      BEGIN
+        EditWindow^.Editor^.Modified := FALSE;
+        EditWindow^.Frame^.DrawView;
+        EditWindow^.Select;
+      END
+      ELSE
+        EditWindow^.Editor^.FileName := '';
+    END
+    ELSE
+      OpenEditor(DateiName, TRUE);
+  END;
 END;
 
 PROCEDURE TNikiApplication.ZeigeClipboard;
