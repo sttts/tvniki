@@ -1,0 +1,126 @@
+# Italian translation for tvNiki
+# Format: English=Italian
+
+# Status bar
+Wall=Muro
+Niki/turn=Niki/gira
+Payload=Carico
+Run=Esegui
+
+# Menus
+~F~ile=~F~ile
+~N~ew=~N~uovo
+~O~pen...=~A~pri...
+~S~ave=~S~alva
+Save ~a~s...=Salva c~o~n nome...
+~P~rint...=S~t~ampa...
+~C~hange directory...=~C~ambia directory...
+~Q~uit=~E~sci
+~E~dit=~M~odifica
+~U~ndo=~A~nnulla
+Cu~t~=~T~aglia
+~C~opy=~C~opia
+~P~aste=~I~ncolla
+C~l~ear=Cance~l~la
+~S~how clipboard=Mo~s~tra appunti
+~S~earch=~C~erca
+~F~ind...=~T~rova...
+~R~eplace...=~S~ostituisci...
+Search ~a~gain=Cerca ~a~ncora
+~C~ompiler=Com~p~ilatore
+~R~un=~E~segui
+C~o~mpile=C~o~mpila
+~S~ingle step=Passo ~s~ingolo
+~R~eset program=~R~eimposta programma
+~T~each in=~R~egistra
+F~i~eld=C~a~mpo
+S~u~pply...=~S~corta...
+Sp~e~ed...=V~e~locità...
+~W~indow=~F~inestra
+~T~ile=~A~ffianca
+~C~ascade=So~v~rapponi
+Cl~o~se all=C~h~iudi tutto
+Si~z~e/move=Di~m~ensione/sposta
+~Z~oom=~Z~oom
+~N~ext=~P~rossimo
+~P~revious=Prece~d~ente
+C~l~ose...=Ch~i~udi...
+~V~ideo mode=Modalità ~v~ideo
+~I~nfo window on/off=F~i~nestra info on/off
+~H~elp=~A~iuto
+~C~ontents=~I~ndice
+~P~ASCAL help=Aiuto ~P~ASCAL
+~A~bout=I~n~formazioni
+
+# Dialogs
+Open File=Apri File
+Open Field=Apri Campo
+Save file=Salva file
+Save as=Salva con nome
+~N~ame=~N~ome
+Cannot open help file=Impossibile aprire il file di aiuto
+Compiling=Compilazione
+Program       :=Programma    :
+Current file  :=File corrente:
+Lines         :=Righe        :
+Total lines   :=Righe totali :
+~C~ancel=~A~nnulla
+~O~k=~O~K
+
+# Editor messages
+%s has been modified. Save?=%s è stato modificato. Salvare?
+Save untitled file?=Salvare file senza nome?
+Search string not found.=Testo non trovato.
+Replace this occurrence?=Sostituire questa occorrenza?
+Debug mode has been disabled via the DEBUG switch in NIKI.CFG.=La modalità debug è stata disabilitata tramite l'opzione DEBUG in NIKI.CFG.
+You must load a robot field first to run the program=Devi prima caricare un campo robot per eseguire il programma
+Error #%d at line %d: %s=Errore #%d alla riga %d: %s
+Untitled=Senza nome
+
+# Field messages
+Save field %s before closing?=Salvare il campo %s prima di chiudere?
+Not enough memory for a field=Memoria insufficiente per un campo
+Change supply=Modifica scorta
+Supply:=Scorta:
+Supply must be between 0 and 99=La scorta deve essere tra 0 e 99
+Change speed=Modifica velocità
+Speed:=Velocità:
+Speed must be between 0 and 99=La velocità deve essere tra 0 e 99
+Do you want to save the recorded part as a program?=Vuoi salvare la parte registrata come programma?
+Program finished=Programma terminato
+
+# Runtime errors
+Error #%d: Nothing to put down or cell is full=Errore #%d: Niente da depositare o cella piena
+Error #%d: Nothing to pick up=Errore #%d: Niente da raccogliere
+Error #%d: Wall in the way=Errore #%d: Muro sulla strada
+Error #%d: Not enough memory=Errore #%d: Memoria insufficiente
+Error #%d: Stack overflow=Errore #%d: Overflow dello stack
+Internal interpreter error #%d at PCode position %d=Errore interno dell'interprete #%d alla posizione PCode %d
+Error #%d: File error=Errore #%d: Errore file
+Unknown error #%d=Errore sconosciuto #%d
+Not enough memory to display error=Memoria insufficiente per mostrare l'errore
+Not enough resources to run the program=Risorse insufficienti per eseguire il programma
+Not enough memory to run the program=Memoria insufficiente per eseguire il programma
+Not enough memory to display completion message=Memoria insufficiente per mostrare il messaggio di completamento
+
+# Compiler errors
+Source file not found or cannot be opened=File sorgente non trovato o non può essere aperto
+Cannot create destination file=Impossibile creare il file di destinazione
+Unclosed comment=Commento non chiuso
+Identifier expected=Identificatore atteso
+Keyword not allowed as identifier=Parola chiave non permessa come identificatore
+Semicolon (;) expected=Punto e virgola (;) atteso
+Semicolon expected=Punto e virgola atteso
+END or command expected=END o comando atteso
+BEGIN expected=BEGIN atteso
+Right bracket expected=Parentesi destra attesa
+Function expected=Funzione attesa
+Unknown function=Funzione sconosciuta
+THEN expected=THEN atteso
+DO expected=DO atteso
+UNTIL expected=UNTIL atteso
+Command expected=Comando atteso
+Unknown command=Comando sconosciuto
+Duplicate identifier=Identificatore duplicato
+Period expected=Punto atteso
+Help system not yet ported to 64-bit=Sistema di aiuto non ancora portato a 64-bit

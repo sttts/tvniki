@@ -4,7 +4,7 @@
 # Status bar
 Wall=Veggur
 Niki/turn=Niki/snúa
-Supply=Birgðir
+Payload=Farmur
 Run=Keyra
 
 # Menus

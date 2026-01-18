@@ -1,0 +1,126 @@
+# Spanish translation for tvNiki
+# Format: English=Spanish
+
+# Status bar
+Wall=Muro
+Niki/turn=Niki/girar
+Payload=Carga
+Run=Ejecutar
+
+# Menus
+~F~ile=~A~rchivo
+~N~ew=~N~uevo
+~O~pen...=~A~brir...
+~S~ave=~G~uardar
+Save ~a~s...=Guardar c~o~mo...
+~P~rint...=~I~mprimir...
+~C~hange directory...=~C~ambiar directorio...
+~Q~uit=~S~alir
+~E~dit=~E~ditar
+~U~ndo=Des~h~acer
+Cu~t~=Cor~t~ar
+~C~opy=~C~opiar
+~P~aste=~P~egar
+C~l~ear=~B~orrar
+~S~how clipboard=Mo~s~trar portapapeles
+~S~earch=B~u~scar
+~F~ind...=~B~uscar...
+~R~eplace...=~R~eemplazar...
+Search ~a~gain=Buscar de nu~e~vo
+~C~ompiler=~C~ompilador
+~R~un=E~j~ecutar
+C~o~mpile=C~o~mpilar
+~S~ingle step=Paso a pa~s~o
+~R~eset program=~R~einiciar programa
+~T~each in=~G~rabar
+F~i~eld=C~a~mpo
+S~u~pply...=~R~eserva...
+Sp~e~ed...=V~e~locidad...
+~W~indow=~V~entana
+~T~ile=~M~osaico
+~C~ascade=~C~ascada
+Cl~o~se all=Cerrar t~o~do
+Si~z~e/move=Ta~m~año/mover
+~Z~oom=~Z~oom
+~N~ext=Siguie~n~te
+~P~revious=~A~nterior
+C~l~ose...=Cerr~a~r...
+~V~ideo mode=Modo de ~v~ideo
+~I~nfo window on/off=Ventana ~i~nfo on/off
+~H~elp=Ay~u~da
+~C~ontents=~C~ontenido
+~P~ASCAL help=Ayuda ~P~ASCAL
+~A~bout=~A~cerca de
+
+# Dialogs
+Open File=Abrir Archivo
+Open Field=Abrir Campo
+Save file=Guardar archivo
+Save as=Guardar como
+~N~ame=~N~ombre
+Cannot open help file=No se puede abrir el archivo de ayuda
+Compiling=Compilando
+Program       :=Programa     :
+Current file  :=Archivo actual:
+Lines         :=Líneas       :
+Total lines   :=Total líneas :
+~C~ancel=~C~ancelar
+~O~k=~A~ceptar
+
+# Editor messages
+%s has been modified. Save?=%s ha sido modificado. ¿Guardar?
+Save untitled file?=¿Guardar archivo sin nombre?
+Search string not found.=Texto no encontrado.
+Replace this occurrence?=¿Reemplazar esta ocurrencia?
+Debug mode has been disabled via the DEBUG switch in NIKI.CFG.=El modo de depuración ha sido deshabilitado mediante la opción DEBUG en NIKI.CFG.
+You must load a robot field first to run the program=Debes cargar primero un campo de robot para ejecutar el programa
+Error #%d at line %d: %s=Error #%d en línea %d: %s
+Untitled=Sin nombre
+
+# Field messages
+Save field %s before closing?=¿Guardar el campo %s antes de cerrar?
+Not enough memory for a field=Memoria insuficiente para un campo
+Change supply=Cambiar reserva
+Supply:=Reserva:
+Supply must be between 0 and 99=La reserva debe estar entre 0 y 99
+Change speed=Cambiar velocidad
+Speed:=Velocidad:
+Speed must be between 0 and 99=La velocidad debe estar entre 0 y 99
+Do you want to save the recorded part as a program?=¿Deseas guardar la parte grabada como programa?
+Program finished=Programa terminado
+
+# Runtime errors
+Error #%d: Nothing to put down or cell is full=Error #%d: Nada que depositar o celda llena
+Error #%d: Nothing to pick up=Error #%d: Nada que recoger
+Error #%d: Wall in the way=Error #%d: Muro en el camino
+Error #%d: Not enough memory=Error #%d: Memoria insuficiente
+Error #%d: Stack overflow=Error #%d: Desbordamiento de pila
+Internal interpreter error #%d at PCode position %d=Error interno del intérprete #%d en posición PCode %d
+Error #%d: File error=Error #%d: Error de archivo
+Unknown error #%d=Error desconocido #%d
+Not enough memory to display error=Memoria insuficiente para mostrar el error
+Not enough resources to run the program=Recursos insuficientes para ejecutar el programa
+Not enough memory to run the program=Memoria insuficiente para ejecutar el programa
+Not enough memory to display completion message=Memoria insuficiente para mostrar el mensaje de finalización
+
+# Compiler errors
+Source file not found or cannot be opened=Archivo fuente no encontrado o no se puede abrir
+Cannot create destination file=No se puede crear el archivo de destino
+Unclosed comment=Comentario no cerrado
+Identifier expected=Identificador esperado
+Keyword not allowed as identifier=Palabra clave no permitida como identificador
+Semicolon (;) expected=Punto y coma (;) esperado
+Semicolon expected=Punto y coma esperado
+END or command expected=END o comando esperado
+BEGIN expected=BEGIN esperado
+Right bracket expected=Paréntesis derecho esperado
+Function expected=Función esperada
+Unknown function=Función desconocida
+THEN expected=THEN esperado
+DO expected=DO esperado
+UNTIL expected=UNTIL esperado
+Command expected=Comando esperado
+Unknown command=Comando desconocido
+Duplicate identifier=Identificador duplicado
+Period expected=Punto esperado
+Help system not yet ported to 64-bit=Sistema de ayuda aún no portado a 64-bit

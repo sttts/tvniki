@@ -4,7 +4,7 @@
 # Status bar
 Wall=Vägg
 Niki/turn=Niki/sväng
-Supply=Förråd
+Payload=Last
 Run=Kör
 
 # Menus
