@@ -155,7 +155,7 @@ FUNCTION TNikiEditor.Compile:BOOLEAN;
 BEGIN
   Compile := FALSE;
 
-  IF Editor^.Save AND (GetTitle(255)<>'Untitled') THEN
+  IF Editor^.Save AND (Editor^.FileName<>'') THEN
   BEGIN
     IF Application^.ExecView(
            New(PCompileDialog, Init(GetTitle(255)))
@@ -198,7 +198,7 @@ BEGIN
       mit der Zeit der PAS-Datei verglichen werden, um zu ermitteln, ob
       die Datei neu compiliert werden muá }
 
-    IF (Editor^.Modified OR (GetTitle(255)='Untitled')) OR NOT Compiled THEN
+    IF (Editor^.Modified OR (Editor^.FileName='')) OR NOT Compiled THEN
       Error := NOT Compile;
 
     IF NOT Error THEN
