@@ -50,6 +50,7 @@ TYPE
     PROCEDURE HandleEvent(VAR Event: TEvent); VIRTUAL;
     PROCEDURE Draw; VIRTUAL;
     PROCEDURE LoadFile(AFileName: String);
+    PROCEDURE Clear;
     PROCEDURE FocusSourceLine(Line: Word);
     PROCEDURE FocusAddr(Addr: Word);
   PRIVATE
@@ -459,6 +460,19 @@ BEGIN
   DrawView;
 END;
 
+PROCEDURE TDisasmViewer.Clear;
+BEGIN
+  LineCount := 0;
+  LineMapCount := 0;
+  ProgSize := 0;
+  CursorLine := -1;
+  ExecLine := -1;
+  Delta.X := 0;
+  Delta.Y := 0;
+  Limit.X := 80;
+  Limit.Y := 1;
+END;
+
 PROCEDURE TDisasmViewer.FocusSourceLine(Line: Word);
 VAR
   i: Integer;
@@ -649,22 +663,42 @@ BEGIN
     END;
     evBroadcast: CASE Event.Command OF
       cmUpdateDisasm: BEGIN
+        IF (Viewer = NIL) OR (Indicator = NIL) THEN
+        BEGIN
+          ClearEvent(Event);
+          Exit;
+        END;
         IF DisasmFileName <> '' THEN
         BEGIN
           CurrentFile := DisasmFileName;
           Viewer^.LoadFile(CurrentFile);
           Viewer^.ExecLine := -1;
           Indicator^.Update(0, FALSE, 0);
+        END
+        ELSE
+        BEGIN
+          { Clear disasm when editor is dirty - just set data, no view calls }
+          CurrentFile := '';
+          Viewer^.Clear;
+          Indicator^.RegIP := 0;
+          Indicator^.RegCarry := FALSE;
+          Indicator^.RegVorrat := 0;
         END;
         ClearEvent(Event);
         Exit;
       END;
       cmSyncDisasm: BEGIN
-        Viewer^.FocusSourceLine(Word(PtrUInt(Event.InfoPtr)));
+        IF (Viewer <> NIL) AND (Viewer^.LineMapCount > 0) THEN
+          Viewer^.FocusSourceLine(Word(PtrUInt(Event.InfoPtr)));
         ClearEvent(Event);
         Exit;
       END;
       cmUpdateDisasmIP: BEGIN
+        IF (Viewer = NIL) OR (Indicator = NIL) THEN
+        BEGIN
+          ClearEvent(Event);
+          Exit;
+        END;
         { InfoPtr contains packed value: (Carry SHL 32) OR (Vorrat SHL 16) OR IP }
         IP := Word(PtrUInt(Event.InfoPtr) AND $FFFF);
         Indicator^.Update(IP,

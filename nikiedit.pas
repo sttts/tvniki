@@ -128,7 +128,31 @@ VAR
   TargetLine: Word;
   LineNum: Word;
   i: LongInt;
+  p: LongInt;
 BEGIN
+  { Handle Ctrl-A/Ctrl-E for line navigation before inherited }
+  IF (Event.What = evKeyDown) AND (Editor <> NIL) THEN
+  BEGIN
+    CASE Event.CharCode OF
+      #1: BEGIN { Ctrl-A - go to beginning of line }
+        p := Editor^.CurPtr;
+        WHILE (p > 0) AND (Editor^.BufChar(p - 1) <> #10) DO
+          Dec(p);
+        Editor^.SetCurPtr(p, 0);
+        ClearEvent(Event);
+        Exit;
+      END;
+      #5: BEGIN { Ctrl-E - go to end of line }
+        p := Editor^.CurPtr;
+        WHILE (p < Editor^.BufLen) AND (Editor^.BufChar(p) <> #10) DO
+          Inc(p);
+        Editor^.SetCurPtr(p, 0);
+        ClearEvent(Event);
+        Exit;
+      END;
+    END;
+  END;
+
   CASE Event.What OF
     evCommand : CASE Event.Command OF
                   cmCompile : BEGIN
@@ -182,6 +206,16 @@ BEGIN
   END;
   INHERITED HandleEvent(Event);
 
+  { Clear disasm when editor becomes dirty after compile }
+  IF Compiled AND Editor^.Modified THEN
+  BEGIN
+    DisasmFileName := '';
+    IF (DisasmWindow <> NIL) AND (DisasmWindow^.Viewer <> NIL) THEN
+    BEGIN
+      DisasmWindow^.Viewer^.Clear;
+      DisasmWindow^.DrawView;
+    END;
+  END;
   Compiled := Compiled AND NOT Editor^.Modified;
   CheckCursorSync;
 END;
@@ -215,6 +249,8 @@ VAR
   p: LongInt;
 BEGIN
   IF Editor = NIL THEN Exit;
+  { Only sync when editor has focus }
+  IF NOT GetState(sfSelected) THEN Exit;
 
   { Count lines up to cursor position }
   Line := 1;
@@ -224,7 +260,8 @@ BEGIN
   IF Line <> LastCursorLine THEN
   BEGIN
     LastCursorLine := Line;
-    Message(Desktop, evBroadcast, cmSyncDisasm, Pointer(PtrUInt(Line)));
+    IF Desktop <> NIL THEN
+      Message(Desktop, evBroadcast, cmSyncDisasm, Pointer(PtrUInt(Line)));
   END;
 END;
 
@@ -248,7 +285,11 @@ BEGIN
       { Broadcast update to disasm window }
       FSplit(Editor^.FileName, Dir, Name, Ext);
       DisasmFileName := Dir + Name + '.NIK';
-      Message(Desktop, evBroadcast, cmUpdateDisasm, NIL);
+      IF Desktop <> NIL THEN
+        Message(Desktop, evBroadcast, cmUpdateDisasm, NIL);
+
+      { Force cursor sync on recompile }
+      LastCursorLine := 0;
     END ELSE
     BEGIN
       IF ErrorNumber<>0 THEN
