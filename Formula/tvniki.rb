@@ -13,9 +13,13 @@ class Tvniki < Formula
     fv_system = "#{Formula["fpc"].lib}/fpc/#{Formula["fpc"].version}/units/#{Hardware::CPU.arch}-darwin/fv"
     rm_rf fv_system if Dir.exist?(fv_system)
 
-    # Determine version from git tags
-    version = Utils.safe_popen_read("git", "describe", "--tags", "--match", "v[0-9]*", "--dirty").strip
-    version = version.sub(/^v/, "") # Remove leading 'v'
+    # Determine version: use git describe for HEAD, formula version for stable
+    if build.head?
+      ver = Utils.safe_popen_read("git", "describe", "--tags", "--match", "v[0-9]*", "--dirty").strip
+      ver = ver.sub(/^v/, "")
+    else
+      ver = version.to_s
+    end
 
     system "make"
     bin.install "tvniki"
@@ -26,7 +30,7 @@ class Tvniki < Formula
     pkgshare.install Dir["*.rob"]
 
     # Record version for reference
-    (pkgshare/"VERSION").write version
+    (pkgshare/"VERSION").write ver
   end
 
   def caveats
