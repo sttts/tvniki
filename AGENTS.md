@@ -7,7 +7,7 @@ This project uses **bd** (beads) for issue tracking. Run `bd onboard` to get sta
 ## Quick Reference
 
 ```bash
-bd ready              # Find available work
+bd ready --pretty     # Find available work (○ open, ◐ in_progress)
 bd show <id>          # View issue details
 bd update <id> --status in_progress  # Claim work
 bd close <id>         # Complete work
@@ -16,7 +16,17 @@ bd create --id <id> --title "Title" --body "Description"  # Create new issue
 bd comments add <id> "Comment text"  # Add comment to issue
 ```
 
-**Note:** `bd ready` shows both open and in_progress issues. When presenting results (e.g., for "What's next?"), always list in-progress issues first in a separate section, then open issues. Only suggest or choose an in-progress issue when the user explicitly asks to continue one.
+**Note:** `bd ready` shows both open and in_progress issues. When presenting results (e.g., for "What's next?"), always show two separate sections:
+
+```
+In progress:
+- tvniki-some-task - Description
+
+Available to start:
+- tvniki-other-task - Description
+```
+
+Only suggest or choose an in-progress issue when the user explicitly asks to continue one.
 
 ## Testing with tmux
 
