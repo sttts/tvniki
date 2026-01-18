@@ -11,10 +11,10 @@ unit HelpFile;
 
 interface
 
-uses Objects, Drivers, Views, SysUtils;
+uses Objects, Drivers, Views, SysUtils, LazUTF8;
 
 const
-  CHelpColor      = #$37#$3F#$3A#$13#$13#$30#$3E#$1E;
+  CHelpColor      = #$37#$31#$1F#$13#$13#$30#$3E#$1E;
   CHelpBlackWhite = #$07#$0F#$07#$70#$70#$07#$0F#$70;
   CHelpMonochrome = #$07#$0F#$07#$70#$70#$07#$0F#$70;
   CHelpViewer     = #6#7#8;
@@ -301,6 +301,8 @@ var
   OldOffset, CurOffset, Offset, ParaOffset: Integer;
   P: PParagraph;
   Line: Integer;
+  LocalLineStart, LocalXrefPos, ByteCount: Integer;
+  TextPtr: PChar;
 begin
   ParaOffset := 0;
   CurOffset := 0;
@@ -308,7 +310,7 @@ begin
   Line := 0;
   Offset := CrossRefs^[I].Offset;
   P := Paragraphs;
-  while ParaOffset+CurOffset < Offset do
+  while (P <> nil) and (ParaOffset+CurOffset < Offset) do
   begin
     OldOffset := ParaOffset + CurOffset;
     WrapText(P^.Text, P^.Size, CurOffset, P^.Wrap);
@@ -320,8 +322,27 @@ begin
       CurOffset := 0;
     end;
   end;
-  Loc.X := Offset - OldOffset - 1;
-  Loc.Y := Line;
+  { Convert byte offset to character count for UTF-8 }
+  if P = nil then
+  begin
+    { Cross-ref points past all paragraphs - return safe values }
+    Loc.X := 0;
+    Loc.Y := Line;
+  end
+  else
+  begin
+    LocalLineStart := OldOffset - ParaOffset;
+    LocalXrefPos := Offset - ParaOffset;
+    ByteCount := LocalXrefPos - LocalLineStart - 1;
+    if LocalLineStart < 0 then LocalLineStart := 0;
+    if ByteCount < 0 then ByteCount := 0;
+    if LocalLineStart + ByteCount > P^.Size then
+      ByteCount := P^.Size - LocalLineStart;
+    if ByteCount < 0 then ByteCount := 0;
+    TextPtr := PChar(@P^.Text) + LocalLineStart;
+    Loc.X := UTF8Length(TextPtr, ByteCount);
+    Loc.Y := Line;
+  end;
   Length := CrossRefs^[I].Length;
   Ref := CrossRefs^[I].Ref;
 end;
