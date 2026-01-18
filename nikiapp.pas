@@ -310,7 +310,19 @@ BEGIN
                                 HideInfo
                               ELSE ShowInfo;
                             END;
-                  cmRun, cmCompile, cmPrint, cmDebug:
+                  cmRun:  IF TypeOf(Desktop^.Current^)<>TypeOf(TNikiEditor) THEN
+                            IF EditWindow<>NIL THEN
+                            BEGIN
+                              PNikiEditor(EditWindow)^.Run(FALSE);
+                              ClearEvent(Event);
+                            END;
+                  cmDebug:IF TypeOf(Desktop^.Current^)<>TypeOf(TNikiEditor) THEN
+                            IF EditWindow<>NIL THEN
+                            BEGIN
+                              PNikiEditor(EditWindow)^.Run(TRUE);
+                              ClearEvent(Event);
+                            END;
+                  cmCompile, cmPrint:
                           IF TypeOf(Desktop^.Current^)<>TypeOf(TNikiEditor) THEN
                             IF EditWindow<>NIL THEN EditWindow^.Select;
                   cmVorrat, cmSpeed, cmTeachIn, cmPrintFeld:

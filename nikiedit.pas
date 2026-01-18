@@ -157,7 +157,12 @@ END;
 PROCEDURE TNikiEditor.SetState(AState: Word; Enable: Boolean);
 BEGIN
   INHERITED SetState(AState, Enable);
-  IF (AState=sfSelected) THEN UpdateCommands;
+  IF (AState=sfSelected) THEN
+  BEGIN
+    UpdateCommands;
+    { Remember this editor as the active one for running from field }
+    IF Enable THEN EditWindow := @Self;
+  END;
 END;
 
 PROCEDURE TNikiEditor.UpdateCommands;
