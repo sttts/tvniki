@@ -1,0 +1,125 @@
+name: Build
+
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+  pull_request:
+    branches: [master]
+
+jobs:
+  build-macos:
+    strategy:
+      matrix:
+        include:
+          - runner: macos-14
+            arch: arm64
+          - runner: macos-13
+            arch: x86_64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Install Free Pascal
+        run: brew install fpc
+
+      - name: Build
+        run: make
+
+      - name: Run tests
+        run: make test
+
+      - name: Rename binary
+        run: mv niki niki-macos-${{ matrix.arch }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: niki-macos-${{ matrix.arch }}
+          path: niki-macos-${{ matrix.arch }}
+
+  build-linux-x86_64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Install Free Pascal
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fpc
+          # Remove system Free Vision to avoid conflicts with fv_utf8
+          sudo rm -rf /usr/lib/fpc/*/units/*/fv
+
+      - name: Build
+        run: make
+
+      - name: Run tests
+        run: make test
+
+      - name: Rename binary
+        run: mv niki niki-linux-x86_64
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: niki-linux-x86_64
+          path: niki-linux-x86_64
+
+  build-linux-arm64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+
+      - name: Build in ARM64 container
+        run: |
+          docker run --rm --platform linux/arm64 \
+            -v ${{ github.workspace }}:/workspace \
+            -w /workspace \
+            debian:bookworm bash -c '
+              apt-get update && apt-get install -y fpc make
+              rm -rf /usr/lib/fpc/*/units/*/fv
+              make clean && make
+              make test
+            '
+
+      - name: Rename binary
+        run: mv niki niki-linux-arm64
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: niki-linux-arm64
+          path: niki-linux-arm64
+
+  release:
+    needs: [build-macos, build-linux-x86_64, build-linux-arm64]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            artifacts/niki-macos-arm64/niki-macos-arm64
+            artifacts/niki-macos-x86_64/niki-macos-x86_64
+            artifacts/niki-linux-x86_64/niki-linux-x86_64
+            artifacts/niki-linux-arm64/niki-linux-arm64
+          generate_release_notes: true
