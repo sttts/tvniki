@@ -87,7 +87,40 @@ BEGIN
   Write(#27'[?1000l');  { Disable mouse button tracking }
 END;
 
+PROCEDURE ShowHelp;
 BEGIN
+  Writeln('tvNiki 1.11 - Educational programming environment');
+  Writeln;
+  Writeln('Usage: niki [options] [file.pas]');
+  Writeln;
+  Writeln('Options:');
+  Writeln('  --help     Show this help message');
+  Writeln;
+  Writeln('Description:');
+  Writeln('  tvNiki teaches programming through a robot that navigates a grid.');
+  Writeln('  Write Pascal-like programs to control Niki: move forward, turn,');
+  Writeln('  pick up and put down objects.');
+  Writeln;
+  Writeln('Commands in programs:');
+  Writeln('  Vor            Move forward');
+  Writeln('  Drehe_Links    Turn left');
+  Writeln('  Nimm_Auf       Pick up object');
+  Writeln('  Gib_Ab         Put down object');
+  Writeln;
+  Writeln('Conditions:');
+  Writeln('  Vorne_Frei     Is the way ahead clear?');
+  Writeln('  Links_Frei     Is left clear?');
+  Writeln('  Rechts_Frei    Is right clear?');
+  Writeln('  Platz_Belegt   Is current position occupied?');
+  Writeln('  Hat_Vorrat     Does Niki have items?');
+  Halt(0);
+END;
+
+BEGIN
+  { Handle --help before doing anything else }
+  IF (ParamCount > 0) AND ((ParamStr(1) = '--help') OR (ParamStr(1) = '-h')) THEN
+    ShowHelp;
+
   OldExit := ExitProc;
   ExitProc := @MyExitProc;
 
