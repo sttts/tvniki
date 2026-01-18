@@ -38,10 +38,8 @@ TYPE TJustify=(jfLeft, jfRight);
 
                       nGesamtZeilen:Longint;
                       nZeilen : Longint;
-                      strDatei : String;
-                      strProgramm: String;
-                      { Pointers must be fields so SetData's @Rec remains valid }
-                      pDatei: PString;
+                      { FormatStr %s expects TLongArray where element 0 is a PString }
+                      pDatei : PString;
                       pProgramm: PString;
 
 
@@ -94,6 +92,9 @@ VAR R:TRect;
 BEGIN
   R.Assign(18, 5, 62, 16);
   INHERITED Init(R, 'Compilieren');
+
+  pProgramm := NIL;
+  pDatei := NIL;
 
   SetupWindow;
 
@@ -155,15 +156,19 @@ END;
 
 PROCEDURE TCompileDialog.SetProgramm(ADatei:String);
 BEGIN
-  strProgramm := ADatei;
-  pProgramm := @strProgramm;
+  IF pProgramm <> NIL THEN DisposeStr(pProgramm);
+  { NewStr returns NIL for empty strings, use ' ' as placeholder }
+  IF ADatei = '' THEN ADatei := ' ';
+  pProgramm := NewStr(ADatei);
   Programm^.SetData(pProgramm);
 END;
 
 PROCEDURE TCompileDialog.SetDatei(ADatei:String);
 BEGIN
-  strDatei := ADatei;
-  pDatei := @strDatei;
+  IF pDatei <> NIL THEN DisposeStr(pDatei);
+  { NewStr returns NIL for empty strings, use ' ' as placeholder }
+  IF ADatei = '' THEN ADatei := ' ';
+  pDatei := NewStr(ADatei);
   Datei^.SetData(pDatei);
 END;
 
