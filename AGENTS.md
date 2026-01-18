@@ -13,6 +13,7 @@ bd update <id> --status in_progress  # Claim work
 bd close <id>         # Complete work
 bd sync               # Sync with git
 bd create --id <id> --title "Title" --body "Description"  # Create new issue
+bd comments add <id> "Comment text"  # Add comment to issue
 ```
 
 ## Testing with tmux
