@@ -1,6 +1,8 @@
 class Tvniki < Formula
   desc "Educational programming environment with robot simulation"
   homepage "https://github.com/sttts/tvniki"
+  url "https://github.com/sttts/tvniki/archive/refs/tags/v2.0.0.tar.gz"
+  sha256 "c21c6027981fbf08a07830dac86c8f84aaa558bddf39b39ffe2df7a555f58c4d"
   license "MIT"
   head "https://github.com/sttts/tvniki.git", branch: "main"
 
