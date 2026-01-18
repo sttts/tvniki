@@ -187,6 +187,22 @@ def convert_text(data):
     return ''.join(cp437_byte_to_utf8(b) for b in data)
 
 
+def build_byte_offset_map(data):
+    """Build a mapping from CP437 byte offsets to UTF-8 byte offsets.
+
+    Returns a list where map[cp437_offset] = utf8_offset.
+    The list has len(data)+1 entries to handle end-of-string offsets.
+    """
+    offset_map = []
+    utf8_pos = 0
+    for b in data:
+        offset_map.append(utf8_pos)
+        utf8_char = cp437_byte_to_utf8(b)
+        utf8_pos += len(utf8_char.encode('utf-8'))
+    offset_map.append(utf8_pos)  # End position
+    return offset_map
+
+
 def read_word(f):
     """Read 16-bit little-endian word."""
     return struct.unpack('<H', f.read(2))[0]
@@ -218,9 +234,10 @@ def write_longint(f, val):
 
 
 class Paragraph:
-    def __init__(self, wrap, text):
+    def __init__(self, wrap, text, offset_map=None):
         self.wrap = wrap
         self.text = text  # UTF-8 string
+        self.offset_map = offset_map  # CP437 byte offset -> UTF-8 byte offset
 
 
 class CrossRef:
@@ -252,8 +269,9 @@ def read_topic(f):
         size = read_smallint(f)
         wrap = f.read(1)[0] != 0
         text_bytes = f.read(size)
+        offset_map = build_byte_offset_map(text_bytes)
         text = convert_text(text_bytes)
-        topic.paragraphs.append(Paragraph(wrap, text))
+        topic.paragraphs.append(Paragraph(wrap, text, offset_map))
 
     # Read cross-reference count
     xref_count = read_smallint(f)
@@ -265,6 +283,27 @@ def read_topic(f):
         topic.crossrefs.append(CrossRef(ref, offset, length))
 
     return topic
+
+
+def adjust_crossref_offset(topic, cp437_offset):
+    """Convert a cross-ref offset from CP437 bytes to UTF-8 bytes.
+
+    Cross-ref offsets are positions in the concatenated paragraph texts.
+    """
+    # Walk through paragraphs to find which paragraph contains this offset
+    cumulative_cp437 = 0
+    cumulative_utf8 = 0
+    for para in topic.paragraphs:
+        # Original CP437 size is len(offset_map) - 1
+        cp437_size = len(para.offset_map) - 1
+        if cumulative_cp437 + cp437_size > cp437_offset:
+            # Offset is within this paragraph
+            local_offset = cp437_offset - cumulative_cp437
+            return cumulative_utf8 + para.offset_map[local_offset]
+        cumulative_cp437 += cp437_size
+        cumulative_utf8 += len(para.text.encode('utf-8'))
+    # Offset is at or past the end
+    return cumulative_utf8
 
 
 def write_topic(f, topic):
@@ -288,8 +327,10 @@ def write_topic(f, topic):
     write_smallint(f, len(topic.crossrefs))
 
     for xref in topic.crossrefs:
+        # Adjust offset from CP437 to UTF-8 byte positions
+        new_offset = adjust_crossref_offset(topic, xref.offset)
         write_word(f, xref.ref)
-        write_smallint(f, xref.offset)
+        write_smallint(f, new_offset)
         f.write(bytes([xref.length]))
 
     return f.tell() - start_pos
