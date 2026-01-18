@@ -168,7 +168,7 @@ TYPE PRobot=^TRobot;
 VAR FeldWindow:PFeldWindow;
 
 IMPLEMENTATION
-USES Dos, Config, NikiCnst, MsgBox, App, StdDlg, Timer, NikiGlob, NikiPrnt;
+USES Dos, Config, NikiCnst, MsgBox, App, StdDlg, Timer, NikiGlob, NikiPrnt, lazutf8;
 
 
 {******************************************************
@@ -1380,6 +1380,8 @@ VAR
   CFrame: Word;
   WallChar: String[4];
   IsActive: Boolean;
+  TitleLen: Integer;
+  TitleStart, TitleEnd: Integer;
 
   { Check if cell has upward wall component: │┴├┤┼╵└┘ }
   FUNCTION HasUp(y, x: Integer): Boolean;
@@ -1443,6 +1445,25 @@ BEGIN
   { Draw junction characters where field walls meet the window frame }
   IF Feld = NIL THEN Exit;
 
+  { Calculate title position to avoid overwriting it with junctions }
+  { This mirrors the logic in TFrame.Draw which centers the title }
+  TitleLen := UTF8Length(GetTitle(Size.X - 10));
+  IF TitleLen > Size.X - 10 THEN
+    TitleLen := Size.X - 10;
+  IF TitleLen > 0 THEN
+  BEGIN
+    { Title is centered: space + title + space spans TitleStart to TitleEnd-1 }
+    TitleStart := (Size.X - TitleLen) SHR 1 - 1;
+    TitleEnd := TitleStart + TitleLen + 2;
+    IF TitleStart < 1 THEN TitleStart := 1;
+    IF TitleEnd > Size.X - 1 THEN TitleEnd := Size.X - 1;
+  END
+  ELSE
+  BEGIN
+    TitleStart := Size.X;
+    TitleEnd := 0;
+  END;
+
   { Match TFrame.Draw logic for active/inactive/dragging state }
   IF (State AND sfDragging) <> 0 THEN
   BEGIN
@@ -1461,14 +1482,18 @@ BEGIN
   END;
 
   { Top edge - check first visible row for DOWNWARD wall component }
-  { Frame position i corresponds to field column Delta.X+i }
-  { Skip corners at position 0 and Size.X-1 }
-  fy := Feld^.Delta.Y;  { First visible field row }
-  FOR i := 1 TO Feld^.Size.X - 2 DO
+  { The first visible field row touches the top frame }
+  { Field content starts at row Delta.Y+1 (row 0 is the border, replaced by frame) }
+  fy := Feld^.Delta.Y + 1;  { First visible content row }
+  FOR i := 1 TO Size.X - 2 DO
   BEGIN
+    { Map window position i to field column: content at window pos 1 = field col Delta.X+1 }
     fx := Feld^.Delta.X + i;
-    IF (fx < NikiFlWn.SizeX) AND HasDown(fy, fx) THEN
+    IF (fx > 0) AND (fx < NikiFlWn.SizeX - 1) AND HasDown(fy, fx) THEN
     BEGIN
+      { Skip positions that overlap with the title }
+      IF (i >= TitleStart) AND (i < TitleEnd) THEN Continue;
+
       IF IsActive THEN WallChar := '╤' ELSE WallChar := '┬';
       MoveStr(B[0], WallChar, CFrame);
       WriteLine(i, 0, 1, 1, B);
