@@ -246,9 +246,9 @@ VAR
   i, Y: Integer;
   S: String;
 BEGIN
-  { Use direct color attributes to bypass palette chain }
-  Color := $70;       { Black on light grey }
-  FocusColor := $2F;  { White on green }
+  { Use direct color attributes - high contrast }
+  Color := $17;       { White on blue, like editor }
+  FocusColor := $1E;  { Yellow on blue }
 
   FOR Y := 0 TO Size.Y - 1 DO
   BEGIN
