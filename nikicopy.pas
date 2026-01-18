@@ -23,7 +23,7 @@ IMPLEMENTATION
 USES App, Strings, Timer, Hilfe;
 
 CONST Width=36;
-      Height=11;
+      Height=9;
 
 
 {************************************}
@@ -56,15 +56,12 @@ BEGIN
   R.Assign(13,2,27,3);
   Insert( New(PStaticText, Init(R, 'tvNiki 1.11')));
 
-  R.Assign(9,4,27,5);
-  Insert( New(PStaticText, Init(R,   'by 1Stein Software')));
-
-  R.Assign(12,7,24,9);
+  R.Assign(12,4,24,6);
   Insert( New(PButton, Init(R, '~O~K', cmOk, bfDefault)));
 
-  R.Assign(1,9,35,10);
+  R.Assign(1,7,35,8);
   New(Scroller, Init(R,
-    'tvNiki (c) by Stefan Schimanski 1996, all rights reserved - '));
+    'tvNiki (c) 1996-2026 Stefan Schimanski, all rights reserved - '));
   Insert(Scroller);
 END;
 
