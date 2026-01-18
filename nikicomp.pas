@@ -40,6 +40,9 @@ TYPE TJustify=(jfLeft, jfRight);
                       nZeilen : Longint;
                       strDatei : String;
                       strProgramm: String;
+                      { Pointers must be fields so SetData's @Rec remains valid }
+                      pDatei: PString;
+                      pProgramm: PString;
 
 
                       OK:PButton;
@@ -151,19 +154,17 @@ BEGIN
 END;
 
 PROCEDURE TCompileDialog.SetProgramm(ADatei:String);
-VAR s:Pointer;
 BEGIN
   strProgramm := ADatei;
-  s := @strProgramm;
-  Programm^.SetData(s);
+  pProgramm := @strProgramm;
+  Programm^.SetData(pProgramm);
 END;
 
 PROCEDURE TCompileDialog.SetDatei(ADatei:String);
-VAR s:Pointer;
 BEGIN
   strDatei := ADatei;
-  s := @strDatei;
-  Datei^.SetData(s);
+  pDatei := @strDatei;
+  Datei^.SetData(pDatei);
 END;
 
 TYPE TErrorInfo = RECORD
